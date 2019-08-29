@@ -8,6 +8,15 @@
     "url": "git+https://github.com/glowkeeper/StandardCoin.git"
   },
   "scripts": {
+    "generate": "cd ./blockchain && mkdir -p ./build/contracts && touch ./build/contracts/fooBar.json && rm ./build/contracts/*json && truffle compile --all",
+    "develMigrate": "cd ./blockchain && truffle migrate --network development",
+    "rinkebyMigrate": "cd ./blockchain && truffle migrate --network rinkeby",
+    "ropstenMigrate": "cd ./blockchain && truffle migrate --network ropsten",
+    "compile": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development",
+    "watch": "./node_modules/.bin/webpack --config ./webpack.dev.js --watch --mode development",
+    "dev": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development",
+    "prod": "./node_modules/.bin/webpack --config ./webpack.prod.js --mode production",
+    "start": "http-server -p 8084 build/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
