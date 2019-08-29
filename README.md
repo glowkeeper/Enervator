@@ -14,6 +14,10 @@ Finally, since STC is pegged to per capita energy use, its total supply must ref
 
 109135920000 / 22.35853544 = 4881174810.97
 
-Rounding up gives 4,881,174,811, or just under five billion coins.
+Rounding up gives 4,881,174,811, or just under five billion coins. With the value of a single STC at $4.39, as described above, the total network value of StandardCoin would be:
 
-For example, with the value of a single STC at $4.39, as described above, the total network value of StandardCoin would be $21,428,357,420.3, or $21.4 billion.
+4,881,174,811 * $4.39 = $21,428,357,420.3
+
+Which approximates to US$21.4 billion.
+
+There are some mechanisms implied by the discussion above. First, in order for incentivisation to work, the amount of energy to which STC is pegged must differ with changes in the annual global average per capita consumption. Secondly, the price per MWh will also vary with changes in the annual global average electricity price. Thirdly, total supply must reflect changes in total global energy consumption.
