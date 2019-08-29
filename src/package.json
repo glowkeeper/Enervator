@@ -1,0 +1,19 @@
+{
+  "name": "StandardCoin",
+  "version": "0.0.1",
+  "description": "A cryptocurrency stablecoin, STC, whose value is linked to energy, much like sovereign currencies were once linked to gold",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glowkeeper/StandardCoin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Steve Huckle",
+  "license": "LGPL-3.0",
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.3.0"
+  }
+}
