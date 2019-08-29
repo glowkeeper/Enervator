@@ -10,7 +10,7 @@ A simple value mechanism for StandardCoin would have been to equate a single STC
 
 1 STC = ( 1 / 22.35853544 ) * 98.16  = $4.39
 
-Finally, since STC is pegged to per capita energy use, its total supply must reflect total global energy consumption. According to the International Energy Agency, in 2015, global consumption was 9,384 Megatons of oil equivalent (Mtoe), which equates to 109135.92 Terra Watt hours (TWh), or 109135920000 MWh. Hence the total supply of STC becomes:
+Finally, since STC is pegged to per capita energy use, its total supply must reflect total global energy consumption. According to the International Energy Agency, in 2015, [global consumption was 9,384 Megatons of oil equivalent (Mtoe)](https://www.iea.org/publications/freepublications/publication/KeyWorld2017.pdf), which equates to 109135.92 Terra Watt hours (TWh), or 109135920000 MWh. Hence the total supply of STC becomes:
 
 109135920000 / 22.35853544 = 4881174810.97
 
