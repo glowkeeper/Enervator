@@ -2,7 +2,7 @@
 
 A cryptocurrency stablecoin, STC, whose value is linked to energy, much like sovereign currencies were once linked to gold.
 
-First, the value of STC is pegged to the annual global average energy consumption per capita. Secondly, the price per mega watt hours (MWh) is derived from the global average residential electricity price. Below describes the process.
+tl;dr: First, the value of STC is pegged to the annual global average energy consumption per capita. Secondly, the price per mega watt hours (MWh) is derived from the global average residential electricity price. Finally, total supply reflects total global energy consumption. Below describes the process.
 
 As of August 2019, the [latest figures from the World Bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE), for 2014, showed that the annual global average energy consumption per capita was 1922.488 kilograms of oil equivalent, which equates to 22.35853544 MWh. Similarly, [statistics from the International Energy Agency (IEA)](https://www.iea.org/statistics/prices/), for 2017, showed that the global average residential electricity price was US$98.16 per MWh.
 
