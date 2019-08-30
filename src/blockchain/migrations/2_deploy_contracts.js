@@ -1,14 +1,19 @@
 const StandardToken = artifacts.require("./StandardToken.sol");
 
-module.exports = function(deployer) {
+require('openzeppelin-test-helpers/configure')({ web3 });
+const { singletons } = require('openzeppelin-test-helpers');
 
-  let standardTokenAddress;
+module.exports = async function (deployer, network, accounts) {
 
-  deployer.deploy(StandardToken, 4881174811, []).then(() => {
-    standardTokenAddress = "\"" + StandardToken.address + "\"";
-  });
+  console.log("Default account ", accounts[0]);
 
-  deployer.then( () => {
-    console.log("static standardTokenAddress =", standardTokenAddress);
-  });
+  if ( (network === 'development')  || (network === 'rinkeby') || (network === 'ropsten') )  {
+    // In a test environment an ERC777 token requires deploying an ERC1820 registry
+    await singletons.ERC1820Registry(accounts[0]);
+  }
+
+  await deployer.deploy(StandardToken, 4881174811, []);
+  const token = await StandardToken.deployed();
+  const standardTokenAddress = "\"" + token.address + "\"";
+  console.log("static standardTokenAddress =", standardTokenAddress);
 };
