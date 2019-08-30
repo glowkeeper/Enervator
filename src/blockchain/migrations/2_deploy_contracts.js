@@ -17,6 +17,9 @@ module.exports = async function (deployer, network, accounts) {
   const standardTokenAddress = "\"" + token.address + "\"";
   const supply = await token.totalSupply();
   const totalSupply = supply.toString(10);
+  const balance = await token.balanceOf(accounts[0]);
+  const totalBalance = balance.toString(10);
   console.log( "static standardTokenAddress =", standardTokenAddress );
   console.log( "Total Supply = ", totalSupply );
+  console.log( accounts[0], " balance = ", totalBalance );
 };
