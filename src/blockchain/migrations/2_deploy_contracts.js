@@ -12,8 +12,11 @@ module.exports = async function (deployer, network, accounts) {
     await singletons.ERC1820Registry(accounts[0]);
   }
 
-  await deployer.deploy(StandardToken, 4881174811, []);
+  await deployer.deploy( StandardToken, 4881174811, [] );
   const token = await StandardToken.deployed();
   const standardTokenAddress = "\"" + token.address + "\"";
-  console.log("static standardTokenAddress =", standardTokenAddress);
+  const supply = await token.totalSupply();
+  const totalSupply = supply.toString(10);
+  console.log( "static standardTokenAddress =", standardTokenAddress );
+  console.log( "Total Supply = ", totalSupply );
 };
