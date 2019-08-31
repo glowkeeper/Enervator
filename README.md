@@ -16,13 +16,11 @@ First, the value of STK is to reflect annual global per capita energy use. Accor
 
 ## Calculating Supply and Token Value
 
-SSTK creates the initial supply of the token by dividing the figure above for annual TPES by that above for annual global average energy consumption per capita:
+STK creates the initial supply of the token by dividing the figure above for annual TPES by that above for annual global average energy consumption per capita:
 
 162494360000 / 22.35853544 = 7267665649.93
 
-Rounding gives 7,267,665,650, or just over 7.25 billion tokens, a figure that broadly agrees with [those available for the global population in 2016 ](https://www.worldometers.info/world-population/), which, according to Worldometers, was 7,464,022,049.
-
-Total supply of STK will grow and diminish relative to the annual figures for TPES.
+Rounding gives 7,267,665,650, or just over 7.25 billion tokens, a figure that broadly agrees with the world population of 7,464,022,049 for 2016, as reported by [Worldometers](https://www.worldometers.info/world-population/). Total supply of STK will grow and diminish relative to the annual figures for TPES.
 
 A simple value mechanism for StandardToken would be to equate a single STK to annual global average per capita energy consumption and then derive the token's worth by finding the product of that average and the annual global average residential electricity price:
 
