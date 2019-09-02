@@ -16,9 +16,9 @@ Since the basis of the value system of STK is energy use per capita, it seems pr
 
 Finally, to make it easy to exchange sovereign currencies for STK, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, [figures from the IEA](https://www.iea.org/statistics/prices/) show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh.
 
-### STK Supply Algorithm.
+### STK Algorithms
 
-Total Supply = World Population (re-evaluated annually).
+Total Supply = World Population (re-evaluated annually)
 
 ### STK Value Algorithm
 
