@@ -12,13 +12,15 @@ The value of a single STK = 2017 global average residential electricity price * 
 
 The total supply of STK will use the world population at at 2.34pm GMT on September 2nd, 2019, which, according to [Worldometer](https://www.worldometers.info/world-population/), was 7,727,623,693.
 
-To incentivise lower energy use, the value of StandardToken is to reflect two annual consumption metrics. The first is _global per capita energy consumption_, which, according to figures from the [World Bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE), in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh). The second is _total primary energy supply (TPES)_, which according to the International Energy Agency (IEA), in 2016, was 13972 Megatons of oil equivalent (Mtoe), or 162494360000 MWh. Using TPES also has the potential to offer stakeholders incentivises for using clean energy, a matter given more consideration in the future iterations section, below.
+To incentivise lower energy use, the value of StandardToken is to reflect two annual consumption metrics. The first is _global per capita energy consumption_, which, according to figures from the [World Bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE), in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh). The second is _total primary energy supply (TPES)_, which according to the International Energy Agency (IEA), in 2016, was 13972 Megatons of oil equivalent (Mtoe), or 162494360000 MWh. Using TPES also has the potential to offer stakeholders incentivises for using clean energy, a metric that future iterations of STK will take into consideration.
 
 Finally, to make it easy to exchange sovereign currencies for STK, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, [figures from the IEA](https://www.iea.org/statistics/prices/) show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh.
 
 ### STK Value Algorithm
 
-The aim is to incentivise lower energy consumption, not price variations, so STK shall use the 2017 global average residential electricity price of US$98.16 as a constant. A simple value algorithm would be to derive the value of a single STK by taking the product of US$98.16 and annual global average per capita energy consumption. Hence, given the figures above:
+The aim is to incentivise lower energy consumption, not price variations, so STK shall use the 2017 global average residential electricity price of US$98.16 as a constant.
+
+A simple value algorithm would be to derive the value of a single STK by taking the product of US$98.16 and annual global average per capita energy consumption. For example:
 
 1 STK = 98.16 * 22.35853544 = US$2194.71
 
@@ -44,9 +46,9 @@ Conversely, imagine that TPES decreases to 100000000000 MWh:
 
 Hence, with a decrease in total energy supply, the value of STK increases and visa-versa.
 
-### Proposed Network Value
+### Network Value
 
-With the value of a single STK at $4.39, the total network value of StandardToken is:
+Given the value of a single STK at $4.39, the total network value of StandardToken would be:
 
 7727623693 * US$4.39 = $33,924,268,012.3
 
