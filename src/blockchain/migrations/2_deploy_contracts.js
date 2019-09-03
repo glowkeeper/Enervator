@@ -1,4 +1,6 @@
 const StandardToken = artifacts.require("./StandardToken.sol");
+const StandardTokenRecipient = artifacts.require('StandardTokenRecipient');
+
 
 require('openzeppelin-test-helpers/configure')({ web3 });
 const { singletons } = require('openzeppelin-test-helpers');
@@ -14,6 +16,8 @@ module.exports = async function (deployer, network, accounts) {
 
   await deployer.deploy( StandardToken, 7727623693, [] );
   const token = await StandardToken.deployed();
+  await deployer.deploy( StandardTokenRecipient, token.address );
+  const tokenRecipient = await StandardTokenRecipient.deployed();
   //await token.addToSupply(1000000000);
 
   const defaultOperators = await token.defaultOperators();
