@@ -7,13 +7,14 @@ module.exports = async function (deployer, network, accounts) {
 
   console.log("Default account ", accounts[0]);
 
-  if ( (network === 'development')  || (network === 'rinkeby') || (network === 'ropsten') )  {
+  if ( network === 'development') {
     // In a test environment an ERC777 token requires deploying an ERC1820 registry
     await singletons.ERC1820Registry(accounts[0]);
   }
 
-  await deployer.deploy( StandardToken, 4881174811, [] );
+  await deployer.deploy( StandardToken, 7727623693, [] );
   const token = await StandardToken.deployed();
+  //await token.addToSupply(1000000000);
 
   const defaultOperators = await token.defaultOperators();
   const supply = await token.totalSupply();
@@ -22,7 +23,7 @@ module.exports = async function (deployer, network, accounts) {
   const totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
-  console.log( "static standardTokenAddress = \"", token.address, "\"" );
+  console.log( "static standardTokenAddress = \"" + token.address + "\"" );
   console.log( "Default Operators =", defaultOperators);
   console.log( "Total Supply =", totalSupply );
   console.log( accounts[0], "balance =", totalBalance );
