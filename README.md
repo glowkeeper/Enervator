@@ -22,7 +22,7 @@ Total Supply = World Population (re-evaluated annually)
 
 ### Value Algorithm
 
-The aim is to incentivise lower energy consumption, not price variations, so EOR shall use the 2017 global average residential electricity price of US$98.16 as a constant.
+The aim is to incentivise lower energy consumption, not energy price variations, so EOR shall use the 2017 global average residential electricity price of US$98.16 as a constant.
 
 A simple value algorithm would be to derive the value of a single EOR by taking the product of US$98.16 and annual global average per capita energy consumption. For example:
 
