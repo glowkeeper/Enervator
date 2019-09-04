@@ -8,17 +8,4 @@ contract StandardToken is ERC777 {
     {
       _mint(msg.sender, msg.sender, _initialSupply, "", "");
     }
-
-    /*
-    function addToSupply( uint256 _amount ) external
-    {
-      _mint(msg.sender, msg.sender, _amount, "", "");
-    }
-
-
-    function removeFromSupply( uint256 _amount ) external
-    {
-      burn(_amount, "", "");
-    }
-    */
 }
