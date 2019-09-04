@@ -1,6 +1,6 @@
 # Enervator
 
-A cryptocurrency stablecoin, with the currency code EOR, whose value is linked to energy, much like sovereign currencies were once linked to gold. **The primary goal of EOR is to incentivise energy efficiency**. Below describes the process.
+A cryptocurrency stablecoin, with the currency code EOR, whose value is linked to energy consumption, much like sovereign currencies were once linked to gold. **The primary goal of EOR is to incentivise energy efficiency**. Below describes the process.
 
 ## tl;dr:
 
@@ -8,7 +8,7 @@ EOR Total Supply = World Population (re-evaluated annually)
 
 The value of a single EOR = 2017 global average residential electricity price * ( 1 / annual global per capita energy use ) * ( current TPES / new TPES)
 
-### EOR Variables
+### Variables
 
 To incentivise lower energy use, the value of Enervator is to reflect two annual consumption metrics. The first is _global per capita energy consumption_, which, according to figures from the [World Bank](https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE), in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh). The second is _total primary energy supply (TPES)_, which according to the International Energy Agency (IEA), in 2016, was 13972 Megatons of oil equivalent (Mtoe), or 162494360000 MWh. Using TPES also has the potential to offer stakeholders incentives for using clean energy, a metric that future iterations of EOR will take into consideration.
 
@@ -16,11 +16,11 @@ Since the basis of the value system of EOR is energy use per capita, it seems pr
 
 Finally, to make it easy to exchange sovereign currencies for EOR, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, [figures from the IEA](https://www.iea.org/statistics/prices/) show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh.
 
-### EOR Algorithms
+### Supply Algorithms
 
 Total Supply = World Population (re-evaluated annually)
 
-### EOR Value Algorithm
+### Value Algorithm
 
 The aim is to incentivise lower energy consumption, not price variations, so EOR shall use the 2017 global average residential electricity price of US$98.16 as a constant.
 
