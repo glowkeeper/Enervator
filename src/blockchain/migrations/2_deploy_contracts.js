@@ -17,10 +17,18 @@ module.exports = async function (deployer, network, accounts) {
   await deployer.deploy( EnervatorManager );
   const tokenManager = await EnervatorManager.deployed();
 
-  await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
+  await deployer.deploy( Enervator, [ tokenManager.address ] );
   const token = await Enervator.deployed();
 
-  await tokenManager.setTokenAddress(token.address)
+  await tokenManager.setToken(token.address)
+
+  await token.setNewTPES ( uint256  _amount ) 
+
+  function setPerCapitaEnergy ( uint256  _amount ) public onlyOwner
+  {
+    require( _amount > 0 );
+    perCapitaEnergy = _amount;
+  }
 
   const defaultOperators = await token.defaultOperators();
   const supply = await token.totalSupply();
@@ -29,10 +37,9 @@ module.exports = async function (deployer, network, accounts) {
   const totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
-  console.log( "static enervatorAddress = \"" + token.address + "\"" );
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
-  //console.log( "Is Operator?", isOperator);
+  console.log( "static enervatorAddress = \"" + token.address + "\"" );
   console.log( "defaultOperators =", defaultOperators);
   console.log( "Total Supply =", totalSupply );
-  console.log( accounts[0], "balance =", totalBalance );
+  //console.log( accounts[0], "balance =", totalBalance );
 };

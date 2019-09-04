@@ -11,15 +11,15 @@ import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
  */
 contract EnervatorManager is IERC777Recipient, IERC777Sender {
 
-    IERC1820Registry private _erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
+    IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
 
     bytes32 constant private TOKENS_SENDER_INTERFACE_HASH = keccak256("ERC777TokensSender");
     bytes32 constant private TOKENS_RECIPIENT_INTERFACE_HASH = keccak256("ERC777TokensRecipient");
 
-    bool private _shouldRevertSend;
-    bool private _shouldRevertReceive;
+    bool private shouldRevertSend;
+    bool private shouldRevertReceive;
 
-    IERC777 private _token;
+    IERC777 private token;
 
     event TokensReceived
     (
@@ -49,16 +49,19 @@ contract EnervatorManager is IERC777Recipient, IERC777Sender {
 
     constructor () public
     {
-        _shouldRevertSend = false;
-        _shouldRevertReceive = false;
+        token = IERC777(0);
 
-        _erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
-        _erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
+        shouldRevertSend = false;
+        shouldRevertReceive = false;
+
+        erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
+        erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
     }
 
-    function setTokenAddress(address token) public
+    function setToken( address _token ) public
     {
-      _token = IERC777(token);
+      require( _token != address(0) );
+      token = IERC777(_token);
     }
 
     function tokensReceived (
@@ -71,16 +74,20 @@ contract EnervatorManager is IERC777Recipient, IERC777Sender {
     ) external
     {
 
-      if (_shouldRevertReceive) {
+      require(
+        address(token) != address(0) &&
+        msg.sender == address(token),
+        "EnervatorManager: Invalid token received"
+      );
+
+      if (shouldRevertReceive) {
          revert();
       }
 
-      require(msg.sender == address(_token), "StandardTokenRecipientSender: Invalid token received");
+      uint256 fromBalance = token.balanceOf(from);
+      uint256 toBalance = token.balanceOf(to);
 
-      uint256 fromBalance = _token.balanceOf(from);
-      uint256 toBalance = _token.balanceOf(to);
-
-      emit TokensReceived(operator, from, to, amount, userData, operatorData, address(_token), fromBalance, toBalance);
+      emit TokensReceived(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }
 
     function tokensToSend (
@@ -93,27 +100,30 @@ contract EnervatorManager is IERC777Recipient, IERC777Sender {
     )
     external {
 
-      if (_shouldRevertSend) {
+      require(
+        address(token) != address(0) &&
+        msg.sender == address(token),
+        "EnervatorManager: Invalid token sent"
+      );
+
+      if (shouldRevertSend) {
          revert();
       }
 
-      require(msg.sender == address(_token), "StandardTokenRecipientSender: Invalid token sent");
+      uint256 fromBalance = token.balanceOf(from);
+      uint256 toBalance = token.balanceOf(to);
 
-      uint256 fromBalance = _token.balanceOf(from);
-        // when called due to burn, to will be the zero address, which will have a balance of 0
-      uint256 toBalance = _token.balanceOf(to);
-
-      emit TokensSent(operator, from, to, amount, userData, operatorData, address(_token), fromBalance, toBalance);
+      emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
 
     }
 
     function setShouldRevertSend ( bool _shouldRevert ) public
     {
-        _shouldRevertSend = _shouldRevert;
+        shouldRevertSend = _shouldRevert;
     }
 
     function setShouldRevertReceive ( bool _shouldRevert ) public
     {
-        _shouldRevertReceive = _shouldRevert;
+        shouldRevertReceive = _shouldRevert;
     }
 }
