@@ -1,5 +1,5 @@
-const StandardToken = artifacts.require("./StandardToken.sol");
-const StandardTokenRecipient = artifacts.require('StandardTokenRecipient');
+const Enervator = artifacts.require("./Enervator.sol");
+const EnervatorManager = artifacts.require('./EnervatorManager.sol');
 
 
 require('openzeppelin-test-helpers/configure')({ web3 });
@@ -14,11 +14,13 @@ module.exports = async function (deployer, network, accounts) {
     await singletons.ERC1820Registry(accounts[0]);
   }
 
-  await deployer.deploy( StandardToken, 7727623693, [] );
-  const token = await StandardToken.deployed();
-  await deployer.deploy( StandardTokenRecipient, token.address );
-  const tokenRecipient = await StandardTokenRecipient.deployed();
-  //await token.addToSupply(1000000000);
+  await deployer.deploy( EnervatorManager );
+  const tokenManager = await EnervatorManager.deployed();
+
+  await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
+  const token = await Enervator.deployed();
+
+  await tokenManager.setTokenAddress(token.address)
 
   const defaultOperators = await token.defaultOperators();
   const supply = await token.totalSupply();
@@ -27,8 +29,10 @@ module.exports = async function (deployer, network, accounts) {
   const totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
-  console.log( "static standardTokenAddress = \"" + token.address + "\"" );
-  console.log( "Default Operators =", defaultOperators);
+  console.log( "static enervatorAddress = \"" + token.address + "\"" );
+  console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
+  //console.log( "Is Operator?", isOperator);
+  console.log( "defaultOperators =", defaultOperators);
   console.log( "Total Supply =", totalSupply );
   console.log( accounts[0], "balance =", totalBalance );
 };

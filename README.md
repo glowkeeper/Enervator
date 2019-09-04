@@ -57,3 +57,7 @@ Given the value of a single EOR at $4.39 and total supply of 7,727,623,693, the 
 7727623693 * US$4.39 = $33,924,268,012.3
 
 _Enervator was first described in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The above introduction to EOR borrows excerpts from that work._
+
+## Licensing
+
+Presently, there are no circumstances where you may copy or reuse the works in this repository. However, that may changve in the near future.

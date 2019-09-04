@@ -1,15 +1,15 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/token/ERC777/IERC777.sol";
-import "openzeppelin-solidity/contracts/introspection/IERC1820Registry.sol";
-import "openzeppelin-solidity/contracts/token/ERC777/IERC777Recipient.sol";
-import "openzeppelin-solidity/contracts/token/ERC777/IERC777Sender.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777.sol";
+import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
 
 /**
  * @title Simple777Recipient
  * @dev Very simple ERC777 Recipient
  */
-contract StandardTokenManager is IERC777Recipient, IERC777Sender {
+contract EnervatorManager is IERC777Recipient, IERC777Sender {
 
     IERC1820Registry private _erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
 
@@ -47,15 +47,18 @@ contract StandardTokenManager is IERC777Recipient, IERC777Sender {
       uint256 toBalance
     );
 
-    constructor (address token) public
+    constructor () public
     {
-        _token = IERC777(token);
-
         _shouldRevertSend = false;
         _shouldRevertReceive = false;
 
         _erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
         _erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
+    }
+
+    function setTokenAddress(address token) public
+    {
+      _token = IERC777(token);
     }
 
     function tokensReceived (
