@@ -20,5 +20,10 @@ module.exports = {
       network_id: 3,
       gas: 4612388      //make sure this gas allocation isn't over 4M, which is the max
     }
+  },
+  compilers: {
+    solc: {
+      version: "0.5.7"
+    }
   }
 };

@@ -1,7 +1,6 @@
 const Enervator = artifacts.require("./Enervator.sol");
 const EnervatorManager = artifacts.require('./EnervatorManager.sol');
 
-
 require('openzeppelin-test-helpers/configure')({ web3 });
 const { singletons } = require('openzeppelin-test-helpers');
 
@@ -22,13 +21,9 @@ module.exports = async function (deployer, network, accounts) {
 
   await tokenManager.setToken(token.address)
 
-  await token.setNewTPES ( uint256  _amount ) 
-
-  function setPerCapitaEnergy ( uint256  _amount ) public onlyOwner
-  {
-    require( _amount > 0 );
-    perCapitaEnergy = _amount;
-  }
+  const perCapita = 22.35853544 * 2**64;
+  await token.setPerCapitaEnergy(perCapita);
+  const value = await token.getUnitValue();
 
   const defaultOperators = await token.defaultOperators();
   const supply = await token.totalSupply();
@@ -36,6 +31,8 @@ module.exports = async function (deployer, network, accounts) {
 
   const totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
+
+  console.log(value);
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
