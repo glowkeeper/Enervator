@@ -9,22 +9,22 @@ contract Enervator is ERC777, Ownable {
 
     uint256 constant private initialSupply = 7727623693;
 
-    int128 private pricePerMWh;
-    int128 private currentTPES;
-    int128 private oldTPES;
-    int128 private perCapitaEnergy;
+    int256 private pricePerMWh;
+    int256 private currentTPES;
+    int256 private oldTPES;
+    int256 private perCapitaEnergy;
 
     constructor( address[] memory _defaultOperators ) ERC777 ( "Enervator", "EOR", _defaultOperators ) public
     {
       _mint(msg.sender, msg.sender, initialSupply, "", "");
 
-      pricePerMWh = ABDKMath64x64.fromInt(100);
-      currentTPES = 162494360000;
+      pricePerMWh = 100 * 2**64;
+      currentTPES = 162494360000 * 2**64;
       oldTPES = currentTPES;
       perCapitaEnergy = 0;
     }
 
-    function setNewTPES ( int128  _amount ) public onlyOwner
+    function setNewTPES ( int256  _amount ) public onlyOwner
     {
       require( _amount > 0 );
 
@@ -32,46 +32,44 @@ contract Enervator is ERC777, Ownable {
       currentTPES = _amount;
     }
 
-    function setPerCapitaEnergy ( int128 _amount ) public onlyOwner
+    function setPerCapitaEnergy ( int256 _amount ) public onlyOwner
     {
       require( _amount > 0 );
+
       perCapitaEnergy = _amount;
     }
 
-  //await token.setPerCapitaEnergy(perCapita);
-    function getPricePerMWh () public view returns ( int128 )
+    function getPricePerMWh () public view returns ( int256 )
     {
         return pricePerMWh;
     }
 
-    function getCurrentTPES () public view returns ( int128 )
+    function getCurrentTPES () public view returns ( int256 )
     {
         return currentTPES;
     }
 
-    function getOldTPES () public view returns ( int128 )
+    function getOldTPES () public view returns ( int256 )
     {
         return oldTPES;
     }
 
-    function getPerCapitaEnergy () public view returns ( int128 )
+    function getPerCapitaEnergy () public view returns ( int256 )
     {
         return perCapitaEnergy;
     }
 
-    function getUnitValue () public view returns ( int128 )
+    function getUnitValue () public view returns ( int256 )
     {
-      require( perCapitaEnergy > 0 );
+      require(
+        perCapitaEnergy > 0 &&
+        currentTPES > 0 &&
+        oldTPES > 0 &&
+        pricePerMWh > 0
+      );
 
-      //int128 price = ABDKMath64x64.fromInt(pricePerMWh);
-      int128 perCapita = ABDKMath64x64.fromInt(perCapitaEnergy);
-      int128 oldTPESConverted = ABDKMath64x64.fromInt(oldTPES);
-      int128 currentTPESConverted = ABDKMath64x64.fromInt(currentTPES);
-
-      int128 TPESFactor = ABDKMath64x64.div(oldTPESConverted, currentTPESConverted);
-      int128 prePrice =  ABDKMath64x64.div(TPESFactor, perCapita);
-      int128 unitValue = ABDKMath64x64.mul(pricePerMWh, prePrice);
-
-      return ABDKMath64x64.toInt(unitValue);
+      int256 TPESFactor = int256(ABDKMath64x64.divi(oldTPES, currentTPES));
+      int128 prePrice =  ABDKMath64x64.divi(TPESFactor, perCapitaEnergy);
+      return ABDKMath64x64.muli(prePrice, pricePerMWh);
     }
 }
