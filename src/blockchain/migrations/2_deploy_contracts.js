@@ -22,7 +22,7 @@ module.exports = async function (deployer, network, accounts) {
 
   await tokenManager.setToken(token.address)
 
-  const perCapita = web3.utils.toBN(22.35853544 * 2**64);
+  const perCapita = web3.utils.toHex(22.35853544 * 2**64);
   await token.setPerCapitaEnergy(perCapita);
   const value = await token.getUnitValue();
   const thisValue = parseInt(value.toString());
