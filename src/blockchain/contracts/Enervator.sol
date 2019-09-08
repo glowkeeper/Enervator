@@ -23,11 +23,11 @@ contract Enervator is ERC777, Ownable {
       TokenValues memory _values,
       address[] memory _defaultOperators ) ERC777 ( "Enervator", "EOR", _defaultOperators ) public
     {
-      require (_values.supply > 0  &&
-               _values.pricePerMWh > 0 &&
-               _values.currentTPES > 0 &&
-               _values.oldTPES > 0 &&
-               _values.perCapitaEnergy > 0);
+      require (_values.supply > 0, "Supply invalid");
+      require (_values.pricePerMWh > 0, "pricePerMWh invalid");
+      require (_values.currentTPES > 0, "currentTPES invalid");
+      require (_values.oldTPES > 0, "oldTPES invalid");
+      require (_values.perCapitaEnergy > 0, "perCapitaEnergy invalid");
 
       values.supply = _values.supply;
       values.pricePerMWh = _values.pricePerMWh;
@@ -41,12 +41,10 @@ contract Enervator is ERC777, Ownable {
 
     function _setUnitValue () private
     {
-      require(
-        values.perCapitaEnergy > 0 &&
-        values.currentTPES > 0 &&
-        values.oldTPES > 0 &&
-        values.pricePerMWh > 0
-      );
+      require (values.pricePerMWh > 0, "pricePerMWh invalid");
+      require (values.currentTPES > 0, "currentTPES invalid");
+      require (values.oldTPES > 0, "oldTPES invalid");
+      require (values.perCapitaEnergy > 0, "perCapitaEnergy invalid");
 
       int128 TPESFactor = ABDKMath64x64.div(values.oldTPES, values.currentTPES);
       int128 prePrice =  ABDKMath64x64.div(TPESFactor, values.perCapitaEnergy);

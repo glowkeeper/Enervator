@@ -24,6 +24,7 @@
   "license": "LGPL-3.0",
   "dependencies": {
     "@openzeppelin/contracts": "^2.3.0",
+    "bignumber.js": "^9.0.0",
     "bn.js": "^5.0.0"
   },
   "devDependencies": {
