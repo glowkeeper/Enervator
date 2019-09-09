@@ -27,8 +27,8 @@ module.exports = async function (deployer, network, accounts) {
   const oldTPES = currentTPES;
   const price = new BN('98', 10);
   const pricePerMWh = multiplier.mul(price);
-  const perCapita = new BN('22', 10);
-  const perCapitaEnergy = multiplier.mul(perCapita);
+  let perCapita = new BN('22', 10);
+  let perCapitaEnergy = multiplier.mul(perCapita);
 
   const tokenValues = {
     pricePerMWh: web3.utils.toHex(pricePerMWh),
@@ -51,10 +51,10 @@ module.exports = async function (deployer, network, accounts) {
   const EORValue = thisValue / 2**64;
 
   const defaultOperators = await token.defaultOperators();
-  const supply = await token.totalSupply();
+  let supply = await token.totalSupply();
   const balance = await token.balanceOf(accounts[0]);
 
-  const totalSupply = supply.toString(10);
+  let totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
   console.log("EOR value US$" + EORValue.toFixed(2));
@@ -63,5 +63,20 @@ module.exports = async function (deployer, network, accounts) {
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
   console.log( "defaultOperators =", defaultOperators);
   console.log( "Total Supply =", totalSupply );
+
+  const newPerCapita = new BN('30', 10);
+  perCapitaEnergy = multiplier.mul(newPerCapita);
+  const newPerCapitaEnergy = web3.utils.toHex(perCapitaEnergy);
+  await tokenManager.setPerCapitaEnergy ( newPerCapitaEnergy );
+  const tokenPerCapitaEnergy = await tokenManager.getPerCapitaEnergy();
+  const capitaEnergy = parseInt(tokenPerCapitaEnergy.toString(10));
+  const thisCapitaEnergy = capitaEnergy / 2**64;
+  console.log( "New perCapitaEnergy =", thisCapitaEnergy )
+
+  /*await tokenManager.setSupply ( 8000000000 );
+  supply = await token.totalSupply();
+  totalSupply = supply.toString(10);
+  console.log( "New Total Supply =", totalSupply );*/
+
   //console.log( accounts[0], "balance =", totalBalance );
 };

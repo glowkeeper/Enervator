@@ -2,27 +2,18 @@ pragma solidity ^0.5.7;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
-import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
-import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
+import "./IEnervatorManager.sol";
 import "./IEnervator.sol";
 import "./ABDKMath64x64.sol";
 
-contract EnervatorManager is IERC777Recipient, IERC777Sender, Ownable {
+contract EnervatorManager is IEnervatorManager, Ownable {
 
     IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
 
     bytes32 constant private TOKENS_SENDER_INTERFACE_HASH = keccak256("ERC777TokensSender");
     bytes32 constant private TOKENS_RECIPIENT_INTERFACE_HASH = keccak256("ERC777TokensRecipient");
-
-    struct TokenValues {
-      int128 pricePerMWh;
-      int128 currentTPES;
-      int128 oldTPES;
-      int128 perCapitaEnergy;
-      int256 unitValue;
-    }
 
     TokenValues private values;
 
@@ -31,32 +22,6 @@ contract EnervatorManager is IERC777Recipient, IERC777Sender, Ownable {
 
     IEnervator private token;
     address private tokenHolder;
-
-    event TokensReceived
-    (
-        address operator,
-        address from,
-        address to,
-        uint256 amount,
-        bytes data,
-        bytes operatorData,
-        address token,
-        uint256 fromBalance,
-        uint256 toBalance
-    );
-
-    event TokensSent
-    (
-      address operator,
-      address from,
-      address to,
-      uint256 amount,
-      bytes data,
-      bytes operatorData,
-      address token,
-      uint256 fromBalance,
-      uint256 toBalance
-    );
 
     constructor ( TokenValues memory _values, address _tokenHolder ) public
     {
