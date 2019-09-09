@@ -15,10 +15,10 @@ module.exports = async function (deployer, network, accounts) {
     await singletons.ERC1820Registry(accounts[0]);
   }
 
-  // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   // 2017 global average residential electricity price was US$98.16 per MWh. That's used as a constant thereafter.
   // 2016 total primary energy supply (TPES) was 162494360000 MWh.
   // 2014 global per capita energy consumption was 22.35853544 MegaWatt hours
+  // Can't get deciomals to work, so rounding down.
   const two = new BN('2', 10);
   const sixtyFour = new BN('64', 10);
   const multiplier = two.pow(sixtyFour);
@@ -40,6 +40,8 @@ module.exports = async function (deployer, network, accounts) {
 
   await deployer.deploy( EnervatorManager, tokenValues, accounts[0] );
   const tokenManager = await EnervatorManager.deployed();
+
+  // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
   const token = await Enervator.deployed();
 
@@ -57,14 +59,13 @@ module.exports = async function (deployer, network, accounts) {
   let totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
-  console.log("EOR value US$" + EORValue.toFixed(2));
-
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
-  console.log( "defaultOperators =", defaultOperators);
+  console.log( "defaultOperators =", defaultOperators  );
   console.log( "Total Supply =", totalSupply );
+  console.log( "EOR value US$" + EORValue.toFixed(2) );
 
-  const newPerCapita = new BN('30', 10);
+  /*const newPerCapita = new BN('30', 10);
   perCapitaEnergy = multiplier.mul(newPerCapita);
   const newPerCapitaEnergy = web3.utils.toHex(perCapitaEnergy);
   await tokenManager.setPerCapitaEnergy ( newPerCapitaEnergy );
@@ -73,10 +74,10 @@ module.exports = async function (deployer, network, accounts) {
   const thisCapitaEnergy = capitaEnergy / 2**64;
   console.log( "New perCapitaEnergy =", thisCapitaEnergy )
 
-  /*await tokenManager.setSupply ( 8000000000 );
+  await tokenManager.setSupply ( 8000000000 );
   supply = await token.totalSupply();
   totalSupply = supply.toString(10);
-  console.log( "New Total Supply =", totalSupply );*/
+  console.log( "New Total Supply =", totalSupply );
 
-  //console.log( accounts[0], "balance =", totalBalance );
+  //console.log( accounts[0], "balance =", totalBalance );*/
 };
