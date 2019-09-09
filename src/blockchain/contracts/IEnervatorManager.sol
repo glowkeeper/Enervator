@@ -46,6 +46,8 @@ contract IEnervatorManager is IERC777Recipient, IERC777Sender {
     function setPerCapitaEnergy ( int128 _amount ) public;
     function setSupply ( uint256 _amount ) public;
 
+    function send ( address _recipient, uint256 _amount ) public;
+
     function getPricePerMWh () public view returns ( int128 );
     function getCurrentTPES () public view returns ( int128 );
     function getOldTPES () public view returns ( int128 );

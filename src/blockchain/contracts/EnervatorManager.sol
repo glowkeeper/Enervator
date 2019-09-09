@@ -60,7 +60,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       values.unitValue = ABDKMath64x64.mul(prePrice, values.pricePerMWh);
     }
 
-    function setToken( address _token ) public
+    function setToken( address _token ) public onlyOwner
     {
       require( _token != address(0) );
       token = IEnervator(_token);
@@ -104,6 +104,15 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
         }
       }
+    }
+
+    function send ( address _recipient, uint256 _amount ) public onlyOwner
+    {
+      require( _amount > 0 );
+      require( address(token) != address(0) );
+      require( address(_recipient) != address(0) );
+
+      token.operatorSend( tokenHolder, _recipient, _amount, "", "");
     }
 
     function getPricePerMWh () public view returns ( int128 )
