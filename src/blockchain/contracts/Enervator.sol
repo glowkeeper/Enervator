@@ -13,7 +13,7 @@ contract Enervator is IEnervator, ERC777 {
 
     function addSupply ( address _tokenOwner, uint256 _amount) public
     {
-      require( _tokenOwner != address(0), "zero address!");
+      require( _tokenOwner != address(0), "zero address!" );
       require( isOperatorFor( msg.sender, _tokenOwner ), "not token operator!" );
       require( _amount > 0, "no tokens to add!" );
 

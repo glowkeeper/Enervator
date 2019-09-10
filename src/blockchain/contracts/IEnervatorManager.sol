@@ -40,20 +40,21 @@ contract IEnervatorManager is IERC777Recipient, IERC777Sender {
     );
 
     function _setUnitValue () private;
+    function _isSendAllowed ( address _sender ) private returns (bool);
 
-    function setToken( address _token ) public;
-    function setNewTPES ( int128  _amount ) public;
-    function setPerCapitaEnergy ( int128 _amount ) public;
-    function setSupply ( uint256 _amount ) public;
+    function setToken( address _token ) external;
+    function setNewTPES ( int128  _amount ) external;
+    function setPerCapitaEnergy ( int128 _amount ) external;
+    function setSupply ( uint256 _amount ) external;
 
-    function send ( address _recipient, uint256 _amount ) public;
+    function send ( address _recipient, uint256 _amount ) external;
 
-    function getPricePerMWh () public view returns ( int128 );
-    function getCurrentTPES () public view returns ( int128 );
-    function getOldTPES () public view returns ( int128 );
-    function getPerCapitaEnergy () public view returns ( int128 );
-    function getUnitValue () public view returns ( int256 );
+    function getPricePerMWh () external view returns ( int128 );
+    function getCurrentTPES () external view returns ( int128 );
+    function getOldTPES () external view returns ( int128 );
+    function getPerCapitaEnergy () external view returns ( int128 );
+    function getUnitValue () external view returns ( int256 );
 
-    function setShouldRevertSend ( bool _shouldRevert ) public;
-    function setShouldRevertReceive ( bool _shouldRevert ) public;
+    function setShouldRevertSend ( bool _shouldRevert ) external;
+    function setShouldRevertReceive ( bool _shouldRevert ) external;
 }

@@ -22,8 +22,10 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
     IEnervator private token;
     address private tokenHolder;
+    address private tokenSender;
+    address private managerOwner;
 
-    constructor ( TokenValues memory _values, address _tokenHolder ) public
+    constructor ( TokenValues memory _values, address _tokenHolder, address _tokenSender ) public
     {
       require ( _values.pricePerMWh > 0, "pricePerMWh invalid" );
       require ( _values.currentTPES > 0, "currentTPES invalid" );
@@ -38,6 +40,8 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
       token = IEnervator(0);
       tokenHolder = _tokenHolder;
+      tokenSender = _tokenSender;
+      managerOwner = msg.sender;
 
       shouldRevertSend = false;
       shouldRevertReceive = false;
@@ -60,13 +64,27 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       values.unitValue = ABDKMath64x64.mul(prePrice, values.pricePerMWh);
     }
 
-    function setToken( address _token ) public onlyOwner
+    function _isSendAllowed ( address _sender ) private returns (bool)
+    {
+      if ( ( _sender == tokenSender ) || ( _sender == managerOwner ) )
+      {
+
+        return true;
+
+      } else {
+
+        return false;
+
+      }
+    }
+
+    function setToken( address _token ) external onlyOwner
     {
       require( _token != address(0) );
       token = IEnervator(_token);
     }
 
-    function setNewTPES ( int128  _amount ) public onlyOwner
+    function setNewTPES ( int128  _amount ) external onlyOwner
     {
       require( _amount > 0 );
 
@@ -75,7 +93,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       _setUnitValue();
     }
 
-    function setPerCapitaEnergy ( int128 _amount ) public onlyOwner
+    function setPerCapitaEnergy ( int128 _amount ) external onlyOwner
     {
       require( _amount > 0 );
 
@@ -83,7 +101,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       _setUnitValue();
     }
 
-    function setSupply ( uint256 _amount ) public onlyOwner
+    function setSupply ( uint256 _amount ) external onlyOwner
     {
       require( _amount > 0 );
       require( address(token) != address(0) );
@@ -106,36 +124,37 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       }
     }
 
-    function send ( address _recipient, uint256 _amount ) public onlyOwner
+    function send ( address _recipient, uint256 _amount ) external
     {
-      require( _amount > 0 );
-      require( address(token) != address(0) );
-      require( address(_recipient) != address(0) );
+      require ( _isSendAllowed(msg.sender), "that address cannot send tokens!");
+      require ( _amount > 0, "no tokens to send!" );
+      require ( address(token) != address(0), "zero address for token!" );
+      require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
       token.operatorSend( tokenHolder, _recipient, _amount, "", "");
     }
 
-    function getPricePerMWh () public view returns ( int128 )
+    function getPricePerMWh () external view returns ( int128 )
     {
         return values.pricePerMWh;
     }
 
-    function getCurrentTPES () public view returns ( int128 )
+    function getCurrentTPES () external view returns ( int128 )
     {
         return values.currentTPES;
     }
 
-    function getOldTPES () public view returns ( int128 )
+    function getOldTPES () external view returns ( int128 )
     {
         return values.oldTPES;
     }
 
-    function getPerCapitaEnergy () public view returns ( int128 )
+    function getPerCapitaEnergy () external view returns ( int128 )
     {
         return values.perCapitaEnergy;
     }
 
-    function getUnitValue () public view returns ( int256 )
+    function getUnitValue () external view returns ( int256 )
     {
       return values.unitValue;
     }
@@ -193,13 +212,14 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
     }
 
-    function setShouldRevertSend ( bool _shouldRevert ) public
+    function setShouldRevertSend ( bool _shouldRevert ) external
     {
-        shouldRevertSend = _shouldRevert;
+      require ( _isSendAllowed(msg.sender), "that address cannot send tokens!");
+      shouldRevertSend = _shouldRevert;
     }
 
-    function setShouldRevertReceive ( bool _shouldRevert ) public
+    function setShouldRevertReceive ( bool _shouldRevert ) external
     {
-        shouldRevertReceive = _shouldRevert;
+      shouldRevertReceive = _shouldRevert;
     }
 }
