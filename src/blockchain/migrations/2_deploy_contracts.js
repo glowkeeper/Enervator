@@ -3,6 +3,7 @@ const StringsLib = artifacts.require("./Strings.sol");
 const Enervator = artifacts.require("./Enervator.sol");
 const EnervatorManager = artifacts.require('./EnervatorManager.sol');
 const DepositDB = artifacts.require('./Deposit.sol');
+const Forex = artifacts.require('./Forex.sol');
 
 //const BigNumber = require('bignumber.js');
 const BN = require('bn.js');
@@ -13,14 +14,6 @@ const { singletons } = require('openzeppelin-test-helpers');
 module.exports = async function (deployer, network, accounts) {
 
   console.log("Default account ", accounts[0]);
-
-  if ( network === 'development') {
-    // In a test environment an ERC777 token requires deploying an ERC1820 registry
-    await singletons.ERC1820Registry(accounts[0]);
-  }
-
-  await deployer.deploy(StringsLib);
-  deployer.link(StringsLib, [DepositDB]);
 
   // 2017 global average residential electricity price was US$98.16 per MWh. That's used as a constant thereafter.
   // 2016 total primary energy supply (TPES) was 162494360000 MWh.
@@ -45,8 +38,19 @@ module.exports = async function (deployer, network, accounts) {
     unitValue: 0
   }
 
+  if ( network === 'development') {
+    // In a test environment an ERC777 token requires deploying an ERC1820 registry
+    await singletons.ERC1820Registry(accounts[0]);
+  }
+
+  await deployer.deploy(StringsLib);
+  deployer.link(StringsLib, [DepositDB]);
+
   await deployer.deploy( DepositDB );
   const depositDB = await DepositDB.deployed();
+
+  await deployer.deploy( Forex );
+  const forex = await Forex.deployed();
 
   await deployer.deploy( EnervatorManager, tokenValues, accounts[0], depositDB.address );
   const tokenManager = await EnervatorManager.deployed();
