@@ -25,7 +25,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
     address private tokenSender;
     address private managerOwner;
 
-    constructor ( TokenValues memory _values, address _tokenHolder, address _tokenSender ) public
+    constructor ( TokenValues memory _values, address _tokenHolder, address _exchanger ) public
     {
       require ( _values.pricePerMWh > 0, "pricePerMWh invalid" );
       require ( _values.currentTPES > 0, "currentTPES invalid" );
@@ -40,8 +40,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
       token = IEnervator(0);
       tokenHolder = _tokenHolder;
-      tokenSender = _tokenSender;
-      managerOwner = msg.sender;
+      tokenSender = _exchanger;
 
       shouldRevertSend = false;
       shouldRevertReceive = false;
@@ -64,9 +63,9 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       values.unitValue = ABDKMath64x64.mul(prePrice, values.pricePerMWh);
     }
 
-    function _isSendAllowed ( address _sender ) private returns (bool)
+    function _isAllowed ( address _sender ) private returns (bool)
     {
-      if ( ( _sender == tokenSender ) || ( _sender == managerOwner ) )
+      if ( ( _sender == tokenSender ) )
       {
 
         return true;
@@ -126,7 +125,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
     function send ( address _recipient, uint256 _amount ) external
     {
-      require ( _isSendAllowed(msg.sender), "that address cannot send tokens!");
+      require ( _isAllowed(msg.sender), "that address cannot send tokens!");
       require ( _amount > 0, "no tokens to send!" );
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
@@ -214,7 +213,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
     function setShouldRevertSend ( bool _shouldRevert ) external
     {
-      require ( _isSendAllowed(msg.sender), "that address cannot send tokens!");
+      require ( _isAllowed(msg.sender), "that address cannot send tokens!");
       shouldRevertSend = _shouldRevert;
     }
 

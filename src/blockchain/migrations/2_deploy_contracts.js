@@ -4,6 +4,7 @@ const Enervator = artifacts.require("./Enervator.sol");
 const EnervatorManager = artifacts.require('./EnervatorManager.sol');
 const DepositDB = artifacts.require('./Deposit.sol');
 const Forex = artifacts.require('./Forex.sol');
+const Exchanger = artifacts.require('./Exchanger.sol');
 
 //const BigNumber = require('bignumber.js');
 const BN = require('bn.js');
@@ -46,22 +47,34 @@ module.exports = async function (deployer, network, accounts) {
   await deployer.deploy(StringsLib);
   deployer.link(StringsLib, [DepositDB]);
 
-  await deployer.deploy( DepositDB );
+  await deployer.deploy( Exchanger );
+  const exchanger = await Exchanger.deployed();
+
+  await deployer.deploy( DepositDB, exchanger.address );
   const depositDB = await DepositDB.deployed();
 
-  await deployer.deploy( Forex );
+  await deployer.deploy( Forex, exchanger.address );
   const forex = await Forex.deployed();
 
-  await deployer.deploy( EnervatorManager, tokenValues, accounts[0], depositDB.address );
+  exchanger.setComponents ( depositDB.address, forex.address );
+
+  await deployer.deploy( EnervatorManager, tokenValues, accounts[0], exchanger.address );
   const tokenManager = await EnervatorManager.deployed();
 
   // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
   const token = await Enervator.deployed();
-
   await tokenManager.setToken(token.address)
 
-  //await token.setPerCapitaEnergy(perCapita);
+  console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
+  console.log( "static enervatorAddress = \"" + token.address + "\"" );
+  console.log( "static depositDBAddress = \"" + depositDB.address + "\"" );
+  console.log( "static forexDBAddress = \"" + forex.address + "\"" );
+  console.log( "static exchangerAddress = \"" + exchanger.address + "\"\n" );
+
+  /*
+  await token.setPerCapitaEnergy(perCapita);
+
   const value = await tokenManager.getUnitValue();
   const thisValue = parseInt(value.toString());
   const EORValue = thisValue / 2**64;
@@ -73,15 +86,11 @@ module.exports = async function (deployer, network, accounts) {
   let totalSupply = supply.toString(10);
   const totalBalance = balance.toString(10);
 
-  console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
-  console.log( "static enervatorAddress = \"" + token.address + "\"" );
-  console.log( "static depositDBAddress = \"" + depositDB.address + "\"" );
-
   console.log( "defaultOperators =", defaultOperators  );
   console.log( "Total Supply =", totalSupply );
   console.log( "EOR value US$" + EORValue.toFixed(2) );
 
-  /*const newPerCapita = new BN('30', 10);
+  const newPerCapita = new BN('30', 10);
   perCapitaEnergy = multiplier.mul(newPerCapita);
   const newPerCapitaEnergy = web3.utils.toHex(perCapitaEnergy);
   await tokenManager.setPerCapitaEnergy ( newPerCapitaEnergy );
@@ -95,5 +104,6 @@ module.exports = async function (deployer, network, accounts) {
   totalSupply = supply.toString(10);
   console.log( "New Total Supply =", totalSupply );
 
-  //console.log( accounts[0], "balance =", totalBalance );*/
+  console.log( accounts[0], "balance =", totalBalance );
+  */
 };

@@ -6,12 +6,45 @@ import "./Strings.sol";
 
 contract Deposit is IDeposit {
 
+  address private depositManager;
+
   address[] private depositors;
   mapping(address => bytes32[]) private depositRefs;
   mapping(bytes32 =>  DepositDB) private deposits;
 
+  constructor( address _depositManager ) public
+  {
+    require ( _depositManager != address(0), "zero address for deposit manager!" );
+    depositManager = _depositManager;
+  }
+
+  function _isAllowed ( address _depositor ) private returns (bool)
+  {
+    require ( _depositor != address(0), "zero address for depositor!" );
+
+    if ( _depositor == depositManager )
+    {
+
+      return true;
+
+    } else {
+
+      return false;
+
+    }
+  }
+
+  function _compareAddresses ( address _x, address _y ) private pure returns (bool)
+  {
+    require ( _x != address(0) &&
+              _y != address(0), "zero address for compare!" );
+
+    return _x == _y;
+  }
+
   function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external
   {
+    require ( _isAllowed(msg.sender), "that address cannot deposit!");
     require ( _depositor != address(0), "zero address for depositor!" );
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
     require ( _code[0] != 0, "no currency code supplied!" );
@@ -34,18 +67,11 @@ contract Deposit is IDeposit {
 
 	function setWithdrawn ( bytes32 _depositRef ) external
   {
+    require ( _isAllowed(msg.sender), "that address cannot withdraw!");
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
     require ( deposits[_depositRef].isDeposited == true, "not deposited!" );
 
 		deposits[_depositRef].isDeposited = false;
-  }
-
-  function _compareAddresses ( address _x, address _y ) private pure returns (bool)
-  {
-    require ( _x != address(0) &&
-              _y != address(0), "zero address for compare!" );
-
-    return _x == _y;
   }
 
   function getExists ( address _x ) public view returns (bool) {

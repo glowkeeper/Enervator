@@ -10,6 +10,7 @@ contract IDeposit {
 	}
 
 	function _compareAddresses ( address _x, address _y ) private pure returns (bool);
+	function _isAllowed ( address _depositor ) private returns (bool);
 
   function getExists( address _x ) public view returns (bool);
 

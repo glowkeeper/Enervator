@@ -40,7 +40,7 @@ contract IEnervatorManager is IERC777Recipient, IERC777Sender {
     );
 
     function _setUnitValue () private;
-    function _isSendAllowed ( address _sender ) private returns (bool);
+    function _isAllowed ( address _sender ) private returns (bool);
 
     function setToken( address _token ) external;
     function setNewTPES ( int128  _amount ) external;
