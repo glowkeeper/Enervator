@@ -4,6 +4,7 @@ import "./ABDKMath64x64.sol";
 
 import "./IForex.sol";
 
+//FIAT to EOR exchange rate.
 contract Forex is IForex {
 
 	mapping(bytes32 => int128) private rates;
@@ -22,7 +23,7 @@ contract Forex is IForex {
 		return rates[_code];
 	}
 
-	function getEORAmount ( bytes32 _code, int128 _amount ) public view returns (int256)
+	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256)
 	{
 		require ( _code[0] != 0, "no currency code supplied!" );
 		require ( _amount > 0, "zero amount!" );

@@ -10,7 +10,7 @@ contract Deposit is IDeposit {
   mapping(address => bytes32[]) private depositRefs;
   mapping(bytes32 =>  DepositDB) private deposits;
 
-  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) public
+  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external
   {
     require ( _depositor != address(0), "zero address for depositor!" );
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
@@ -32,7 +32,7 @@ contract Deposit is IDeposit {
     deposits[_depositRef].isDeposited = true;
 	}
 
-	function setWithdrawn ( bytes32 _depositRef ) public
+	function setWithdrawn ( bytes32 _depositRef ) external
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
     require ( deposits[_depositRef].isDeposited == true, "not deposited!" );
@@ -63,26 +63,26 @@ contract Deposit is IDeposit {
     return exists;
   }
 
-	function getNumDepositors () public view returns (uint256)
+	function getNumDepositors () external view returns (uint256)
   {
     return depositors.length;
   }
 
-  function getDepositor ( uint256 _index ) public view returns (address)
+  function getDepositor ( uint256 _index ) external view returns (address)
   {
     require ( _index < depositors.length, "index out of range!" );
 
     return depositors[_index];
   }
 
-  function getNumDeposits ( address _depositor ) public view returns (uint256)
+  function getNumDeposits ( address _depositor ) external view returns (uint256)
   {
     require ( _depositor != address(0), "zero address for depositor!" );
 
     return depositRefs[_depositor].length;
   }
 
-  function getDepositReference( address _depositor, uint256 _index ) public view returns (bytes32)
+  function getDepositReference( address _depositor, uint256 _index ) external view returns (bytes32)
   {
     require ( _depositor != address(0), "zero address for depositor!" );
     require ( _index < depositRefs[_depositor].length, "index out of range!" );
@@ -90,28 +90,28 @@ contract Deposit is IDeposit {
     return depositRefs[_depositor][_index];
   }
 
-  function getDepositedAmount ( bytes32 _depositRef ) public view returns (uint256)
+  function getDepositedAmount ( bytes32 _depositRef ) external view returns (uint256)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
 		deposits[_depositRef].amount;
 	}
 
-  function getDepositedCode ( bytes32 _depositRef ) public view returns (bytes32)
+  function getDepositedCode ( bytes32 _depositRef ) external view returns (bytes32)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
 		deposits[_depositRef].code;
 	}
 
-  function getIsDeposited ( bytes32 _depositRef ) public view returns (bool)
+  function getIsDeposited ( bytes32 _depositRef ) external view returns (bool)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
 		deposits[_depositRef].isDeposited;
 	}
 
-  function getDeposit( bytes32 _depositRef ) public view returns (DepositDB memory) {
+  function getDeposit( bytes32 _depositRef ) external view returns (DepositDB memory) {
     require (_depositRef[0] != 0, "no deposit reference supplied!" );
 
     return deposits[_depositRef];

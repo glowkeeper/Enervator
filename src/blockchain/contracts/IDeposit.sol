@@ -13,18 +13,18 @@ contract IDeposit {
 
   function getExists( address _x ) public view returns (bool);
 
-	function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) public;
+	function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external;
 
-	function setWithdrawn ( bytes32 _depositRef ) public;
+	function setWithdrawn ( bytes32 _depositRef ) external;
 
-	function getNumDepositors () public view returns (uint256);
-	function getDepositor ( uint256 _index ) public view returns (address);
-	function getNumDeposits ( address _depositor ) public view returns (uint256);
-	function getDepositReference( address _depositor, uint256 _index ) public view returns (bytes32);
+	function getNumDepositors () external view returns (uint256);
+	function getDepositor ( uint256 _index ) external view returns (address);
+	function getNumDeposits ( address _depositor ) external view returns (uint256);
+	function getDepositReference( address _depositor, uint256 _index ) external view returns (bytes32);
 
-	function getDepositedAmount ( bytes32 _depositRef ) public view returns (uint256);
-	function getDepositedCode ( bytes32 _depositRef ) public view returns (bytes32);
-	function getIsDeposited ( bytes32 _depositRef ) public view returns (bool);
-	function getDeposit( bytes32 _depositRef ) public view returns (DepositDB memory);
+	function getDepositedAmount ( bytes32 _depositRef ) external view returns (uint256);
+	function getDepositedCode ( bytes32 _depositRef ) external view returns (bytes32);
+	function getIsDeposited ( bytes32 _depositRef ) external view returns (bool);
+	function getDeposit( bytes32 _depositRef ) external view returns (DepositDB memory);
 
 }
