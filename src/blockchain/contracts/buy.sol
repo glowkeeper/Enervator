@@ -21,6 +21,14 @@ contract Buy is IBuy {
     buyerManager = _buyerManager;
   }
 
+  function _compareAddresses ( address _x, address _y ) private pure returns (bool)
+  {
+    require ( _x != address(0) &&
+              _y != address(0), "zero address for compare!" );
+
+    return _x == _y;
+  }
+
   function _isAllowed ( address _account ) private returns (bool)
   {
     require ( _account != address(0), "zero address for account!" );
@@ -37,6 +45,42 @@ contract Buy is IBuy {
     }
   }
 
+  function getExists ( address _x ) public view returns (bool) {
+    require ( _x != address(0), "zero address does not exist!" );
 
+    bool exists = false;
+    for ( uint256 i = 0; i < buyers.length; i++ )
+    {
+      if (_compareAddresses( _x, buyers[i] ) )
+      {
+        exists = true;
+        break;
+      }
+    }
+    return exists;
+  }
 
+  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
+  {
+    require ( _buyer != address(0), "no address for buyer!" );
+    require ( _buyRef[0] != 0, "no buy reference supplied!" );
+    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
+
+    if ( !getExists(_buyer ) )
+    {
+      buyers.push(_buyer);
+    }
+
+    if ( !Strings.getExists( _buyRef, buyerRefs[_buyer] ) )
+    {
+      buyerRefs[_buyer].push(_buyRef);
+    }
+
+    buys[_buyRef].account = _buyer;
+		deposits[_depositRef].depositRef = _depositRef;
+
+    uint epochTime = now;
+    emit Bought( epochTime, _buyer, _buyRef, _depositRef );
+
+  }
 }

@@ -45,6 +45,21 @@ contract Deposit is IDeposit {
     return _x == _y;
   }
 
+  function getExists ( address _x ) public view returns (bool) {
+    require ( _x != address(0), "zero address does not exist!" );
+
+    bool exists = false;
+    for ( uint256 i = 0; i < depositors.length; i++ )
+    {
+      if (_compareAddresses( _x, depositors[i] ) )
+      {
+        exists = true;
+        break;
+      }
+    }
+    return exists;
+  }
+
   function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot deposit!");
@@ -80,21 +95,6 @@ contract Deposit is IDeposit {
 
 		deposits[_depositRef].isWithdrawn = true;
     emit Withdrawn( _depositRef );
-  }
-
-  function getExists ( address _x ) public view returns (bool) {
-    require ( _x != address(0), "zero address does not exist!" );
-
-    bool exists = false;
-    for ( uint256 i = 0; i < depositors.length; i++ )
-    {
-      if (_compareAddresses( _x, depositors[i] ) )
-      {
-        exists = true;
-        break;
-      }
-    }
-    return exists;
   }
 
 	function getNumDepositors () external view returns (uint256)

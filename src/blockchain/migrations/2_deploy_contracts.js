@@ -58,7 +58,7 @@ module.exports = async function (deployer, network, accounts) {
   const forex = await Forex.deployed();
 
   await deployer.deploy( Buy, exchanger.address );
-  const forex = await Buy.deployed();
+  const buy = await Buy.deployed();
 
   exchanger.setComponents ( deposit.address, forex.address, buy.address );
 
@@ -72,8 +72,9 @@ module.exports = async function (deployer, network, accounts) {
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
-  console.log( "static depositDBAddress = \"" + depositDB.address + "\"" );
-  console.log( "static forexDBAddress = \"" + forex.address + "\"" );
+  console.log( "static depositAddress = \"" + deposit.address + "\"" );
+  console.log( "static forexAddress = \"" + forex.address + "\"" );
+  console.log( "static buyAddress = \"" + buy.address + "\"" );
   console.log( "static exchangerAddress = \"" + exchanger.address + "\"\n" );
 
   /*

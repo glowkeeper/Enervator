@@ -16,7 +16,6 @@ contract IDeposit {
   function getExists( address _x ) public view returns (bool);
 
 	function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external;
-
 	function setWithdrawn ( bytes32 _depositRef ) external;
 
 	function getNumDepositors () external view returns (uint256);
