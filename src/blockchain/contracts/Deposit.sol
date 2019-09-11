@@ -12,17 +12,20 @@ contract Deposit is IDeposit {
   mapping(address => bytes32[]) private depositRefs;
   mapping(bytes32 =>  DepositDB) private deposits;
 
+  event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount );
+  event Withdrawn ( bytes32 _depositRef );
+
   constructor( address _depositManager ) public
   {
     require ( _depositManager != address(0), "zero address for deposit manager!" );
     depositManager = _depositManager;
   }
 
-  function _isAllowed ( address _depositor ) private returns (bool)
+  function _isAllowed ( address _account ) private returns (bool)
   {
-    require ( _depositor != address(0), "zero address for depositor!" );
+    require ( _account != address(0), "zero address for account!" );
 
-    if ( _depositor == depositManager )
+    if ( _account == depositManager )
     {
 
       return true;
@@ -42,7 +45,7 @@ contract Deposit is IDeposit {
     return _x == _y;
   }
 
-  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external
+  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot deposit!");
     require ( _depositor != address(0), "zero address for depositor!" );
@@ -60,18 +63,23 @@ contract Deposit is IDeposit {
       depositRefs[_depositor].push(_depositRef);
     }
 
+    deposits[_depositRef].account = _depositor;
 		deposits[_depositRef].amount = _amount;
     deposits[_depositRef].code = _code;
-    deposits[_depositRef].isDeposited = true;
+    deposits[_depositRef].isWithdrawn = false;
+
+    uint epochTime = now;
+    emit Deposited( epochTime, _depositor, _depositRef, _code, _amount );
 	}
 
 	function setWithdrawn ( bytes32 _depositRef ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot withdraw!");
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
-    require ( deposits[_depositRef].isDeposited == true, "not deposited!" );
+    require ( deposits[_depositRef].isWithdrawn == false, "already withdrawn!" );
 
-		deposits[_depositRef].isDeposited = false;
+		deposits[_depositRef].isWithdrawn = true;
+    emit Withdrawn( _depositRef );
   }
 
   function getExists ( address _x ) public view returns (bool) {
@@ -116,25 +124,33 @@ contract Deposit is IDeposit {
     return depositRefs[_depositor][_index];
   }
 
-  function getDepositedAmount ( bytes32 _depositRef ) external view returns (uint256)
+  function getDepositedAddress ( bytes32 _depositRef ) external view returns (address)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
-		deposits[_depositRef].amount;
+    return deposits[_depositRef].account;
+  }
+
+
+  function getDepositedAmount ( bytes32 _depositRef ) external view returns (int128)
+  {
+    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
+
+		return deposits[_depositRef].amount;
 	}
 
   function getDepositedCode ( bytes32 _depositRef ) external view returns (bytes32)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
-		deposits[_depositRef].code;
+		return deposits[_depositRef].code;
 	}
 
-  function getIsDeposited ( bytes32 _depositRef ) external view returns (bool)
+  function getIsWithdrawn ( bytes32 _depositRef ) external view returns (bool)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 
-		deposits[_depositRef].isDeposited;
+		return deposits[_depositRef].isWithdrawn;
 	}
 
   function getDeposit( bytes32 _depositRef ) external view returns (DepositDB memory) {

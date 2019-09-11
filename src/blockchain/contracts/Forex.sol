@@ -17,9 +17,11 @@ contract Forex is IForex {
     forexManager = _forexManager;
   }
 
-	function _isAllowed ( address _settor ) private returns (bool)
+	function _isAllowed ( address _account ) private returns (bool)
   {
-    if ( _settor == forexManager )
+    require ( _account != address(0), "zero address for account!" );
+		
+    if ( _account == forexManager )
     {
 
       return true;

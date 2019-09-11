@@ -2,8 +2,9 @@ const StringsLib = artifacts.require("./Strings.sol");
 
 const Enervator = artifacts.require("./Enervator.sol");
 const EnervatorManager = artifacts.require('./EnervatorManager.sol');
-const DepositDB = artifacts.require('./Deposit.sol');
+const Deposit = artifacts.require('./Deposit.sol');
 const Forex = artifacts.require('./Forex.sol');
+const Buy = artifacts.require('./Buy.sol');
 const Exchanger = artifacts.require('./Exchanger.sol');
 
 //const BigNumber = require('bignumber.js');
@@ -45,18 +46,21 @@ module.exports = async function (deployer, network, accounts) {
   }
 
   await deployer.deploy(StringsLib);
-  deployer.link(StringsLib, [DepositDB]);
+  deployer.link(StringsLib, [Deposit, Buy]);
 
   await deployer.deploy( Exchanger );
   const exchanger = await Exchanger.deployed();
 
-  await deployer.deploy( DepositDB, exchanger.address );
-  const depositDB = await DepositDB.deployed();
+  await deployer.deploy( Deposit, exchanger.address );
+  const deposit = await Deposit.deployed();
 
   await deployer.deploy( Forex, exchanger.address );
   const forex = await Forex.deployed();
 
-  exchanger.setComponents ( depositDB.address, forex.address );
+  await deployer.deploy( Buy, exchanger.address );
+  const forex = await Buy.deployed();
+
+  exchanger.setComponents ( deposit.address, forex.address, buy.address );
 
   await deployer.deploy( EnervatorManager, tokenValues, accounts[0], exchanger.address );
   const tokenManager = await EnervatorManager.deployed();
