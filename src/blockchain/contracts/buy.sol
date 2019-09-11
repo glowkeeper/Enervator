@@ -77,7 +77,7 @@ contract Buy is IBuy {
     }
 
     buys[_buyRef].account = _buyer;
-		deposits[_depositRef].depositRef = _depositRef;
+		buys[_buyRef].depositRef = _depositRef;
 
     uint epochTime = now;
     emit Bought( epochTime, _buyer, _buyRef, _depositRef );
