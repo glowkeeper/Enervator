@@ -8,6 +8,6 @@ contract IExchanger {
 
   function setCanWithdraw ( bytes32 _depositRef ) external;
   function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external;
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external;
+  function bought ( address _buyer, bytes calldata _buyData ) external;
 
 }

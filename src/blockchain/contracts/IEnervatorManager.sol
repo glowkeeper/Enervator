@@ -1,4 +1,5 @@
 pragma solidity ^0.5.7;
+pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
@@ -47,7 +48,7 @@ contract IEnervatorManager is IERC777Recipient, IERC777Sender {
     function setPerCapitaEnergy ( int128 _amount ) external;
     function setSupply ( uint256 _amount ) external;
 
-    function send ( address _recipient, uint256 _amount ) external;
+    function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external;
 
     function getPricePerMWh () external view returns ( int128 );
     function getCurrentTPES () external view returns ( int128 );

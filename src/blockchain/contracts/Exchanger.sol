@@ -77,24 +77,30 @@ contract Exchanger is Ownable {
     int128 depositedAmount = depositDB.getDepositedAmount( _depositRef );
     uint256 amountEOR = uint256(forexDB.getEORAmount( currencyCode, depositedAmount ));
 
-    enervatorManager.send ( _buyer, amountEOR );
+    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef );
+
+    //bytes memory accountData = abi.encodePacked(_buyer);
+    /*buyerData.push( buyerAddress );
+    buyerData.push(_buyRef);
+    buyerData.push(_depositRef);*/
+
+    enervatorManager.send ( _buyer, amountEOR, buyData );
   }
 
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
+  function bought ( address _buyer, bytes calldata _buyData ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot send tokens!");
     require ( address(depositDB) != address(0), "no address for depositDB!" );
     require ( address(buyDB) != address(0), "no address for buyDB!" );
     require ( _buyer != address(0), "no address for buyer!" );
-    require ( _buyRef[0] != 0, "no buy reference supplied!" );
-    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
-    require ( depositDB.getDepositedAddress( _depositRef ) == _buyer, "buyer and deposit addresses are different!" );
+    require ( _buyData[0] != 0, "no buy data supplied!" );
+    /* require ( depositDB.getDepositedAddress( _depositRef ) == _buyer, "buyer and deposit addresses are different!" );
     require ( depositDB.getCanWithdraw( _depositRef ), "deposit cannot be withdrawn!" );
-    require ( !depositDB.getIsWithdrawn( _depositRef ), "deposit has been withdrawn!" );
+    require ( !depositDB.getIsWithdrawn( _depositRef ), "deposit has been withdrawn!" ); */
 
-    depositDB.setCanWithdraw( _depositRef, false );
+    /* depositDB.setCanWithdraw( _depositRef, false );
     depositDB.setWithdrawn( _depositRef, true );
-    buyDB.bought( _buyer, _buyRef, _depositRef );
+    buyDB.bought( _buyer, _buyRef, _depositRef );*/
   }
 
 }
