@@ -13,7 +13,8 @@ contract Deposit is IDeposit {
   mapping(bytes32 =>  DepositDB) private deposits;
 
   event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount );
-  event Withdrawn ( bytes32 _depositRef );
+  event CanWithdraw ( bytes32 _depositRef, bool _canWithdraw );
+  event Withdrawn ( bytes32 _depositRef, bool _withdrawn );
 
   constructor( address _depositManager ) public
   {
@@ -81,20 +82,30 @@ contract Deposit is IDeposit {
     deposits[_depositRef].account = _depositor;
 		deposits[_depositRef].amount = _amount;
     deposits[_depositRef].code = _code;
+    deposits[_depositRef].canWithdraw = true; // set to true for now - further down the line, this can be used as a guard...
     deposits[_depositRef].isWithdrawn = false;
 
     uint epochTime = now;
     emit Deposited( epochTime, _depositor, _depositRef, _code, _amount );
 	}
 
-	function setWithdrawn ( bytes32 _depositRef ) external
+
+	function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw ) external
+  {
+    require ( _isAllowed(msg.sender), "that address cannot allow/disallow withdraws!");
+    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
+
+		deposits[_depositRef].canWithdraw = _canWithdraw;
+    emit CanWithdraw( _depositRef, _canWithdraw );
+  }
+
+	function setWithdrawn ( bytes32 _depositRef, bool _withdrawn ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot withdraw!");
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
-    require ( deposits[_depositRef].isWithdrawn == false, "already withdrawn!" );
 
-		deposits[_depositRef].isWithdrawn = true;
-    emit Withdrawn( _depositRef );
+		deposits[_depositRef].isWithdrawn = _withdrawn;
+    emit Withdrawn( _depositRef, _withdrawn );
   }
 
 	function getNumDepositors () external view returns (uint256)
@@ -145,6 +156,13 @@ contract Deposit is IDeposit {
 
 		return deposits[_depositRef].code;
 	}
+
+  function getCanWithdraw ( bytes32 _depositRef ) external view returns (bool)
+  {
+    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
+
+		return deposits[_depositRef].canWithdraw;
+  }
 
   function getIsWithdrawn ( bytes32 _depositRef ) external view returns (bool)
   {

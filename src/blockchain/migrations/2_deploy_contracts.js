@@ -60,10 +60,10 @@ module.exports = async function (deployer, network, accounts) {
   await deployer.deploy( Buy, exchanger.address );
   const buy = await Buy.deployed();
 
-  exchanger.setComponents ( deposit.address, forex.address, buy.address );
-
   await deployer.deploy( EnervatorManager, tokenValues, accounts[0], exchanger.address );
   const tokenManager = await EnervatorManager.deployed();
+
+  exchanger.setComponents ( tokenManager.address, deposit.address, forex.address, buy.address );
 
   // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );

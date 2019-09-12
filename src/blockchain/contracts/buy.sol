@@ -60,7 +60,7 @@ contract Buy is IBuy {
     return exists;
   }
 
-  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
+  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
   {
     require ( _buyer != address(0), "no address for buyer!" );
     require ( _buyRef[0] != 0, "no buy reference supplied!" );
@@ -81,6 +81,46 @@ contract Buy is IBuy {
 
     uint epochTime = now;
     emit Bought( epochTime, _buyer, _buyRef, _depositRef );
+  }
 
+  function getNumBuyers () external view returns (uint256)
+  {
+    return buyers.length;
+  }
+
+	function getBuys ( uint256 _index ) external view returns (address)
+  {
+    require ( _index < buyers.length, "index out of range!" );
+
+    return buyers[_index];
+  }
+
+	function getNumBuys ( address _buyer ) external view returns (uint256)
+  {
+    require ( _buyer != address(0), "zero address for depositor!" );
+
+    return buyerRefs[_buyer].length;
+  }
+
+	function getBuyReference( address _buyer, uint256 _index ) external view returns (bytes32)
+  {
+    require ( _buyer != address(0), "zero address for depositor!" );
+    require ( _index < buyerRefs[_buyer].length, "index out of range!" );
+
+    return buyerRefs[_buyer][_index];
+  }
+
+  function getBuyAddress ( bytes32 _buyerRef ) external view returns (address)
+  {
+    require ( _buyerRef[0] != 0, "no deposit reference supplied!" );
+
+    return buys[_buyerRef].account;
+  }
+
+	function getDepositReference ( bytes32 _buyerRef ) external view returns (bytes32)
+  {
+    require ( _buyerRef[0] != 0, "no deposit reference supplied!" );
+
+    return buys[_buyerRef].depositRef;
   }
 }

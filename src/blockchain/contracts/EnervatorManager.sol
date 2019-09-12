@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 import "./IEnervatorManager.sol";
 import "./IEnervator.sol";
+import "./IExchanger.sol";
 import "./ABDKMath64x64.sol";
 
 contract EnervatorManager is IEnervatorManager, Ownable {
@@ -21,9 +22,8 @@ contract EnervatorManager is IEnervatorManager, Ownable {
     bool private shouldRevertReceive;
 
     IEnervator private token;
+    IExchanger private tokenSender;
     address private tokenHolder;
-    address private tokenSender;
-    address private managerOwner;
 
     constructor ( TokenValues memory _values, address _tokenHolder, address _exchanger ) public
     {
@@ -39,8 +39,8 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       values.perCapitaEnergy = _values.perCapitaEnergy;
 
       token = IEnervator(0);
+      tokenSender = IExchanger(_exchanger);
       tokenHolder = _tokenHolder;
-      tokenSender = _exchanger;
 
       shouldRevertSend = false;
       shouldRevertReceive = false;
@@ -65,7 +65,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
     function _isAllowed ( address _sender ) private returns (bool)
     {
-      if ( ( _sender == tokenSender ) )
+      if ( _sender == address(tokenSender ) )
       {
 
         return true;
