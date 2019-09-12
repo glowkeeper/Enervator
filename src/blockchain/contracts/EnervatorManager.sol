@@ -2,6 +2,8 @@ pragma solidity ^0.5.7;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 import "./IEnervatorManager.sol";
@@ -9,7 +11,7 @@ import "./IEnervator.sol";
 import "./IExchanger.sol";
 import "./ABDKMath64x64.sol";
 
-contract EnervatorManager is IEnervatorManager, Ownable {
+contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender, Ownable {
 
     IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
 
@@ -47,6 +49,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
 
       erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
       erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
+
 
       _setUnitValue();
     }
@@ -132,32 +135,6 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
       token.operatorSend( tokenHolder, _recipient, _amount, "", _buyData );
-      //tokenSender.bought( _recipient, _buyData );
-    }
-
-    function getPricePerMWh () external view returns ( int128 )
-    {
-        return values.pricePerMWh;
-    }
-
-    function getCurrentTPES () external view returns ( int128 )
-    {
-        return values.currentTPES;
-    }
-
-    function getOldTPES () external view returns ( int128 )
-    {
-        return values.oldTPES;
-    }
-
-    function getPerCapitaEnergy () external view returns ( int128 )
-    {
-        return values.perCapitaEnergy;
-    }
-
-    function getUnitValue () external view returns ( int256 )
-    {
-      return values.unitValue;
     }
 
     function tokensReceived (
@@ -169,7 +146,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
         bytes calldata operatorData
     ) external
     {
-
+      require ( false, "blimeyagain!");
       require(
         address(token) != address(0) &&
         msg.sender == address(token),
@@ -196,7 +173,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
     )
     external {
 
-      //require( false, "we got here!");
+        require ( false, "blimey!");
 
       require(
         address(token) != address(0) &&
@@ -211,7 +188,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      //tokenSender.bought(to, operatorData);
+      tokenSender.bought(to, operatorData);
 
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
 
@@ -226,5 +203,30 @@ contract EnervatorManager is IEnervatorManager, Ownable {
     function setShouldRevertReceive ( bool _shouldRevert ) external
     {
       shouldRevertReceive = _shouldRevert;
+    }
+
+    function getPricePerMWh () external view returns ( int128 )
+    {
+        return values.pricePerMWh;
+    }
+
+    function getCurrentTPES () external view returns ( int128 )
+    {
+        return values.currentTPES;
+    }
+
+    function getOldTPES () external view returns ( int128 )
+    {
+        return values.oldTPES;
+    }
+
+    function getPerCapitaEnergy () external view returns ( int128 )
+    {
+        return values.perCapitaEnergy;
+    }
+
+    function getUnitValue () external view returns ( int256 )
+    {
+      return values.unitValue;
     }
 }

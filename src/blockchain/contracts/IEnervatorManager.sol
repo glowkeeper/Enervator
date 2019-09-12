@@ -1,10 +1,7 @@
 pragma solidity ^0.5.7;
 pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
-import "@openzeppelin/contracts/token/ERC777/IERC777Sender.sol";
-
-contract IEnervatorManager is IERC777Recipient, IERC777Sender {
+contract IEnervatorManager {
 
     struct TokenValues {
       int128 pricePerMWh;
