@@ -97,10 +97,11 @@ contract Exchanger is Ownable {
 
     bytes32 currencyCode = depositDB.getDepositedCode( _depositRef );
     int128 depositedAmount = depositDB.getDepositedAmount( _depositRef );
-    uint256 amountEOR = uint256(forexDB.getEORAmount( currencyCode, depositedAmount ));
+    int128 amountEOR = forexDB.getEORAmount( currencyCode, depositedAmount );
+    uint256 amountEORShifted = uint256 (amountEOR >> 64);
 
     bytes memory buyData = abi.encodePacked( _buyRef, _depositRef );
-    enervatorManager.send ( _buyer, amountEOR, buyData );
+    enervatorManager.send ( _buyer, 100, buyData );
   }
 
   function bought ( address _buyer, bytes calldata _buyData ) external

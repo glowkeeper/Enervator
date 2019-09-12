@@ -77,15 +77,34 @@ module.exports = async function (deployer, network, accounts) {
   console.log( "static buyAddress = \"" + buy.address + "\"" );
   console.log( "static exchangerAddress = \"" + exchanger.address + "\"\n" );
 
-
   let code = ethers.utils.formatBytes32String( "RUP" );
   let rate = new BN('10', 10);
   let rupRate = multiplier.mul(rate);
   await exchanger.setRate( code, web3.utils.toHex(rupRate) );
-  const savedRate = await exchanger.getRate( code );
+  const savedRate = await forex.getRate( code );
   const thisRate = parseInt(savedRate.toString());
   const retrievedRate = thisRate / 2**64;
   console.log( "RUP Rate = \"" + retrievedRate + "\"\n" );
+
+  let depositRef = ethers.utils.formatBytes32String( "RUPDEP" );
+  let amount = new BN('100', 10);
+  let rupAmount = multiplier.mul(amount);
+  await exchanger.deposit( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3',  depositRef, code, rupAmount);
+  const savedAmount = await deposit.getDepositedAmount( depositRef );
+  const thisAmount = parseInt(savedAmount.toString());
+  const retrievedAmount = thisAmount / 2**64;
+  console.log( "RUP Amount = \"" + retrievedAmount + "\"\n" );
+
+  const eorAmount = await forex.getEORAmount( code, savedAmount );
+  const thisEorAmount = parseInt(eorAmount.toString());
+  const retrievedEorAmount = thisEorAmount / 2**64;
+  console.log( "EOR Amount = \"" + retrievedEorAmount + "\"\n" );
+
+  let buyRef = ethers.utils.formatBytes32String( "RUPBUY" );
+  await exchanger.buy( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3', buyRef, depositRef );
+  //let numBuys = await buy.getNumBuyers();
+  let numBuys = await buy.getNumBuys( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3' );
+  console.log( "Num buys = \"" + numBuys + "\"\n" );
 
   /*
   await token.setPerCapitaEnergy(perCapita);

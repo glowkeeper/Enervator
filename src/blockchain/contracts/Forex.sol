@@ -48,13 +48,13 @@ contract Forex is IForex {
 		return rates[_code];
 	}
 
-	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256)
+	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int128)
 	{
 		require ( _code[0] != 0, "no currency code supplied!" );
 		require ( _amount > 0, "zero amount!" );
 
 		int128 rate = getRate(_code);
-		return ABDKMath64x64.mul(rate, _amount);
+		return ABDKMath64x64.div(_amount, rate);
 	}
 
 }

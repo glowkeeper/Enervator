@@ -132,6 +132,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
       token.operatorSend( tokenHolder, _recipient, _amount, "", _buyData );
+      //tokenSender.bought( _recipient, _buyData );
     }
 
     function getPricePerMWh () external view returns ( int128 )
@@ -195,6 +196,8 @@ contract EnervatorManager is IEnervatorManager, Ownable {
     )
     external {
 
+      //require( false, "we got here!");
+
       require(
         address(token) != address(0) &&
         msg.sender == address(token),
@@ -208,7 +211,7 @@ contract EnervatorManager is IEnervatorManager, Ownable {
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      tokenSender.bought(to, operatorData);
+      //tokenSender.bought(to, operatorData);
 
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
 

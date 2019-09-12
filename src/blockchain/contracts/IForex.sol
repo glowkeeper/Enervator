@@ -9,6 +9,6 @@ contract IForex {
 
 	function setRate ( bytes32 _code, int128 _rate ) external;
 	function getRate ( bytes32 _code) public view returns (int128);
-	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256);
+	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int128);
 
 }
