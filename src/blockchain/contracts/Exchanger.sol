@@ -62,6 +62,28 @@ contract Exchanger is Ownable {
     depositDB.setCanWithdraw( _depositRef, _canWithdraw );
   }
 
+  function setRate ( bytes32 _code, int128 _rate ) external onlyOwner
+  {
+    require ( address(forexDB) != address(0), "no address for forexDB!" );
+    require ( _code[0] != 0, "no currency code supplied!" );
+		require ( _rate > 0, "no rate supplied!" );
+    forexDB.setRate( _code, _rate );
+  }
+
+	function getRate ( bytes32 _code ) external view returns (int128)
+  {
+    require ( address(forexDB) != address(0), "no address for forexDB!" );
+    require ( _code[0] != 0, "no currency code supplied!" );
+    return forexDB.getRate( _code );
+  }
+
+	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256)
+  {
+    require ( address(forexDB) != address(0), "no address for forexDB!" );
+    require ( _code[0] != 0, "no currency code supplied!" );
+    return forexDB.getEORAmount( _code, _amount );
+  }
+
   function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
   {
     require ( address(forexDB) != address(0), "no address for forexDB!" );

@@ -25,7 +25,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^2.3.0",
     "bignumber.js": "^9.0.0",
-    "bn.js": "^5.0.0"
+    "bn.js": "^5.0.0",
+    "ethers": "^4.0.37"
   },
   "devDependencies": {
     "chai": "^4.2.0",

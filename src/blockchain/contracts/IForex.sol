@@ -7,7 +7,7 @@ contract IForex {
 
 	function _isAllowed ( address _settor ) private returns (bool);
 
-	function setRate ( bytes32 _code, int128 _rate ) public;
+	function setRate ( bytes32 _code, int128 _rate ) external;
 	function getRate ( bytes32 _code) public view returns (int128);
 	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256);
 

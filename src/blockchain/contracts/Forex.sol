@@ -20,7 +20,7 @@ contract Forex is IForex {
 	function _isAllowed ( address _account ) private returns (bool)
   {
     require ( _account != address(0), "zero address for account!" );
-		
+
     if ( _account == forexManager )
     {
 
@@ -33,7 +33,7 @@ contract Forex is IForex {
     }
   }
 
-	function setRate ( bytes32 _code, int128 _rate ) public
+	function setRate ( bytes32 _code, int128 _rate ) external
 	{
 		require ( _isAllowed(msg.sender), "that address cannot set forex rates!");
 		require ( _code[0] != 0, "no currency code supplied!" );

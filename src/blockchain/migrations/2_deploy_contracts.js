@@ -7,7 +7,7 @@ const Forex = artifacts.require('./Forex.sol');
 const Buy = artifacts.require('./Buy.sol');
 const Exchanger = artifacts.require('./Exchanger.sol');
 
-//const BigNumber = require('bignumber.js');
+const ethers = require('ethers');
 const BN = require('bn.js');
 
 require('openzeppelin-test-helpers/configure')({ web3 });
@@ -76,6 +76,16 @@ module.exports = async function (deployer, network, accounts) {
   console.log( "static forexAddress = \"" + forex.address + "\"" );
   console.log( "static buyAddress = \"" + buy.address + "\"" );
   console.log( "static exchangerAddress = \"" + exchanger.address + "\"\n" );
+
+
+  let code = ethers.utils.formatBytes32String( "RUP" );
+  let rate = new BN('10', 10);
+  let rupRate = multiplier.mul(rate);
+  await exchanger.setRate( code, web3.utils.toHex(rupRate) );
+  const savedRate = await exchanger.getRate( code );
+  const thisRate = parseInt(savedRate.toString());
+  const retrievedRate = thisRate / 2**64;
+  console.log( "RUP Rate = \"" + retrievedRate + "\"\n" );
 
   /*
   await token.setPerCapitaEnergy(perCapita);
