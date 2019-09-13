@@ -15,8 +15,6 @@ const { singletons } = require('openzeppelin-test-helpers');
 
 module.exports = async function (deployer, network, accounts) {
 
-  console.log("Default account ", accounts[0]);
-
   // 2017 global average residential electricity price was US$98.16 per MWh. That's used as a constant thereafter.
   // 2016 total primary energy supply (TPES) was 162494360000 MWh.
   // 2014 global per capita energy consumption was 22.35853544 MegaWatt hours
@@ -77,87 +75,4 @@ module.exports = async function (deployer, network, accounts) {
   console.log( "static buyAddress = \"" + buy.address + "\"" );
   console.log( "static exchangerAddress = \"" + exchanger.address + "\"\n" );
 
-  let code = ethers.utils.formatBytes32String( "RUP" );
-  let rate = new BN('10', 10);
-  let rupRate = multiplier.mul(rate);
-  await exchanger.setRate( code, web3.utils.toHex(rupRate) );
-  const savedRate = await forex.getRate( code );
-  const thisRate = parseInt(savedRate.toString());
-  const retrievedRate = thisRate / 2**64;
-  console.log( "RUP Rate = \"" + retrievedRate + "\"\n" );
-
-  let depositRef = ethers.utils.formatBytes32String( "RUPDEP" );
-  let amount = new BN('100', 10);
-  let rupAmount = multiplier.mul(amount);
-  await exchanger.deposit( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3',  depositRef, code, rupAmount);
-  const savedAmount = await deposit.getDepositedAmount( depositRef );
-  const thisAmount = parseInt(savedAmount.toString());
-  const retrievedAmount = thisAmount / 2**64;
-  console.log( "RUP Amount = \"" + retrievedAmount + "\"\n" );
-
-  const eorAmount = await forex.getEORAmount( code, savedAmount );
-  const thisEorAmount = eorAmount.div(multiplier);
-  const thisEorAmountOut = parseInt(thisEorAmount.toString());
-  console.log( "EOR Amount = \"" + thisEorAmountOut + "\"\n" );
-
-  const supply = await token.totalSupply();
-  const totalSupply = supply.toString(10);
-  console.log( "Total Supply =", totalSupply );
-
-  let contractBalance = await token.balanceOf( token.address );
-  let thisContractBalance = contractBalance.toString(10);
-  let balance = await token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
-  let thisBalance = balance.toString(10);
-
-  console.log( "Contract Balance = \"" + thisContractBalance + "\"\n" );
-  console.log( "Balance = \"" + thisBalance + "\"\n" );
-
-  let buyRef = ethers.utils.formatBytes32String( "RUPBUY" );
-  await exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef );
-  //let numBuys = await buy.getNumBuyers();
-  let numBuys = await buy.getNumBuys( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
-  console.log( "Num buys = \"" + numBuys + "\"\n" );
-
-  contractBalance = await token.balanceOf( token.address );
-  thisContractBalance = contractBalance.toString(10);
-  balance = await token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
-  thisBalance = balance.toString(10);
-
-  console.log( "Contract Balance = \"" + thisContractBalance + "\"\n" );
-  console.log( "Balance = \"" + thisBalance + "\"\n" );
-
-  /*
-  await token.setPerCapitaEnergy(perCapita);
-
-  const value = await tokenManager.getUnitValue();
-  const thisValue = parseInt(value.toString());
-  const EORValue = thisValue / 2**64;
-
-  const defaultOperators = await token.defaultOperators();
-  let supply = await token.totalSupply();
-  const balance = await token.balanceOf(accounts[0]);
-
-  let totalSupply = supply.toString(10);
-  const totalBalance = balance.toString(10);
-
-  console.log( "defaultOperators =", defaultOperators  );
-  console.log( "Total Supply =", totalSupply );
-  console.log( "EOR value US$" + EORValue.toFixed(2) );
-
-  const newPerCapita = new BN('30', 10);
-  perCapitaEnergy = multiplier.mul(newPerCapita);
-  const newPerCapitaEnergy = web3.utils.toHex(perCapitaEnergy);
-  await tokenManager.setPerCapitaEnergy ( newPerCapitaEnergy );
-  const tokenPerCapitaEnergy = await tokenManager.getPerCapitaEnergy();
-  const capitaEnergy = parseInt(tokenPerCapitaEnergy.toString(10));
-  const thisCapitaEnergy = capitaEnergy / 2**64;
-  console.log( "New perCapitaEnergy =", thisCapitaEnergy )
-
-  await tokenManager.setSupply ( 8000000000 );
-  supply = await token.totalSupply();
-  totalSupply = supply.toString(10);
-  console.log( "New Total Supply =", totalSupply );
-
-  console.log( accounts[0], "balance =", totalBalance );
-  */
 };
