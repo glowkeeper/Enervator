@@ -66,10 +66,9 @@ module.exports = async function (deployer, network, accounts) {
   exchanger.setComponents ( tokenManager.address, deposit.address, forex.address, buy.address );
 
   // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
-  await deployer.deploy( Enervator, [ tokenManager.address ] );
+  await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
   const token = await Enervator.deployed();
   await tokenManager.setToken(token.address);
-  await tokenManager.setSupply( 7727623693 );
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
@@ -101,11 +100,31 @@ module.exports = async function (deployer, network, accounts) {
   const thisEorAmountOut = parseInt(thisEorAmount.toString());
   console.log( "EOR Amount = \"" + thisEorAmountOut + "\"\n" );
 
+  const supply = await token.totalSupply();
+  const totalSupply = supply.toString(10);
+  console.log( "Total Supply =", totalSupply );
+
+  let contractBalance = await token.balanceOf( token.address );
+  let thisContractBalance = contractBalance.toString(10);
+  let balance = await token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
+  let thisBalance = balance.toString(10);
+
+  console.log( "Contract Balance = \"" + thisContractBalance + "\"\n" );
+  console.log( "Balance = \"" + thisBalance + "\"\n" );
+
   let buyRef = ethers.utils.formatBytes32String( "RUPBUY" );
   await exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef );
   //let numBuys = await buy.getNumBuyers();
   let numBuys = await buy.getNumBuys( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
   console.log( "Num buys = \"" + numBuys + "\"\n" );
+
+  contractBalance = await token.balanceOf( token.address );
+  thisContractBalance = contractBalance.toString(10);
+  balance = await token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
+  thisBalance = balance.toString(10);
+
+  console.log( "Contract Balance = \"" + thisContractBalance + "\"\n" );
+  console.log( "Balance = \"" + thisBalance + "\"\n" );
 
   /*
   await token.setPerCapitaEnergy(perCapita);

@@ -42,9 +42,6 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       token = IEnervator(0);
       tokenSender = IExchanger(_exchanger);
 
-      erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
-      erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
-
       _setUnitValue();
     }
 
@@ -78,6 +75,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     {
       require( _token != address(0) );
       token = IEnervator(_token);
+
+      erc1820.setInterfaceImplementer( _token, TOKENS_SENDER_INTERFACE_HASH, address(this) );
+      erc1820.setInterfaceImplementer( _token, TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
     }
 
     function setNewTPES ( int128  _amount ) external onlyOwner
@@ -128,7 +128,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
-      token.operatorSend( address(this), _recipient, _amount, "", _buyData );
+      token.operatorSend( address(token), _recipient, _amount, "", _buyData );
     }
 
     function tokensReceived (

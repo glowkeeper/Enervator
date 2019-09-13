@@ -1,18 +1,21 @@
 pragma solidity ^0.5.7;
 
 import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
+import "@openzeppelin/contracts/introspection/IERC1820Registry.sol";
 import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
 
 import "./IEnervator.sol";
 
 contract Enervator is IEnervator, ERC777 {
 
+  IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
   address private tokenOwner;
 
-  constructor( address[] memory _defaultOperators )
+  constructor( uint256 _initialSupply, address[] memory _defaultOperators )
   ERC777 ( "Enervator", "EOR", _defaultOperators ) public
   {
-    tokenOwner = _defaultOperators[0];
+    erc1820.setManager( address(this), _defaultOperators[0] );
+    _mint( address(this), address(this), _initialSupply, "", "" );
   }
 
   function addSupply ( uint256 _amount ) external
@@ -21,6 +24,6 @@ contract Enervator is IEnervator, ERC777 {
     require( isOperatorFor( msg.sender, tokenOwner ), "not token operator!" );
     require( _amount > 0, "no tokens to add!" );
 
-    _mint( tokenOwner, tokenOwner, _amount, "", "" );
+    _mint( address(this), address(this), _amount, "", "" );
   }
 }
