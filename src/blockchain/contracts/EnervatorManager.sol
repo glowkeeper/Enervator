@@ -15,25 +15,24 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
     IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
 
-    bytes32 constant private TOKENS_SENDER_INTERFACE_HASH = keccak256("ERC777TokensSender");
-    bytes32 constant private TOKENS_RECIPIENT_INTERFACE_HASH = keccak256("ERC777TokensRecipient");
+    bytes32 constant private TOKENS_SENDER_INTERFACE_HASH =
+        0x29ddb589b1fb5fc7cf394961c1adf5f8c6454761adf795e67fe149f658abe895;
+
+    // keccak256("ERC777TokensRecipient")
+    bytes32 constant private TOKENS_RECIPIENT_INTERFACE_HASH =
+        0xb281fc8c12954d22544db45de3159a39272895b169a852b314f9cc762e44c53b;
 
     TokenValues private values;
 
-    bool private shouldRevertSend;
-    bool private shouldRevertReceive;
-
     IEnervator private token;
     IExchanger private tokenSender;
-    address private tokenHolder;
 
-    constructor ( TokenValues memory _values, address _tokenHolder, address _exchanger ) public
+    constructor ( TokenValues memory _values, address _exchanger ) public
     {
       require ( _values.pricePerMWh > 0, "pricePerMWh invalid" );
       require ( _values.currentTPES > 0, "currentTPES invalid" );
       require ( _values.oldTPES > 0, "oldTPES invalid" );
       require ( _values.perCapitaEnergy > 0, "perCapitaEnergy invalid" );
-      require ( _tokenHolder != address(0) );
 
       values.pricePerMWh = _values.pricePerMWh;
       values.currentTPES = _values.currentTPES;
@@ -42,14 +41,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
       token = IEnervator(0);
       tokenSender = IExchanger(_exchanger);
-      tokenHolder = _tokenHolder;
 
-      shouldRevertSend = false;
-      shouldRevertReceive = false;
-
-      erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
       erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
-
+      erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
 
       _setUnitValue();
     }
@@ -116,11 +110,11 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
         if ( _amount < supply ) {
 
           difference = supply - _amount;
-          token.operatorBurn( tokenHolder, difference, "", "");
+          token.operatorBurn( address(this), difference, "", "");
 
         } else {
 
-          token.addSupply( tokenHolder, difference);
+          token.addSupply( difference );
 
         }
       }
@@ -134,7 +128,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
-      token.operatorSend( tokenHolder, _recipient, _amount, "", _buyData );
+      token.operatorSend( address(this), _recipient, _amount, "", _buyData );
     }
 
     function tokensReceived (
@@ -146,16 +140,12 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
         bytes calldata operatorData
     ) external
     {
-      require ( false, "blimeyagain!");
+      //require ( false, "blimeyagain!");
       require(
         address(token) != address(0) &&
         msg.sender == address(token),
         "EnervatorManager: Invalid token received"
       );
-
-      if (shouldRevertReceive) {
-         revert();
-      }
 
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
@@ -173,17 +163,11 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     )
     external {
 
-        require ( false, "blimey!");
-
       require(
         address(token) != address(0) &&
         msg.sender == address(token),
         "EnervatorManager: Invalid token sent"
       );
-
-      if (shouldRevertSend) {
-         revert();
-      }
 
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
@@ -191,18 +175,6 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       tokenSender.bought(to, operatorData);
 
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
-
-    }
-
-    function setShouldRevertSend ( bool _shouldRevert ) external
-    {
-      require ( _isAllowed(msg.sender), "that address cannot send tokens!");
-      shouldRevertSend = _shouldRevert;
-    }
-
-    function setShouldRevertReceive ( bool _shouldRevert ) external
-    {
-      shouldRevertReceive = _shouldRevert;
     }
 
     function getPricePerMWh () external view returns ( int128 )

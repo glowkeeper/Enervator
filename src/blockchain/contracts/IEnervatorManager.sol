@@ -52,7 +52,4 @@ contract IEnervatorManager {
     function getOldTPES () external view returns ( int128 );
     function getPerCapitaEnergy () external view returns ( int128 );
     function getUnitValue () external view returns ( int256 );
-
-    function setShouldRevertSend ( bool _shouldRevert ) external;
-    function setShouldRevertReceive ( bool _shouldRevert ) external;
 }

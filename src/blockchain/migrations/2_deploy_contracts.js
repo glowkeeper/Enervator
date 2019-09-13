@@ -60,15 +60,16 @@ module.exports = async function (deployer, network, accounts) {
   await deployer.deploy( Buy, exchanger.address );
   const buy = await Buy.deployed();
 
-  await deployer.deploy( EnervatorManager, tokenValues, accounts[0], exchanger.address );
+  await deployer.deploy( EnervatorManager, tokenValues, exchanger.address );
   const tokenManager = await EnervatorManager.deployed();
 
   exchanger.setComponents ( tokenManager.address, deposit.address, forex.address, buy.address );
 
   // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
-  await deployer.deploy( Enervator, 7727623693, [ tokenManager.address ] );
+  await deployer.deploy( Enervator, [ tokenManager.address ] );
   const token = await Enervator.deployed();
-  await tokenManager.setToken(token.address)
+  await tokenManager.setToken(token.address);
+  await tokenManager.setSupply( 7727623693 );
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
@@ -89,21 +90,21 @@ module.exports = async function (deployer, network, accounts) {
   let depositRef = ethers.utils.formatBytes32String( "RUPDEP" );
   let amount = new BN('100', 10);
   let rupAmount = multiplier.mul(amount);
-  await exchanger.deposit( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3',  depositRef, code, rupAmount);
+  await exchanger.deposit( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3',  depositRef, code, rupAmount);
   const savedAmount = await deposit.getDepositedAmount( depositRef );
   const thisAmount = parseInt(savedAmount.toString());
   const retrievedAmount = thisAmount / 2**64;
   console.log( "RUP Amount = \"" + retrievedAmount + "\"\n" );
 
   const eorAmount = await forex.getEORAmount( code, savedAmount );
-  const thisEorAmount = parseInt(eorAmount.toString());
-  const retrievedEorAmount = thisEorAmount / 2**64;
-  console.log( "EOR Amount = \"" + retrievedEorAmount + "\"\n" );
+  const thisEorAmount = eorAmount.div(multiplier);
+  const thisEorAmountOut = parseInt(thisEorAmount.toString());
+  console.log( "EOR Amount = \"" + thisEorAmountOut + "\"\n" );
 
   let buyRef = ethers.utils.formatBytes32String( "RUPBUY" );
-  await exchanger.buy( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3', buyRef, depositRef );
+  await exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef );
   //let numBuys = await buy.getNumBuyers();
-  let numBuys = await buy.getNumBuys( '0xDD1927AeE5D1283Edab15493846D7bbaD4ee11a3' );
+  let numBuys = await buy.getNumBuys( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' );
   console.log( "Num buys = \"" + numBuys + "\"\n" );
 
   /*

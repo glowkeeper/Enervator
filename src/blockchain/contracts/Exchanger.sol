@@ -2,6 +2,8 @@ pragma solidity ^0.5.7;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
+import "./ABDKMath64x64.sol";
+
 import "./IEnervatorManager.sol";
 import "./IDeposit.sol";
 import "./IForex.sol";
@@ -29,7 +31,7 @@ contract Exchanger is Ownable {
     buyDB = IBuy(_buyDB);
   }
 
-  function _isAllowed ( address _sender ) private returns (bool)
+  function _isAllowed ( address _sender ) private view returns (bool)
   {
     if ( _sender == address(enervatorManager) )
     {
@@ -77,7 +79,7 @@ contract Exchanger is Ownable {
     return forexDB.getRate( _code );
   }
 
-	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int256)
+	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int128)
   {
     require ( address(forexDB) != address(0), "no address for forexDB!" );
     require ( _code[0] != 0, "no currency code supplied!" );
@@ -98,10 +100,10 @@ contract Exchanger is Ownable {
     bytes32 currencyCode = depositDB.getDepositedCode( _depositRef );
     int128 depositedAmount = depositDB.getDepositedAmount( _depositRef );
     int128 amountEOR = forexDB.getEORAmount( currencyCode, depositedAmount );
-    uint256 amountEORShifted = uint256 (amountEOR >> 64);
+    uint64 amountEORShifted = ABDKMath64x64.toUInt(amountEOR);
 
     bytes memory buyData = abi.encodePacked( _buyRef, _depositRef );
-    enervatorManager.send ( _buyer, 100, buyData );
+    enervatorManager.send ( _buyer, amountEORShifted, buyData );
   }
 
   function bought ( address _buyer, bytes calldata _buyData ) external
