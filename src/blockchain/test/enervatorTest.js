@@ -28,6 +28,7 @@ contract("Enervator Test", async accounts => {
   it('has the correct name', async function () {
 
     const name = await this.token.name()
+
     assert.equal( name, 'Enervator' );
 
   });
@@ -35,7 +36,89 @@ contract("Enervator Test", async accounts => {
   it('has the correct symbol', async function () {
 
     const symbol = await this.token.symbol()
+
     assert.equal( symbol, 'EOR' );
+
+  });
+
+  /*const two = new BN('2', 10);
+  const sixtyFour = new BN('64', 10);
+  const multiplier = two.pow(sixtyFour);
+  const TPES = new BN('162494360000', 10);
+  const currentTPES = multiplier.mul(TPES);
+  const oldTPES = currentTPES;
+  const price = new BN('98', 10);
+  const pricePerMWh = multiplier.mul(price);
+  let perCapita = new BN('22', 10);
+  let perCapitaEnergy = multiplier.mul(perCapita);
+
+  const tokenValues = {
+    pricePerMWh: web3.utils.toHex(pricePerMWh),
+    currentTPES: web3.utils.toHex(currentTPES),
+    oldTPES: web3.utils.toHex(oldTPES),
+    perCapitaEnergy: web3.utils.toHex(perCapitaEnergy),
+    unitValue: 0
+  }
+
+  function setToken( address _token ) external;
+  function setNewTPES ( int128  _amount ) external;
+  function setPerCapitaEnergy ( int128 _amount ) external;
+  function setSupply ( uint256 _amount ) external;
+
+  function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external;
+
+  function getPricePerMWh () external view returns ( int128 );
+  function getCurrentTPES () external view returns ( int128 );
+  function getOldTPES () external view returns ( int128 );
+  function getPerCapitaEnergy () external view returns ( int128 );
+  function getUnitValue () external view returns ( int256 );*/
+
+  it('has the correct current TPES', async function () {
+
+    const TPES = await this.manager.getCurrentTPES()
+    const retrievedTPES = TPES.div(this.multiplier);
+    const currentTPES = retrievedTPES.toString();
+
+    assert.equal( currentTPES, '162494360000' );
+
+  });
+
+  it('has the correct old TPES', async function () {
+
+    const TPES = new BN('200000000000', 10)
+    const hexTPES = web3.utils.toHex(this.multiplier.mul(TPES))
+    await this.manager.setNewTPES(hexTPES)
+
+    const currentTPES = await this.manager.getCurrentTPES()
+    const oldTPES = await this.manager.getOldTPES()
+
+    const retrievedCurrentTPES = currentTPES.div(this.multiplier);
+    const thisCurrentTPES = retrievedCurrentTPES.toString();
+    const retrievedOldTPES = oldTPES.div(this.multiplier);
+    const thisOldTPES = retrievedOldTPES.toString();
+
+    assert.equal( thisOldTPES, '162494360000' );
+    assert.equal( thisCurrentTPES, '200000000000' );
+
+  });
+
+  it('has the correct per capita energy', async function () {
+
+    const perCapita = await this.manager.getPerCapitaEnergy()
+    const retrievedPerCapita = perCapita.div(this.multiplier);
+    const thisPerCapita = retrievedPerCapita.toString();
+
+    assert.equal( thisPerCapita, '22' );
+
+  });
+
+  it('has the correct unit value', async function () {
+
+    const unitValue = await this.manager.getUnitValue()
+    const retrievedUnitValue = parseFloat(unitValue.toString());
+    const thisUnitValue = (retrievedUnitValue / 2**64).toFixed(2);
+
+    assert.equal( "4.45", thisUnitValue );
 
   });
 
@@ -43,6 +126,7 @@ contract("Enervator Test", async accounts => {
 
     const supply = await this.token.totalSupply()
     const totalSupply = supply.toString(10);
+
     assert.equal( totalSupply, '7727623693' );
 
   });
@@ -53,6 +137,7 @@ contract("Enervator Test", async accounts => {
     await this.manager.setSupply(8000000000);
     const supply = await this.token.totalSupply()
     const totalSupply = supply.toString();
+
     assert.equal( totalSupply, '8000000000' );
 
   });
@@ -67,6 +152,7 @@ contract("Enervator Test", async accounts => {
     const savedRate = await this.forex.getRate( code );
     const retrievedRate = savedRate.div(this.multiplier);
     const thisRate = retrievedRate.toString();
+
     assert.equal( thisRate, rate );
 
   });
@@ -82,6 +168,7 @@ contract("Enervator Test", async accounts => {
     const savedAmount = await this.deposit.getDepositedAmount( depositRef );
     const retrievedAmount = savedAmount.div( this.multiplier );
     const thisAmount = retrievedAmount.toString();
+
     assert.equal( thisAmount, amount );
 
   });
@@ -96,6 +183,7 @@ contract("Enervator Test", async accounts => {
     const retrievedRate = savedRate.div(this.multiplier);
     const expectedAmount = parseInt(amount) / retrievedRate;
     const thisEorAmount = eorAmount.toString();
+
     assert.equal( thisEorAmount, expectedAmount );
 
   });
