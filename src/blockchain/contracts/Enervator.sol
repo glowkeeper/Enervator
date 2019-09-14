@@ -9,7 +9,6 @@ import "./IEnervator.sol";
 contract Enervator is IEnervator, ERC777 {
 
   IERC1820Registry private erc1820 = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
-  address private tokenOwner;
 
   constructor( uint256 _initialSupply, address[] memory _defaultOperators )
   ERC777 ( "Enervator", "EOR", _defaultOperators ) public
@@ -20,8 +19,7 @@ contract Enervator is IEnervator, ERC777 {
 
   function addSupply ( uint256 _amount ) external
   {
-    require( tokenOwner != address(0), "zero address!" );
-    require( isOperatorFor( msg.sender, tokenOwner ), "not token operator!" );
+    require( isOperatorFor( msg.sender, address(this) ), "not token operator!" );
     require( _amount > 0, "no tokens to add!" );
 
     _mint( address(this), address(this), _amount, "", "" );

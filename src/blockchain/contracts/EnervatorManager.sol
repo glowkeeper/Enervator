@@ -73,7 +73,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
     function setToken( address _token ) external onlyOwner
     {
-      require( _token != address(0) );
+      require( _token != address(0), "zero address passed for token!" );
       token = IEnervator(_token);
 
       erc1820.setInterfaceImplementer( _token, TOKENS_SENDER_INTERFACE_HASH, address(this) );
@@ -100,7 +100,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     function setSupply ( uint256 _amount ) external onlyOwner
     {
       require( _amount > 0 );
-      require( address(token) != address(0) );
+      require( address(token) != address(0), "zero address!" );
 
       uint256 supply = token.totalSupply();
 

@@ -12,7 +12,7 @@ contract("Enervator Test", async accounts => {
 
   beforeEach(async function () {
 
-    this.manager = EnervatorManager.deployed();
+    this.manager = await EnervatorManager.deployed();
     this.token = await Enervator.deployed();
     this.exchanger = await Exchanger.deployed();
     this.forex = await Forex.deployed();
@@ -25,25 +25,35 @@ contract("Enervator Test", async accounts => {
 
   });
 
-  it('has a correct name', async function () {
+  it('has the correct name', async function () {
 
     const name = await this.token.name()
     assert.equal( name, 'Enervator' );
 
   });
 
-  it('has a correct symbol', async function () {
+  it('has the correct symbol', async function () {
 
     const symbol = await this.token.symbol()
     assert.equal( symbol, 'EOR' );
 
   });
 
-  it('has a correct total supply', async function () {
+  it('has the correct total supply', async function () {
 
     const supply = await this.token.totalSupply()
     const totalSupply = supply.toString(10);
     assert.equal( totalSupply, '7727623693' );
+
+  });
+
+  it('Sets supply correctly', async function () {
+
+    await this.manager.setToken(this.token.address);
+    await this.manager.setSupply(8000000000);
+    const supply = await this.token.totalSupply()
+    const totalSupply = supply.toString();
+    assert.equal( totalSupply, '8000000000' );
 
   });
 
@@ -76,7 +86,7 @@ contract("Enervator Test", async accounts => {
 
   });
 
-  it('forex correct calcs', async function () {
+  it('Correct forex calcs', async function () {
 
     const code = ethers.utils.formatBytes32String( "RUP" );
     const amount = '100';
@@ -90,7 +100,7 @@ contract("Enervator Test", async accounts => {
 
   });
 
-  it('Correct buys', async function () {
+  it('Buys correctly', async function () {
 
     const code = ethers.utils.formatBytes32String( "RUP" );
 
@@ -112,7 +122,5 @@ contract("Enervator Test", async accounts => {
     assert.equal( thisBalance, thisOldBalance + thisEorAmount );
 
   });
-
-
 
 });
