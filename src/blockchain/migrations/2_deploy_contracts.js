@@ -52,6 +52,10 @@ module.exports = async function (deployer, network, accounts) {
     await singletons.ERC1820Registry(accounts[0]);
   }
 
+  if ( network === 'rinkeby' ) {
+    return
+  }
+
   await deployer.deploy(StringsLib);
   deployer.link(StringsLib, [Deposit, Buy]);
 
