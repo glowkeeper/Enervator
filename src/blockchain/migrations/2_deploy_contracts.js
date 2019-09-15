@@ -66,7 +66,7 @@ module.exports = async function (deployer, network, accounts) {
   // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   await deployer.deploy( Enervator, [ tokenManager.address ] );
   const token = await Enervator.deployed();
-  
+
   await tokenManager.setToken(token.address);
   await tokenManager.setSupply( 7727623693 );
 
