@@ -10,8 +10,17 @@ const Exchanger = artifacts.require('./Exchanger.sol');
 const ethers = require('ethers');
 const BN = require('bn.js');
 
-require('openzeppelin-test-helpers/configure')({ web3 });
-const { singletons } = require('openzeppelin-test-helpers');
+try {
+
+  require("openzeppelin-test-helpers/configure")({ web3 })
+
+} catch (e) {
+  // If deploying to a testnet, a weird error about configuring web3 twice occurs. Wrapping the function in a try-catch
+  // until we find a better approach or --skipDryRun is added to truffle in the next major release
+  // console.error(e);
+}
+
+const { singletons } = require('openzeppelin-test-helpers')
 
 module.exports = async function (deployer, network, accounts) {
 
