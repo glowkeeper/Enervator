@@ -41,38 +41,6 @@ contract("Enervator Test", async accounts => {
 
   });
 
-  /*const two = new BN('2', 10);
-  const sixtyFour = new BN('64', 10);
-  const multiplier = two.pow(sixtyFour);
-  const TPES = new BN('162494360000', 10);
-  const currentTPES = multiplier.mul(TPES);
-  const oldTPES = currentTPES;
-  const price = new BN('98', 10);
-  const pricePerMWh = multiplier.mul(price);
-  let perCapita = new BN('22', 10);
-  let perCapitaEnergy = multiplier.mul(perCapita);
-
-  const tokenValues = {
-    pricePerMWh: web3.utils.toHex(pricePerMWh),
-    currentTPES: web3.utils.toHex(currentTPES),
-    oldTPES: web3.utils.toHex(oldTPES),
-    perCapitaEnergy: web3.utils.toHex(perCapitaEnergy),
-    unitValue: 0
-  }
-
-  function setToken( address _token ) external;
-  function setNewTPES ( int128  _amount ) external;
-  function setPerCapitaEnergy ( int128 _amount ) external;
-  function setSupply ( uint256 _amount ) external;
-
-  function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external;
-
-  function getPricePerMWh () external view returns ( int128 );
-  function getCurrentTPES () external view returns ( int128 );
-  function getOldTPES () external view returns ( int128 );
-  function getPerCapitaEnergy () external view returns ( int128 );
-  function getUnitValue () external view returns ( int256 );*/
-
   it('has the correct current TPES', async function () {
 
     const TPES = await this.manager.getCurrentTPES()

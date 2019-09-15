@@ -33,6 +33,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require ( _values.currentTPES > 0, "currentTPES invalid" );
       require ( _values.oldTPES > 0, "oldTPES invalid" );
       require ( _values.perCapitaEnergy > 0, "perCapitaEnergy invalid" );
+      require ( _exchanger != address(0), "no exchanger address supplied!" );
 
       values.pricePerMWh = _values.pricePerMWh;
       values.currentTPES = _values.currentTPES;
@@ -41,6 +42,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
       token = IEnervator(0);
       tokenSender = IExchanger(_exchanger);
+
+      erc1820.setInterfaceImplementer( address(this), TOKENS_SENDER_INTERFACE_HASH, address(this) );
+      erc1820.setInterfaceImplementer( address(this), TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
 
       _setUnitValue();
     }
@@ -75,9 +79,6 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     {
       require( _token != address(0), "zero address passed for token!" );
       token = IEnervator(_token);
-
-      erc1820.setInterfaceImplementer( _token, TOKENS_SENDER_INTERFACE_HASH, address(this) );
-      erc1820.setInterfaceImplementer( _token, TOKENS_RECIPIENT_INTERFACE_HASH, address(this) );
     }
 
     function setNewTPES ( int128  _amount ) external onlyOwner
@@ -100,7 +101,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     function setSupply ( uint256 _amount ) external onlyOwner
     {
       require( _amount > 0 );
-      require( address(token) != address(0), "zero address!" );
+      require( address(token) != address(0), "zero address for token!" );
 
       uint256 supply = token.totalSupply();
 
@@ -128,7 +129,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
-      token.operatorSend( address(token), _recipient, _amount, "", _buyData );
+      token.operatorSend( address(this), _recipient, _amount, "", _buyData );
     }
 
     function tokensReceived (
@@ -141,11 +142,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     ) external
     {
       //require ( false, "blimeyagain!");
-      require(
-        address(token) != address(0) &&
-        msg.sender == address(token),
-        "EnervatorManager: Invalid token received"
-      );
+      require ( address(token) != address(0), "zero address for token!" );
+      require ( msg.sender == address(token), "invalid token sender!" );
+      require ( amount > 0, "no tokens received!" );
 
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
@@ -160,14 +159,11 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
         uint256 amount,
         bytes calldata userData,
         bytes calldata operatorData
-    )
-    external {
-
-      require(
-        address(token) != address(0) &&
-        msg.sender == address(token),
-        "EnervatorManager: Invalid token sent"
-      );
+    ) external
+    {
+      require ( address(token) != address(0), "zero address for token!" );
+      require ( msg.sender == address(token), "invalid token sender!" );
+      require ( amount > 0, "no tokens to send!" );
 
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
