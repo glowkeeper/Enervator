@@ -81,7 +81,6 @@ module.exports = async function (deployer, network, accounts) {
   const token = await Enervator.deployed();
 
   await tokenManager.setToken(token.address);
-  await tokenManager.setSupply( 7727623693 );
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );

@@ -81,6 +81,23 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       token = IEnervator(_token);
     }
 
+    function addTokens ( uint256 _amount ) external
+    {
+      require( _amount > 0 );
+      require( address(token) != address(0), "zero address for token!" );
+
+      token.addSupply( _amount );
+
+    }
+
+    function burnTokens ( uint256 _amount ) external
+    {
+      require( _amount > 0 );
+      require( address(token) != address(0), "zero address for token!" );
+
+      token.operatorBurn( address(this), _amount, "", "");
+    }
+
     function setNewTPES ( int128  _amount ) external onlyOwner
     {
       require( _amount > 0 );
@@ -96,29 +113,6 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
       values.perCapitaEnergy = _amount;
       _setUnitValue();
-    }
-
-    function setSupply ( uint256 _amount ) external onlyOwner
-    {
-      require( _amount > 0 );
-      require( address(token) != address(0), "zero address for token!" );
-
-      uint256 supply = token.totalSupply();
-
-      if ( _amount != supply ) {
-
-        uint256 difference = _amount - supply;
-        if ( _amount < supply ) {
-
-          difference = supply - _amount;
-          token.operatorBurn( address(this), difference, "", "");
-
-        } else {
-
-          token.addSupply( difference );
-
-        }
-      }
     }
 
     function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external
@@ -168,7 +162,12 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      tokenSender.bought(to, operatorData);
+      if ( operatorData[0] != 0 )
+      {
+
+        tokenSender.bought(to, operatorData);
+
+      }
 
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }

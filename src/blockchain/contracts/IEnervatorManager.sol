@@ -40,10 +40,12 @@ contract IEnervatorManager {
     function _setUnitValue () private;
     function _isAllowed ( address _sender ) private returns (bool);
 
+    function addTokens ( uint256 _amount ) external;    
+    function burnTokens ( uint256 _amount ) external;
+
     function setToken( address _token ) external;
     function setNewTPES ( int128  _amount ) external;
     function setPerCapitaEnergy ( int128 _amount ) external;
-    function setSupply ( uint256 _amount ) external;
 
     function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external;
 

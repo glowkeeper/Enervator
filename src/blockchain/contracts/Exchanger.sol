@@ -72,20 +72,6 @@ contract Exchanger is Ownable {
     forexDB.setRate( _code, _rate );
   }
 
-	function getRate ( bytes32 _code ) external view returns (int128)
-  {
-    require ( address(forexDB) != address(0), "no address for forexDB!" );
-    require ( _code[0] != 0, "no currency code supplied!" );
-    return forexDB.getRate( _code );
-  }
-
-	function getEORAmount ( bytes32 _code, int128 _amount ) external view returns (int128)
-  {
-    require ( address(forexDB) != address(0), "no address for forexDB!" );
-    require ( _code[0] != 0, "no currency code supplied!" );
-    return forexDB.getEORAmount( _code, _amount );
-  }
-
   function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
   {
     require ( address(forexDB) != address(0), "no address for forexDB!" );
@@ -99,11 +85,10 @@ contract Exchanger is Ownable {
 
     bytes32 currencyCode = depositDB.getDepositedCode( _depositRef );
     int128 depositedAmount = depositDB.getDepositedAmount( _depositRef );
-    int128 amountEOR = forexDB.getEORAmount( currencyCode, depositedAmount );
-    uint64 amountEORShifted = ABDKMath64x64.toUInt(amountEOR);
+    uint256 amountEOR = uint256(forexDB.getEORAmount( currencyCode, depositedAmount ));
 
     bytes memory buyData = abi.encodePacked( _buyRef, _depositRef );
-    enervatorManager.send ( _buyer, amountEORShifted, buyData );
+    enervatorManager.send ( _buyer, amountEOR, buyData );
   }
 
   function bought ( address _buyer, bytes calldata _buyData ) external
