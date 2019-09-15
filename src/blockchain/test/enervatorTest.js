@@ -12,19 +12,19 @@ contract("Enervator Test", async accounts => {
 
   beforeEach(async function () {
 
-    /* this.manager = await EnervatorManager.deployed();
+    this.manager = await EnervatorManager.deployed();
     this.token = await Enervator.deployed();
     this.exchanger = await Exchanger.deployed();
     this.forex = await Forex.deployed();
     this.deposit = await Deposit.deployed();
-    this.buy = await Buy.deployed();*/
+    this.buy = await Buy.deployed();
 
-    this.manager = await EnervatorManager.at('0xadbc684Dbb5D931B72cED71C312EBcf3b56635B8');
+    /*this.manager = await EnervatorManager.at('0xadbc684Dbb5D931B72cED71C312EBcf3b56635B8');
     this.token = await Enervator.at('0xaC68282F256a82a5c50478F94364132cF3D0a3D8');
     this.deposit = await Deposit.at('0xFad115D9f8e7D873a063a29D3873A2Df920e91ff');
     this.forex = await Forex.at('0x834ffE2EcA00e40C70f4242e41bdA0B0941a75d7');
     this.buy = await Buy.at('0x91283F4A2d54823B922fA7cF8c65017D7f5EdC13')
-    this.exchanger = await Exchanger.at('0xC553FE7B1C64D9E01Efe45595C82F13905AEe6A6');
+    this.exchanger = await Exchanger.at('0xC553FE7B1C64D9E01Efe45595C82F13905AEe6A6');*/
 
     const two = new BN('2', 10);
     const sixtyFour = new BN('64', 10);
