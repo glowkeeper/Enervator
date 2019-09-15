@@ -81,7 +81,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       token = IEnervator(_token);
     }
 
-    function addTokens ( uint256 _amount ) external
+    function addTokens ( uint256 _amount ) external onlyOwner
     {
       require( _amount > 0 );
       require( address(token) != address(0), "zero address for token!" );
@@ -90,7 +90,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
     }
 
-    function burnTokens ( uint256 _amount ) external
+    function burnTokens ( uint256 _amount ) external onlyOwner
     {
       require( _amount > 0 );
       require( address(token) != address(0), "zero address for token!" );
@@ -165,7 +165,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       if ( operatorData[0] != 0 )
       {
 
-        tokenSender.bought(to, operatorData);
+        tokenSender.bought(to, amount, operatorData);
 
       }
 

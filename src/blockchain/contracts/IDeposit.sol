@@ -8,7 +8,6 @@ contract IDeposit {
 		int128 amount;
 		address account;
 		bool canWithdraw;
-		bool isWithdrawn;
 	}
 
 	function _compareAddresses ( address _x, address _y ) private pure returns (bool);
@@ -17,8 +16,8 @@ contract IDeposit {
   function getExists( address _x ) public view returns (bool);
 
 	function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external;
+	function withdraw ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external;
 	function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw ) external;
-	function setWithdrawn ( bytes32 _depositRef, bool _withdrawn ) external;
 
 	function getNumDepositors () external view returns (uint256);
 	function getDepositor ( uint256 _index ) external view returns (address);
@@ -29,7 +28,6 @@ contract IDeposit {
 	function getDepositedAmount ( bytes32 _depositRef ) external view returns (int128);
 	function getDepositedCode ( bytes32 _depositRef ) external view returns (bytes32);
 	function getCanWithdraw ( bytes32 _depositRef ) external view returns (bool);
-	function getIsWithdrawn ( bytes32 _depositRef ) external view returns (bool);
 	function getDeposit( bytes32 _depositRef ) external view returns (DepositDB memory);
 
 }

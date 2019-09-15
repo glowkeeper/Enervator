@@ -3,6 +3,7 @@ pragma solidity ^0.5.7;
 contract IBuy {
 
   struct BuyDB {
+    uint256 amount;
     bytes32 depositRef;
     address account;
   }
@@ -12,7 +13,7 @@ contract IBuy {
 
   function getExists ( address _x ) public view returns (bool);
 
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external;
+  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amount ) external;
 
   function getNumBuyers () external view returns (uint256);
 	function getBuys ( uint256 _index ) external view returns (address);

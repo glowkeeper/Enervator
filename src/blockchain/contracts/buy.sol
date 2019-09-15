@@ -12,7 +12,7 @@ contract Buy is IBuy {
   mapping(address => bytes32[]) private buyerRefs;
   mapping(bytes32 =>  BuyDB) private buys;
 
-  event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef );
+  event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amount );
 
   constructor( address _buyerManager ) public
   {
@@ -60,11 +60,12 @@ contract Buy is IBuy {
     return exists;
   }
 
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef ) external
+  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amount ) external
   {
     require ( _buyer != address(0), "no address for buyer!" );
     require ( _buyRef[0] != 0, "no buy reference supplied!" );
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
+    require ( _amount > 0, "no amount supplied" );
 
     if ( !getExists(_buyer ) )
     {
@@ -76,11 +77,12 @@ contract Buy is IBuy {
       buyerRefs[_buyer].push(_buyRef);
     }
 
+    buys[_buyRef].amount = _amount;
     buys[_buyRef].account = _buyer;
 		buys[_buyRef].depositRef = _depositRef;
 
     uint epochTime = now;
-    emit Bought( epochTime, _buyer, _buyRef, _depositRef );
+    emit Bought( epochTime, _buyer, _buyRef, _depositRef, _amount );
   }
 
   function getNumBuyers () external view returns (uint256)
@@ -108,6 +110,13 @@ contract Buy is IBuy {
     require ( _index < buyerRefs[_buyer].length, "index out of range!" );
 
     return buyerRefs[_buyer][_index];
+  }
+
+  function getBuyAmount ( bytes32 _buyerRef ) external view returns (uint256)
+  {
+    require ( _buyerRef[0] != 0, "no deposit reference supplied!" );
+
+    return buys[_buyerRef].amount;
   }
 
   function getBuyAddress ( bytes32 _buyerRef ) external view returns (address)
