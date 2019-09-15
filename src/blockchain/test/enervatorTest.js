@@ -73,7 +73,7 @@ contract("Enervator Test", async accounts => {
   it('has the correct per capita energy', async function () {
 
     const perCapita = await this.manager.getPerCapitaEnergy()
-    const retrievedPerCapita = perCapita.div(this.multiplier);
+    const retrievedPerCapita = perCapita.div(this.multiplier)
     const thisPerCapita = retrievedPerCapita.toString();
 
     assert.equal( thisPerCapita, '22' );
@@ -82,11 +82,20 @@ contract("Enervator Test", async accounts => {
 
   it('has the correct unit value', async function () {
 
-    const unitValue = await this.manager.getUnitValue()
-    const retrievedUnitValue = parseFloat(unitValue.toString());
-    const thisUnitValue = (retrievedUnitValue / 2**64).toFixed(2);
+    // 2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
 
-    assert.equal( "4.45", thisUnitValue );
+    const pricePerMWh = await this.manager.getPricePerMWh()
+    const currentTPES = await this.manager.getCurrentTPES()
+    const oldTPES = await this.manager.getOldTPES()
+    const perCapita = await this.manager.getPerCapitaEnergy()
+    const derivedUnitValue = parseFloat( pricePerMWh.toString() ) * ( parseFloat( oldTPES.toString() ) / parseFloat( currentTPES.toString() ) ) / parseFloat( perCapita.toString() )
+    const thisDerivedUnitValue = ( derivedUnitValue ).toFixed( 2 )
+
+    const unitValue = await this.manager.getUnitValue()
+    const retrievedUnitValue = parseFloat(unitValue.toString())
+    const thisUnitValue = ( retrievedUnitValue / 2**64 ).toFixed( 2 )
+
+    assert.equal( thisDerivedUnitValue, thisUnitValue );
 
   });
 
