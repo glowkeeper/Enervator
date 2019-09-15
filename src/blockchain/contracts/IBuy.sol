@@ -20,6 +20,7 @@ contract IBuy {
 	function getNumBuys ( address _buyer ) external view returns (uint256);
 	function getBuyReference( address _buyer, uint256 _index ) external view returns (bytes32);
 
+  function getBuyAmount ( bytes32 _buyerRef ) external view returns (uint256);
   function getBuyAddress ( bytes32 _buyerRef ) external view returns (address);
 	function getDepositReference ( bytes32 _buyerRef ) external view returns (bytes32);
 
