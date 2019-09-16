@@ -8,34 +8,43 @@ const Buy = artifacts.require('./Buy.sol');
 const ethers = require('ethers');
 const BN = require('bn.js');
 
-contract("Enervator Test", async accounts => {
+contract("Enervator Test", async function ( network )
+{
 
-  beforeEach(async function () {
+  beforeEach( async function () {
 
-    this.manager = await EnervatorManager.deployed()
-    this.token = await Enervator.deployed()
-    this.exchanger = await Exchanger.deployed()
-    this.forex = await Forex.deployed()
-    this.deposit = await Deposit.deployed()
-    this.buy = await Buy.deployed()
+    if ( network === 'rinkeby' )
+    {
 
-    /* Rinkeby Addresses
+      /*
+      use deployed contracts...
+      Rinkeby Addresses
+      static enervatorManagerAddress = "0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA"
+      static enervatorAddress = "0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73"
+      static depositAddress = "0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1"
+      static forexAddress = "0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1"
+      static buyAddress = "0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86"
+      static exchangerAddress = "0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d"
+      */
 
-    static enervatorManagerAddress = "0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA"
-  static enervatorAddress = "0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73"
-  static depositAddress = "0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1"
-  static forexAddress = "0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1"
-  static buyAddress = "0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86"
-  static exchangerAddress = "0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d"
+      this.manager = await EnervatorManager.at('0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA');
+      this.token = await Enervator.at('0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73');
+      this.deposit = await Deposit.at('0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1');
+      this.forex = await Forex.at('0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1');
+      this.buy = await Buy.at('0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86')
+      this.exchanger = await Exchanger.at('0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d');
 
-  */
+    } else
+    {
 
-    /* this.manager = await EnervatorManager.at('0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA');
-    this.token = await Enervator.at('0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73');
-    this.deposit = await Deposit.at('0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1');
-    this.forex = await Forex.at('0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1');
-    this.buy = await Buy.at('0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86')
-    this.exchanger = await Exchanger.at('0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d'); */
+      this.manager = await EnervatorManager.deployed()
+      this.token = await Enervator.deployed()
+      this.exchanger = await Exchanger.deployed()
+      this.forex = await Forex.deployed()
+      this.deposit = await Deposit.deployed()
+      this.buy = await Buy.deployed()
+
+    }
 
     const two = new BN('2', 10)
     const sixtyFour = new BN('64', 10)
@@ -149,7 +158,7 @@ contract("Enervator Test", async accounts => {
 
     const code = ethers.utils.formatBytes32String( "USD" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
-    const amount = '1000'
+    const amount = '150'
     const bigAmount = new BN( amount, 10 )
     const thisAmount = this.multiplier.mul(bigAmount)
     await this.exchanger.deposit( '0xcE34954ad4018B58c3dD974A46D8246850190280', depositRef, code, thisAmount )
@@ -162,10 +171,6 @@ contract("Enervator Test", async accounts => {
   });
 
   it('Buys correctly', async function () {
-
-    const code = ethers.utils.formatBytes32String( "USD" )
-
-    const oldBalance = await this.token.balanceOf( '0xcE34954ad4018B58c3dD974A46D8246850190280' )
 
     const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
