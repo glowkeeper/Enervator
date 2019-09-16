@@ -2,6 +2,10 @@
 
 A cryptocurrency stablecoin, with the currency code EOR, whose value is linked to energy consumption, much like sovereign currencies were once linked to gold. **The primary goal of EOR is to incentivise energy efficiency**. Below describes the process.
 
+_Enervator was first described in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The introduction to EOR, below, borrows excerpts from that work._
+
+_A note on the name: Enervator is a reference to the token's relation to energy, and the word itself is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the aim of the token is to weaken energy consumption._
+
 ## tl;dr:
 
 Total Supply = World Population (re-evaluated annually)
@@ -56,18 +60,14 @@ Hence, with a decrease in TPES, the value of EOR increases, and visa-versa.
 
 ### Network Value
 
-Given the value of a single EOR at $4.47 and total supply of 7,727,623,693, the total network value of Enervator would be:
+Given the value of a single EOR at $4.39 and total supply of 7,727,623,693, the total network value of Enervator would be:
 
 7727623693 * US$4.39 = $33,924,268,012
 
-_Enervator was first described in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The above introduction to EOR borrows excerpts from that work._
-
-_A note on the name: Enervator is a reference to the token's relation to energy, and the word itself is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the aim of the token is to weaken energy consumption._
-
-## Deployed Addresses
+## Deployed Address
 
 Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/token/0xa6851748083e59897c74240544c39b976fe14be2).
 
 ## Licensing
 
-Presently, there are no circumstances where you may copy or reuse the works in this repository. However, that may changve in the near future.
+Presently, there are no circumstances where you may copy or reuse the works in this repository, since they form part of Steve Huckle's thesis, which is unpublished, presently. However, that will change with the publication of that thesis, so if you are interested in using Enervator, or you would like to get involved in its development or its promotion to the wider-cryptocurrency community, please email s dot huckle at sussex dot ac dot uk.
