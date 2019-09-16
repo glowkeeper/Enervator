@@ -11,7 +11,7 @@ contract IExchanger {
 
   function setRate ( bytes32 _code, int128 _rate ) external;
 
-  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amount ) external;
-  function bought ( address _buyer, uint256 _amount, bytes calldata _buyData ) external;
+  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT ) external;
+  function bought ( address _buyer, uint256 _amountEOR, bytes calldata _buyData ) external;
 
 }

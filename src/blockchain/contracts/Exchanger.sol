@@ -72,7 +72,7 @@ contract Exchanger is Ownable {
     forexDB.setRate( _code, _rate );
   }
 
-  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amount ) external
+  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT ) external
   {
     require ( address(forexDB) != address(0), "no address for forexDB!" );
     require ( address(depositDB) != address(0), "no address for depositDB!" );
@@ -81,34 +81,39 @@ contract Exchanger is Ownable {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
     require ( depositDB.getDepositedAddress( _depositRef ) == _buyer, "buyer and deposit addresses are different!" );
     require ( depositDB.getCanWithdraw( _depositRef ), "deposit cannot be withdrawn!" );
-    require ( _amount <= depositDB.getDepositedAmount( _depositRef ), "cannot buy that amount!" );
+    require ( _amountFIAT <= depositDB.getDepositedAmount( _depositRef ), "cannot buy that amount!" );
 
-    bytes32 currencyCode = depositDB.getDepositedCode( _depositRef );
-    int128 amountEOR = forexDB.getEORAmount( currencyCode, _amount );
-    //uint256 thisAmountEOR = uint256( amountEOR >> 64 );
+    bytes32 code = depositDB.getDepositedCode(_depositRef);
+    int128 rate = forexDB.getRate(code);
+		int128 fixedAmountEOR = ABDKMath64x64.div(_amountFIAT, rate);
+    uint256 toWei =  uint256( ( fixedAmountEOR >> 64 ) * 10**18 );
 
-    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef );
-    enervatorManager.send ( _buyer, uint256(amountEOR), buyData );
+    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
+    enervatorManager.send ( _buyer, toWei, buyData );
   }
 
-  function bought ( address _buyer, uint256 _amount, bytes calldata _buyData ) external
+  function bought ( address _buyer, uint256 _amountEOR, bytes calldata _buyData ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot send tokens!");
     require ( address(depositDB) != address(0), "no address for depositDB!" );
     require ( address(buyDB) != address(0), "no address for buyDB!" );
     require ( _buyer != address(0), "no address for buyer!" );
-    require ( _amount > 0, "no amount supplied" );
+    require ( _amountEOR > 0, "no EOR supplied" );
     require ( _buyData[0] != 0, "no buy data supplied!" );
 
     bytes memory buyData = _buyData;
     bytes32 buyRef;
     bytes32 depositRef;
+    int128 amountFIAT;
     assembly {
 	    buyRef := mload(add(buyData, 32))
 	    depositRef := mload(add(buyData, 64))
+      amountFIAT := mload(add(buyData, 80))
     }
 
-    buyDB.bought( _buyer, buyRef, depositRef, _amount );
+    bytes32 code = depositDB.getDepositedCode( depositRef );
+    depositDB.withdraw( _buyer, depositRef, code, amountFIAT );
+    buyDB.bought( _buyer, buyRef, depositRef, _amountEOR );
   }
 
 }

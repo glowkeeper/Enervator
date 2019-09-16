@@ -152,7 +152,7 @@ contract("Enervator Test", async accounts => {
     const amount = '1000'
     const bigAmount = new BN( amount, 10 )
     const thisAmount = this.multiplier.mul(bigAmount)
-    await this.exchanger.deposit( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', depositRef, code, thisAmount )
+    await this.exchanger.deposit( '0xcE34954ad4018B58c3dD974A46D8246850190280', depositRef, code, thisAmount )
     const savedAmount = await this.deposit.getDepositedAmount( depositRef )
     const retrievedAmount = savedAmount.div( this.multiplier )
     const thisRetrievedAmount = retrievedAmount.toString()
@@ -161,40 +161,21 @@ contract("Enervator Test", async accounts => {
 
   });
 
-  it('Correct forex calcs', async function () {
-
-    const code = ethers.utils.formatBytes32String( "USD" )
-    const amount = '1000'
-    const bigAmount = new BN( amount, 10 )
-    const eorAmount = await this.forex.getEORAmount( code, bigAmount )
-    const savedRate = await this.forex.getRate( code )
-    const retrievedRate = savedRate.div(this.multiplier)
-    const expectedAmount = parseInt(amount) / retrievedRate
-    const thisEorAmount = eorAmount.toString()
-
-    assert.equal( thisEorAmount, expectedAmount )
-
-  });
-
   it('Buys correctly', async function () {
 
     const code = ethers.utils.formatBytes32String( "USD" )
 
-    const oldBalance = await this.token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' )
-
-    const amount = '1000'
-    const bigAmount = new BN( amount, 10 )
-    const thisAmount = this.multiplier.mul(bigAmount)
-    const eorAmount = await this.forex.getEORAmount( code, thisAmount )
-    const thisEorAmount = parseFloat(eorAmount.toString())
+    const oldBalance = await this.token.balanceOf( '0xcE34954ad4018B58c3dD974A46D8246850190280' )
 
     const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
-    await this.exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef, thisAmount )
+    const amount = await this.deposit.getDepositedAmount( depositRef )
+    await this.exchanger.buy( '0xcE34954ad4018B58c3dD974A46D8246850190280', buyRef, depositRef, amount )
+    const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
+    const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
 
-    balance = await this.token.balanceOf( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3' )
-
-    assert.equal( balance, oldBalance + thisEorAmount )
+    assert.equal( newDepositedAmount, 0 )
+    assert.equal( canWithdraw, false )
 
   });
 

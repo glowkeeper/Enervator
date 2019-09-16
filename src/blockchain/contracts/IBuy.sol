@@ -13,7 +13,7 @@ contract IBuy {
 
   function getExists ( address _x ) public view returns (bool);
 
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amount ) external;
+  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR ) external;
 
   function getNumBuyers () external view returns (uint256);
 	function getBuys ( uint256 _index ) external view returns (address);

@@ -118,7 +118,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external
     {
       require ( _isAllowed(msg.sender), "that address cannot send tokens!");
-      require ( _amount > 0, "no tokens to send!" );
+      require ( _amount > 0, "in send: no tokens to send!" );
       require ( _buyData[0] != 0, "no buy data supplied!" );
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
@@ -157,7 +157,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     {
       require ( address(token) != address(0), "zero address for token!" );
       require ( msg.sender == address(token), "invalid token sender!" );
-      require ( amount > 0, "no tokens to send!" );
+      require ( amount > 0, "in tokensToSend: no tokens to send!" );
 
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
