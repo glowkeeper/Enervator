@@ -26,31 +26,31 @@ Total Supply = World Population (re-evaluated annually)
 
 ## Value Algorithm
 
-he aim is to incentivise lower energy consumption, not energy price variations, so EOR shall use the 2017 global average residential electricity price as a constant. Furthermore, to make the maths more straightforward, the price is rounded up to US$100.
+The aim is to incentivise lower energy consumption, not energy price variations, so EOR shall use the 2017 global average residential electricity price, at US$98.16 per MWh, as a constant.
 
 A simple value algorithm would be to derive the value of a single EOR by taking the product of US$98.16 and annual global average per capita energy consumption. For example:
 
-1 EOR = 100 * 22.35853544 = US$2235.85
+1 EOR = 98.16 * 22.35853544 = US$2194.71
 
 Unfortunately, that simple algorithm rewards inefficiency, since the value of EOR would increase as consumption increases. In a world threatened by climate change, that is problematic. Instead, a simple fix that offers incentives for efficiency is to take the reciprocal of the annual global average per capita energy consumption:
 
-1 EOR = 100 * ( 1 / 22.35853544 ) = $4.47
+1 EOR = 98.16 * ( 1 / 22.35853544 ) = $4.39
 
 For example, imagine the scenario where consumption increases to 30 MWh:
 
-1 EOR = 100 * ( 1 / 30 ) = $3.33
+1 EOR = 98.16 * ( 1 / 30 ) = $3.27
 
 However, if consumption falls to 10 MWh, the value of EOR increases:
 
-1 EOR = 100 * ( 1 / 10 ) = $10
+1 EOR = 98.16 * ( 1 / 10 ) = $9.82
 
 The value algorithm is not quite complete - to further incentivise lower energy consumption, the price of a single EOR will also reflect the difference between old and current TPES figure. At setup, that would have no effect since new equals current; therefore, there is no difference. However, imagine the second annual TPES figures show that, unfortunately, TPES has increased to 200000000000 MWh:
 
-1 EOR = 100 * ( 1 / 22.35853544 ) * ( 162494360000 / 200000000000 ) = 100 * ( 162494360000 / 200000000000 ) / 22.35853544  = $3.63
+1 EOR = 98.16 * ( 1 / 22.35853544 ) * ( 162494360000 / 200000000000 ) = 98.16 * ( 162494360000 / 200000000000 ) / 22.35853544  = $3.57
 
 Conversely, imagine that TPES decreases to 100000000000 MWh:
 
-1 EOR = 100 * ( 162494360000 / 100000000000 ) / 22.35853544 = $7.27
+1 EOR = 98.16 * ( 162494360000 / 100000000000 ) / 22.35853544 = $7.13
 
 Hence, with a decrease in TPES, the value of EOR increases, and visa-versa.
 
@@ -58,11 +58,15 @@ Hence, with a decrease in TPES, the value of EOR increases, and visa-versa.
 
 Given the value of a single EOR at $4.47 and total supply of 7,727,623,693, the total network value of Enervator would be:
 
-7727623693 * US$4.47 = $34,542,477,907.
+7727623693 * US$4.39 = $33,924,268,012
 
 _Enervator was first described in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The above introduction to EOR borrows excerpts from that work._
 
-_A note on the name: Enervator is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the aim of the token is to weaken energy consumption._
+_A note on the name: Enervator is a reference to the token's relation to energy, and the word itself is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the aim of the token is to weaken energy consumption._
+
+## Deployed Addresses
+
+Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/token/0xa6851748083e59897c74240544c39b976fe14be2).
 
 ## Licensing
 

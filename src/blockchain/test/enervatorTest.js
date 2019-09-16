@@ -19,20 +19,21 @@ contract("Enervator Test", async function ( network )
       /*
       use deployed contracts...
       Rinkeby Addresses
-      static enervatorManagerAddress = "0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA"
-      static enervatorAddress = "0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73"
-      static depositAddress = "0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1"
-      static forexAddress = "0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1"
-      static buyAddress = "0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86"
-      static exchangerAddress = "0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d"
+      static enervatorManagerAddress = "0xbC523aF797704089a2B8Cf563C84c9ffcE2A61cf"
+      static enervatorAddress = "0xA6851748083E59897C74240544C39b976Fe14Be2"
+      static depositAddress = "0x7F39C8f98bC25e58d374D066100c80EEbf1a6008"
+      static forexAddress = "0x52f6d7eA2A50703a5CEB345d4C974d5faCdb925E"
+      static buyAddress = "0x0bf35BE5988f810e0A3917991Ba641078e9dcffF"
+      static exchangerAddress = "0xD2976BaB578B04A30580d3920a0493b259624846"
+
       */
 
-      this.manager = await EnervatorManager.at('0x48B98faB029Cd2c77afA780Ab94c2d4e2f4879dA');
-      this.token = await Enervator.at('0x4E302158Ee8FC54f4959Bc071cb050AfD723cC73');
-      this.deposit = await Deposit.at('0x9CC34aD7dde699bA2A51cE086Dc2b34c452D65F1');
-      this.forex = await Forex.at('0x5aC3766194C2C44FC43Ed922C341Ba6aA6406AC1');
-      this.buy = await Buy.at('0xb93f64763Fad8f01FdebEbb04023362e55Ae0B86')
-      this.exchanger = await Exchanger.at('0xB09c0693a4dD839bAe887465Cb930FFe609f1C3d');
+      this.manager = await EnervatorManager.at('0xbC523aF797704089a2B8Cf563C84c9ffcE2A61cf');
+      this.token = await Enervator.at('0xA6851748083E59897C74240544C39b976Fe14Be2');
+      this.deposit = await Deposit.at('0x7F39C8f98bC25e58d374D066100c80EEbf1a6008');
+      this.forex = await Forex.at('0x52f6d7eA2A50703a5CEB345d4C974d5faCdb925E');
+      this.buy = await Buy.at('0x0bf35BE5988f810e0A3917991Ba641078e9dcffF')
+      this.exchanger = await Exchanger.at('0xD2976BaB578B04A30580d3920a0493b259624846');
 
     } else
     {
@@ -50,6 +51,10 @@ contract("Enervator Test", async function ( network )
     const sixtyFour = new BN('64', 10)
     this.multiplier = two.pow(sixtyFour)
 
+    const ten = new BN('10', 10)
+    const eighteen = new BN('18', 10)
+    this.decimilisation = ten.pow(eighteen)
+
   });
 
   it('has the correct name', async function () {
@@ -65,6 +70,19 @@ contract("Enervator Test", async function ( network )
     const symbol = await this.token.symbol()
 
     assert.equal( symbol, 'EOR' )
+
+  });
+
+  it('Sets supply correctly', async function () {
+
+    const newSupply = new BN('8000000000', 10)
+    const shiftedSupply = this.decimilisation.mul( newSupply )
+    await this.manager.addTokens(shiftedSupply)
+    const supply = await this.token.totalSupply()
+    const retrievedNewSupply = supply.div(this.decimilisation)
+    const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
+
+    assert.equal( thisRetrievedNewSupply, '8000000000' )
 
   });
 
@@ -126,19 +144,6 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('Adds correctly', async function () {
-
-    const supply = new BN('8000000000', 10)
-    const shiftedSupply = this.multiplier.mul(supply)
-    await this.manager.addTokens(shiftedSupply)
-    const newSupply = await this.token.totalSupply()
-    const retrievedNewSupply = newSupply.div(this.multiplier)
-    const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
-
-    assert.equal( thisRetrievedNewSupply, '8000000000' )
-
-  });
-
   it('has the correct rate', async function () {
 
     const code = ethers.utils.formatBytes32String( "USD" )
@@ -161,7 +166,7 @@ contract("Enervator Test", async function ( network )
     const amount = '150'
     const bigAmount = new BN( amount, 10 )
     const thisAmount = this.multiplier.mul(bigAmount)
-    await this.exchanger.deposit( '0xcE34954ad4018B58c3dD974A46D8246850190280', depositRef, code, thisAmount )
+    await this.exchanger.deposit( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', depositRef, code, thisAmount )
     const savedAmount = await this.deposit.getDepositedAmount( depositRef )
     const retrievedAmount = savedAmount.div( this.multiplier )
     const thisRetrievedAmount = retrievedAmount.toString()
@@ -175,7 +180,7 @@ contract("Enervator Test", async function ( network )
     const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
     const amount = await this.deposit.getDepositedAmount( depositRef )
-    await this.exchanger.buy( '0xcE34954ad4018B58c3dD974A46D8246850190280', buyRef, depositRef, amount )
+    await this.exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef, amount )
     const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
     const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
 
