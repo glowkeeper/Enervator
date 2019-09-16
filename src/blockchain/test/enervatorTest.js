@@ -75,14 +75,14 @@ contract("Enervator Test", async function ( network )
 
   it('Sets supply correctly', async function () {
 
-    const newSupply = new BN('8000000000', 10)
+    const newSupply = new BN('7727623693', 10)
     const shiftedSupply = this.decimilisation.mul( newSupply )
     await this.manager.addTokens(shiftedSupply)
     const supply = await this.token.totalSupply()
     const retrievedNewSupply = supply.div(this.decimilisation)
     const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
 
-    assert.equal( thisRetrievedNewSupply, '8000000000' )
+    assert.equal( thisRetrievedNewSupply, '7727623693' )
 
   });
 
@@ -98,7 +98,7 @@ contract("Enervator Test", async function ( network )
 
   it('has the correct old TPES', async function () {
 
-    const TPES = new BN('200000000000', 10)
+    const TPES = new BN('162494360000', 10)
     const thisTPES = this.multiplier.mul(TPES)
     await this.manager.setNewTPES(thisTPES)
 
@@ -111,7 +111,7 @@ contract("Enervator Test", async function ( network )
     const thisOldTPES = retrievedOldTPES.toString()
 
     assert.equal( thisOldTPES, '162494360000' )
-    assert.equal( thisCurrentTPES, '200000000000' )
+    assert.equal( thisCurrentTPES, '162494360000' )
 
   });
 

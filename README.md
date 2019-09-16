@@ -66,7 +66,7 @@ Given the value of a single EOR at $4.39 and total supply of 7,727,623,693, the 
 
 ## Deployed Address
 
-Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/token/0xa6851748083e59897c74240544c39b976fe14be2).
+Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/address/0x0e57aa96b255e182896abd98c8015ffa6db9fe42).
 
 ## Licensing
 
