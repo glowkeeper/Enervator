@@ -66,7 +66,7 @@ Given the value of a single EOR at $4.39 and total supply of 7,727,623,693, the 
 
 ## Deployed Address
 
-Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/token/0x0e57aa96b255e182896abd98c8015ffa6db9fe42).
+Enervator is currently deployed on the [Ethereum testnet Rinkeby](https://rinkeby.etherscan.io/token/0x0e57aa96b255e182896abd98c8015ffa6db9fe42). Coming soon is a frontend for simulating and testing the exchange of FIAT currencies for EOR...
 
 ## Licensing
 
