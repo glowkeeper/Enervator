@@ -2,9 +2,9 @@
 
 A cryptocurrency stablecoin, with the currency code EOR, whose value is linked to energy consumption, much like sovereign currencies were once linked to gold. **The primary goal of EOR is to incentivise energy efficiency**. Below describes the process.
 
-_Enervator was first described in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The introduction to EOR, below, borrows excerpts from that work._
+_*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). The introduction, below, borrows excerpts from that work._
 
-_A note on the name: Enervator is a reference to the token's relation to energy, and the word itself is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the aim of the token is to weaken energy consumption._
+_**The name Enervator is an apparent reference to the token's relation to energy. Additionally, the word itself is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; in this context, the token aims to incentivise decreasing energy consumption._
 
 ## tl;dr:
 
