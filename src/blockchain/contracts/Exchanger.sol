@@ -86,7 +86,7 @@ contract Exchanger is Ownable {
     bytes32 code = depositDB.getDepositedCode(_depositRef);
     int128 rate = forexDB.getRate(code);
 		int128 fixedAmountEOR = ABDKMath64x64.div(_amountFIAT, rate);
-    uint256 toWei =  uint256( ( fixedAmountEOR >> 64 ) * 10**18 );
+    uint256 toWei = uint256( fixedAmountEOR * 10**18 ) >> 64;
 
     bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
     enervatorManager.send ( _buyer, toWei, buyData );
