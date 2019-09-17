@@ -6,6 +6,8 @@ const Deposit = artifacts.require('./Deposit.sol');
 const Buy = artifacts.require('./Buy.sol');
 
 const ethers = require('ethers');
+const DECIMAL = require('decimal.js');
+const BIG = require('bignumber.js');
 const BN = require('bn.js');
 
 contract("Enervator Test", async function ( network )
@@ -147,10 +149,16 @@ contract("Enervator Test", async function ( network )
   it('has the correct rate', async function () {
 
     const code = ethers.utils.formatBytes32String( "USD" )
-    const rate = '20'
-    const bigRate = new BN( rate, 10 )
-    const thisRate = this.multiplier.mul(bigRate)
-    await this.exchanger.setRate( code, thisRate )
+    const rate = new DECIMAL(7.3)
+    const thisTwo = new DECIMAL(2)
+    const thisSixtyFour = new DECIMAL(64)
+    const thisMultiplier = thisTwo.pow(thisSixtyFour)
+    const thisNewBigRate = thisMultiplier.mul(rate)
+    //console.log(thisNewBigRate)
+    //const bigRate = new BN( rate, 10 )
+    //const thisRate = this.multiplier.mul(bigRate)
+    //await this.exchanger.setRate( code, thisRate )
+    await this.exchanger.setRate( code, thisNewBigRate.toString() )
     const savedRate = await this.forex.getRate( code )
     const retrievedRate = savedRate.div(this.multiplier)
     const thisRetrievedRate = parseFloat(retrievedRate.toString())
@@ -163,10 +171,10 @@ contract("Enervator Test", async function ( network )
 
     const code = ethers.utils.formatBytes32String( "USD" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
-    const amount = '150'
+    const amount = '1000'
     const bigAmount = new BN( amount, 10 )
     const thisAmount = this.multiplier.mul(bigAmount)
-    await this.exchanger.deposit( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', depositRef, code, thisAmount )
+    await this.exchanger.deposit( '0xcE34954ad4018B58c3dD974A46D8246850190280', depositRef, code, thisAmount )
     const savedAmount = await this.deposit.getDepositedAmount( depositRef )
     const retrievedAmount = savedAmount.div( this.multiplier )
     const thisRetrievedAmount = retrievedAmount.toString()
@@ -180,7 +188,7 @@ contract("Enervator Test", async function ( network )
     const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
     const amount = await this.deposit.getDepositedAmount( depositRef )
-    await this.exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef, amount )
+    await this.exchanger.buy( '0xcE34954ad4018B58c3dD974A46D8246850190280', buyRef, depositRef, amount )
     const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
     const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
 
