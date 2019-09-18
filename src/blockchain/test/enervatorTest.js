@@ -149,11 +149,11 @@ contract("Enervator Test", async function ( network )
   it('has the correct rate', async function () {
 
     const code = ethers.utils.formatBytes32String( "USD" )
-    const rate = new DECIMAL(7.3)
+    const rate = new DECIMAL(0.07)
     const thisTwo = new DECIMAL(2)
     const thisSixtyFour = new DECIMAL(64)
     const thisMultiplier = thisTwo.pow(thisSixtyFour)
-    const thisNewBigRate = thisMultiplier.mul(rate)
+    const thisNewBigRate = Math.round(thisMultiplier.mul(rate).toString())
     //console.log(thisNewBigRate)
     //const bigRate = new BN( rate, 10 )
     //const thisRate = this.multiplier.mul(bigRate)
@@ -161,7 +161,7 @@ contract("Enervator Test", async function ( network )
     await this.exchanger.setRate( code, thisNewBigRate.toString() )
     const savedRate = BIG(await this.forex.getRate( code ))
     const retrievedRate = savedRate.div(thisMultiplier)
-    const thisRetrievedRate = retrievedRate.toFixed(1)
+    const thisRetrievedRate = retrievedRate.toFixed(2)
 
     assert.equal( thisRetrievedRate, rate.toString() )
 
