@@ -85,11 +85,29 @@ contract Exchanger is Ownable {
 
     bytes32 code = depositDB.getDepositedCode(_depositRef);
     int128 rate = forexDB.getRate(code);
-		int128 fixedAmountEOR = _amountFIAT / rate;
+
+    int128 fixedAmountEOR = _amountFIAT / rate;
     int128 toWei = fixedAmountEOR * 10**18;
 
     bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
     enervatorManager.send ( _buyer, uint256(toWei), buyData );
+
+    /* int128 fixedAmountEOR = ABDKMath64x64.div(_amountFIAT, rate);
+
+    int128 integer;
+    int128 fraction;
+    assembly {
+	    integer := mload(add(fixedAmountEOR, 64))
+	    fraction := mload(add(fixedAmountEOR, 128))
+    }
+
+    int128 fractionToWei = ( fraction * 10**18 ) >> 64;
+    int128 integerToWei = ( integer * 10**18 ) >> 64;
+
+    uint256 amountWei = uint256(fractionToWei + integerToWei);
+
+    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
+    enervatorManager.send ( _buyer, amountWei, buyData ); */
   }
 
   function bought ( address _buyer, uint256 _amountEOR, bytes calldata _buyData ) external
