@@ -8,13 +8,9 @@ _**The name Enervator is an apparent reference to the token's relation to energy
 
 ## tl;dr:
 
-Total Supply = World Population (re-evaluated annually)
+Total Supply = World Population, so it will grow or decrease according to annual population fluctuations.
 
-Value = 2017 global average residential electricity price * ( 1 / annual global per capita energy use ) * ( old TPES / current TPES )
-
-That's equivalent to:
-
-2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
+Value = 2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
 
 ## Variables
 
