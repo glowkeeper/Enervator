@@ -5,3 +5,13 @@ blockchain/node_modules
 blockchain/node_modules/*
 blockchain/build
 blockchain/build/*
+demo/admin/node_modules
+demo/admin/node_modules/*
+demo/admin/build
+demo/admin/build/*
+demo/exchanger/node_modules
+demo/exchanger/node_modules/*
+demo/exchanger/build
+demo/exchanger/build/*
+demo/typechain
+demo/typechain/*

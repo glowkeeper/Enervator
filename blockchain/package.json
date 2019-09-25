@@ -5,18 +5,13 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glowkeeper/StandardCoin.git"
+    "url": "git+https://github.com/glowkeeper/Enervator.git"
   },
   "scripts": {
-    "generate": "mkdir -p ./build/contracts && touch ./build/contracts/fooBar.json && rm ./build/contracts/*json && truffle compile --all",
+    "generate": "mkdir -p ./build/contracts && touch ./build/contracts/fooBar.json && rm ./build/contracts/*json && truffle compile --all && ./typechainBuild.sh",
     "develMigrate": "truffle migrate --network development",
     "rinkebyMigrate": "truffle migrate --network rinkeby",
     "ropstenMigrate": "truffle migrate --network ropsten",
-    "compile": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development",
-    "watch": "./node_modules/.bin/webpack --config ./webpack.dev.js --watch --mode development",
-    "dev": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development",
-    "prod": "./node_modules/.bin/webpack --config ./webpack.prod.js --mode production",
-    "start": "http-server -p 8084 build/",
     "test": "truffle test"
   },
   "keywords": [],
@@ -31,6 +26,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "openzeppelin-test-helpers": "^0.4.3"
+    "chai-bn": "^0.2.0",
+    "openzeppelin-test-helpers": "^0.4.3",
+    "typechain": "^0.3.21"
   }
 }
