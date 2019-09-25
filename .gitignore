@@ -1,7 +1,7 @@
-src/blockchain/typechain
-src/blockchain/build
-src/blockchain/build/*
-src/node_modules
-src/node_modules/*
-src/build
-src/build/*
+blockchain/typechain
+blockchain/build
+blockchain/build/*
+blockchain/node_modules
+blockchain/node_modules/*
+blockchain/build
+blockchain/build/*
