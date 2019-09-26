@@ -1,5 +1,5 @@
-import { combineReducers, Reducer, Store, createStore, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
+import { combineReducers, Reducer, Store, createStore, applyMiddleware, Action } from 'redux'
+import ReduxThunk, { ThunkDispatch } from 'redux-thunk'
 
 import { ActionProps, PayloadProps, TxProps } from './types'
 
@@ -22,12 +22,11 @@ import { reducer as writerReducer } from './enervator/writer/reducer'
 import { reducer as readerReducer } from './enervator/reader/reducer'
 
 /*
-ERROR in [at-loader] ./src/store/store.ts:72:3
+ERROR in [at-loader] ./src/store/store.ts:68:3
     TS2322: Type 'Store<ApplicationState, ActionProps> & { dispatch: unknown; }' is not assignable to type 'Store<ApplicationState, AnyAction>'.
   Types of property 'dispatch' are incompatible.
     Type 'Dispatch<ActionProps>' is not assignable to type 'Dispatch<AnyAction>'.
       Property 'payload' is missing in type 'AnyAction' but required in type 'ActionProps'.
-
 */
 
 //export type ThunkResult<R> = ThunkAction<R, ApplicationState, {}, ActionProps>
@@ -54,9 +53,14 @@ export const rootReducer: Reducer<ApplicationState, ActionProps> = combineReduce
   reader: readerReducer
 })
 
-export function configureStore(
-  initialState: ApplicationState
-): Store<ApplicationState> {
+export interface EnhancedStore<ApplicationState, A extends Action = ActionProps>
+  extends Store<ApplicationState, A> {
+  dispatch: ThunkDispatch<ApplicationState, any, A>
+}
+
+export function configureStore<ApplicationState, A extends Action = ActionProps>(
+    initialState: ApplicationState
+): EnhancedStore<ApplicationState, A> {
 
   // create the redux-saga middleware
   const store = createStore(

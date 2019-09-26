@@ -1,4 +1,4 @@
 declare module '*.png' {
-  const value: object
+  const value: string
   export = value
 }
