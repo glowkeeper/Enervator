@@ -1,4 +1,4 @@
-//import { Action } from 'redux'
+import { Action } from 'redux'
 
 export interface TxData {
   summary: string,
@@ -17,7 +17,7 @@ export interface PayloadProps {
   data: object
 }
 
-export interface ActionProps {
+export interface ActionProps extends Action {
   type: string
   payload: PayloadProps
 }
