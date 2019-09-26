@@ -1,7 +1,8 @@
 const path = require('path')
 const fs  = require('fs');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
@@ -26,8 +27,9 @@ var config = {
     extensions: [".ts", ".tsx", ".js", ".json"]
   },
   plugins: [
-    new cleanWebpackPlugin(['build']),
-    new htmlWebpackPlugin({
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: 'body',
     }),

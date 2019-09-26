@@ -14,13 +14,14 @@ import Help from '@material-ui/icons/Help'
 import Panorama from '@material-ui/icons/Panorama'
 import Create from '@material-ui/icons/Create'
 
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import { withTheme, styles } from '../styles/theme'
+//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+//import { withTheme, styles } from '../styles/theme'
+import { withTheme } from '../styles/theme'
 
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
-class Bar extends React.Component<WithStyles<typeof styles>> {
+class Bar extends React.Component {
 
   render() {
 
@@ -30,7 +31,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
           <Toolbar variant="dense">
             <Link to={PathConfig.home}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.home}>
+                <IconButton aria-label={Paths.home}>
                   <Home />
                 </IconButton>
                 {Paths.home}
@@ -38,7 +39,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.blockchain}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.blockchain}>
+                <IconButton aria-label={Paths.blockchain}>
                   <ListAlt />
                 </IconButton>
                 {Paths.blockchain}
@@ -46,7 +47,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.writer}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.writer}>
+                <IconButton aria-label={Paths.writer}>
                   <Create />
                 </IconButton>
                 {Paths.writer}
@@ -54,7 +55,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.reader}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.reader}>
+                <IconButton aria-label={Paths.reader}>
                   <List />
                 </IconButton>
                 {Paths.reader}
@@ -62,7 +63,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.overview}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.overview}>
+                <IconButton aria-label={Paths.overview}>
                   <Panorama />
                 </IconButton>
                 {Paths.overview}
@@ -70,7 +71,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.help}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.help}>
+                <IconButton aria-label={Paths.help}>
                   <Help />
                 </IconButton>
                 {Paths.help}
@@ -78,7 +79,7 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
             </Link>
             <Link to={PathConfig.about}>
               <MenuItem>
-                <IconButton className={this.props.classes.button} aria-label={Paths.about}>
+                <IconButton aria-label={Paths.about}>
                   <Info />
                 </IconButton>
                 {Paths.about}
@@ -91,4 +92,4 @@ class Bar extends React.Component<WithStyles<typeof styles>> {
   }
 }
 
-export const ApplicationBar = withTheme(withStyles(styles)(Bar))
+export const ApplicationBar = withTheme(Bar)

@@ -7,11 +7,12 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "noImplicitAny": true,
-    "noImplicitThis": false,
+    "noImplicitThis": true,
     "keyofStringsOnly": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
+    "strictNullChecks": true,
     "outDir": "build",
     "lib": [
       "es5",

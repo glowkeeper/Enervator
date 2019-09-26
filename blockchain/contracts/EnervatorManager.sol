@@ -126,14 +126,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       token.operatorSend( address(this), _recipient, _amount, "", _buyData );
     }
 
-    function tokensReceived (
-        address operator,
-        address from,
-        address to,
-        uint256 amount,
-        bytes calldata userData,
-        bytes calldata operatorData
-    ) external
+    function tokensReceived ( address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData ) external
     {
       //require ( false, "blimeyagain!");
       require ( address(token) != address(0), "zero address for token!" );
@@ -146,14 +139,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       emit TokensReceived(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }
 
-    function tokensToSend (
-        address operator,
-        address from,
-        address to,
-        uint256 amount,
-        bytes calldata userData,
-        bytes calldata operatorData
-    ) external
+    function tokensToSend ( address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData ) external
     {
       require ( address(token) != address(0), "zero address for token!" );
       require ( msg.sender == address(token), "invalid token sender!" );

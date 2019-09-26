@@ -88,6 +88,8 @@ const theme = createMuiTheme({
   },
 })
 
+/*
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -205,7 +207,7 @@ const styles = (theme: Theme) =>
     button: {
       margin: theme.spacing.unit
     },
-  })
+  }) */
 
 function withTheme<P>(Component: React.ComponentType<P>) {
   function WithTheme(props: P) {
@@ -219,4 +221,6 @@ function withTheme<P>(Component: React.ComponentType<P>) {
   return WithTheme
 }
 
-export { withTheme, styles }
+//export { withTheme, styles }
+
+export { withTheme }

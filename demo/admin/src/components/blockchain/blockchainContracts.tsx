@@ -6,25 +6,11 @@ import { ContractProps } from '../../store/blockchain/contracts/types'
 
 import { Contract } from '../../utils/config'
 
-import { IATIOrgs } from '../../../blockchain/typechain/IATIOrgs'
-import { IATIOrganisations } from '../../../blockchain/typechain/IATIOrganisations'
-import { IATIOrganisation } from '../../../blockchain/typechain/IATIOrganisation'
-import { IATIOrganisationDocs } from '../../../blockchain/typechain/IATIOrganisationDocs'
-import { IATIOrganisationBudgets } from '../../../blockchain/typechain/IATIOrganisationBudgets'
-import { IATIOrganisationExpenditure } from '../../../blockchain/typechain/IATIOrganisationExpenditure'
-import { IATIOrganisationRecipientBudgets } from '../../../blockchain/typechain/IATIOrganisationRecipientBudgets'
-import { IATIOrganisationRegionBudgets } from '../../../blockchain/typechain/IATIOrganisationRegionBudgets'
-import { IATIOrganisationCountryBudgets } from '../../../blockchain/typechain/IATIOrganisationCountryBudgets'
-import { IATIActivities } from '../../../blockchain/typechain/IATIActivities'
-import { IATIActivity } from '../../../blockchain/typechain/IATIActivity'
-import { IATIActivityAdditional } from '../../../blockchain/typechain/IATIActivityAdditional'
-import { IATIActivityDates } from '../../../blockchain/typechain/IATIActivityDates'
-import { IATIActivityParticipatingOrgs } from '../../../blockchain/typechain/IATIActivityParticipatingOrgs'
-import { IATIActivitySectors } from '../../../blockchain/typechain/IATIActivitySectors'
-import { IATIActivityBudgets } from '../../../blockchain/typechain/IATIActivityBudgets'
-import { IATIActivityTerritories } from '../../../blockchain/typechain/IATIActivityTerritories'
-import { IATIActivityTransactions } from '../../../blockchain/typechain/IATIActivityTransactions'
-import { IATIActivityRelatedActivities } from '../../../blockchain/typechain/IATIActivityRelatedActivities'
+import { EnervatorManager } from '../../../typechain/EnervatorManager'
+import { Deposit } from '../../../typechain/Deposit'
+import { Forex } from '../../../typechain/Forex'
+import { Buy } from '../../../typechain/Buy'
+import { Exchanger } from '../../../typechain/Exchanger'
 
 interface ChainProps {
   store: Store
@@ -45,63 +31,25 @@ export const setContracts = (props: ChainProps) => {
       const contractData: ContractProps = {
         data: {
           contracts: {
-            orgs: new ethers.Contract(Contract.orgsAddress,
-                                              Contract.orgsABI,
-                                              signer) as IATIOrgs,
-            organisations: new ethers.Contract(Contract.organisationsAddress,
-                                                     Contract.organisationsABI,
-                                                     signer) as IATIOrganisations,
-            organisation: new ethers.Contract(Contract.organisationAddress,
-                                                     Contract.organisationABI,
-                                                     signer) as IATIOrganisation,
-            organisationDocs: new ethers.Contract(Contract.organisationDocsAddress,
-                                                     Contract.organisationDocsABI,
-                                                     signer) as IATIOrganisationDocs,
-            organisationBudgets: new ethers.Contract(Contract.organisationBudgetsAddress,
-                                                     Contract.organisationBudgetsABI,
-                                                     signer) as IATIOrganisationBudgets,
-            organisationExpenditure: new ethers.Contract(Contract.organisationExpenditureAddress,
-                                                     Contract.organisationExpenditureABI,
-                                                     signer) as IATIOrganisationExpenditure,
-            organisationRecipientBudgets: new ethers.Contract(Contract.organisationRecipientBudgetsAddress,
-                                                     Contract.organisationRecipientBudgetsABI,
-                                                     signer) as IATIOrganisationRecipientBudgets,
-            organisationRegionBudgets: new ethers.Contract(Contract.organisationRegionBudgetsAddress,
-                                                     Contract.organisationRegionBudgetsABI,
-                                                     signer) as IATIOrganisationRegionBudgets,
-            organisationCountryBudgets: new ethers.Contract(Contract.organisationCountryBudgetsAddress,
-                                                     Contract.organisationCountryBudgetsABI,
-                                                     signer) as IATIOrganisationCountryBudgets,
-            activities: new ethers.Contract(Contract.activitiesAddress,
-                                                     Contract.activitiesABI,
-                                                     signer) as IATIActivities,
-            activity: new ethers.Contract(Contract.activityAddress,
-                                                     Contract.activityABI,
-                                                     signer) as IATIActivity,
-            activityAdditional: new ethers.Contract(Contract.activityAdditionalAddress,
-                                                     Contract.activityAdditionalABI,
-                                                     signer) as IATIActivityAdditional,
-            activityDates: new ethers.Contract(Contract.activityDatesAddress,
-                                                     Contract.activityDatesABI,
-                                                     signer) as IATIActivityDates,
-            activityParticipatingOrgs: new ethers.Contract(Contract.activityParticipatingOrgsAddress,
-                                                     Contract.activityParticipatingOrgsABI,
-                                                     signer) as IATIActivityParticipatingOrgs,
-            activitySectors: new ethers.Contract(Contract.activitySectorsAddress,
-                                                     Contract.activitySectorsABI,
-                                                     signer) as IATIActivitySectors,
-            activityBudgets: new ethers.Contract(Contract.activityBudgetsAddress,
-                                                     Contract.activityBudgetsABI,
-                                                     signer) as IATIActivityBudgets,
-            activityTerritories: new ethers.Contract(Contract.activityTerritoriesAddress,
-                                                     Contract.activityTerritoriesABI,
-                                                     signer) as IATIActivityTerritories,
-            activityTransactions: new ethers.Contract(Contract.activityTransactionsAddress,
-                                                     Contract.activityTransactionsABI,
-                                                     signer) as IATIActivityTransactions,
-            activityRelatedActivities: new ethers.Contract(Contract.activityRelatedActivitiesAddress,
-                                                     Contract.activityRelatedActivitiesABI,
-                                                     signer) as IATIActivityRelatedActivities
+            enervatorManager: new ethers.Contract( Contract.enervatorManagerAddress,
+                                                   Contract.enervatorManagerABI,
+                                                   signer) as EnervatorManager,
+
+            deposit: new ethers.Contract( Contract.depositAddress,
+                                          Contract.depositABI,
+                                          signer) as Deposit,
+
+            forex: new ethers.Contract(Contract.forexAddress,
+                                       Contract.forexABI,
+                                       signer) as Forex,
+
+            buy: new ethers.Contract(Contract.buyAddress,
+                                     Contract.buyABI,
+                                     signer) as Buy,
+
+            exchange: new ethers.Contract(Contract.exchangerAddress,
+                                          Contract.exchangerABI,
+                                          signer) as Exchanger
           }
         }
       }

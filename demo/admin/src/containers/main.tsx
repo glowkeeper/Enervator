@@ -8,63 +8,64 @@ import { ApplicationBar } from './appBar'
 import { Content } from './content'
 import { App } from '../utils/strings'
 
-import logo from '../images/logo.png'
+import Logo from '../../../images/logo.png'
 
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { withTheme, styles } from '../styles/theme'
+//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+//import { withTheme, styles } from '../styles/theme'
+import { withTheme } from '../styles/theme'
 
-class MainLayout extends React.Component<WithStyles<typeof styles>> {
+class MainLayout extends React.Component {
 
   render() {
 
     return (
       <div>
-        <Paper className={this.props.classes.root}>
-          <Paper className={this.props.classes.header}>
+        <Paper>
+          <Paper>
             <Grid container>
               <Grid item xs={12} sm={1}>
-                <img className={this.props.classes.button} src={logo}/>
+                <img src={Logo}/>
               </Grid>
               <Grid item xs={12} sm={9}>
-                <Paper className={this.props.classes.appBar}>
+                <Paper>
                   <ApplicationBar />
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={2}>
-                <Paper className={this.props.classes.header}>
+                <Paper>
                   <h1>{App.title}</h1>
                 </Paper>
               </Grid>
             </Grid>
           </Paper>
-          <Paper className={this.props.classes.content}>
+          <Paper>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={3}>
-                <Paper className={this.props.classes.sider}>
+                <Paper>
                   <SiderOrganisationMenu />
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={9}>
-                <Paper className={this.props.classes.content}>
+                <Paper>
                   <Content />
                 </Paper>
               </Grid>
             </Grid>
           </Paper>
-          <Paper className={this.props.classes.footer}>
+          <Paper>
             <Grid container spacing={0}>
               <Grid item xs={2}>
-                <Paper className={this.props.classes.footer}>
+                <Paper>
                   <Markdown escapeHtml={false} source={App.author} />
                 </Paper>
               </Grid>
               <Grid item xs={8}>
-              <Paper className={this.props.classes.title}>
+              <Paper>
                 <h3>{App.tagline}</h3>
               </Paper>
               </Grid>
               <Grid item xs={2}>
-                <Paper className={this.props.classes.footer}>
+                <Paper>
                   <Markdown escapeHtml={false} source={App.copyright} />
                 </Paper>
               </Grid>
@@ -76,4 +77,4 @@ class MainLayout extends React.Component<WithStyles<typeof styles>> {
   }
 }
 
-export const Main = withTheme(withStyles(styles)(MainLayout))
+export const Main = withTheme(MainLayout)

@@ -4,25 +4,11 @@ import { ActionProps } from '../../types'
  const initialContractState: ContractProps = {
     data: {
       contracts: {
-        orgs: {},
-        organisations: {},
-        organisation: {},
-        organisationDocs: {},
-        organisationBudgets: {},
-        organisationExpenditure: {},
-        organisationRecipientBudgets: {},
-        organisationRegionBudgets: {},
-        organisationCountryBudgets: {},
-        activities: {},
-        activity: {},
-        activityAdditional: {},
-        activityDates: {},
-        activityParticipatingOrgs: {},
-        activitySectors: {},
-        activityBudgets: {},
-        activityTerritories: {},
-        activityTransactions: {},
-        activityRelatedActivities: {}
+        enervatorManager: {},
+        deposit: {},
+        forex: {},
+        buy: {},
+        exchange: {}
       }
     }
   }

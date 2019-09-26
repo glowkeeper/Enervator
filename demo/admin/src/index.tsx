@@ -3,12 +3,12 @@ import { render } from "react-dom"
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { history } from './app/utils/history'
+import { history } from './utils/history'
 
 import { setBlockchain } from './components/blockchain/blockchain'
 
-import { Main } from './app/containers/main'
-import { configureStore } from './app/store'
+import { Main } from './containers/main'
+import { configureStore } from './store'
 
 const initialState = (window as any).initialReduxState
 const store = configureStore(initialState)

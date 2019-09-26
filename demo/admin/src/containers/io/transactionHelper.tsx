@@ -8,8 +8,8 @@ import { ApplicationState } from '../../store'
 import { ActionProps, TxReport } from '../../store/types'
 import { Keys, KeyTypes } from '../../store/helpers/keys/types'
 
-import { initialise  as initialiseRead } from '../../store/IATI/IATIReader/actions'
-import { initialise as txInit } from '../../store/IATI/IATIWriter/actions'
+import { initialise  as initialiseRead } from '../../store/enervator/reader/actions'
+import { initialise as txInit } from '../../store/enervator/writer/actions'
 //import { initialise as readDataInit } from '../../store/IATI/IATIReader/actions'
 import { setKey } from '../../store/helpers/keys/actions'
 
@@ -88,7 +88,7 @@ const mapStateToProps = (state: ApplicationState): TransactionProps => {
   return {
     submittingFunc: state.forms.data.submitFunc,
     resettingFunc: state.forms.data.resetFunc,
-    tx: state.writerForms.data as TxReport
+    tx: state.writer.data as TxReport
   }
 }
 

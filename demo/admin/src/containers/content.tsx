@@ -2,8 +2,9 @@ import * as React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
 
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-import { withTheme, styles } from '../styles/theme'
+//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
+//import { withTheme, styles } from '../styles/theme'
+import { withTheme } from '../styles/theme'
 
 import { Info } from './pages/info/info'
 import { InfoTypes } from './pages/info/types'
@@ -13,7 +14,7 @@ import { BlockchainInfo } from './pages/blockchain/blockchainInfo'
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
-class AppContent extends React.Component<WithStyles<typeof styles>> {
+class AppContent extends React.Component {
 
   render() {
 
@@ -53,13 +54,13 @@ class AppContent extends React.Component<WithStyles<typeof styles>> {
         <Route
           name={Paths.writer}
           path={PathConfig.writer}
-          render={() => <Info type={InfoTypes.Writer} />}
+          render={() => <Info type={InfoTypes.WRITE} />}
         />
 
         <Route
           name={Paths.reader}
           path={PathConfig.reader}
-          render={() => <Info type={InfoTypes.Reader} />}
+          render={() => <Info type={InfoTypes.READ} />}
         />
 
       </Switch>
@@ -67,4 +68,4 @@ class AppContent extends React.Component<WithStyles<typeof styles>> {
   }
 }
 
-export const Content = withTheme(withStyles(styles)(AppContent))
+export const Content = withTheme(AppContent)

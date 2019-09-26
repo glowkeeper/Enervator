@@ -9,6 +9,6 @@ import { WriterActionTypes } from '../types'
 export const initialise = () => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
     const initData: TxReport = {}
-    await dispatch(write({data: initData})(IATIWriterActionTypes.TX_INIT))
+    await dispatch(write({data: initData})(WriterActionTypes.TX_INIT))
   }
 }

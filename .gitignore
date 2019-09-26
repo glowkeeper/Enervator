@@ -13,5 +13,6 @@ demo/exchanger/node_modules
 demo/exchanger/node_modules/*
 demo/exchanger/build
 demo/exchanger/build/*
-demo/typechain
-demo/typechain/*
+demo/admin/typechain
+demo/admin/typechain/*
+*.awcache*
