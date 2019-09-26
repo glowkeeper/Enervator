@@ -44,6 +44,6 @@ const mapStateToProps = (state: ApplicationState): InfoProps => {
   return properties
 }
 
-export const BlockchainInfo = withTheme(connect<InfoProps, void, void, ApplicationState>(
+export const BlockchainInfo = withTheme(connect<InfoProps, {}, {}, ApplicationState>(
   mapStateToProps
 )(Info))

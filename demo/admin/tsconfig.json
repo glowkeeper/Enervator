@@ -11,7 +11,7 @@
     "keyofStringsOnly": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "strict": true,
+    "strict": false,
     "strictNullChecks": true,
     "outDir": "build",
     "lib": [

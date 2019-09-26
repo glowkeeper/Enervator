@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import createStyles from '@material-ui/core/styles/createStyles'
-import { Theme } from '@material-ui/core/styles/createMuiTheme'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 // A theme with custom primary and secondary color.
@@ -9,25 +8,25 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 const theme = createMuiTheme({
   typography: {
     fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-    fontSize: 14,
+    fontSize: 16,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
-    headline: {
-      fontSize: "1.2rem",
-      fontWeight: 400,
-      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-      lineHeight: "1.7em",
-      color: "rgba(0, 0, 0, 1)"
-    },
-    title: {
+    h1: {
       fontSize: "1.1125rem",
       fontWeight: 500,
       fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
       lineHeight: "1.6em",
       color: "rgba(0, 0, 0, 0.97)"
     },
-    subheading: {
+    h2: {
+      fontSize: "1.025rem",
+      fontWeight: 500,
+      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
+      lineHeight: "1.6em",
+      color: "rgba(0, 0, 0, 0.97)"
+    },
+    subtitle1: {
       fontSize: "1rem",
       fontWeight: 400,
       fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
@@ -105,6 +104,13 @@ const styles = (theme: Theme) =>
       fontWeight: theme.typography.body1.fontWeight,
       fontFamily: theme.typography.body1.fontFamily,
       lineHeight: theme.typography.body1.lineHeight,
+    headline: {
+      fontSize: "1.2rem",
+      fontWeight: 400,
+      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
+      lineHeight: "1.7em",
+      color: "rgba(0, 0, 0, 1)"
+    },
       color: theme.typography.body1.color
     },
     header: {

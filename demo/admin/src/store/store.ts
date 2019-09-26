@@ -1,5 +1,5 @@
 import { combineReducers, Reducer, Store, createStore, applyMiddleware } from 'redux'
-import ReduxThunk, { ThunkAction } from 'redux-thunk'
+import ReduxThunk from 'redux-thunk'
 
 import { ActionProps, PayloadProps, TxProps } from './types'
 
@@ -21,7 +21,16 @@ import { reducer as infoReducer } from './info/reducer'
 import { reducer as writerReducer } from './enervator/writer/reducer'
 import { reducer as readerReducer } from './enervator/reader/reducer'
 
-export type ThunkResult<R> = ThunkAction<R, ApplicationState, null, any>
+/*
+ERROR in [at-loader] ./src/store/store.ts:72:3
+    TS2322: Type 'Store<ApplicationState, ActionProps> & { dispatch: unknown; }' is not assignable to type 'Store<ApplicationState, AnyAction>'.
+  Types of property 'dispatch' are incompatible.
+    Type 'Dispatch<ActionProps>' is not assignable to type 'Dispatch<AnyAction>'.
+      Property 'payload' is missing in type 'AnyAction' but required in type 'ActionProps'.
+
+*/
+
+//export type ThunkResult<R> = ThunkAction<R, ApplicationState, {}, ActionProps>
 
 export interface ApplicationState {
   chainInfo: ChainDataProps

@@ -8,7 +8,7 @@ import { ApplicationBar } from './appBar'
 import { Content } from './content'
 import { App } from '../utils/strings'
 
-import Logo from '../../../images/logo.png'
+import Logo from '../../images/Logo.png'
 
 //import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 //import { withTheme, styles } from '../styles/theme'
