@@ -35,6 +35,11 @@ interface DispatchProps {
 
 class Sider extends React.Component<DispatchProps> {
 
+  public static defaultProps = {
+    initialise: () => {},
+    setKey: (keyProps: Keys) => {}
+  }
+
   render() {
 
     return (

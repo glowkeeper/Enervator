@@ -42,7 +42,7 @@ class MainLayout extends React.Component {
             <Grid container spacing={0}>
               <Grid item xs={12} sm={3}>
                 <Paper>
-                  <SiderOrganisationMenu initialise={} setKey={}/>
+                  <SiderOrganisationMenu />
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={9}>
