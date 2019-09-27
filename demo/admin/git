@@ -1,0 +1,6 @@
+
+> EnervatorAdmin@0.0.1 compile /home/steve/gitrepos/Enervator/demo/admin
+> webpack --config ./webpack.dev.js --mode development
+
+ℹ ｢atl｣: Using typescript@3.6.3 from typescript
+ℹ ｢atl｣: Using tsconfig.json from /home/steve/gitrepos/Enervator/demo/admin/tsconfig.json

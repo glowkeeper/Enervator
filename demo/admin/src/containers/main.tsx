@@ -8,7 +8,7 @@ import { ApplicationBar } from './appBar'
 import { Content } from './content'
 import { App } from '../utils/strings'
 
-import { Logo } from '../../images/Logo.png'
+import Logo from '../images/Logo.png'
 
 //import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 //import { withTheme, styles } from '../styles/theme'
@@ -42,7 +42,7 @@ class MainLayout extends React.Component {
             <Grid container spacing={0}>
               <Grid item xs={12} sm={3}>
                 <Paper>
-                  <SiderOrganisationMenu />
+                  <SiderOrganisationMenu initialise={} setKey={}/>
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={9}>

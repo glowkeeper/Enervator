@@ -39,9 +39,28 @@ class Sider extends React.Component<DispatchProps> {
 
     return (
       <div>
-
-
-
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <h4>{App.headingWriter}</h4>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <MenuList>
+            <Link
+              to={PathConfig.home}
+              onClick={() => {
+                this.props.initialise()
+                this.props.setKey({key: '', keyType: KeyTypes.ACTIVITIES})
+              }} >
+              <MenuItem>
+                <IconButton aria-label={Paths.home}>
+                  <Create />
+                </IconButton>
+                {Paths.home}
+              </MenuItem>
+            </Link>
+          </MenuList>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
       </div>
     )
   }

@@ -57,12 +57,11 @@ var config = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 81920
+              limit: 32768
             }
           }
         ]

@@ -25,8 +25,8 @@ const stop = (props: StopProps) => {
   if ( provider.hasOwnProperty('connection') ) {
 
     const account = state.chainAccount.data.account
-    const orgContract = state.chainContracts.data.contracts.orgs
-    if ( (orgContract.hasOwnProperty('getOrganisationExists')) &&
+    const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
+    if ( (enervatorManagerContract.hasOwnProperty('getPricePerMWh')) &&
          (account != "" ) ) {
       /* console.log('stopping intervals for account ', account)
       console.log('stopping intervals for contract ', orgContract) */
