@@ -44,7 +44,7 @@ export interface ApplicationState {
   reader: PayloadProps
 }
 
-export const rootReducer: Reducer<ApplicationState, ActionProps> = combineReducers<ApplicationState, ActionProps>({
+export const rootReducer: Reducer = combineReducers({
   chainInfo: chainDataReducer,
   chainAccount: chainAccountReducer,
   chainContracts: chainContractReducer,
@@ -55,7 +55,7 @@ export const rootReducer: Reducer<ApplicationState, ActionProps> = combineReduce
   reader: readerReducer
 })
 
-export function configureStore<ApplicationState, ActionProps>()
+export function configureStore()
 {
 
   const store = createStore(
