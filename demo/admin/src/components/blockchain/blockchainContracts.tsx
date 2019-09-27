@@ -24,8 +24,8 @@ export const setContracts = (props: ChainProps) => {
 
   if ( provider.hasOwnProperty('connection') ) {
     const state = store.getState()
-    const orgsContract = state.chainContracts.data.contracts.orgs
-    if ( !(orgsContract.hasOwnProperty('getNumOrgs')) ) {
+    const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
+    if ( !(enervatorManagerContract.hasOwnProperty('getPricePerMWh')) ) {
 
       const signer = provider.getSigner()
       const contractData: ContractProps = {

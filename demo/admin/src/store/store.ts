@@ -21,6 +21,9 @@ import { reducer as infoReducer } from './info/reducer'
 import { reducer as writerReducer } from './enervator/writer/reducer'
 import { reducer as readerReducer } from './enervator/reader/reducer'
 
+
+import { About, Help, Home, Reader, Writer, Overview } from '../utils/strings'
+
 /*
 ERROR in [at-loader] ./src/store/store.ts:68:3
     TS2322: Type 'Store<ApplicationState, ActionProps> & { dispatch: unknown; }' is not assignable to type 'Store<ApplicationState, AnyAction>'.
@@ -70,20 +73,20 @@ const initialState: ApplicationState = {
   info: {
     data: {
       about: {
-        title: "",
-        data: ""
+        title: About.heading,
+        data: About.info
       },
       help: {
-        title: "",
-        data: ""
+        title: Help.heading,
+        data: Help.info
       },
       home: {
-        title: "",
-        data: ""
+        title: Home.heading,
+        data: Home.info
       },
       overview: {
-        title: "Blah",
-        data: "for fek"
+        title: Overview.heading,
+        data: Overview.info
       }
     }
   },

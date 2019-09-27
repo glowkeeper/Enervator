@@ -106,7 +106,7 @@ class Contract {
     "function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw )@500000",
     "function setRate ( bytes32 _code, int128 _rate )@500000",
     "function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT )@500000",
-    "function bought ( address _buyer, uint256 _amountEOR, bytes calldata _buyData )@500000",
+    "function bought ( address _buyer, uint256 _amountEOR, bytes _buyData )@500000",
 
   ]
 }
