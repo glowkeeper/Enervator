@@ -82,8 +82,8 @@ const initialState: ApplicationState = {
         data: ""
       },
       overview: {
-        title: "",
-        data: ""
+        title: "Blah",
+        data: "for fek"
       }
     }
   },
