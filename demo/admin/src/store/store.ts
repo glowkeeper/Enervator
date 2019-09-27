@@ -31,8 +31,6 @@ ERROR in [at-loader] ./src/store/store.ts:68:3
 
 //export type ThunkResult<R> = ThunkAction<R, ApplicationState, {}, ActionProps>
 
-const initialState = (window as any).initialReduxState
-
 export interface ApplicationState {
   chainInfo: ChainDataProps
   chainAccount: AccountProps
@@ -42,6 +40,88 @@ export interface ApplicationState {
   forms: FormProps
   writer: PayloadProps
   reader: PayloadProps
+}
+
+const initialState: ApplicationState = {
+  chainInfo: {
+    data: {
+      Name: '',
+      ChainId: '',
+      ENS: '',
+      provider: {},
+    }
+  },
+  chainAccount: {
+    data: {
+      account: ""
+    }
+  },
+  chainContracts: {
+    data: {
+      contracts: {
+        enervatorManager: {},
+        deposit: {},
+        forex: {},
+        buy: {},
+        exchange: {}
+      }
+    }
+  },
+  info: {
+    data: {
+      about: {
+        title: "",
+        data: ""
+      },
+      help: {
+        title: "",
+        data: ""
+      },
+      home: {
+        title: "",
+        data: ""
+      },
+      overview: {
+        title: "",
+        data: ""
+      }
+    }
+  },
+  keys: {
+    data: {
+      org: '',
+      organisations: '',
+      organisation: '',
+      organisationBudget: '',
+      organisationCountryBudget: '',
+      organisationDoc: '',
+      organisationExpenditure: '',
+      organisationRecipientBudget: '',
+      organisationRegionBudget: '',
+      activities: '',
+      activity: '',
+      activityAdditional: '',
+      activityDate: '',
+      activityParticipatingOrg: '',
+      activitySector: '',
+      activityBudget: '',
+      activityTerritory: '',
+      activityTransaction: '',
+      activityRelatedActivity: ''
+    }
+  },
+  forms: {
+    data: {
+      submitFunc: (function(submit: boolean) { return submit }),
+      resetFunc: (function() { return null })
+    }
+  },
+  writer: {
+    data: {}
+  },
+  reader: {
+    data: {}
+  }
 }
 
 export const rootReducer: Reducer = combineReducers({
