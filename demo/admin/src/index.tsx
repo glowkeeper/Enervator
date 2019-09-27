@@ -3,15 +3,15 @@ import { render } from "react-dom"
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { history } from './utils/history'
+import { createBrowserHistory } from 'history';
 
 import { setBlockchain } from './components/blockchain/blockchain'
 
 import { Main } from './containers/main'
 import { configureStore } from './store'
 
-const initialState = (window as any).initialReduxState
-const store = configureStore(initialState)
+const history = createBrowserHistory()
+const store = configureStore()
 setBlockchain({store: store})
 
 const App = () => (

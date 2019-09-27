@@ -31,6 +31,8 @@ ERROR in [at-loader] ./src/store/store.ts:68:3
 
 //export type ThunkResult<R> = ThunkAction<R, ApplicationState, {}, ActionProps>
 
+const initialState = (window as any).initialReduxState
+
 export interface ApplicationState {
   chainInfo: ChainDataProps
   chainAccount: AccountProps
@@ -53,16 +55,9 @@ export const rootReducer: Reducer<ApplicationState, ActionProps> = combineReduce
   reader: readerReducer
 })
 
-export interface EnhancedStore<ApplicationState, A extends Action = ActionProps>
-  extends Store<ApplicationState, A> {
-  dispatch: ThunkDispatch<ApplicationState, any, A>
-}
+export function configureStore<ApplicationState, ActionProps>()
+{
 
-export function configureStore<ApplicationState, A extends Action = ActionProps>(
-    initialState: ApplicationState
-): EnhancedStore<ApplicationState, A> {
-
-  // create the redux-saga middleware
   const store = createStore(
     rootReducer,
     initialState,
