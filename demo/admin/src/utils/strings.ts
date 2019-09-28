@@ -2,10 +2,12 @@ import { Paths as configPaths } from './config'
 
 class App {
 
-  static readonly title='**Enervator Admin**'
+  static readonly token='Enervator'
+  static readonly title='Enervator Admin'
   static readonly tagline='Using Blockchain Technology to Incentivise Energy Efficiency'
-  static readonly copyright='[University of Sussex](https://www.sussex.ac.uk/) © 2019'
-  static readonly author='Created by [Steven Huckle](https://glowkeeper.github.io/)'
+  static readonly copyright='© 2019'
+  static readonly place ='[University of Sussex](https://www.sussex.ac.uk/)'
+  static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
   static headingWriter = 'Write Enervator Data'
@@ -31,45 +33,44 @@ class Blockchain {
 
 class Home {
 
-  static heading = 'Home'
+  static heading = `${App.title} Home`
 
-  static info = `Use this application to read and write Enervator values.<br /><br />Read the [Overview](#${configPaths.overview}) section to learn about the origins of **Enervator**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **Enervator Admin** - in essence, to update Enervator records, click on the [Write Record](#${configPaths.writer}) link and fill in all fields. To read Enervator records, click on the [Read Record](#${configPaths.reader}) link. You must have [MetaMask](https://metamask.io/) installed and own the Enervator Manager smart contract.`
+  static info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [Overview](#${configPaths.overview}) section describes the origins of **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [About](#${configPaths.about}) section gives version, author and copyright information.`
 }
 
 class About {
 
-  static heading = 'About Enervator Admin'
+  static heading = `About ${App.title}`
 
-  static info = `_${App.title}_ version _${App.version}_<br /><br /> _${App.author}_ at the _${App.copyright}_`
-
+  static info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place} ${App.copyright}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
 }
 
 class Overview {
 
-  static heading = 'Overview of Enervator'
+  static heading = `Overview of ${App.title}`
 
-  static info = '**Enervator** is the result of Stven Huckle\'s thesis, at the [University of Sussex](https://www.sussex.ac.uk/).<br /><br />For more information about **Enervator**, please contact s dot huckle at sussex dot ac dot uk.'
+  static info = `**${App.token}** is the result of ${App.author}\'s PhD at the ${App.place}.`
 }
 
 class Help {
 
-  static heading = 'Enervator Help'
+  static heading = `${App.title} Help`
 
-  static info = `**Enervator Admin'** allows the owner of the Enervator Manager smart contract to read and write Enervator records.<br /><br />Have a read of the [Overview](#${configPaths.overview}) section, which gives some background about the app\'. <br /><br />This app' relies on [MetaMask](https://metamask.io/).`
+  static info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to read and write **${App.token}** records.<br /><br />To update **${App.token}** parameters, click on the [Write Records](#${configPaths.writer}) link and select the parameter you wish to update. To read **${App.token}** records, click on the [Read Records](#${configPaths.reader}) link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Writer {
 
-  static heading = 'Enervator Writer'
+  static heading = `${App.title} Writer`
 
-  static info = `The _${App.headingWriter}_ menu lets you write Enervator records.`
+  static info = `The _${App.headingWriter}_ section lets you write **${App.token}** records.`
 }
 
 class Reader {
 
-  static heading = 'Enervator Reader'
+  static heading = `${App.title} Reader`
 
-  static info = `The _${App.headingReader}_ menu lets you read Enervator records.`
+  static info = `The _${App.headingReader}_ section lets you read **${App.token}** records.`
 }
 
 class Transaction {
