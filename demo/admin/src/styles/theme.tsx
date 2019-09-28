@@ -72,7 +72,7 @@ let theme = createMuiTheme({
   palette: {
     type: 'dark',
     background: {
-      default: '#ffffff',
+      default: '#439889',
     },
     primary: {
       light: '#4c8c4a',
@@ -97,70 +97,81 @@ theme.spacing(4)
 
 const useStyles = makeStyles({
   root: {
-    padding: '0 30px',
-    backgroundColor: theme.palette.background.default
-  },
-  paper: {
-    padding: '0 30px',
-    margin: '0 30px',
-    align: 'center'
+    padding: theme.spacing(2),
+    margin: theme.spacing(1),
   },
   header: {
-    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)',
-    padding: '0 30px',
-    margin: '0 30px',
+    padding: theme.spacing(2),
+    align: 'center',
+    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)'
+  },
+  logo: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginRight: theme.spacing(1),
     align: 'center',
   },
   title: {
-    padding: '0 30px',
-    margin: '0 30px',
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
     align: 'center',
-    backgroundColor: theme.palette.primary.main
+    background: 'linear-gradient(45deg, #003d33 30%, #439889 90%)'
   },
-  subHeader: {
-    padding: '0 30px',
-    margin: '0 30px',
+  subTitle: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     align: 'center',
-    backgroundColor: theme.palette.primary.main
+    background: 'linear-gradient(45deg, #003d33 30%, #439889 90%)'
   },
   content: {
-    padding: '0 30px',
-    margin: '0 30px',
+    padding: theme.spacing(2),
     align: 'left',
-    backgroundColor: theme.palette.primary.light
   },
   sider: {
-    padding: '0 30px',
-    margin: '0 30px',
     align: 'left',
-    backgroundColor: theme.palette.primary.light
   },
   siderMenu: {
-    padding: 0,
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     margin: 0,
     align: 'left',
-    backgroundColor: theme.palette.primary.light
+  },
+  main: {
+    padding: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    align: 'left',
   },
   appBar: {
-    padding: 0,
     margin: 0,
     align: 'left',
-    backgroundColor: theme.palette.primary.main
   },
   caption: {
-    padding: '0 30px',
-    margin: '0 30px',
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     align: 'center',
-    backgroundColor: theme.palette.primary.light
   },
   footer: {
-    padding: '0 30px',
-    margin: '0 30px',
+    padding: theme.spacing(2),
     align: 'center',
-    backgroundColor: theme.palette.primary.main
+    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)'
+  },
+  copyright: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    align: 'center',
+  },
+  author: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    align: 'center',
   },
   button: {
-    margin: 0
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    background: 'linear-gradient(45deg, #003d33 30%, #439889 90%)'
   }
 })
 

@@ -22,7 +22,7 @@ const Main = () => {
         <Paper className={classes.header}>
           <Grid container>
             <Grid item xs={12} sm={1}>
-              <img className={classes.button} src={Logo}/>
+              <img className={classes.logo} src={Logo}/>
             </Grid>
             <Grid item xs={12} sm={9}>
               <Paper className={classes.appBar}>
@@ -30,7 +30,7 @@ const Main = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={2}>
-              <Paper className={classes.header}>
+              <Paper className={classes.title}>
                 <h1>{App.title}</h1>
               </Paper>
             </Grid>
@@ -44,7 +44,7 @@ const Main = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <Paper className={classes.content}>
+              <Paper className={classes.main}>
                 <Content />
               </Paper>
             </Grid>
@@ -53,17 +53,17 @@ const Main = () => {
         <Paper className={classes.footer}>
           <Grid container spacing={0}>
             <Grid item xs={2}>
-              <Paper className={classes.footer}>
+              <Paper className={classes.author}>
                 <Markdown escapeHtml={false} source={App.author} />
               </Paper>
             </Grid>
             <Grid item xs={8}>
-            <Paper className={classes.title}>
+            <Paper className={classes.subTitle}>
               <h3>{App.tagline}</h3>
             </Paper>
             </Grid>
             <Grid item xs={2}>
-              <Paper className={classes.footer}>
+              <Paper className={classes.copyright}>
                 <Markdown escapeHtml={false} source={App.copyright} />
               </Paper>
             </Grid>
