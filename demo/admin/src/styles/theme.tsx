@@ -1,32 +1,29 @@
 import * as React from 'react'
 
-import createStyles from '@material-ui/core/styles/createStyles'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-
 // A theme with custom primary and secondary color.
 // It's optional.
-const theme = createMuiTheme({
+const theme = {
   typography: {
     fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-    fontSize: 16,
+    fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
-    h1: {
+    headline: {
+      fontSize: "1.2rem",
+      fontWeight: 400,
+      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
+      lineHeight: "1.7em",
+      color: "rgba(0, 0, 0, 1)"
+    },
+    title: {
       fontSize: "1.1125rem",
       fontWeight: 500,
       fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
       lineHeight: "1.6em",
       color: "rgba(0, 0, 0, 0.97)"
     },
-    h2: {
-      fontSize: "1.025rem",
-      fontWeight: 500,
-      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-      lineHeight: "1.6em",
-      color: "rgba(0, 0, 0, 0.97)"
-    },
-    subtitle1: {
+    subheading: {
       fontSize: "1rem",
       fontWeight: 400,
       fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
@@ -85,7 +82,9 @@ const theme = createMuiTheme({
       contrastText: '#000000',
     },
   },
-})
+}
+
+export { theme }
 
 /*
 
@@ -104,13 +103,6 @@ const styles = (theme: Theme) =>
       fontWeight: theme.typography.body1.fontWeight,
       fontFamily: theme.typography.body1.fontFamily,
       lineHeight: theme.typography.body1.lineHeight,
-    headline: {
-      fontSize: "1.2rem",
-      fontWeight: 400,
-      fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-      lineHeight: "1.7em",
-      color: "rgba(0, 0, 0, 1)"
-    },
       color: theme.typography.body1.color
     },
     header: {
@@ -213,7 +205,7 @@ const styles = (theme: Theme) =>
     button: {
       margin: theme.spacing.unit
     },
-  }) */
+  })
 
 function withTheme<P>(Component: React.ComponentType<P>) {
   function WithTheme(props: P) {
@@ -227,6 +219,4 @@ function withTheme<P>(Component: React.ComponentType<P>) {
   return WithTheme
 }
 
-//export { withTheme, styles }
-
-export { withTheme }
+export { withTheme, styles }*/
