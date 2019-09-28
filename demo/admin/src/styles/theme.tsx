@@ -161,12 +161,14 @@ const useStyles = makeStyles({
     paddingRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
     align: 'center',
+    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)'
   },
   author: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     marginRight: theme.spacing(1),
     align: 'center',
+    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)'
   },
   button: {
     marginLeft: theme.spacing(1),
