@@ -2,10 +2,6 @@ import * as React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../styles/theme'
-import { withTheme } from '../styles/theme'
-
 import { Info } from './pages/info/info'
 import { InfoTypes } from './pages/info/types'
 
@@ -68,4 +64,4 @@ class AppContent extends React.Component {
   }
 }
 
-export const Content = withTheme(AppContent)
+export const Content = AppContent

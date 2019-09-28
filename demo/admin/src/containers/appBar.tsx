@@ -14,10 +14,6 @@ import Help from '@material-ui/icons/Help'
 import Panorama from '@material-ui/icons/Panorama'
 import Create from '@material-ui/icons/Create'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../styles/theme'
-import { withTheme } from '../styles/theme'
-
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
@@ -92,4 +88,4 @@ class Bar extends React.Component {
   }
 }
 
-export const ApplicationBar = withTheme(Bar)
+export const ApplicationBar = Bar

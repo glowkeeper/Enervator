@@ -18,7 +18,6 @@ import List from '@material-ui/icons/List'
 
 //import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 //import { withTheme, styles } from '../styles/theme'
-import { withTheme } from '../styles/theme'
 
 import { Paths, App } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
@@ -344,7 +343,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, Actio
   }
 }
 
-export const SiderOrganisationMenu = withTheme(connect<null, DispatchProps, {}, ApplicationState>(
+export const SiderOrganisationMenu = connect<null, DispatchProps, {}, ApplicationState>(
   null,
   mapDispatchToProps
-)(Sider))
+)(Sider)

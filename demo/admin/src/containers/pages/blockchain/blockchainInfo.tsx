@@ -6,10 +6,6 @@ import { ApplicationState } from '../../../store'
 
 import { get } from '../../../components/io/list'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../../../styles/theme'
-import { withTheme } from '../../../styles/theme'
-
 import { Blockchain } from '../../../utils/strings'
 
 interface InfoProps {
@@ -44,6 +40,6 @@ const mapStateToProps = (state: ApplicationState): InfoProps => {
   return properties
 }
 
-export const BlockchainInfo = withTheme(connect<InfoProps, {}, {}, ApplicationState>(
+export const BlockchainInfo = connect<InfoProps, {}, {}, ApplicationState>(
   mapStateToProps
-)(Info))
+)(Info)

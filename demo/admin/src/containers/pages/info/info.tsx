@@ -5,10 +5,6 @@ import Markdown from 'react-markdown'
 
 import { ApplicationState } from '../../../store'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../../../styles/theme'
-import { withTheme } from '../../../styles/theme'
-
 //import { fetchRequest, RequestDataAction } from '../../../store/helpers/about/actions'
 import { InfoProps } from '../../../store/info/types'
 import { InfoTypes } from './types'
@@ -47,6 +43,6 @@ const mapStateToProps = (state: ApplicationState, ownProps: StateProps): InfoPro
   }
 }
 
-export const Info = withTheme(connect<InfoProps, {}, StateProps, ApplicationState>(
+export const Info = connect<InfoProps, {}, StateProps, ApplicationState>(
   mapStateToProps
-)(AppInfo))
+)(AppInfo)

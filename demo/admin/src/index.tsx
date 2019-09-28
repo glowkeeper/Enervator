@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 import { createBrowserHistory } from 'history';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { theme } from './styles/theme'
@@ -22,6 +23,7 @@ const App = () => (
     <Provider store={store}>
       <React.Fragment>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Router history={history}>
             <Main />
           </Router>

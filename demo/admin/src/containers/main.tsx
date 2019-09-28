@@ -10,10 +10,6 @@ import { App } from '../utils/strings'
 
 import Logo from '../images/Logo.png'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../styles/theme'
-import { withTheme } from '../styles/theme'
-
 class MainLayout extends React.Component {
 
   render() {
@@ -56,7 +52,7 @@ class MainLayout extends React.Component {
             <Grid container spacing={0}>
               <Grid item xs={2}>
                 <Paper>
-                  <Markdown escapeHtml={false} source={App.author} />
+                  <Markdown escapeHtml={false} source={App.author}/>
                 </Paper>
               </Grid>
               <Grid item xs={8}>
@@ -66,7 +62,7 @@ class MainLayout extends React.Component {
               </Grid>
               <Grid item xs={2}>
                 <Paper>
-                  <Markdown escapeHtml={false} source={App.copyright} />
+                  <Markdown escapeHtml={false} source={App.copyright}/>
                 </Paper>
               </Grid>
             </Grid>
@@ -77,4 +73,4 @@ class MainLayout extends React.Component {
   }
 }
 
-export const Main = withTheme(MainLayout)
+export const Main = MainLayout
