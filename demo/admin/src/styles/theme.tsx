@@ -106,11 +106,10 @@ const useStyles = makeStyles({
     align: 'center'
   },
   header: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, #1b5e20 30%, #439889 90%)',
     padding: '0 30px',
     margin: '0 30px',
     align: 'center',
-    backgroundColor: theme.palette.primary.main
   },
   title: {
     padding: '0 30px',
@@ -161,7 +160,7 @@ const useStyles = makeStyles({
     backgroundColor: theme.palette.primary.main
   },
   button: {
-    padding: '0 30px'
+    margin: 0
   }
 })
 
