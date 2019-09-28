@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { withStyles } from '@material-ui/styles';
+
 import Markdown from 'react-markdown'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
