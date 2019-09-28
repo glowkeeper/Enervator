@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 
 let theme = createMuiTheme({
   spacing: 8,
@@ -95,70 +95,79 @@ let theme = createMuiTheme({
 theme = responsiveFontSizes(theme)
 theme.spacing(4)
 
-/*
-paper: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center'
+const useStyles = makeStyles({
+  root: {
+    padding: '0 30px',
+    margin: '0 30px',
+    backgroundColor: theme.palette.background.default
+  },
+  paper: {
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center'
   },
   header: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center',
-  backgroundColor: theme.palette.primary.main
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 100,
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center'
   },
   title: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center',
-  backgroundColor: theme.palette.primary.main
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center',
+    backgroundColor: theme.palette.primary.main
   },
   subHeader: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center',
-  backgroundColor: theme.palette.primary.main
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center',
+    backgroundColor: theme.palette.primary.main
   },
   content: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  backgroundColor: theme.palette.primary.light
+    padding: '0 30px',
+    margin: '0 30px',
+    backgroundColor: theme.palette.primary.light
   },
   sider: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'left',
-  backgroundColor: theme.palette.primary.light
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'left',
+    backgroundColor: theme.palette.primary.light
   },
   siderMenu: {
-  padding: 0,
-  margin: 0,
-  textAlign: 'left',
-  backgroundColor: theme.palette.primary.light
+    padding: 0,
+    margin: 0,
+    align: 'left',
+    backgroundColor: theme.palette.primary.light
   },
   appBar: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'left',
-  backgroundColor: theme.palette.primary.main
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'left',
+    backgroundColor: theme.palette.primary.main
   },
   caption: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center',
-  backgroundColor: theme.palette.primary.light
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center',
+    backgroundColor: theme.palette.primary.light
   },
   footer: {
-  padding: theme.spacing,
-  margin: theme.spacing,
-  textAlign: 'center',
-  backgroundColor: theme.palette.primary.main
+    padding: '0 30px',
+    margin: '0 30px',
+    align: 'center',
+    backgroundColor: theme.palette.primary.main
   },
   button: {
-  padding: theme.spacing,
-  margin: theme.spacing
+    padding: theme.spacing,
+    margin: theme.spacing
   }
-},
-*/
+})
 
-export { theme }
+export { theme, useStyles }
