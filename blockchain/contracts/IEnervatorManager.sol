@@ -49,6 +49,10 @@ contract IEnervatorManager {
 
   function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external;
 
+  function getTokenName () external view returns ( string memory );
+  function getTokenSymbol () external view returns ( string memory );
+  function getTotalSupply () external view returns ( uint256 );
+
   function getPricePerMWh () external view returns ( int128 );
   function getCurrentTPES () external view returns ( int128 );
   function getOldTPES () external view returns ( int128 );

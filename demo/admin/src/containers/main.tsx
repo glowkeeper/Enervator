@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {useStyles } from '../styles/theme';
+import { useStyles } from '../styles/theme';
 
 import Markdown from 'react-markdown'
 import Grid from '@material-ui/core/Grid'

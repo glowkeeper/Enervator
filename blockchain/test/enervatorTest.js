@@ -1,4 +1,3 @@
-const Enervator = artifacts.require("Enervator");
 const EnervatorManager = artifacts.require('./EnervatorManager.sol');
 const Forex = artifacts.require('./Forex.sol');
 const Exchanger = artifacts.require('./Exchanger.sol');
@@ -31,7 +30,6 @@ contract("Enervator Test", async function ( network )
       */
 
       this.manager = await EnervatorManager.at('0xbC523aF797704089a2B8Cf563C84c9ffcE2A61cf');
-      this.token = await Enervator.at('0xA6851748083E59897C74240544C39b976Fe14Be2');
       this.deposit = await Deposit.at('0x7F39C8f98bC25e58d374D066100c80EEbf1a6008');
       this.forex = await Forex.at('0x52f6d7eA2A50703a5CEB345d4C974d5faCdb925E');
       this.buy = await Buy.at('0x0bf35BE5988f810e0A3917991Ba641078e9dcffF')
@@ -41,7 +39,6 @@ contract("Enervator Test", async function ( network )
     {
 
       this.manager = await EnervatorManager.deployed()
-      this.token = await Enervator.deployed()
       this.exchanger = await Exchanger.deployed()
       this.forex = await Forex.deployed()
       this.deposit = await Deposit.deployed()
@@ -61,7 +58,7 @@ contract("Enervator Test", async function ( network )
 
   it('has the correct name', async function () {
 
-    const name = await this.token.name()
+    const name = await this.manager.getTokenName()
 
     assert.equal( name, 'Enervator' )
 
@@ -69,7 +66,7 @@ contract("Enervator Test", async function ( network )
 
   it('has the correct symbol', async function () {
 
-    const symbol = await this.token.symbol()
+    const symbol = await this.manager.getTokenSymbol()
 
     assert.equal( symbol, 'EOR' )
 
@@ -80,7 +77,7 @@ contract("Enervator Test", async function ( network )
     const newSupply = new BN('7727623693', 10)
     const shiftedSupply = this.decimilisation.mul( newSupply )
     await this.manager.addTokens(shiftedSupply)
-    const supply = await this.token.totalSupply()
+    const supply = await this.manager.getTotalSupply()
     const retrievedNewSupply = supply.div(this.decimilisation)
     const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
 

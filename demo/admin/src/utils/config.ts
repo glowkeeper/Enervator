@@ -7,6 +7,9 @@ class Paths {
   static readonly help = '/help'
   static readonly writer = '/write'
   static readonly reader = '/read'
+
+  static readonly exchangeRateWriter = '/set-exchange-rate'
+  static readonly exchangeRatesReader = '/read-exchange-rates'
 }
 
 class Blockchain {
@@ -38,6 +41,10 @@ class Contract {
 
     "function tokensReceived ( address operator, address from, address to, uint256 amount, bytes userData, bytes operatorData )@500000",
     "function tokensToSend ( address operator, address from, address to, uint256 amount, bytes userData, bytes operatorData )@500000",
+
+    "function getTokenName () view returns ( string memory )",
+    "function getTokenSymbol () external view returns ( string memory )",
+    "function getTotalSupply () external view returns ( uint256 )",
 
     "function getPricePerMWh () view returns ( int128 )",
     "function getCurrentTPES () view returns ( int128 )",

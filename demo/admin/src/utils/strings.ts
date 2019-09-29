@@ -1,5 +1,3 @@
-import { Paths as configPaths } from './config'
-
 class App {
 
   static readonly token='Enervator'
@@ -10,8 +8,8 @@ class App {
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
-  static headingWriter = 'Write Enervator Data'
-  static headingReader = 'Read Enervator Data'
+  static headingWriter = 'Set Enervator Parameters'
+  static headingReader = 'Read Enervator Parameters'
 }
 
 class Paths {
@@ -22,8 +20,11 @@ class Paths {
   static readonly about = 'About'
   static readonly overview = 'Overview'
   static readonly help = 'Help'
-  static readonly writer = 'Write Records'
-  static readonly reader = 'Read Records'
+  static readonly writer = 'Set Parameters'
+  static readonly reader = 'Read Parameters'
+
+  static readonly exchangeRateWriter = '/set-exchange-rate'
+  static readonly exchangeRatesReader = '/read-exchange-rates'
 }
 
 class Blockchain {
@@ -35,7 +36,7 @@ class Home {
 
   static heading = `${App.title} Home`
 
-  static info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [Overview](#${configPaths.overview}) section describes the origins of **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [About](#${configPaths.about}) section gives version, author and copyright information.`
+  static info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.help}_ link, above, gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
 }
 
 class About {
@@ -56,7 +57,7 @@ class Help {
 
   static heading = `${App.title} Help`
 
-  static info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to read and write **${App.token}** records.<br /><br />To update **${App.token}** parameters, click on the [Write Records](#${configPaths.writer}) link and select the parameter you wish to update. To read **${App.token}** records, click on the [Read Records](#${configPaths.reader}) link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${Paths.writer}_ link and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${Paths.reader}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Writer {

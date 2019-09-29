@@ -3,7 +3,6 @@ import ReduxThunk, { ThunkDispatch } from 'redux-thunk'
 
 import { ActionProps, PayloadProps, TxProps } from './types'
 
-import { KeyProps } from './helpers/keys/types'
 import { FormProps } from './helpers/forms/types'
 
 import { InfoPageProps } from './info/types'
@@ -11,7 +10,6 @@ import { ChainDataProps } from  './blockchain/data/types'
 import { AccountProps } from  './blockchain/account/types'
 import { ContractProps } from  './blockchain/contracts/types'
 
-import { reducer as keyReducer } from './helpers/keys/reducer'
 import { reducer as formReducer } from './helpers/forms/reducer'
 
 import { reducer as chainDataReducer } from './blockchain/data/reducer'
@@ -30,7 +28,6 @@ export interface ApplicationState {
   chainAccount: AccountProps
   chainContracts: ContractProps
   info: InfoPageProps
-  keys: KeyProps
   forms: FormProps
   writer: PayloadProps
   reader: PayloadProps
@@ -41,7 +38,6 @@ export const rootReducer: Reducer = combineReducers({
   chainAccount: chainAccountReducer,
   chainContracts: chainContractReducer,
   info: infoReducer,
-  keys: keyReducer,
   forms: formReducer,
   writer: writerReducer,
   reader: readerReducer

@@ -158,6 +158,24 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }
 
+    function getTokenName () external view returns ( string memory )
+    {
+      require ( address(token) != address(0), "zero address for token!" );
+      return token.name();
+    }
+
+    function getTokenSymbol () external view returns ( string memory )
+    {
+      require ( address(token) != address(0), "zero address for token!" );
+      return token.symbol();
+    }
+
+    function getTotalSupply () external view returns ( uint256 )
+    {
+      require ( address(token) != address(0), "zero address for token!" );
+      return token.totalSupply();
+    }
+
     function getPricePerMWh () external view returns ( int128 )
     {
         return values.pricePerMWh;
