@@ -8,8 +8,8 @@ class App {
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
-  static headingWriter = 'Set Enervator Parameters'
-  static headingReader = 'Read Enervator Parameters'
+  static readonly headingWriter = 'Set Enervator Parameters'
+  static readonly headingReader = 'Read Enervator Parameters'
 }
 
 class Paths {
@@ -29,59 +29,70 @@ class Paths {
 
 class Blockchain {
 
-  static heading = 'Blockchain Data'
+  static readonly heading = 'Blockchain Data'
 }
 
 class Home {
 
-  static heading = `${App.title} Home`
+  static readonly heading = `${App.title} Home`
 
-  static info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.help}_ link, above, gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
+  static readonly info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.help}_ link, above, gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
 }
 
 class About {
 
-  static heading = `About ${App.title}`
+  static readonly heading = `About ${App.title}`
 
-  static info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place} ${App.copyright}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
+  static readonly info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place} ${App.copyright}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
 }
 
 class Overview {
 
-  static heading = `Overview of ${App.title}`
+  static readonly heading = `Overview of ${App.title}`
 
-  static info = `**${App.token}** is the result of ${App.author}\'s PhD at the ${App.place}.`
+  static readonly info = `**${App.token}** is the result of ${App.author}\'s PhD at the ${App.place}.`
 }
 
 class Help {
 
-  static heading = `${App.title} Help`
+  static readonly heading = `${App.title} Help`
 
-  static info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${Paths.writer}_ link and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${Paths.reader}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${Paths.writer}_ link and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${Paths.reader}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Writer {
 
-  static heading = `${App.title} Writer`
+  static readonly heading = `${App.title} Writer`
 
-  static info = `The _${App.headingWriter}_ section lets you write **${App.token}** records.`
+  static readonly info = `The _${App.headingWriter}_ section lets you write **${App.token}** records.`
 }
 
 class Reader {
 
-  static heading = `${App.title} Reader`
+  static readonly heading = `${App.title} Reader`
 
-  static info = `The _${App.headingReader}_ section lets you read **${App.token}** records.`
+  static readonly info = `The _${App.headingReader}_ section lets you read **${App.token}** records.`
 }
 
 class Transaction {
 
-  static heading = "Transaction Details"
+  static readonly heading = "Transaction Details"
 
-  static hash = 'Transaction Hash'
-  static summary = 'Transaction Summary'
-  static success = 'Submitted Successfully!'
-  static fail = 'Submission Failed!'
+  static readonly hash = 'Transaction Hash'
+  static readonly summary = 'Transaction Summary'
+  static readonly success = 'Submitted Successfully!'
+  static readonly fail = 'Submission Failed!'
+}
+
+class ExchangeRates {
+
+  static readonly headingExchangeRateWriter = 'Set Exchange Rate'
+  static readonly headingExchangeRateReader = 'Read Exchange Rates'
+
+  static readonly currency = "Currency"
+  static readonly rate = "Exchange Rate"
+
+  static readonly exchangeRateDetails = 'Exchange Rate Details'
 }
 
 
@@ -94,5 +105,6 @@ export { App,
          Help,
          Writer,
          Reader,
-         Transaction
+         Transaction,
+         ExchangeRates
        }

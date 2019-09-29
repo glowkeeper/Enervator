@@ -6,12 +6,9 @@ import Markdown from 'react-markdown'
 
 import { ApplicationState } from '../../store'
 import { ActionProps, TxReport } from '../../store/types'
-import { Keys, KeyTypes } from '../../store/helpers/keys/types'
 
 import { initialise  as initialiseRead } from '../../store/enervator/reader/actions'
 import { initialise as txInit } from '../../store/enervator/writer/actions'
-//import { initialise as readDataInit } from '../../store/IATI/IATIReader/actions'
-import { setKey } from '../../store/helpers/keys/actions'
 
 import { Transaction } from '../../utils/strings'
 import { Helpers } from '../../utils/config'
@@ -23,7 +20,6 @@ interface TransactionProps {
 }
 
 interface TransactionDispatchProps {
-  setKey: (keyProps: Keys) => void
   initialiseRead: () => void
   initialiseTX: () => void
 }
@@ -47,7 +43,6 @@ class TX extends React.Component<TxProps> {
       this.props.submittingFunc(false)
       this.props.resettingFunc()
       this.props.initialiseRead()
-      this.props.setKey({key: '', keyType: KeyTypes.NEW})
     }
   }
 
@@ -95,8 +90,7 @@ const mapStateToProps = (state: ApplicationState): TransactionProps => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): TransactionDispatchProps => {
   return {
     initialiseTX: () => dispatch(txInit()),
-    initialiseRead: () => dispatch(initialiseRead()),
-    setKey: (keyProps: Keys) => dispatch(setKey(keyProps))
+    initialiseRead: () => dispatch(initialiseRead())
   }
 }
 

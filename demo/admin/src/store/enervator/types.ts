@@ -2,7 +2,7 @@ import { PayloadProps } from '../types'
 
 /* Exchange Rates */
 
-interface ExchangeRateProps
+export interface ExchangeRateProps
 {
   currency: string
   rate: number
@@ -21,42 +21,42 @@ export interface ExchangeRateReportProps extends PayloadProps
 
 /* Enervator Types */
 
-interface NameProps
+export interface NameProps
 {
   name: string
 }
 
-interface SymbolProps
+export interface SymbolProps
 {
   symbol: string
 }
 
-interface SupplyProps
+export interface SupplyProps
 {
   supply: number
 }
 
-interface PricePerMWhProps
+export interface PricePerMWhProps
 {
   pricePerMWh: number
 }
 
-interface PerCapitaEnergyProps
+export interface PerCapitaEnergyProps
 {
   perCapitaEnergy: number
 }
 
-interface TPESProps
+export interface TPESProps
 {
   tPES: number
 }
 
-interface UnitValueProps
+export interface UnitValueProps
 {
   unitValue: number
 }
 
-interface EnervatorProps
+export interface EnervatorProps
 {
   tokenName: NameProps
   tokenSymbol: SymbolProps
