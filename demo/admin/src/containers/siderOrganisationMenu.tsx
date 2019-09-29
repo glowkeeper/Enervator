@@ -62,6 +62,28 @@ const Sider = (props: DispatchProps = defaultProps) => {
           </MenuList>
         </ExpansionPanelDetails>
       </ExpansionPanel>
+
+      <ExpansionPanel className={classes.siderMenu}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <h4>{App.headingReader}</h4>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.siderMenu}>
+          <MenuList>
+            <Link
+              to={PathConfig.exchangeRatesReader}
+              onClick={() => {
+                props.initialise()
+              }} >
+              <MenuItem>
+                <IconButton aria-label={Paths.exchangeRatesReader}>
+                  <List />
+                </IconButton>
+                {Paths.exchangeRatesReader}
+              </MenuItem>
+            </Link>
+          </MenuList>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   )
 }

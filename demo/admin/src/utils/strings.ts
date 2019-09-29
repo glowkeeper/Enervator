@@ -23,8 +23,8 @@ class Paths {
   static readonly writer = 'Set Parameters'
   static readonly reader = 'Read Parameters'
 
-  static readonly exchangeRateWriter = '/set-exchange-rate'
-  static readonly exchangeRatesReader = '/read-exchange-rates'
+  static readonly exchangeRateWriter = 'Set Exchange Rate'
+  static readonly exchangeRatesReader = 'Read Exchange Rates'
 }
 
 class Blockchain {
@@ -87,7 +87,7 @@ class Transaction {
 class ExchangeRates {
 
   static readonly headingExchangeRateWriter = 'Set Exchange Rate'
-  static readonly headingExchangeRateReader = 'Read Exchange Rates'
+  static readonly headingExchangeRatesReader = 'Read Exchange Rates'
 
   static readonly currency = "Currency"
   static readonly rate = "Exchange Rate"

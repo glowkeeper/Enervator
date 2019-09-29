@@ -3,12 +3,14 @@ pragma solidity ^0.5.7;
 import "./ABDKMath64x64.sol";
 
 import "./IForex.sol";
+import "./Strings.sol";
 
 //FIAT to EOR exchange rate.
 contract Forex is IForex {
 
 	address private forexManager;
 
+	bytes32[] private codes;
 	mapping(bytes32 => int128) private rates;
 
 	constructor( address _forexManager ) public
@@ -38,10 +40,28 @@ contract Forex is IForex {
 		require ( _isAllowed(msg.sender), "that address cannot set forex rates!");
 		require ( _code[0] != 0, "no currency code supplied!" );
 		require ( _rate > 0, "no rate supplied!" );
+
+		if ( !Strings.getExists( _code, codes ) )
+    {
+      codes.push(_code);
+    }
+
 		rates[_code] = _rate;
 	}
 
-	function getRate ( bytes32 _code) public view returns (int128)
+	function getNumCodes () external view returns (uint256)
+	{
+		return codes.length;
+	}
+
+	function getCode ( uint256 _index ) external view returns (bytes32)
+	{
+		require ( _index < codes.length, "index out of range!" );
+
+    return codes[_index];
+	}
+
+	function getRate ( bytes32 _code ) external view returns (int128)
 	{
 		require ( _code[0] != 0, "no currency code supplied!" );
 

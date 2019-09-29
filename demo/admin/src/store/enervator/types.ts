@@ -10,7 +10,6 @@ export interface ExchangeRateProps
 
 export interface ExchangeRateReport
 {
-  organisationsRef: string
   data: Array<ExchangeRateProps>
 }
 

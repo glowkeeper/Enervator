@@ -57,7 +57,7 @@ module.exports = async function (deployer, network, accounts) {
   }
 
   await deployer.deploy(StringsLib);
-  deployer.link(StringsLib, [Deposit, Buy]);
+  deployer.link(StringsLib, [Deposit, Buy, Forex]);
 
   await deployer.deploy( Exchanger );
   const exchanger = await Exchanger.deployed();

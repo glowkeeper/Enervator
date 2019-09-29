@@ -8,6 +8,7 @@ import { InfoTypes } from './pages/info/types'
 import { BlockchainInfo } from './pages/blockchain/blockchainInfo'
 
 import { ExchangeRateWriter } from './pages/enervator/writer/exchangeRate'
+import { ExchangeRatesReader } from './pages/enervator/reader/exchangeRates'
 
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
@@ -69,6 +70,12 @@ class AppContent extends React.Component {
           name={Paths.exchangeRateWriter}
           path={PathConfig.exchangeRateWriter}
           render={() => <ExchangeRateWriter />}
+        />
+
+        <Route
+          name={Paths.exchangeRatesReader}
+          path={PathConfig.exchangeRatesReader}
+          render={() => <ExchangeRatesReader />}
         />
 
       </Switch>

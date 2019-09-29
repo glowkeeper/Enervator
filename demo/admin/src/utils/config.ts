@@ -24,14 +24,12 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0x834ffE2EcA00e40C70f4242e41bdA0B0941a75d7"
-  //static enervatorAddress = "0xadbc684Dbb5D931B72cED71C312EBcf3b56635B8"
-  static depositAddress = "0xe02358b7C13Cd6b19c45C2670467696cD4F30006"
-  static forexAddress = "0xC553FE7B1C64D9E01Efe45595C82F13905AEe6A6"
-  static buyAddress = "0xFad115D9f8e7D873a063a29D3873A2Df920e91ff"
-  static exchangerAddress = "0x27fCC0F0DfFe999Ea3AE852cF6E9003ba0181aa9"
-
-
+  static enervatorManagerAddress = "0x5126965356e3059c2533db04c0d52c31889825e1"
+  //static enervatorAddress = "0xC6D447a9D25a345d085a4D8291eaFe6Ac24d5aA3"
+  static depositAddress = "0xE094b19643a98dF71407ae0ceB386AA620658316"
+  static forexAddress = "0x9eBc3136d7C2fa7634d4fC4652FD5aeBaE677581"
+  static buyAddress = "0x98369E0cE619E8C69f59f4c1Fb55E1E8D11177b4"
+  static exchangerAddress = "0xf32Acd268D689cc200EF560c9A451E2216B6219d"
 
   static enervatorManagerABI = [
 
@@ -85,7 +83,9 @@ class Contract {
   static forexABI = [
 
   	"function setRate ( bytes32 _code, int128 _rate )@500000",
-    "function getRate ( bytes32 _code) public view returns (int128)"
+    "function getNumCodes () view returns (uint256)",
+    "function getCode ( uint256 _index ) view returns (bytes32)",
+    "function getRate ( bytes32 _code) view returns (int128)"
 
   ]
 
