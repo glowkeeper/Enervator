@@ -59,6 +59,18 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 {Paths.exchangeRateWriter}
               </MenuItem>
             </Link>
+            <Link
+              to={PathConfig.supplyWriter}
+              onClick={() => {
+                props.initialise()
+              }} >
+              <MenuItem>
+                <IconButton aria-label={Paths.supplyWriter}>
+                  <Create />
+                </IconButton>
+                {Paths.supplyWriter}
+              </MenuItem>
+            </Link>
           </MenuList>
         </ExpansionPanelDetails>
       </ExpansionPanel>

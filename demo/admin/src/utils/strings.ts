@@ -23,8 +23,10 @@ class Paths {
   static readonly writer = 'Set Parameters'
   static readonly reader = 'Read Parameters'
 
-  static readonly exchangeRateWriter = 'Set Exchange Rate'
+  static readonly exchangeRateWriter = 'Set Exchange Rates'
   static readonly exchangeRatesReader = 'Read Exchange Rates'
+
+  static readonly supplyWriter = 'Set Supply'
 }
 
 class Blockchain {
@@ -43,7 +45,7 @@ class About {
 
   static readonly heading = `About ${App.title}`
 
-  static readonly info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place} ${App.copyright}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
+  static readonly info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
 }
 
 class Overview {
@@ -95,6 +97,14 @@ class ExchangeRates {
   static readonly exchangeRateDetails = 'Exchange Rate Details'
 }
 
+class TokenSupply {
+
+  static readonly headingSupplyWriter = 'Set Supply'
+  static readonly headingSupplyReader = 'Read Supply'
+
+  static readonly supply = "Supply"
+}
+
 
 export { App,
          Paths,
@@ -106,5 +116,6 @@ export { App,
          Writer,
          Reader,
          Transaction,
-         ExchangeRates
+         ExchangeRates,
+         TokenSupply
        }

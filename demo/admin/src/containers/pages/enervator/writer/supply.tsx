@@ -12,45 +12,42 @@ import { TextField, Select } from "material-ui-formik-components"
 
 import { ApplicationState } from '../../../../store'
 import { ActionProps } from '../../../../store/types'
-import { ExchangeRateProps } from '../../../../store/enervator/types'
+import { SupplyProps } from '../../../../store/enervator/types'
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
-import { setExchangeRate } from '../../../../store/enervator/writer/exchangeRate/actions'
+import { setSupply } from '../../../../store/enervator/writer/tokenSupply/actions'
 
 import { TransactionHelper } from '../../../io/transactionHelper'
 
-import { ExchangeRates as ExchangeRateStrings } from '../../../../utils/strings'
+import { TokenSupply as TokenSupplyStrings } from '../../../../utils/strings'
 import { Helpers } from '../../../../utils/config'
 
-const exchangeRateSchema = Yup.object().shape({
-  currency: Yup
-    .string()
-    .required('Required'),
-  rate: Yup
+const supplySchema = Yup.object().shape({
+  supply: Yup
     .number()
     .required('Required'),
 })
 
-export interface ExchangeRateDispatchProps {
+export interface SupplyDispatchProps {
   handleSubmit: (values: any) => void
   setFormFunctions: (formProps: FormData) => void
 }
 
-type ExchangeRateFormProps = ExchangeRateDispatchProps
+type SupplyFormProps = SupplyDispatchProps
 
-export class ExchangeRateForm extends React.Component<ExchangeRateFormProps> {
+export class SupplyForm extends React.Component<SupplyFormProps> {
 
   public static defaultProps = {
     handleSubmit: (values: any) => {},
     setFormFunctions: (formProps: FormData) => {}
   }
 
-  constructor (props: ExchangeRateFormProps) {
+  constructor (props: SupplyFormProps) {
    super(props)
   }
 
-  handleSubmit = (values: ExchangeRateProps, setSubmitting: Function, reset: Function) => {
+  handleSubmit = (values: SupplyProps, setSubmitting: Function, reset: Function) => {
     this.props.setFormFunctions({submitFunc: setSubmitting, resetFunc: reset})
     this.props.handleSubmit(values)
   }
@@ -59,30 +56,22 @@ export class ExchangeRateForm extends React.Component<ExchangeRateFormProps> {
 
     return (
       <div>
-        <h2>{ExchangeRateStrings.headingExchangeRateWriter}</h2>
+        <h2>{TokenSupplyStrings.headingSupplyWriter}</h2>
         <div>
           <Formik
-            initialValues={ {currency: "",
-                            rate: 0
+            initialValues={ {supply: 0
                             }}
             enableReinitialize={true}
-            validationSchema={exchangeRateSchema}
-            onSubmit={(values: ExchangeRateProps, actions: any) => {
+            validationSchema={supplySchema}
+            onSubmit={(values: SupplyProps, actions: any) => {
               this.handleSubmit(values, actions.setSubmitting, actions.resetForm)
             }}
-            render={(formProps: FormikProps<ExchangeRateProps>) => (
+            render={(formProps: FormikProps<SupplyProps>) => (
               <Form>
                 <FormControl fullWidth={true}>
                   <Field
-                    name="currency"
-                    label={ExchangeRateStrings.currency}
-                    component={Select}
-                    options={Helpers.currencyCodes}
-                  />
-                  <ErrorMessage name='currency' />
-                  <Field
-                    name='rate'
-                    label={ExchangeRateStrings.rate}
+                    name='supply'
+                    label={TokenSupplyStrings.supply}
                     component={TextField}
                   />
                   <ErrorMessage name='value' />
@@ -103,14 +92,14 @@ export class ExchangeRateForm extends React.Component<ExchangeRateFormProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): ExchangeRateDispatchProps => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): SupplyDispatchProps => {
   return {
-    handleSubmit: (ownProps: any) => dispatch(setExchangeRate(ownProps)),
+    handleSubmit: (ownProps: any) => dispatch(setSupply(ownProps)),
     setFormFunctions: (formProps: FormData) => dispatch(setFormFunctions(formProps))
   }
 }
 
-export const ExchangeRateWriter = connect<null, ExchangeRateDispatchProps, {}, ApplicationState>(
+export const SupplyWriter = connect<null, SupplyDispatchProps, {}, ApplicationState>(
   null,
   mapDispatchToProps
-)(ExchangeRateForm)
+)(SupplyForm)

@@ -78,10 +78,14 @@ export const enum WriterActionTypes {
   TX_INIT =  '@@WriterActionTypes/TX_INIT',
   RATE_SUCCESS = '@@WriterActionTypes/RATE_SUCCESS',
   RATE_FAILURE = '@@WriterActionTypes/RATE_FAILURE',
+  SUPPLY_SUCCESS = '@@WriterActionTypes/SUPPLY_SUCCESS',
+  SUPPLY_FAILURE = '@@WriterActionTypes/SUPPLY_FAILURE'
 }
 
 export const enum ReaderActionTypes {
   REPORT_INIT = '@@ReaderActionTypes/REPORT_INIT',
   RATE_SUCCESS = '@@ReaderActionTypes/RATE_SUCCESS',
-  RATE_FAILURE = '@@ReaderActionTypes/RATE_FAILURE'
+  RATE_FAILURE = '@@ReaderActionTypes/RATE_FAILURE',
+  SUPPLY_SUCCESS = '@@ReaderActionTypes/SUPPLY_SUCCESS',
+  SUPPLY_FAILURE = '@@ReaderActionTypes/SUPPLY_FAILURE',
 }

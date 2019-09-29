@@ -10,6 +10,8 @@ import { BlockchainInfo } from './pages/blockchain/blockchainInfo'
 import { ExchangeRateWriter } from './pages/enervator/writer/exchangeRate'
 import { ExchangeRatesReader } from './pages/enervator/reader/exchangeRates'
 
+import { SupplyWriter } from './pages/enervator/writer/supply'
+
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
@@ -77,6 +79,15 @@ class AppContent extends React.Component {
           path={PathConfig.exchangeRatesReader}
           render={() => <ExchangeRatesReader />}
         />
+
+        /* Token Supply */
+
+        <Route
+          name={Paths.supplyWriter}
+          path={PathConfig.supplyWriter}
+          render={() => <SupplyWriter />}
+        />
+
 
       </Switch>
     )

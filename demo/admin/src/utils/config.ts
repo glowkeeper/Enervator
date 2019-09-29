@@ -10,6 +10,8 @@ class Paths {
 
   static readonly exchangeRateWriter = '/set-exchange-rate'
   static readonly exchangeRatesReader = '/read-exchange-rates'
+
+  static readonly supplyWriter = '/set-supply'
 }
 
 class Blockchain {
@@ -24,12 +26,13 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0x5126965356e3059c2533db04c0d52c31889825e1"
-  //static enervatorAddress = "0xC6D447a9D25a345d085a4D8291eaFe6Ac24d5aA3"
-  static depositAddress = "0xE094b19643a98dF71407ae0ceB386AA620658316"
-  static forexAddress = "0x9eBc3136d7C2fa7634d4fC4652FD5aeBaE677581"
-  static buyAddress = "0x98369E0cE619E8C69f59f4c1Fb55E1E8D11177b4"
-  static exchangerAddress = "0xf32Acd268D689cc200EF560c9A451E2216B6219d"
+  static enervatorManagerAddress = "0x8F9C48C83A1E19c4b3E6EfaB72DCCeE7f279EA2A"
+  //static enervatorAddress = "0x1521e9CcD0d93adB9ac1fE1Ce2dc8679510e3456"
+  static depositAddress = "0xede79aE16b86d3F235cE3745Ed6FFf9D7F031309"
+  static forexAddress = "0xE911aC9b1cB395fB561F599865Be168336f98655"
+  static buyAddress = "0xEc4AA10B1f8988cB05fC2551844C1d863Ab5C755"
+  static exchangerAddress = "0xA3C9cC93C5F451CDCbB87eBC516972B8b0De8a45"
+
 
   static enervatorManagerABI = [
 
