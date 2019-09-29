@@ -30,6 +30,7 @@ var config = {
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      favicon: './src/images/favicon.png',
       template: './src/index.html',
       inject: 'body',
     }),

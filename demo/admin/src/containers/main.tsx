@@ -10,7 +10,7 @@ import { ApplicationBar } from './appBar'
 import { Content } from './content'
 import { App } from '../utils/strings'
 
-import Logo from '../images/Logo.png'
+import Logo from '../images/logo.png'
 
 const Main = () => {
 
