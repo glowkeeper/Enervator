@@ -57,19 +57,24 @@ export interface UnitValueProps
 
 export interface EnervatorProps
 {
-  tokenName: NameProps
-  tokenSymbol: SymbolProps
-  tokenSupply: SupplyProps
-  pricePerMWh: PricePerMWhProps
-  currentTPES: TPESProps
-  oldTPES: TPESProps
-  perCapitaEnergy: PerCapitaEnergyProps
-  unitValue: UnitValueProps
+  tokenName: string
+  tokenSymbol: string
+  totalSupply: number
+  pricePerMWh: number
+  currentTPES: number
+  oldTPES: number
+  perCapitaEnergy: number
+  unitValue: number
+}
+
+export interface EnervatorReport
+{
+  data: Array<EnervatorProps>
 }
 
 export interface EnervatorReportProps extends PayloadProps
 {
-  data: EnervatorProps
+  data: EnervatorReport
 }
 
 /* Action Types */
@@ -88,6 +93,8 @@ export const enum WriterActionTypes {
 
 export const enum ReaderActionTypes {
   REPORT_INIT = '@@ReaderActionTypes/REPORT_INIT',
+  REPORT_SUCCESS = '@@ReaderActionTypes/REPORT_SUCCESS',
+  REPORT_FAILURE = '@@ReaderActionTypes/REPORT_FAILURE',
   RATE_SUCCESS = '@@ReaderActionTypes/RATE_SUCCESS',
   RATE_FAILURE = '@@ReaderActionTypes/RATE_FAILURE',
   SUPPLY_SUCCESS = '@@ReaderActionTypes/SUPPLY_SUCCESS',

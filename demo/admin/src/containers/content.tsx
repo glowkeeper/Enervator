@@ -14,6 +14,8 @@ import { SupplyWriter } from './pages/enervator/writer/supply'
 import { TPESWriter } from './pages/enervator/writer/tPES'
 import { PerCapitaEnergyWriter } from './pages/enervator/writer/perCapitaEnergy'
 
+import { EnervatorReader } from './pages/enervator/reader/enervatorParams'
+
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
@@ -101,12 +103,18 @@ class AppContent extends React.Component {
         /* Per Capita Energy */
 
         <Route
-          name={Paths.PerCapitaEnergyWriter}
-          path={PathConfig.PerCapitaEnergyWriter}
+          name={Paths.perCapitaEnergyWriter}
+          path={PathConfig.perCapitaEnergyWriter}
           render={() => <PerCapitaEnergyWriter />}
         />
 
+        /* Read Enervator Parameters */
 
+        <Route
+          name={Paths.enervatorReportReader}
+          path={PathConfig.enervatorReportReader}
+          render={() => <EnervatorReader />}
+        />
 
       </Switch>
     )

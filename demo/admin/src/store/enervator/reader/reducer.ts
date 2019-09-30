@@ -12,11 +12,14 @@ export const reducer = (state: PayloadProps = initialState, action: ActionProps)
       const data = action.payload.data as PayloadProps
       return data
     }
-    case ReaderActionTypes.RATE_SUCCESS: {
+    case ReaderActionTypes.RATE_SUCCESS:
+    case ReaderActionTypes.REPORT_SUCCESS:
+    {
       const data = (action.payload.data as PayloadProps)
       return {...state, ...data}
     }
     case ReaderActionTypes.RATE_FAILURE:
+    case ReaderActionTypes.REPORT_FAILURE:
     default:
       return state
   }

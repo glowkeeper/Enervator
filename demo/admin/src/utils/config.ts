@@ -13,7 +13,9 @@ class Paths {
 
   static readonly supplyWriter = '/set-supply'
   static readonly TPESWriter = '/set-tpes'
-  static readonly PerCapitaEnergyWriter = '/set-per-capita-energy'
+  static readonly perCapitaEnergyWriter = '/set-per-capita-energy'
+
+  static readonly enervatorReportReader = '/read-enervator-parameters'
 }
 
 class Blockchain {

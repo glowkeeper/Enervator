@@ -88,15 +88,15 @@ const Sider = (props: DispatchProps = defaultProps) => {
             </Link>
             <Link
               className={classes.link}
-              to={PathConfig.PerCapitaEnergyWriter}
+              to={PathConfig.perCapitaEnergyWriter}
               onClick={() => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.PerCapitaEnergyWriter}>
+                <IconButton aria-label={Paths.perCapitaEnergyWriter}>
                   <Create />
                 </IconButton>
-                {Paths.PerCapitaEnergyWriter}
+                {Paths.perCapitaEnergyWriter}
               </MenuItem>
             </Link>
           </MenuList>
@@ -120,6 +120,19 @@ const Sider = (props: DispatchProps = defaultProps) => {
                   <List />
                 </IconButton>
                 {Paths.exchangeRatesReader}
+              </MenuItem>
+            </Link>
+            <Link
+              className={classes.link}
+              to={PathConfig.enervatorReportReader}
+              onClick={() => {
+                props.initialise()
+              }} >
+              <MenuItem>
+                <IconButton aria-label={Paths.enervatorReportReader}>
+                  <List />
+                </IconButton>
+                {Paths.enervatorReportReader}
               </MenuItem>
             </Link>
           </MenuList>
