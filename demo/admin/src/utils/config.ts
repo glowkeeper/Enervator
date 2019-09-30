@@ -12,6 +12,7 @@ class Paths {
   static readonly exchangeRatesReader = '/read-exchange-rates'
 
   static readonly supplyWriter = '/set-supply'
+  static readonly TPESWriter = '/set-tpes'
 }
 
 class Blockchain {
@@ -26,19 +27,19 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0x85f1116DF7FCFE73bc511Ac1a6a69BaB0A3af1dA"
-  //static enervatorAddress = "0x7952136EB509C59bFe8393a0BAeB17D3a5E0a400"
-  static depositAddress = "0x1dF54fB0bE96038017A1C0563477FabeaEf4A9E3"
-  static forexAddress = "0xFa9f7680705968660d36F34D080d5fEeD0614221"
-  static buyAddress = "0xB155E22D9598cC0e635792070A888127Ae349B0c"
-  static exchangerAddress = "0x5fd0bf6818576c58E067749821F1C41aAf97B16A"
+  static enervatorManagerAddress = "0xCc7805E2f6F71B02Ff01a54aa05d2B01CeB69526"
+  //static enervatorAddress = "0x1423b9AB2e3A61d74E9993BEfD556279E5Dd1425"
+  static depositAddress = "0xEB10B38e8e61663e298f756204624661c7366d02"
+  static forexAddress = "0xdd93B3D6D9e9c8141576847e2EFC72645BDeE706"
+  static buyAddress = "0xdd3f941e63CE1de0a1491CB463c6D2EB03897796"
+  static exchangerAddress = "0x8F3a2D6AE06942cbb6Fdb5db13147A0cCbBf5045"
 
   static enervatorManagerABI = [
 
     "function setToken( address _token )@500000",
     "function addTokens ( uint256 _amount )@500000",
     "function burnTokens ( uint256 _amount )@500000",
-    "function setNewTPES ( int128  _amount )@500000",
+    "function setTPES ( int128  _amount )@500000",
     "function setPerCapitaEnergy ( int128 _amount )@500000",
     "function send ( address _recipient, uint256 _amount, bytes _buyData )@500000",
 

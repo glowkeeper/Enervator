@@ -11,6 +11,7 @@ import { ExchangeRateWriter } from './pages/enervator/writer/exchangeRate'
 import { ExchangeRatesReader } from './pages/enervator/reader/exchangeRates'
 
 import { SupplyWriter } from './pages/enervator/writer/supply'
+import { TPESWriter } from './pages/enervator/writer/tPES'
 
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
@@ -86,6 +87,14 @@ class AppContent extends React.Component {
           name={Paths.supplyWriter}
           path={PathConfig.supplyWriter}
           render={() => <SupplyWriter />}
+        />
+
+        /* TPES */
+
+        <Route
+          name={Paths.TPESWriter}
+          path={PathConfig.TPESWriter}
+          render={() => <TPESWriter />}
         />
 
 

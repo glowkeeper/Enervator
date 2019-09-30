@@ -27,6 +27,7 @@ class Paths {
   static readonly exchangeRatesReader = 'Read Exchange Rates'
 
   static readonly supplyWriter = 'Set Supply'
+  static readonly TPESWriter = 'Set TPES'
 }
 
 class Blockchain {
@@ -105,6 +106,14 @@ class TokenSupply {
   static readonly supply = "Supply"
 }
 
+class TPES {
+
+  static readonly headingTPESWriter = 'Set Supply'
+  static readonly headingTPESReader = 'Read Supply'
+
+  static readonly tPES = "TPES"
+}
+
 
 export { App,
          Paths,
@@ -117,5 +126,6 @@ export { App,
          Reader,
          Transaction,
          ExchangeRates,
-         TokenSupply
+         TokenSupply,
+         TPES
        }

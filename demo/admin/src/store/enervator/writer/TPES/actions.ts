@@ -8,38 +8,36 @@ import { ApplicationState } from '../../../store'
 import { write } from '../../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
-import { ExchangeRateProps, WriterActionTypes} from '../../types'
+import { TPESProps, WriterActionTypes} from '../../types'
 
 import { Transaction } from '../../../../utils/strings'
 
-export const setExchangeRate = (details: ExchangeRateProps) => {
+export const setTPES = (details: TPESProps) => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
-    const exchangeRateContract = state.chainContracts.data.contracts.exchange
+    const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
-    const currency = ethers.utils.formatBytes32String(details.currency)
-    const rate = new Decimal(details.rate)
-    const thisTwo = new Decimal(2)
-    const thisSixtyFour = new Decimal(64)
-    const thisMultiplier = thisTwo.pow(thisSixtyFour)
-    const thisNewBigRate = thisMultiplier.mul(rate)
-
-    //console.log (currency, thisNewBigRate.toString())
-
-    let actionType = WriterActionTypes.RATE_FAILURE
+    let actionType = WriterActionTypes.TPES_FAILURE
     let txData: TxReport = {}
     try {
+
+      const tpes = new Decimal(details.tPES)
+      const thisTwo = new Decimal(2)
+      const thisSixtyFour = new Decimal(64)
+      const thisMultiplier = thisTwo.pow(thisSixtyFour)
+      const thisNewBigTPES = thisMultiplier.mul(tpes)
+
       // set(bytes32 _reference, bytes32 _orgRef, bytes32 _reportingOrgRef, bytes32 _version, bytes32 _generatedTime)
-      const tx = await exchangeRateContract.setRate (currency, thisNewBigRate.toString())
-      const key = tx.hash
+      console.log(details.tPES, tpes, thisNewBigTPES.toHexadecimal())
+      const tx = await enervatorManagerContract.setTPES (thisNewBigTPES.toHexadecimal())
       txData = {
-        [key]: {
+        [tx.hash]: {
           summary: `${Transaction.success}`,
           info: tx
         }
       }
-      actionType = WriterActionTypes.RATE_SUCCESS
+      actionType = WriterActionTypes.TPES_SUCCESS
     } catch (error) {
       txData = {
         [-1]: {
@@ -47,7 +45,7 @@ export const setExchangeRate = (details: ExchangeRateProps) => {
           info: {}
         }
       }
-      console.log('setRate error', error)
+      console.log('setTPES error', error)
     }
 
     dispatch(write({data: {data: txData}})(actionType))

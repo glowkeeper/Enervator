@@ -73,6 +73,19 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 {Paths.supplyWriter}
               </MenuItem>
             </Link>
+            <Link
+              className={classes.link}
+              to={PathConfig.TPESWriter}
+              onClick={() => {
+                props.initialise()
+              }} >
+              <MenuItem>
+                <IconButton aria-label={Paths.TPESWriter}>
+                  <Create />
+                </IconButton>
+                {Paths.TPESWriter}
+              </MenuItem>
+            </Link>
           </MenuList>
         </ExpansionPanelDetails>
       </ExpansionPanel>

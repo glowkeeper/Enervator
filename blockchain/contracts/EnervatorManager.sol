@@ -97,9 +97,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       token.operatorBurn( address(this), _amount, "", "");
     }
 
-    function setNewTPES ( int128  _amount ) external onlyOwner
+    function setTPES ( int128  _amount ) external onlyOwner
     {
-      require( _amount > 0 );
+      require( _amount > 0, "amount needs to be greater than zero!" );
 
       values.oldTPES = values.currentTPES;
       values.currentTPES = _amount;
@@ -108,7 +108,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
     function setPerCapitaEnergy ( int128 _amount ) external onlyOwner
     {
-      require( _amount > 0 );
+      require( _amount > 0, "amount needs to be greater than zero!" );
 
       values.perCapitaEnergy = _amount;
       _setUnitValue();

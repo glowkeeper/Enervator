@@ -108,7 +108,7 @@ contract("Enervator Test", async function ( network )
 
     const TPES = new BN('162494360000', 10)
     const thisTPES = this.multiplier.mul(TPES)
-    await this.manager.setNewTPES(thisTPES)
+    await this.manager.setTPES(thisTPES)
     const currentTPES = await this.manager.getCurrentTPES()
     const oldTPES = await this.manager.getOldTPES()
     const retrievedCurrentTPES = currentTPES.div(this.multiplier)
@@ -130,7 +130,7 @@ contract("Enervator Test", async function ( network )
   });
 
   it('has the correct unit value', async function () {
-    
+
     const pricePerMWh = await this.manager.getPricePerMWh()
     const currentTPES = await this.manager.getCurrentTPES()
     const oldTPES = await this.manager.getOldTPES()

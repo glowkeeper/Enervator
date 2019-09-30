@@ -13,9 +13,11 @@ export const reducer = (state: PayloadProps = initialState, action: ActionProps)
       return data
     }
     case WriterActionTypes.RATE_SUCCESS:
-    case WriterActionTypes.SUPPLY_SUCCESS:    
+    case WriterActionTypes.SUPPLY_SUCCESS:
+    case WriterActionTypes.TPES_SUCCESS:
     case WriterActionTypes.RATE_FAILURE:
     case WriterActionTypes.SUPPLY_FAILURE:
+    case WriterActionTypes.TPES_FAILURE:
     {
       const data = (action.payload.data as PayloadProps)
       return { ...state, ...data }

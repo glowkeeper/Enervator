@@ -31,10 +31,9 @@ export const setExchangeRate = (details: ExchangeRateProps) => {
     let txData: TxReport = {}
     try {
       // set(bytes32 _reference, bytes32 _orgRef, bytes32 _reportingOrgRef, bytes32 _version, bytes32 _generatedTime)
-      const tx = await exchangeRateContract.setRate (currency, thisNewBigRate.toString())
-      const key = tx.hash
+      const tx = await exchangeRateContract.setRate (currency, thisNewBigRate.toHexadecimal())
       txData = {
-        [key]: {
+        [tx.hash]: {
           summary: `${Transaction.success}`,
           info: tx
         }
