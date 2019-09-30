@@ -28,7 +28,7 @@ export const setPerCapitaEnergy = (details: PerCapitaEnergyProps) => {
       const thisMultiplier = thisTwo.pow(thisSixtyFour)
       const thisNewBigPerCapitaEnergy = thisMultiplier.mul(perCapitaEnergy)
 
-      console.log(details.perCapitaEnergy, perCapitaEnergy, thisNewBigPerCapitaEnergy.toHexadecimal())
+      //console.log(details.perCapitaEnergy, perCapitaEnergy, thisNewBigPerCapitaEnergy.toHexadecimal())
       const tx = await enervatorManagerContract.setPerCapitaEnergy (thisNewBigPerCapitaEnergy.toHexadecimal())
       txData = {
         [tx.hash]: {
