@@ -59,7 +59,6 @@ contract("Enervator Test", async function ( network )
   it('has the correct name', async function () {
 
     const name = await this.manager.getTokenName()
-
     assert.equal( name, 'Enervator' )
 
   });
@@ -67,7 +66,6 @@ contract("Enervator Test", async function ( network )
   it('has the correct symbol', async function () {
 
     const symbol = await this.manager.getTokenSymbol()
-
     assert.equal( symbol, 'EOR' )
 
   });
@@ -80,8 +78,20 @@ contract("Enervator Test", async function ( network )
     const supply = await this.manager.getTotalSupply()
     const retrievedNewSupply = supply.div(this.decimilisation)
     const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
-
     assert.equal( thisRetrievedNewSupply, '7727623693' )
+
+  });
+
+  it('Burns correctly', async function () {
+
+    const burnAmount = new BN('1000000000', 10)
+    const shiftedBurn = this.decimilisation.mul( burnAmount )
+    await this.manager.burnTokens(shiftedBurn)
+    const supply = await this.manager.getTotalSupply()
+    const retrievedNewSupply = supply.div(this.decimilisation)
+    const thisRetrievedNewSupply = parseInt(retrievedNewSupply.toString())
+    const supplyShouldEqual = 7727623693 - 1000000000
+    assert.equal( thisRetrievedNewSupply, supplyShouldEqual )
 
   });
 
@@ -90,7 +100,6 @@ contract("Enervator Test", async function ( network )
     const TPES = await this.manager.getCurrentTPES()
     const retrievedTPES = TPES.div(this.multiplier)
     const currentTPES = retrievedTPES.toString()
-
     assert.equal( currentTPES, '162494360000' )
 
   });
@@ -100,15 +109,12 @@ contract("Enervator Test", async function ( network )
     const TPES = new BN('162494360000', 10)
     const thisTPES = this.multiplier.mul(TPES)
     await this.manager.setNewTPES(thisTPES)
-
     const currentTPES = await this.manager.getCurrentTPES()
     const oldTPES = await this.manager.getOldTPES()
-
     const retrievedCurrentTPES = currentTPES.div(this.multiplier)
     const thisCurrentTPES = retrievedCurrentTPES.toString()
     const retrievedOldTPES = oldTPES.div(this.multiplier)
     const thisOldTPES = retrievedOldTPES.toString()
-
     assert.equal( thisOldTPES, '162494360000' )
     assert.equal( thisCurrentTPES, '162494360000' )
 
@@ -119,26 +125,21 @@ contract("Enervator Test", async function ( network )
     const perCapita = await this.manager.getPerCapitaEnergy()
     const retrievedPerCapita = perCapita.div(this.multiplier)
     const thisPerCapita = retrievedPerCapita.toString()
-
     assert.equal( thisPerCapita, '22' )
 
   });
 
   it('has the correct unit value', async function () {
-
-    // 2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
-
+    
     const pricePerMWh = await this.manager.getPricePerMWh()
     const currentTPES = await this.manager.getCurrentTPES()
     const oldTPES = await this.manager.getOldTPES()
     const perCapita = await this.manager.getPerCapitaEnergy()
     const derivedUnitValue = parseFloat( pricePerMWh.toString() ) * ( parseFloat( oldTPES.toString() ) / parseFloat( currentTPES.toString() ) ) / parseFloat( perCapita.toString() )
     const thisDerivedUnitValue = ( derivedUnitValue ).toFixed( 2 )
-
     const unitValue = await this.manager.getUnitValue()
     const retrievedUnitValue = parseFloat(unitValue.toString())
     const thisUnitValue = ( retrievedUnitValue / 2**64 ).toFixed( 2 )
-
     assert.equal( thisDerivedUnitValue, thisUnitValue )
 
   });
@@ -151,15 +152,10 @@ contract("Enervator Test", async function ( network )
     const thisSixtyFour = new DECIMAL(64)
     const thisMultiplier = thisTwo.pow(thisSixtyFour)
     const thisNewBigRate = Math.round(thisMultiplier.mul(rate).toString())
-    //console.log(thisNewBigRate)
-    //const bigRate = new BN( rate, 10 )
-    //const thisRate = this.multiplier.mul(bigRate)
-    //await this.exchanger.setRate( code, thisRate )
     await this.exchanger.setRate( code, thisNewBigRate.toString() )
     const savedRate = BIG(await this.forex.getRate( code ))
     const retrievedRate = savedRate.div(thisMultiplier)
     const thisRetrievedRate = retrievedRate.toFixed(2)
-
     assert.equal( thisRetrievedRate, rate.toString() )
 
   });
@@ -175,7 +171,6 @@ contract("Enervator Test", async function ( network )
     const savedAmount = await this.deposit.getDepositedAmount( depositRef )
     const retrievedAmount = savedAmount.div( this.multiplier )
     const thisRetrievedAmount = retrievedAmount.toString()
-
     assert.equal( thisRetrievedAmount, amount )
 
   });
@@ -188,7 +183,6 @@ contract("Enervator Test", async function ( network )
     await this.exchanger.buy( '0xc220728701829A7351Fa3e16b11Aaf223543AAc3', buyRef, depositRef, amount )
     const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
     const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
-
     assert.equal( newDepositedAmount, 0 )
     assert.equal( canWithdraw, false )
 

@@ -35,7 +35,7 @@ export const setSupply = (details: SupplyProps) => {
           const burnAmount =  ethers.utils.bigNumberify(amount)
           const decimilisedBurnAmount = ethers.constants.WeiPerEther.mul( burnAmount )
 
-          console.log(currentSupply, details.supply, amount, decimilisedBurnAmount )
+          //console.log(currentSupply, details.supply, amount, decimilisedBurnAmount )
 
           const tx = await enervatorManagerContract.burnTokens (decimilisedBurnAmount)
           txData = {
@@ -50,7 +50,7 @@ export const setSupply = (details: SupplyProps) => {
           const addAmount =  ethers.utils.bigNumberify(amount)
           const decimilisedAddAmount = ethers.constants.WeiPerEther.mul( addAmount )
 
-          console.log(currentSupply, details.supply, amount, decimilisedAddAmount )
+          //console.log(currentSupply, details.supply, amount, decimilisedAddAmount )
 
           const tx = await enervatorManagerContract.addTokens (decimilisedAddAmount)
           txData = {

@@ -48,6 +48,7 @@ const Sider = (props: DispatchProps = defaultProps) => {
         <ExpansionPanelDetails className={classes.siderMenu}>
           <MenuList>
             <Link
+              className={classes.link}
               to={PathConfig.exchangeRateWriter}
               onClick={() => {
                 props.initialise()
@@ -60,6 +61,7 @@ const Sider = (props: DispatchProps = defaultProps) => {
               </MenuItem>
             </Link>
             <Link
+              className={classes.link}
               to={PathConfig.supplyWriter}
               onClick={() => {
                 props.initialise()
@@ -82,6 +84,7 @@ const Sider = (props: DispatchProps = defaultProps) => {
         <ExpansionPanelDetails className={classes.siderMenu}>
           <MenuList>
             <Link
+              className={classes.link}
               to={PathConfig.exchangeRatesReader}
               onClick={() => {
                 props.initialise()

@@ -83,16 +83,15 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
     function addTokens ( uint256 _amount ) external onlyOwner
     {
-      require( _amount > 0 );
+      require( _amount > 0, "need to add more than zero tokens!" );
       require( address(token) != address(0), "zero address for token!" );
 
       token.addSupply( _amount );
-
     }
 
     function burnTokens ( uint256 _amount ) external onlyOwner
     {
-      require( _amount > 0 );
+      require( _amount > 0, "need to burn more than zero tokens!" );
       require( address(token) != address(0), "zero address for token!" );
 
       token.operatorBurn( address(this), _amount, "", "");
