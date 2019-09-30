@@ -54,9 +54,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.exchangeRateWriter}>
-                  <Create />
-                </IconButton>
                 {Paths.exchangeRateWriter}
               </MenuItem>
             </Link>
@@ -67,9 +64,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.supplyWriter}>
-                  <Create />
-                </IconButton>
                 {Paths.supplyWriter}
               </MenuItem>
             </Link>
@@ -80,9 +74,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.TPESWriter}>
-                  <Create />
-                </IconButton>
                 {Paths.TPESWriter}
               </MenuItem>
             </Link>
@@ -93,9 +84,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.perCapitaEnergyWriter}>
-                  <Create />
-                </IconButton>
                 {Paths.perCapitaEnergyWriter}
               </MenuItem>
             </Link>
@@ -116,9 +104,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.exchangeRatesReader}>
-                  <List />
-                </IconButton>
                 {Paths.exchangeRatesReader}
               </MenuItem>
             </Link>
@@ -129,9 +114,6 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.enervatorReportReader}>
-                  <List />
-                </IconButton>
                 {Paths.enervatorReportReader}
               </MenuItem>
             </Link>
