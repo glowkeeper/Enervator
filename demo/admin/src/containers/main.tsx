@@ -54,7 +54,7 @@ export const Main = () => {
           <Grid container spacing={0}>
             <Grid item xs={2}>
               <Paper className={classes.author}>
-                <Markdown escapeHtml={false} source={App.author} />
+                <Markdown className={classes.link} source={App.author} />
               </Paper>
             </Grid>
             <Grid item xs={8}>
@@ -64,7 +64,7 @@ export const Main = () => {
             </Grid>
             <Grid item xs={2}>
               <Paper className={classes.copyright}>
-                <Markdown escapeHtml={false} source={App.copyright} />
+                <Markdown source={App.copyright} />
               </Paper>
             </Grid>
           </Grid>

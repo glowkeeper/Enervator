@@ -102,8 +102,7 @@ const useStyles = makeStyles({
   },
   link: {
     underline: 'none',
-    color: '#ffffff',
-    variant: 'inherit',
+    color: '#ffffff'
   },
   header: {
     padding: theme.spacing(2),
