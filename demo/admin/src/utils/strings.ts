@@ -28,6 +28,7 @@ class Paths {
 
   static readonly supplyWriter = 'Set Supply'
   static readonly TPESWriter = 'Set TPES'
+  static readonly PerCapitaEnergyWriter = 'Set Per Capita Energy'
 }
 
 class Blockchain {
@@ -115,6 +116,14 @@ class TPES {
 }
 
 
+class PerCapitaEnergy {
+
+  static readonly headingPerCapitaEnergyWriter = 'Set Per Capita Energy'
+  static readonly headingPerCapitaEnergyeader = 'Read Per Capita Energy'
+
+  static readonly perCapitaEnergy = "Per Capita Energy"
+}
+
 export { App,
          Paths,
          Blockchain,
@@ -127,5 +136,6 @@ export { App,
          Transaction,
          ExchangeRates,
          TokenSupply,
-         TPES
+         TPES,
+         PerCapitaEnergy
        }

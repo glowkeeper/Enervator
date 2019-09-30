@@ -8,35 +8,35 @@ import { ApplicationState } from '../../../store'
 import { write } from '../../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
-import { TPESProps, WriterActionTypes} from '../../types'
+import { PerCapitaEnergyProps, WriterActionTypes} from '../../types'
 
 import { Transaction } from '../../../../utils/strings'
 
-export const setTPES = (details: TPESProps) => {
+export const setPerCapitaEnergy = (details: PerCapitaEnergyProps) => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
     const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
-    let actionType = WriterActionTypes.TPES_FAILURE
+    let actionType = WriterActionTypes.CAPITA_FAILURE
     let txData: TxReport = {}
     try {
 
-      const tpes = new Decimal(details.tPES)
+      const perCapitaEnergy = new Decimal(details.perCapitaEnergy)
       const thisTwo = new Decimal(2)
       const thisSixtyFour = new Decimal(64)
       const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisNewBigTPES = thisMultiplier.mul(tpes)
+      const thisNewBigPerCapitaEnergy = thisMultiplier.mul(perCapitaEnergy)
 
-      //console.log(details.tPES, tpes, thisNewBigTPES.toHexadecimal())
-      const tx = await enervatorManagerContract.setTPES (thisNewBigTPES.toHexadecimal())
+      console.log(details.perCapitaEnergy, perCapitaEnergy, thisNewBigPerCapitaEnergy.toHexadecimal())
+      const tx = await enervatorManagerContract.setPerCapitaEnergy (thisNewBigPerCapitaEnergy.toHexadecimal())
       txData = {
         [tx.hash]: {
           summary: `${Transaction.success}`,
           info: tx
         }
       }
-      actionType = WriterActionTypes.TPES_SUCCESS
+      actionType = WriterActionTypes.CAPITA_SUCCESS
     } catch (error) {
       txData = {
         [-1]: {

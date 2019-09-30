@@ -81,7 +81,9 @@ export const enum WriterActionTypes {
   SUPPLY_SUCCESS = '@@WriterActionTypes/SUPPLY_SUCCESS',
   SUPPLY_FAILURE = '@@WriterActionTypes/SUPPLY_FAILURE',
   TPES_SUCCESS = '@@WriterActionTypes/TPES_SUCCESS',
-  TPES_FAILURE = '@@WriterActionTypes/TPES_FAILURE'
+  TPES_FAILURE = '@@WriterActionTypes/TPES_FAILURE',
+  CAPITA_SUCCESS = '@@WriterActionTypes/CAPITA_SUCCESS',
+  CAPITA_FAILURE = '@@WriterActionTypes/CAPITA_FAILURE'
 }
 
 export const enum ReaderActionTypes {
@@ -91,5 +93,7 @@ export const enum ReaderActionTypes {
   SUPPLY_SUCCESS = '@@ReaderActionTypes/SUPPLY_SUCCESS',
   SUPPLY_FAILURE = '@@ReaderActionTypes/SUPPLY_FAILURE',
   TPES_SUCCESS = '@@ReaderActionTypes/TPES_SUCCESS',
-  TPES_FAILURE = '@@ReaderActionTypes/TPES_FAILURE'
+  TPES_FAILURE = '@@ReaderActionTypes/TPES_FAILURE',
+  CAPITA_SUCCESS = '@@ReaderActionTypes/CAPITA_SUCCESS',
+  CAPITA_FAILURE = '@@ReaderActionTypes/CAPITA_FAILURE'
 }

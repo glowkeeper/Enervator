@@ -12,6 +12,7 @@ import { ExchangeRatesReader } from './pages/enervator/reader/exchangeRates'
 
 import { SupplyWriter } from './pages/enervator/writer/supply'
 import { TPESWriter } from './pages/enervator/writer/tPES'
+import { PerCapitaEnergyWriter } from './pages/enervator/writer/perCapitaEnergy'
 
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
@@ -96,6 +97,15 @@ class AppContent extends React.Component {
           path={PathConfig.TPESWriter}
           render={() => <TPESWriter />}
         />
+
+        /* Per Capita Energy */
+
+        <Route
+          name={Paths.PerCapitaEnergyWriter}
+          path={PathConfig.PerCapitaEnergyWriter}
+          render={() => <PerCapitaEnergyWriter />}
+        />
+
 
 
       </Switch>
