@@ -11,7 +11,7 @@ class App {
   static readonly version='0.0.1'
 
   static headingDepositor = 'Deposit FIAT'
-  static headingExchanger = 'Read Enervator Data'
+  static headingExchanger = `Read ${App.token} Enervator Data`
 }
 
 class Paths {
@@ -22,9 +22,6 @@ class Paths {
   static readonly about = 'About'
   static readonly overview = 'Overview'
   static readonly help = 'Help'
-
-  static readonly deposit = 'Deposit FIAT cash'
-  static readonly exchanger = `Exchange deposits for ${App.token}`
 }
 
 class Blockchain {
@@ -57,21 +54,7 @@ class Help {
 
   static readonly heading = `${App.title} Help`
 
-  static readonly info = `**${App.title}** allows users to deposit FIAT currencies, whereby they can exchange them for **${App.token}**.<br /><br />To deposit FIAT, click on the _${Paths.deposit}_ link. To exchange deposits for **${App.token}**, click on the _${Paths.exchanger}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
-}
-
-class Writer {
-
-  static heading = `${App.title} Writer`
-
-  static info = `The _${App.headingWriter}_ section lets you write **${App.token}** records.`
-}
-
-class Reader {
-
-  static heading = `${App.title} Reader`
-
-  static info = `The _${App.headingReader}_ section lets you read **${App.token}** records.`
+  static readonly info = `**${App.title}** allows users to deposit FIAT currencies, whereby they can exchange them for **${App.token}**.<br /><br />To deposit FIAT, click on the _${App.headingDepositor}_ link in the sidebar. To exchange deposits for **${App.token}**, click on the _${App.headingExchanger}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Transaction {
@@ -92,7 +75,5 @@ export { App,
          About,
          Overview,
          Help,
-         Writer,
-         Reader,
          Transaction
        }

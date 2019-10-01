@@ -21,18 +21,18 @@ const Main = () => {
       <Paper className={classes.root}>
         <Paper className={classes.header}>
           <Grid container>
-            <Grid item xs={12} sm={1}>
-              <img className={classes.logo} src={Logo}/>
-            </Grid>
+            <Grid item xs={12} sm={2}>
+              <Paper className={classes.title}>
+                <h1>{App.title}</h1>
+              </Paper>
+            </Grid>            
             <Grid item xs={12} sm={9}>
               <Paper className={classes.appBar}>
                 <ApplicationBar />
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={2}>
-              <Paper className={classes.title}>
-                <h1>{App.title}</h1>
-              </Paper>
+            <Grid item xs={12} sm={1}>
+              <img className={classes.logo} src={Logo}/>
             </Grid>
           </Grid>
         </Paper>

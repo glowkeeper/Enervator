@@ -64,20 +64,6 @@ class Help {
   static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${App.headingWriter}_ link in the sidebar, and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${App.headingReader}_ link in the sidebar.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
-class Writer {
-
-  static readonly heading = `${App.title} Writer`
-
-  static readonly info = `The _${App.headingWriter}_ section lets you write **${App.token}** records.`
-}
-
-class Reader {
-
-  static readonly heading = `${App.title} Reader`
-
-  static readonly info = `The _${App.headingReader}_ section lets you read **${App.token}** records.`
-}
-
 class Transaction {
 
   static readonly heading = "Transaction Details"
@@ -137,8 +123,6 @@ export { App,
          About,
          Overview,
          Help,
-         Writer,
-         Reader,
          Transaction,
          ExchangeRates,
          TokenSupply,

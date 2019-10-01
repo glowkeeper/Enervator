@@ -21,8 +21,6 @@ import { reducer as infoReducer } from './info/reducer'
 import { reducer as writerReducer } from './enervator/writer/reducer'
 import { reducer as readerReducer } from './enervator/reader/reducer'
 
-import { About, Help, Home, Reader, Writer, Overview } from '../utils/strings'
-
 const initialState = (window as any).initialReduxState
 
 export interface ApplicationState {

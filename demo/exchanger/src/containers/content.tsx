@@ -47,18 +47,6 @@ class AppContent extends React.Component {
           render={() => <Info type={InfoTypes.HELP} />}
         />
 
-        <Route
-          name={Paths.writer}
-          path={PathConfig.writer}
-          render={() => <Info type={InfoTypes.WRITE} />}
-        />
-
-        <Route
-          name={Paths.reader}
-          path={PathConfig.reader}
-          render={() => <Info type={InfoTypes.READ} />}
-        />
-
       </Switch>
     )
   }
