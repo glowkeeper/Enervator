@@ -2,7 +2,6 @@ import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
 import { BigNumber } from 'bignumber.js'
-import { Decimal } from 'decimal.js'
 
 import { ApplicationState } from '../../../../store'
 

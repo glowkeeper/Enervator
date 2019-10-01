@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { Decimal } from 'decimal.js'
+import { BigNumber } from 'bignumber.js'
 
 import { ApplicationState } from '../../../store'
 
@@ -22,14 +22,16 @@ export const setTPES = (details: TPESProps) => {
     let txData: TxReport = {}
     try {
 
-      const tpes = new Decimal(details.tPES)
-      const thisTwo = new Decimal(2)
-      const thisSixtyFour = new Decimal(64)
+      const thisTwo = new BigNumber(2)
+      const thisSixtyFour = new BigNumber(64)
       const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisNewBigTPES = thisMultiplier.mul(tpes)
+
+      const tpes = new BigNumber(details.tPES)
+      const thisNewBigTPES = thisMultiplier.times(tpes)
+      const tPESString = "0x" + thisNewBigTPES.toString(16)
 
       //console.log(details.tPES, tpes, thisNewBigTPES.toHexadecimal())
-      const tx = await enervatorManagerContract.setTPES (thisNewBigTPES.toHexadecimal())
+      const tx = await enervatorManagerContract.setTPES (tPESString)
       txData = {
         [tx.hash]: {
           summary: `${Transaction.success}`,

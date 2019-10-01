@@ -30,12 +30,12 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0xCc7805E2f6F71B02Ff01a54aa05d2B01CeB69526"
-  //static enervatorAddress = "0x1423b9AB2e3A61d74E9993BEfD556279E5Dd1425"
-  static depositAddress = "0xEB10B38e8e61663e298f756204624661c7366d02"
-  static forexAddress = "0xdd93B3D6D9e9c8141576847e2EFC72645BDeE706"
-  static buyAddress = "0xdd3f941e63CE1de0a1491CB463c6D2EB03897796"
-  static exchangerAddress = "0x8F3a2D6AE06942cbb6Fdb5db13147A0cCbBf5045"
+  static enervatorManagerAddress = "0xE47f088EcDf6cA4b62Fd4eabB16851f74a04EE90"
+  //static enervatorAddress = "0x79AF8f052039d3d92FA3d6DC091Ef1fbDA42c014"
+  static depositAddress = "0xD08B5F0AD41f5971840455EC04c51122a1a59161"
+  static forexAddress = "0xf2293b059aAEA567e2095b55b13c143256F99061"
+  static buyAddress = "0x8e260d916838b6b1a350f62420f58BaF67190F3f"
+  static exchangerAddress = "0xed3e4D8727c3cC8c512DF5Ba0B76815877722DcB"
 
   static enervatorManagerABI = [
 
