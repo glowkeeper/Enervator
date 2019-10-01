@@ -20,8 +20,6 @@ class Paths {
   static readonly about = 'About'
   static readonly overview = 'Overview'
   static readonly help = 'Help'
-  static readonly writer = 'Set Parameters'
-  static readonly reader = 'Read Parameters'
 
   static readonly exchangeRateWriter = 'Set Exchange Rates'
   static readonly exchangeRatesReader = 'Read Exchange Rates'
@@ -63,7 +61,7 @@ class Help {
 
   static readonly heading = `${App.title} Help`
 
-  static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${Paths.writer}_ link and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${Paths.reader}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${App.headingWriter}_ link in the sidebar, and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${App.headingReader}_ link in the sidebar.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Writer {

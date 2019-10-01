@@ -16,9 +16,6 @@ import IconButton from '@material-ui/core/IconButton'
 import Create from '@material-ui/icons/Create'
 import List from '@material-ui/icons/List'
 
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../styles/theme'
-
 import { Paths, App } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 

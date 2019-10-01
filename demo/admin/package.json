@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glowkeeper/StandardCoin.git"
+    "url": "git+https://github.com/glowkeeper/Enervator.git"
   },
   "scripts": {
     "compile": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development",

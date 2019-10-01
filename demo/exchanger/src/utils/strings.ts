@@ -3,15 +3,15 @@ import { Paths as configPaths } from './config'
 class App {
 
   static readonly token='Enervator'
-  static readonly title='Enervator Admin'
+  static readonly title='Enerchanger'
   static readonly tagline='Using Blockchain Technology to Incentivise Energy Efficiency'
   static readonly copyright='© 2019'
   static readonly place ='[University of Sussex](https://www.sussex.ac.uk/)'
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
-  static headingWriter = 'Write Enervator Data'
-  static headingReader = 'Read Enervator Data'
+  static headingDepositor = 'Deposit FIAT'
+  static headingExchanger = 'Read Enervator Data'
 }
 
 class Paths {
@@ -22,8 +22,9 @@ class Paths {
   static readonly about = 'About'
   static readonly overview = 'Overview'
   static readonly help = 'Help'
-  static readonly writer = 'Write Records'
-  static readonly reader = 'Read Records'
+
+  static readonly deposit = 'Deposit FIAT cash'
+  static readonly exchanger = `Exchange deposits for ${App.token}`
 }
 
 class Blockchain {
@@ -33,30 +34,30 @@ class Blockchain {
 
 class Home {
 
-  static heading = `${App.title} Home`
+  static readonly heading = `${App.title} Home`
 
-  static info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [Overview](#${configPaths.overview}) section describes the origins of **${App.token}**.<br /><br />The [Help](#${configPaths.help}) section gives brief instructions as to how to use **${App.title}**.<br /><br />The [About](#${configPaths.about}) section gives version, author and copyright information.`
+  static readonly info = `Use **${App.title}** to exchange FIAT cash for **${App.token}**.<br /><br />The _${Paths.help}_ link, above, gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
 }
 
 class About {
 
-  static heading = `About ${App.title}`
+  static readonly heading = `About ${App.title}`
 
-  static info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place} ${App.copyright}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
+  static readonly info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
 }
 
 class Overview {
 
-  static heading = `Overview of ${App.title}`
+  static readonly heading = `Overview of ${App.title}`
 
-  static info = `**${App.token}** is the result of ${App.author}\'s PhD at the ${App.place}.`
+  static readonly info = `**${App.token}** is the result of ${App.author}\'s PhD at the ${App.place}.`
 }
 
 class Help {
 
-  static heading = `${App.title} Help`
+  static readonly heading = `${App.title} Help`
 
-  static info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to read and write **${App.token}** records.<br /><br />To update **${App.token}** parameters, click on the [Write Records](#${configPaths.writer}) link and select the parameter you wish to update. To read **${App.token}** records, click on the [Read Records](#${configPaths.reader}) link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static readonly info = `**${App.title}** allows users to deposit FIAT currencies, whereby they can exchange them for **${App.token}**.<br /><br />To deposit FIAT, click on the _${Paths.deposit}_ link. To exchange deposits for **${App.token}**, click on the _${Paths.exchanger}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Writer {

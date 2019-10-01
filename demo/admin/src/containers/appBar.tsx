@@ -43,22 +43,6 @@ export const ApplicationBar = () => {
               {Paths.blockchain}
             </MenuItem>
           </Link>
-          <Link className={classes.link} to={PathConfig.writer}>
-            <MenuItem>
-              <IconButton aria-label={Paths.writer}>
-                <Create />
-              </IconButton>
-              {Paths.writer}
-            </MenuItem>
-          </Link>
-          <Link className={classes.link} to={PathConfig.reader}>
-            <MenuItem>
-              <IconButton aria-label={Paths.reader}>
-                <List />
-              </IconButton>
-              {Paths.reader}
-            </MenuItem>
-          </Link>
           <Link className={classes.link} to={PathConfig.overview}>
             <MenuItem>
               <IconButton aria-label={Paths.overview}>

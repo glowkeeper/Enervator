@@ -5,8 +5,6 @@ class Paths {
   static readonly about = '/about'
   static readonly overview = '/overview'
   static readonly help = '/help'
-  static readonly writer = '/write'
-  static readonly reader = '/read'
 
   static readonly exchangeRateWriter = '/set-exchange-rate'
   static readonly exchangeRatesReader = '/read-exchange-rates'
