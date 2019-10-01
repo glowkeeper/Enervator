@@ -40,7 +40,7 @@ class Home {
 
   static readonly heading = `${App.title} Home`
 
-  static readonly info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.help}_ link, above, gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
+  static readonly info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.blockchain}_ link, above, gives details of the blockchain in use.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
 }
 
 class About {

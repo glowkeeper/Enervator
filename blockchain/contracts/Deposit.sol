@@ -3,6 +3,7 @@ pragma experimental ABIEncoderV2;
 
 import "./IDeposit.sol";
 import "./Strings.sol";
+import "./ABDKMath64x64.sol";
 
 contract Deposit is IDeposit {
 
@@ -80,7 +81,7 @@ contract Deposit is IDeposit {
     }
 
     deposits[_depositRef].account = _depositor;
-		deposits[_depositRef].amount += _amount;
+		deposits[_depositRef].amount = ABDKMath64x64.add(deposits[_depositRef].amount, _amount);
     deposits[_depositRef].code = _code;
     deposits[_depositRef].canWithdraw = true; // set to true for now - further down the line, this can be used as a guard...
 
@@ -97,7 +98,8 @@ contract Deposit is IDeposit {
     require ( _amount > 0, "no withdraw to make!" );
     require ( _amount <= deposits[_depositRef].amount, "withdrawd too much!" );
 
-    deposits[_depositRef].amount -= _amount;
+
+    deposits[_depositRef].amount = ABDKMath64x64.sub(deposits[_depositRef].amount, _amount);
     if ( deposits[_depositRef].amount == 0 )
     {
       deposits[_depositRef].canWithdraw = false;

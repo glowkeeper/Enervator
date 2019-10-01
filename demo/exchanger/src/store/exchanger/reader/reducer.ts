@@ -12,6 +12,14 @@ export const reducer = (state: PayloadProps = initialState, action: ActionProps)
       const data = action.payload.data as PayloadProps
       return data
     }
+    case ReaderActionTypes.DEPOSIT_SUCCESS:
+    case ReaderActionTypes.BUY_SUCCESS:
+    {
+      const data = (action.payload.data as PayloadProps)
+      return {...state, ...data}
+    }
+    case ReaderActionTypes.DEPOSIT_FAILURE:
+    case ReaderActionTypes.BUY_FAILURE:
     default:
       return state
   }

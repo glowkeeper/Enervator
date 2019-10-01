@@ -11,8 +11,6 @@ import { ActionProps } from '../store/types'
 import { useStyles } from '../styles/theme'
 
 import { initialise } from '../store/exchanger/actions'
-import { setKey } from '../store/helpers/keys/actions'
-import { Keys, KeyTypes } from '../store/helpers/keys/types'
 
 import IconButton from '@material-ui/core/IconButton'
 import Create from '@material-ui/icons/Create'

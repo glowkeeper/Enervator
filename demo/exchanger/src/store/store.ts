@@ -3,7 +3,8 @@ import ReduxThunk, { ThunkDispatch } from 'redux-thunk'
 
 import { ActionProps, PayloadProps, TxProps } from './types'
 
-import { KeyProps } from './helpers/keys/types'
+import { BuyRefProps } from './helpers/refs/types'
+import { DepositRefProps } from './helpers/refs/types'
 import { FormProps } from './helpers/forms/types'
 
 import { InfoPageProps } from './info/types'
@@ -11,7 +12,8 @@ import { ChainDataProps } from  './blockchain/data/types'
 import { AccountProps } from  './blockchain/account/types'
 import { ContractProps } from  './blockchain/contracts/types'
 
-import { reducer as keyReducer } from './helpers/keys/reducer'
+import { reducer as buyRefReducer } from './helpers/refs/buy/reducer'
+import { reducer as depositRefReducer } from './helpers/refs/deposit/reducer'
 import { reducer as formReducer } from './helpers/forms/reducer'
 
 import { reducer as chainDataReducer } from './blockchain/data/reducer'
@@ -28,7 +30,8 @@ export interface ApplicationState {
   chainAccount: AccountProps
   chainContracts: ContractProps
   info: InfoPageProps
-  keys: KeyProps
+  buyRefs: BuyRefProps
+  depositRefs: DepositRefProps
   forms: FormProps
   writer: PayloadProps
   reader: PayloadProps
@@ -39,7 +42,8 @@ export const rootReducer: Reducer = combineReducers({
   chainAccount: chainAccountReducer,
   chainContracts: chainContractReducer,
   info: infoReducer,
-  keys: keyReducer,
+  buyRefs: buyRefReducer,
+  depositRefs: depositRefReducer,
   forms: formReducer,
   writer: writerReducer,
   reader: readerReducer

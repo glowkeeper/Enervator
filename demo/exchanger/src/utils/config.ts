@@ -7,6 +7,7 @@ class Paths {
   static readonly help = '/help'
 
   static readonly deposit = '/deposit'
+  static readonly buy = '/buy'
 }
 
 class Blockchain {
@@ -21,12 +22,12 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0x9B86571c23c0d0F5d9bE2197F174DB58Ca60dA4d"
-  //static enervatorAddress = "0x8513b4317E08d697B59c5aDAa871f6315ACdC59E"
-  static depositAddress = "0x17b4aDb94f178e9C594228700Fe230adeCe28fd9"
-  static forexAddress = "0xa0A43A0892B143362bEB0Db02D97A0997de331F5"
-  static buyAddress = "0x0b673B65e59d5cB6a3000501DD7B4FaaC676692c"
-  static exchangerAddress = "0x1Aaaf35b7D11f662E3BC26373DADBC475B890813"
+  static enervatorManagerAddress = "0x492d641AEf25Fa2Ca768504D444361CAF29Fd59d"
+  static enervatorAddress = "0xBbaF76E70063e65c49BCE84212817f117AeDeac9"
+  static depositAddress = "0x081eE3dEC3C8d5d5daD5D2F51D77745C1De3b8Ed"
+  static forexAddress = "0xEe877231D23C19eA59d942140fF8cff1B94421F0"
+  static buyAddress = "0x0c0dA685D5E9FF2864df3248FB955910918b000A"
+  static exchangerAddress = "0x1c30798c737422d15f500d6BA916C5FF8dc7514E"
 
   static enervatorManagerABI = [
 
