@@ -9,12 +9,8 @@ import { ActionProps } from '../../store/types'
 
 import { Field, ErrorMessage, FieldProps } from 'formik'
 import { Select } from "material-ui-formik-components"
-//import MuiSelect from '@material-ui/core/Select'
 
-import { setRef } from '../../store/helpers/keys/actions'
-import { getDepositRefs } from '../../store/exchanger/reader/deposit/actions'
-
-import { Keys, KeyTypes } from '../../store/helpers/keys/types'
+import { getDepositRefs } from '../../store/helpers/refs/deposit/actions'
 
 interface DepositFormProps {
   setValue: Function
@@ -28,7 +24,6 @@ interface DepositDataProps {
 
 interface DepositDispatchProps {
   getDepositRefs: () => void
-  setDepositKey: (depositRef: string) => void
 }
 
 type DepositPickerProps = DepositFormProps & DepositDataProps & DepositDispatchProps
@@ -61,7 +56,6 @@ class Deposit extends React.Component<DepositPickerProps> {
           label={this.props.label}
           component={Select}
           onChange={(ev: any) => {
-            this.props.setDepositKey(ev.target.value)
             this.props.setValue(this.props.name, ev.target.value)
           }}
           options={depositRefs}
@@ -74,14 +68,13 @@ class Deposit extends React.Component<DepositPickerProps> {
 const mapStateToProps = (state: ApplicationState): DepositDataProps => {
   //console.log(state.orgReader)
   return {
-    depositRefs: state.depositPicker.data as Array<string>
+    depositRefs: state.depositRefs.data as Array<string>
   }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): DepositDispatchProps => {
   return {
-    getDepositRefs: () => dispatch(getDepositRefs()),
-    setDepositKey: (depositRef: string) => dispatch(setKey({key: depositRef, keyType: KeyTypes.DEPOSIT})),
+    getDepositRefs: () => dispatch(getDepositRefs())
   }
 }
 

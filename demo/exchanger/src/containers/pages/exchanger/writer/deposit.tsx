@@ -23,17 +23,6 @@ import { TransactionHelper } from '../../../io/transactionHelper'
 import { Deposit as DepositStrings } from '../../../../utils/strings'
 import { Helpers } from '../../../../utils/config'
 
-/* deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) */
-/*
-export interface DepositProps
-{
-  address: string
-  depositRef: string
-  currency: string
-  amount: number
-}
-*/
-
 const depositSchema = Yup.object().shape({
   currency: Yup
     .string()

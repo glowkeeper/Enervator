@@ -6,15 +6,13 @@ import { write } from '../../actions'
 import { ActionProps, PayloadProps } from '../../types'
 import { RefActionTypes, DepositRefProps, DepositRefData } from '../types'
 
-interface DepositProps {
-  account: string
-}
 
-export const getDepositRefs = ( props: DepositProps ) => {
+export const getDepositRefs = () => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
     const depositContract = state.chainContracts.data.contracts.deposit
+    const account = state.chainAccount.data.account
 
     let refsData: DepositRefData {
       refs: []
@@ -25,11 +23,11 @@ export const getDepositRefs = ( props: DepositProps ) => {
     try {
 
       let ref = ""
-      const num = await depositContract.getNumDeposits( props.account )
+      const num = await depositContract.getNumDeposits( account )
       const numDeposits = num.toNumber()
       for (let i = 0; i < numDeposits; i++)
       {
-        ref = await depositContract.getDepositReference( props.account, i.toString() )
+        ref = await depositContract.getDepositReference( account, i.toString() )
         refsData.refs.push(ref)
       }
 
