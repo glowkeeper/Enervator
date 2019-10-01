@@ -8,7 +8,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ApplicationState } from '../store'
 import { ActionProps } from '../store/types'
 
-import { useStyles } from '../styles/theme';
+import { useStyles } from '../styles/theme'
 
 import { initialise } from '../store/enervator/actions'
 

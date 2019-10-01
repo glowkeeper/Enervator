@@ -80,7 +80,7 @@ contract Deposit is IDeposit {
     }
 
     deposits[_depositRef].account = _depositor;
-		deposits[_depositRef].amount = _amount;
+		deposits[_depositRef].amount += _amount;
     deposits[_depositRef].code = _code;
     deposits[_depositRef].canWithdraw = true; // set to true for now - further down the line, this can be used as a guard...
 
@@ -107,7 +107,6 @@ contract Deposit is IDeposit {
     emit Withdrawn( epochTime, _depositor, _depositRef, _code, _amount );
 
   }
-
 
 	function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw ) external
   {

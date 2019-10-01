@@ -8,9 +8,8 @@ import { ApplicationState } from '../../store'
 import { ActionProps, TxReport } from '../../store/types'
 import { Keys, KeyTypes } from '../../store/helpers/keys/types'
 
-import { initialise  as initialiseRead } from '../../store/enervator/reader/actions'
-import { initialise as txInit } from '../../store/enervator/writer/actions'
-//import { initialise as readDataInit } from '../../store/IATI/IATIReader/actions'
+import { initialise  as initialiseRead } from '../../store/exchanger/reader/actions'
+import { initialise as txInit } from '../../store/exchanger/writer/actions'
 import { setKey } from '../../store/helpers/keys/actions'
 
 import { Transaction } from '../../utils/strings'

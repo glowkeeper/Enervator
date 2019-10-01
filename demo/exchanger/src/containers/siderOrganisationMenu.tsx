@@ -8,16 +8,15 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ApplicationState } from '../store'
 import { ActionProps } from '../store/types'
 
-import { initialise } from '../store/enervator/actions'
+import { useStyles } from '../styles/theme'
+
+import { initialise } from '../store/exchanger/actions'
 import { setKey } from '../store/helpers/keys/actions'
 import { Keys, KeyTypes } from '../store/helpers/keys/types'
 
 import IconButton from '@material-ui/core/IconButton'
 import Create from '@material-ui/icons/Create'
 import List from '@material-ui/icons/List'
-
-//import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
-//import { withTheme, styles } from '../styles/theme'
 
 import { Paths, App } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
@@ -29,51 +28,44 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 interface DispatchProps {
   initialise: () => void
-  setKey: (keyProps: Keys) => void
 }
 
-class Sider extends React.Component<DispatchProps> {
+const defaultProps: DispatchProps = {
+  initialise: () => {}
+}
 
-  public static defaultProps = {
-    initialise: () => {},
-    setKey: (keyProps: Keys) => {}
-  }
+const Sider = (props: DispatchProps = defaultProps) => {
 
-  render() {
+  const classes = useStyles()
 
-    return (
-      <div>
-      <ExpansionPanel>
+  return (
+    <div>
+      <ExpansionPanel className={classes.siderMenu}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <h4>{App.headingDepositor}</h4>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.siderMenu}>
           <MenuList>
             <Link
-              to={PathConfig.home}
+              className={classes.link}
+              to={PathConfig.deposit}
               onClick={() => {
-                this.props.initialise()
-                this.props.setKey({key: '', keyType: KeyTypes.ACTIVITIES})
+                props.initialise()
               }} >
               <MenuItem>
-                <IconButton aria-label={Paths.home}>
-                  <Create />
-                </IconButton>
-                {Paths.home}
+                {Paths.deposit}
               </MenuItem>
             </Link>
           </MenuList>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): DispatchProps => {
   return {
-    initialise: () => dispatch(initialise()),
-    setKey: (keyProps: Keys) => dispatch(setKey(keyProps))
+    initialise: () => dispatch(initialise())
   }
 }
 

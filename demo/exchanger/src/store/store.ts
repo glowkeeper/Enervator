@@ -18,8 +18,8 @@ import { reducer as chainDataReducer } from './blockchain/data/reducer'
 import { reducer as chainAccountReducer } from './blockchain/account/reducer'
 import { reducer as chainContractReducer } from './blockchain/contracts/reducer'
 import { reducer as infoReducer } from './info/reducer'
-import { reducer as writerReducer } from './enervator/writer/reducer'
-import { reducer as readerReducer } from './enervator/reader/reducer'
+import { reducer as writerReducer } from './exchanger/writer/reducer'
+import { reducer as readerReducer } from './exchanger/reader/reducer'
 
 const initialState = (window as any).initialReduxState
 

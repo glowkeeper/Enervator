@@ -5,8 +5,8 @@ class Paths {
   static readonly about = '/about'
   static readonly overview = '/overview'
   static readonly help = '/help'
-  static readonly writer = '/write'
-  static readonly reader = '/read'
+
+  static readonly deposit = '/deposit'
 }
 
 class Blockchain {
@@ -21,23 +21,28 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0x177E971581e17d783bF9f4e9b49729Dd08755091"
-  static depositAddress = "0xE6a0f4838c27024A41e4DAC39354Ad735Ef71E82"
-  static forexAddress = "0xFDCF04eEA8F126C6CB32a32237AaB0f47b661edF"
-  static buyAddress = "0xEb6B45ea7f7Ab87ad14bD5a850138afFBba3114f"
-  static exchangerAddress = "0xe0c591987bc980aC688886E7A34084E282951E9a"
+  static enervatorManagerAddress = "0x9B86571c23c0d0F5d9bE2197F174DB58Ca60dA4d"
+  //static enervatorAddress = "0x8513b4317E08d697B59c5aDAa871f6315ACdC59E"
+  static depositAddress = "0x17b4aDb94f178e9C594228700Fe230adeCe28fd9"
+  static forexAddress = "0xa0A43A0892B143362bEB0Db02D97A0997de331F5"
+  static buyAddress = "0x0b673B65e59d5cB6a3000501DD7B4FaaC676692c"
+  static exchangerAddress = "0x1Aaaf35b7D11f662E3BC26373DADBC475B890813"
 
   static enervatorManagerABI = [
 
     "function setToken( address _token )@500000",
     "function addTokens ( uint256 _amount )@500000",
     "function burnTokens ( uint256 _amount )@500000",
-    "function setNewTPES ( int128  _amount )@500000",
+    "function setTPES ( int128  _amount )@500000",
     "function setPerCapitaEnergy ( int128 _amount )@500000",
     "function send ( address _recipient, uint256 _amount, bytes _buyData )@500000",
 
     "function tokensReceived ( address operator, address from, address to, uint256 amount, bytes userData, bytes operatorData )@500000",
     "function tokensToSend ( address operator, address from, address to, uint256 amount, bytes userData, bytes operatorData )@500000",
+
+    "function getTokenName () view returns ( string memory )",
+    "function getTokenSymbol () external view returns ( string memory )",
+    "function getTotalSupply () external view returns ( uint256 )",
 
     "function getPricePerMWh () view returns ( int128 )",
     "function getCurrentTPES () view returns ( int128 )",
@@ -75,7 +80,9 @@ class Contract {
   static forexABI = [
 
   	"function setRate ( bytes32 _code, int128 _rate )@500000",
-    "function getRate ( bytes32 _code) public view returns (int128)"
+    "function getNumCodes () view returns (uint256)",
+    "function getCode ( uint256 _index ) view returns (bytes32)",
+    "function getRate ( bytes32 _code) view returns (int128)"
 
   ]
 

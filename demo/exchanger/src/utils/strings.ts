@@ -10,8 +10,8 @@ class App {
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
-  static headingDepositor = 'Deposit FIAT'
-  static headingExchanger = `Read ${App.token} Enervator Data`
+  static readonly headingDepositor = 'Deposit FIAT'
+  static readonly headingExchanger = `Read ${App.token} Enervator Data`
 }
 
 class Paths {
@@ -22,11 +22,13 @@ class Paths {
   static readonly about = 'About'
   static readonly overview = 'Overview'
   static readonly help = 'Help'
+
+  static readonly deposit = 'Deposit'
 }
 
 class Blockchain {
 
-  static heading = 'Blockchain Data'
+  static readonly heading = 'Blockchain Data'
 }
 
 class Home {
@@ -59,14 +61,22 @@ class Help {
 
 class Transaction {
 
-  static heading = "Transaction Details"
+  static readonly heading = "Transaction Details"
 
-  static hash = 'Transaction Hash'
-  static summary = 'Transaction Summary'
-  static success = 'Submitted Successfully!'
-  static fail = 'Submission Failed!'
+  static readonly hash = 'Transaction Hash'
+  static readonly summary = 'Transaction Summary'
+  static readonly success = 'Submitted Successfully!'
+  static readonly fail = 'Submission Failed!'
 }
 
+class Deposit {
+
+  static readonly heading = "Deposits"
+
+  static readonly currency = "Currency"
+  static readonly amount = "Amount"
+
+}
 
 export { App,
          Paths,
@@ -75,5 +85,6 @@ export { App,
          About,
          Overview,
          Help,
-         Transaction
+         Transaction,
+         Deposit
        }

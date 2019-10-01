@@ -10,6 +10,8 @@ import { BlockchainInfo } from './pages/blockchain/blockchainInfo'
 import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
+import { DepositWriter } from './pages/exchanger/writer/deposit'
+
 class AppContent extends React.Component {
 
   render() {
@@ -45,6 +47,14 @@ class AppContent extends React.Component {
           name={Paths.help}
           path={PathConfig.help}
           render={() => <Info type={InfoTypes.HELP} />}
+        />
+
+        /* Deposit */
+
+        <Route
+          name={Paths.deposit}
+          path={PathConfig.deposit}
+          render={() => <DepositWriter />}
         />
 
       </Switch>

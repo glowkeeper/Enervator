@@ -1,4 +1,4 @@
-import { ReaderActionTypes } from '../types'
+import { WriterActionTypes } from '../types'
 import { ActionProps, PayloadProps } from '../../types'
 
 const initialState: PayloadProps = {
@@ -8,15 +8,18 @@ const initialState: PayloadProps = {
 export const reducer = (state: PayloadProps = initialState, action: ActionProps): PayloadProps => {
 
   switch (action.type) {
-    case ReaderActionTypes.REPORT_INIT: {
+    case WriterActionTypes.TX_INIT: {
       const data = action.payload.data as PayloadProps
       return data
     }
-    case ReaderActionTypes.RATE_SUCCESS: {
+    case WriterActionTypes.DEPOSIT_SUCCESS:
+    case WriterActionTypes.DEPOSIT_FAILURE:
+    case WriterActionTypes.BUY_SUCCESS:
+    case WriterActionTypes.BUY_FAILURE:
+    {
       const data = (action.payload.data as PayloadProps)
-      return {...state, ...data}
+      return { ...state, ...data }
     }
-    case ReaderActionTypes.RATE_FAILURE:
     default:
       return state
   }
