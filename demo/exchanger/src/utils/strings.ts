@@ -10,8 +10,7 @@ class App {
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
   static readonly version='0.0.1'
 
-  static readonly headingDepositor = 'Deposit'
-  static readonly headingExchanger = `Read ${App.token} Enervator Data`
+  static readonly headingExchanger = `Exchange`
 }
 
 class Paths {
@@ -57,7 +56,7 @@ class Help {
 
   static readonly heading = `${App.title} Help`
 
-  static readonly info = `**${App.title}** allows users to deposit FIAT currencies, whereby they can exchange them for **${App.token}**.<br /><br />To deposit FIAT, click on the _${App.headingDepositor}_ link in the sidebar. To exchange deposits for **${App.token}**, click on the _${App.headingExchanger}_ link.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static readonly info = `**${App.title}** allows users to deposit FIAT currencies, whereby they can exchange them for **${App.token}**.<br /><br />To deposit and exchange FIAT for **${App.token}**, click on the _${App.headingExchanger}_ link in the sidebar.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
 }
 
 class Transaction {
@@ -72,7 +71,7 @@ class Transaction {
 
 class Deposit {
 
-  static readonly heading = "Deposits"
+  static readonly heading = "Deposit"
 
   static readonly currency = "Currency"
   static readonly amount = "Amount"
@@ -81,7 +80,7 @@ class Deposit {
 
 class Buy {
 
-  static readonly heading = "Deposits"
+  static readonly heading = "Buy"
 
   static readonly depositRef = "Deposit Reference"
   static readonly currency = "Currency"

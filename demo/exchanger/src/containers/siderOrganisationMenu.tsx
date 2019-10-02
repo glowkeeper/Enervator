@@ -40,7 +40,7 @@ const Sider = (props: DispatchProps = defaultProps) => {
     <div>
       <ExpansionPanel className={classes.siderMenu}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <h4>{App.headingDepositor}</h4>
+          <h4>{App.headingExchanger}</h4>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.siderMenu}>
           <MenuList>

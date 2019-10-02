@@ -33,13 +33,18 @@ export const makeBuy = ( details: BuyProps ) => {
         buyRef = ethers.utils.formatBytes32String(shortid.generate())
       }
 
-      console.log ( "this ref", buyRef)
+      //console.log ( "this ref", buyRef)
 
       const amount = new Decimal(details.amount)
       const thisTwo = new Decimal(2)
       const thisSixtyFour = new Decimal(64)
       const thisMultiplier = thisTwo.pow(thisSixtyFour)
       const thisNewBigAmount = thisMultiplier.mul(amount)
+
+      console.log( "Buy this", address,
+      buyRef,
+      details.depositRef,
+      thisNewBigAmount.toHexadecimal())
 
       //   "function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT )@500000",
       const tx = await exchangerContract.buy(
