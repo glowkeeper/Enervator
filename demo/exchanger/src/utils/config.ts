@@ -29,7 +29,6 @@ class Contract {
   static buyAddress = "0x834ffE2EcA00e40C70f4242e41bdA0B0941a75d7"
   static exchangerAddress = "0xe02358b7C13Cd6b19c45C2670467696cD4F30006"
 
-
   static enervatorManagerABI = [
 
     "function setToken( address _token )@500000",
