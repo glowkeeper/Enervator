@@ -44,7 +44,7 @@ export const setPerCapitaEnergy = (details: PerCapitaEnergyProps) => {
           info: {}
         }
       }
-      console.log('setTPES error', error)
+      console.log('setPerCapita error', error)
     }
 
     dispatch(write({data: {data: txData}})(actionType))
