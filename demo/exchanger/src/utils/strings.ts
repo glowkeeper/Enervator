@@ -85,6 +85,7 @@ class Buy {
 
   static readonly depositRef = "Deposit Reference"
   static readonly currency = "Currency"
+  static readonly code = "Currency"
   static readonly amount = "Amount"
 
 }

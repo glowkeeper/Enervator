@@ -1,6 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
+import { BigNumber } from 'bignumber.js'
 
 import { ApplicationState } from '../../../store'
 import { ActionProps } from '../../../types'
@@ -40,10 +41,16 @@ const getThisDepositsRecord = (props: DepositsProps) => {
 
       const deposits: BlockchainDepositProps = await depositsContract.getDeposit ( props.depositsRef )
 
+      const bigAmount = new BigNumber(deposits.amount)
+      const thisTwo = new BigNumber(2)
+      const thisSixtyFour = new BigNumber(64)
+      const thisMultiplier = thisTwo.pow(thisSixtyFour)
+      const thisAmount = bigAmount.div(thisMultiplier).toNumber()
+
       depositsData.data.data[data.length] = {
           depositRef: props.depositsRef,
           currency: ethers.utils.parseBytes32String(deposits.code),
-          amount: deposits.amount,
+          amount: thisAmount,
           address: deposits.account
       }
 

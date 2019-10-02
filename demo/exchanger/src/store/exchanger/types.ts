@@ -42,6 +42,8 @@ export interface BuyProps
   account: string,
   buyRef: string,
   depositRef: string,
+  currency: string,
+  rate: number,
   amount: number
 }
 

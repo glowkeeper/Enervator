@@ -16,7 +16,7 @@ import { DepositPicker } from '../../../../components/io/depositPicker'
 
 import { ApplicationState } from '../../../../store'
 import { ActionProps } from '../../../../store/types'
-import { BuyProps, DepositReportProps } from '../../../../store/exchanger/types'
+import { BuyProps, DepositReportProps, DepositProps } from '../../../../store/exchanger/types'
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
@@ -31,15 +31,12 @@ const buySchema = Yup.object().shape({
   depositRef: Yup
     .string()
     .required('Required'),
-  currency: Yup
-    .string()
-    .required('Required'),
   amount: Yup
     .number()
     .required('Required'),
 })
 
-interface DepositProps {
+interface BuyDepositProps {
   deposits: DepositReportProps
 }
 
@@ -48,7 +45,7 @@ export interface BuyDispatchProps {
   setFormFunctions: (formProps: FormData) => void
 }
 
-type BuyFormProps = DepositProps & BuyDispatchProps
+type BuyFormProps = BuyDepositProps & BuyDispatchProps
 
 export class BuyForm extends React.Component<BuyFormProps> {
 
@@ -66,14 +63,33 @@ export class BuyForm extends React.Component<BuyFormProps> {
     this.props.handleSubmit(values)
   }
 
+  getAmountsData = (deposits: DepositReportProps): BuyProps  => {
+
+    let newAmounts: BuyProps = {
+      account: "",
+      buyRef: "",
+      depositRef: "",
+      currency: "",
+      rate: 0,
+      amount: 0
+    }
+    if ( typeof deposits.data != 'undefined' )
+    {
+      let depositReport: DepositProps = deposits.data[0] as DepositProps
+      console.log(deposits)
+      //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
+      newAmounts.depositRef = depositReport.depositRef as string,
+      newAmounts.currency =  depositReport.currency as string,
+      newAmounts.rate = 0,
+      newAmounts.amount =  depositReport.amount as number
+    }
+
+    return newAmounts
+  }
+
   render() {
 
-    let xs = ""
-    if ( typeof this.props.deposits != 'undefined' )
-    {
-      xs = getDictEntries(this.props.deposits)
-      console.log("deposit", xs)
-    }
+    const thisAmount: BuyProps  = this.getAmountsData(this.props.deposits)
 
     return (
       <div>
@@ -81,9 +97,11 @@ export class BuyForm extends React.Component<BuyFormProps> {
         <div>
           <Formik
             initialValues={ { account: "",
-                              buyRef: "",
-                              depositRef: "",
-                              amount: 0
+                              buyRef: thisAmount.buyRef,
+                              depositRef: thisAmount.depositRef,
+                              currency: thisAmount.currency,
+                              rate: 0,
+                              amount: thisAmount.amount
                             }}
             enableReinitialize={true}
             validationSchema={buySchema}
@@ -102,8 +120,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
                   <Field
                     name="currency"
                     label={BuyStrings.currency}
-                    component={Select}
-                    options={Helpers.currencyCodes}
+                    component={TextField}
                   />
                   <ErrorMessage name='currency' />
                   <Field
@@ -129,7 +146,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState): DepositProps => {
+const mapStateToProps = (state: ApplicationState): BuyDepositProps => {
   return {
     deposits:  state.reader.data as DepositReportProps
   }
@@ -142,7 +159,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, Actio
   }
 }
 
-export const BuyWriter = connect<DepositProps, BuyDispatchProps, {}, ApplicationState>(
+export const BuyWriter = connect<BuyDepositProps, BuyDispatchProps, {}, ApplicationState>(
   mapStateToProps,
   mapDispatchToProps
 )(BuyForm)

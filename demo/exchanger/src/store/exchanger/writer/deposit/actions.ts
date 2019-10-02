@@ -71,7 +71,7 @@ export const makeDeposit = ( details: DepositProps ) => {
         depositRef = ethers.utils.formatBytes32String(shortid.generate())
       }
 
-      console.log ( "this ref", depositRef)
+      //console.log ( "this ref", depositRef)
 
       const amount = new Decimal(details.amount)
       const thisTwo = new Decimal(2)
