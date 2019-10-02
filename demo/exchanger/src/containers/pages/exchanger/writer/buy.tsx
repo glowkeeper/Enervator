@@ -16,7 +16,7 @@ import { DepositPicker } from '../../../../components/io/depositPicker'
 
 import { ApplicationState } from '../../../../store'
 import { ActionProps } from '../../../../store/types'
-import { BuyProps, DepositReportProps, DepositProps } from '../../../../store/exchanger/types'
+import { BuyProps, DepositReportProps, DepositReport, DepositProps } from '../../../../store/exchanger/types'
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
@@ -37,7 +37,7 @@ const buySchema = Yup.object().shape({
 })
 
 interface BuyDepositProps {
-  deposits: DepositReportProps
+  deposits: DepositReport
 }
 
 export interface BuyDispatchProps {
@@ -63,7 +63,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
     this.props.handleSubmit(values)
   }
 
-  getAmountsData = (deposits: DepositReportProps): BuyProps  => {
+  getAmountsData = (deposits: DepositReport): BuyProps  => {
 
     let newAmounts: BuyProps = {
       account: "",
@@ -75,13 +75,12 @@ export class BuyForm extends React.Component<BuyFormProps> {
     }
     if ( typeof deposits.data != 'undefined' )
     {
-      let depositReport: DepositProps = deposits.data[0] as DepositProps
-      console.log(deposits)
+      const thisDeposit = deposits.data[0] as DepositProps
       //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
-      newAmounts.depositRef = depositReport.depositRef as string,
-      newAmounts.currency =  depositReport.currency as string,
+      newAmounts.depositRef = thisDeposit.depositRef as string,
+      newAmounts.currency =  thisDeposit.currency as string,
       newAmounts.rate = 0,
-      newAmounts.amount =  depositReport.amount as number
+      newAmounts.amount =  thisDeposit.amount as number
     }
 
     return newAmounts
@@ -148,7 +147,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
 
 const mapStateToProps = (state: ApplicationState): BuyDepositProps => {
   return {
-    deposits:  state.reader.data as DepositReportProps
+    deposits:  state.reader.data as DepositReport
   }
 }
 
