@@ -25,7 +25,7 @@ const getThisDepositsRecord = (props: DepositsProps) => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
-    const depositsContract = state.chainContracts.data.contracts.deposits
+    const depositsContract = state.chainContracts.data.contracts.deposit
     const depositsRef = props.depositsRef
     const data =  props.data
 
@@ -36,12 +36,15 @@ const getThisDepositsRecord = (props: DepositsProps) => {
     let actionType =  props.successActionType
     try {
 
-      const deposits: BlockchainDepositProps = await depositsContract.getDeposit (props.depositsRef)
+      // bytes32 code, int128 amount, address account, bool canWithdraw
+
+      const deposits: BlockchainDepositProps = await depositsContract.getDeposit ( props.depositsRef )
+
       depositsData.data.data[data.length] = {
           depositRef: props.depositsRef,
-          currency: ethers.utils.parseBytes32String(deposits.currency),
+          currency: ethers.utils.parseBytes32String(deposits.code),
           amount: deposits.amount,
-          address: deposits.address
+          address: deposits.account
       }
 
     } catch (error) {
@@ -73,7 +76,7 @@ export const getDeposits = () => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
-    const depositsContract = state.chainContracts.data.contracts.deposits
+    const depositsContract = state.chainContracts.data.contracts.deposit
 
     let indexRecordProps: DepositsProps = {
       depositsRef: "",

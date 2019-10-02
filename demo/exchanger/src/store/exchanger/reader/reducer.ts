@@ -16,6 +16,7 @@ export const reducer = (state: PayloadProps = initialState, action: ActionProps)
     case ReaderActionTypes.BUY_SUCCESS:
     {
       const data = (action.payload.data as PayloadProps)
+      //console.log( "this deposit data", data)
       return {...state, ...data}
     }
     case ReaderActionTypes.DEPOSIT_FAILURE:

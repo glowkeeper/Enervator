@@ -4,34 +4,29 @@ import { ApplicationState } from '../../../store'
 import { write } from '../../../actions'
 import { ActionProps, PayloadProps } from '../../../types'
 
-import { RefActionTypes, BuyRefProps, BuyRefData } from '../types'
+import { RefActionTypes, BuyRefProps } from '../types'
 
-interface BuyProps {
-  account: string
-}
 
-export const getBuyRefs = ( props: BuyProps ) => {
+export const getBuyRefs = () => {
   return async (dispatch: ThunkDispatch<ApplicationState, null, ActionProps>, getState: Function) => {
 
     const state = getState()
     const buyContract = state.chainContracts.data.contracts.buy
+    const account = state.chainAccount.data.account
 
-    let refsData: BuyRefData =
-    {
-      refs: []
-    }
+    let refsData: Array<string> = []
 
     let actionType = RefActionTypes.BUY_SUCCESS
 
     try {
 
       let ref = ""
-      const num = await buyContract.getNumBuys( props.account )
+      const num = await buyContract.getNumBuys( account )
       const numBuys = num.toNumber()
       for (let i = 0; i < numBuys; i++)
       {
-        ref = await buyContract.getBuyReference( props.account, i.toString() )
-        refsData.refs.push(ref)
+        ref = await buyContract.getBuyReference( account, i.toString() )
+        refsData.push(ref)
       }
 
     } catch (error) {

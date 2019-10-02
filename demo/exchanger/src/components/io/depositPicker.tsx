@@ -42,6 +42,7 @@ class Deposit extends React.Component<DepositPickerProps> {
 
   render() {
 
+    //console.log( this.props.depositRefs )
     let depositRefs: any[] = [{ value: "", label: "" }]
     if ( typeof this.props.depositRefs != 'undefined' &&
          typeof this.props.depositRefs[0] != 'undefined' &&
@@ -69,9 +70,9 @@ class Deposit extends React.Component<DepositPickerProps> {
 }
 
 const mapStateToProps = (state: ApplicationState): DepositDataProps => {
-  //console.log(state.orgReader)
+  //console.log(state.depositRefs.data)
   return {
-    depositRefs: state.depositRefs.data.refs as Array<string>
+    depositRefs: state.depositRefs.data as Array<string>
   }
 }
 

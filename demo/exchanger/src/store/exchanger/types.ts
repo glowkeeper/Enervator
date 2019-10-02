@@ -4,9 +4,9 @@ import { PayloadProps } from '../types'
 
 export interface BlockchainDepositProps
 {
-  currency: string,
+  code: string,
   amount: number,
-  address: string,
+  account: string,
   bool: boolean
 }
 

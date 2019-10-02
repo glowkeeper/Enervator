@@ -9,12 +9,14 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 //import { Select } from 'formik-material-ui'
 
+import { getDictEntries } from '../../../../components/io/dict'
+
 import { TextField, Select } from "material-ui-formik-components"
 import { DepositPicker } from '../../../../components/io/depositPicker'
 
 import { ApplicationState } from '../../../../store'
 import { ActionProps } from '../../../../store/types'
-import { BuyProps } from '../../../../store/exchanger/types'
+import { BuyProps, DepositReportProps } from '../../../../store/exchanger/types'
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
@@ -37,12 +39,16 @@ const buySchema = Yup.object().shape({
     .required('Required'),
 })
 
+interface DepositProps {
+  deposits: DepositReportProps
+}
+
 export interface BuyDispatchProps {
   handleSubmit: (values: any) => void
   setFormFunctions: (formProps: FormData) => void
 }
 
-type BuyFormProps = BuyDispatchProps
+type BuyFormProps = DepositProps & BuyDispatchProps
 
 export class BuyForm extends React.Component<BuyFormProps> {
 
@@ -61,6 +67,13 @@ export class BuyForm extends React.Component<BuyFormProps> {
   }
 
   render() {
+
+    let xs = ""
+    if ( typeof this.props.deposits != 'undefined' )
+    {
+      xs = getDictEntries(this.props.deposits)
+      console.log("deposit", xs)
+    }
 
     return (
       <div>
@@ -116,6 +129,12 @@ export class BuyForm extends React.Component<BuyFormProps> {
   }
 }
 
+const mapStateToProps = (state: ApplicationState): DepositProps => {
+  return {
+    deposits:  state.reader.data as DepositReportProps
+  }
+}
+
 const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): BuyDispatchProps => {
   return {
     handleSubmit: (ownProps: any) => dispatch(makeBuy(ownProps)),
@@ -123,7 +142,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, Actio
   }
 }
 
-export const BuyWriter = connect<null, BuyDispatchProps, {}, ApplicationState>(
-  null,
+export const BuyWriter = connect<DepositProps, BuyDispatchProps, {}, ApplicationState>(
+  mapStateToProps,
   mapDispatchToProps
 )(BuyForm)
