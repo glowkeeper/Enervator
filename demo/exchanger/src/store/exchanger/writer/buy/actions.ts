@@ -41,10 +41,7 @@ export const makeBuy = ( details: BuyProps ) => {
       const thisMultiplier = thisTwo.pow(thisSixtyFour)
       const thisNewBigAmount = thisMultiplier.mul(amount)
 
-      console.log( "Buy this", address,
-      buyRef,
-      details.depositRef,
-      thisNewBigAmount.toHexadecimal())
+      //console.log( "Buy this", address, buyRef, details.depositRef, thisNewBigAmount.toHexadecimal() )
 
       //   "function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT )@500000",
       const tx = await exchangerContract.buy(
