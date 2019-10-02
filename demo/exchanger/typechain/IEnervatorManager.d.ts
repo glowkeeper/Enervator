@@ -22,7 +22,7 @@ interface IEnervatorManagerInterface extends Interface {
 
     setToken: TypedFunctionDescription<{ encode([_token]: [string]): string }>;
 
-    setNewTPES: TypedFunctionDescription<{
+    setTPES: TypedFunctionDescription<{
       encode([_amount]: [BigNumberish]): string;
     }>;
 
@@ -102,7 +102,7 @@ export class IEnervatorManager extends Contract {
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
-    setNewTPES(
+    setTPES(
       _amount: BigNumberish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
@@ -119,6 +119,9 @@ export class IEnervatorManager extends Contract {
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
+    getTokenName(): Promise<string>;
+    getTokenSymbol(): Promise<string>;
+    getTotalSupply(): Promise<BigNumber>;
     getPricePerMWh(): Promise<BigNumber>;
     getCurrentTPES(): Promise<BigNumber>;
     getOldTPES(): Promise<BigNumber>;
@@ -159,7 +162,7 @@ export class IEnervatorManager extends Contract {
 
     setToken(_token: string): Promise<BigNumber>;
 
-    setNewTPES(_amount: BigNumberish): Promise<BigNumber>;
+    setTPES(_amount: BigNumberish): Promise<BigNumber>;
 
     setPerCapitaEnergy(_amount: BigNumberish): Promise<BigNumber>;
 

@@ -2,12 +2,20 @@ import { PayloadProps } from '../types'
 
 /* Deposit */
 
+export interface BlockchainDepositProps
+{
+  currency: string,
+  amount: number,
+  address: string,
+  bool: boolean
+}
+
 export interface DepositProps
 {
-  address: string,
-  depositRef: string,
+  depositRef: string
   currency: string,
-  amount: number
+  amount: number,
+  address: string
 }
 
 export interface DepositReport
@@ -22,9 +30,16 @@ export interface DepositReportProps extends PayloadProps
 
 /* Buy */
 
+export interface BlockchainBuyProps
+{
+  amount: number,
+  depositRef: string,
+  account: string
+}
+
 export interface BuyProps
 {
-  address: string,
+  account: string,
   buyRef: string,
   depositRef: string,
   amount: number

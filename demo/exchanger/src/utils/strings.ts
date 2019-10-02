@@ -79,6 +79,16 @@ class Deposit {
 
 }
 
+class Buy {
+
+  static readonly heading = "Deposits"
+
+  static readonly depositRef = "Deposit Reference"
+  static readonly currency = "Currency"
+  static readonly amount = "Amount"
+
+}
+
 export { App,
          Paths,
          Blockchain,
@@ -87,5 +97,6 @@ export { App,
          Overview,
          Help,
          Transaction,
-         Deposit
+         Deposit,
+         Buy
        }

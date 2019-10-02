@@ -3,9 +3,9 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ethers } from 'ethers'
 
 import { ApplicationState } from '../../../store'
-
 import { ActionProps } from '../../../types'
-import { DepositProps } from '../../types'
+
+import { ReaderActionTypes, DepositReportProps, BlockchainDepositProps, DepositProps } from '../../types'
 
 import { write } from '../../../actions'
 
@@ -14,9 +14,9 @@ interface RecordProps {
 }
 
 interface DepositsDataProps {
-  data: Array<DepositsData>
-  successActionType: ReportActionTypes
-  failureActionType: ReportActionTypes
+  data: Array<DepositProps>
+  successActionType: ReaderActionTypes
+  failureActionType: ReaderActionTypes
 }
 
 type DepositsProps = RecordProps & DepositsDataProps
@@ -29,20 +29,21 @@ const getThisDepositsRecord = (props: DepositsProps) => {
     const depositsRef = props.depositsRef
     const data =  props.data
 
-    let depositsData: DepositsReportProps = {
+    let depositsData: DepositReportProps = {
       data: { data: data }
     }
 
     let actionType =  props.successActionType
     try {
 
-      const deposits: DepositsProps = await depositsContract.getDeposits(props.depositsRef)
+      const deposits: BlockchainDepositProps = await depositsContract.getDeposit (props.depositsRef)
       depositsData.data.data[data.length] = {
-        depositsRef: props.depositsRef,
-        version: ethers.utils.parseBytes32String(deposits.version),
-        generatedTime:  ethers.utils.parseBytes32String(deposits.generatedTime),
-        linkedData: ethers.utils.parseBytes32String(deposits.linkedData),
+          depositRef: props.depositsRef,
+          currency: ethers.utils.parseBytes32String(deposits.currency),
+          amount: deposits.amount,
+          address: deposits.address
       }
+
     } catch (error) {
       actionType = props.failureActionType
       console.log('getDeposits error', error)
@@ -60,8 +61,8 @@ export const getDepositsRecord = (props: RecordProps) => {
     let indexRecordProps: DepositsProps = {
       depositsRef: props.depositsRef,
       data: [],
-      successActionType: ReportActionTypes.ACTIVITIES_SUCCESS,
-      failureActionType: ReportActionTypes.ACTIVITIES_FAILURE
+      successActionType: ReaderActionTypes.DEPOSIT_SUCCESS,
+      failureActionType: ReaderActionTypes.DEPOSIT_FAILURE
     }
 
     dispatch(getThisDepositsRecord(indexRecordProps))
@@ -77,8 +78,8 @@ export const getDeposits = () => {
     let indexRecordProps: DepositsProps = {
       depositsRef: "",
       data: [],
-      successActionType: ReportActionTypes.ACTIVITIES_SUCCESS,
-      failureActionType: ReportActionTypes.ACTIVITIES_FAILURE
+      successActionType: ReaderActionTypes.DEPOSIT_SUCCESS,
+      failureActionType: ReaderActionTypes.DEPOSIT_FAILURE
     }
 
     try {

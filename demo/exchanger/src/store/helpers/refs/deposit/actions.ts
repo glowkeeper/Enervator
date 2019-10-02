@@ -1,9 +1,9 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { ApplicationState } from '../../../store'
 
-import { write } from '../../actions'
+import { write } from '../../../actions'
+import { ActionProps, PayloadProps } from '../../../types'
 
-import { ActionProps, PayloadProps } from '../../types'
 import { RefActionTypes, DepositRefProps, DepositRefData } from '../types'
 
 
@@ -14,7 +14,8 @@ export const getDepositRefs = () => {
     const depositContract = state.chainContracts.data.contracts.deposit
     const account = state.chainAccount.data.account
 
-    let refsData: DepositRefData {
+    let refsData: DepositRefData =
+    {
       refs: []
     }
 

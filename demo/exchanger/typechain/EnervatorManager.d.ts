@@ -28,7 +28,7 @@ interface EnervatorManagerInterface extends Interface {
       encode([_amount]: [BigNumberish]): string;
     }>;
 
-    setNewTPES: TypedFunctionDescription<{
+    setTPES: TypedFunctionDescription<{
       encode([_amount]: [BigNumberish]): string;
     }>;
 
@@ -146,7 +146,7 @@ export class EnervatorManager extends Contract {
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
-    setNewTPES(
+    setTPES(
       _amount: BigNumberish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
@@ -185,6 +185,9 @@ export class EnervatorManager extends Contract {
 
     owner(): Promise<string>;
     isOwner(): Promise<boolean>;
+    getTokenName(): Promise<string>;
+    getTokenSymbol(): Promise<string>;
+    getTotalSupply(): Promise<BigNumber>;
     getPricePerMWh(): Promise<BigNumber>;
     getCurrentTPES(): Promise<BigNumber>;
     getOldTPES(): Promise<BigNumber>;
@@ -234,7 +237,7 @@ export class EnervatorManager extends Contract {
 
     burnTokens(_amount: BigNumberish): Promise<BigNumber>;
 
-    setNewTPES(_amount: BigNumberish): Promise<BigNumber>;
+    setTPES(_amount: BigNumberish): Promise<BigNumber>;
 
     setPerCapitaEnergy(_amount: BigNumberish): Promise<BigNumber>;
 

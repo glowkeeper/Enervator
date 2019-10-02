@@ -1,11 +1,7 @@
 import { PayloadProps } from '../../types'
 
-export interface DepositRef {
-  deposit: ''
-}
-
 export interface DepositRefData {
-  refs: Array<DepositRef>
+  refs: Array<string>
 }
 
 
@@ -13,12 +9,8 @@ export interface DepositRefProps extends PayloadProps {
   data: DepositRefData
 }
 
-export interface BuyRef {
-  buy: ''
-}
-
 export interface BuyRefData {
-  refs: Array<BuyRef>
+  refs: Array<string>
 }
 
 export interface BuyRefProps extends PayloadProps {

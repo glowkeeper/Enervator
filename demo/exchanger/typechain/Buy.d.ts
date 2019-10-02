@@ -63,6 +63,10 @@ export class Buy extends Contract {
 
     getDepositReference(_buyerRef: Arrayish): Promise<string>;
 
+    getBuy(
+      _buyerRef: Arrayish
+    ): Promise<{ amount: BigNumber; depositRef: string; account: string }>;
+
     bought(
       _buyer: string,
       _buyRef: Arrayish,

@@ -1,4 +1,5 @@
 pragma solidity ^0.5.7;
+pragma experimental ABIEncoderV2;
 
 contract IBuy {
 
@@ -24,4 +25,5 @@ contract IBuy {
   function getBuyAddress ( bytes32 _buyerRef ) external view returns (address);
 	function getDepositReference ( bytes32 _buyerRef ) external view returns (bytes32);
 
+	function getBuy( bytes32 _buyerRef ) external view returns (BuyDB memory);
 }

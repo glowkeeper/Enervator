@@ -11,6 +11,7 @@ import { Paths } from '../utils/strings'
 import { Paths as PathConfig } from '../utils/config'
 
 import { DepositWriter } from './pages/exchanger/writer/deposit'
+import { BuyWriter } from './pages/exchanger/writer/buy'
 
 class AppContent extends React.Component {
 
@@ -55,6 +56,14 @@ class AppContent extends React.Component {
           name={Paths.deposit}
           path={PathConfig.deposit}
           render={() => <DepositWriter />}
+        />
+
+        /* Buy */
+
+        <Route
+          name={Paths.buy}
+          path={PathConfig.buy}
+          render={() => <BuyWriter />}
         />
 
       </Switch>

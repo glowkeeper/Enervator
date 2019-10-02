@@ -33,6 +33,39 @@ const _abi = [
   },
   {
     constant: true,
+    inputs: [],
+    name: "getNumCodes",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "_index",
+        type: "uint256"
+      }
+    ],
+    name: "getCode",
+    outputs: [
+      {
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
     inputs: [
       {
         name: "_code",

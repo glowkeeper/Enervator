@@ -232,5 +232,38 @@ const _abi = [
     payable: false,
     stateMutability: "view",
     type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "_buyerRef",
+        type: "bytes32"
+      }
+    ],
+    name: "getBuy",
+    outputs: [
+      {
+        components: [
+          {
+            name: "amount",
+            type: "uint256"
+          },
+          {
+            name: "depositRef",
+            type: "bytes32"
+          },
+          {
+            name: "account",
+            type: "address"
+          }
+        ],
+        name: "",
+        type: "tuple"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];

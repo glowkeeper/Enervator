@@ -34,6 +34,8 @@ export class Forex extends Contract {
   interface: ForexInterface;
 
   functions: {
+    getCode(_index: BigNumberish): Promise<string>;
+
     getRate(_code: Arrayish): Promise<BigNumber>;
 
     setRate(
@@ -41,6 +43,8 @@ export class Forex extends Contract {
       _rate: BigNumberish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
+
+    getNumCodes(): Promise<BigNumber>;
   };
 
   filters: {};

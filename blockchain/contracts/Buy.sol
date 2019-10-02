@@ -132,4 +132,11 @@ contract Buy is IBuy {
 
     return buys[_buyerRef].depositRef;
   }
+
+  function getBuy( bytes32 _buyerRef ) external view returns (BuyDB memory)
+  {
+    require (_buyerRef[0] != 0, "no buy reference supplied!" );
+
+    return  buys[_buyerRef];
+  }
 }

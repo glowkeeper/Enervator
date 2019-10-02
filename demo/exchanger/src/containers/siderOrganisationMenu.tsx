@@ -54,6 +54,16 @@ const Sider = (props: DispatchProps = defaultProps) => {
                 {Paths.deposit}
               </MenuItem>
             </Link>
+            <Link
+              className={classes.link}
+              to={PathConfig.buy}
+              onClick={() => {
+                props.initialise()
+              }} >
+              <MenuItem>
+                {Paths.buy}
+              </MenuItem>
+            </Link>
           </MenuList>
         </ExpansionPanelDetails>
       </ExpansionPanel>

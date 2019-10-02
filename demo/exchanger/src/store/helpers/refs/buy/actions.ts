@@ -1,9 +1,9 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { ApplicationState } from '../../../store'
 
-import { write } from '../../actions'
+import { write } from '../../../actions'
+import { ActionProps, PayloadProps } from '../../../types'
 
-import { ActionProps, PayloadProps } from '../../types'
 import { RefActionTypes, BuyRefProps, BuyRefData } from '../types'
 
 interface BuyProps {
@@ -16,7 +16,8 @@ export const getBuyRefs = ( props: BuyProps ) => {
     const state = getState()
     const buyContract = state.chainContracts.data.contracts.buy
 
-    let refsData: BuyRefData {
+    let refsData: BuyRefData =
+    {
       refs: []
     }
 
