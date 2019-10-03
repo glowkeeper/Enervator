@@ -39,7 +39,7 @@ const getDepositRef = async ( props: DepositRefProps ) =>
       {
         depositRef = refTemp
         const depositedAmount = await depositContract.getDepositedAmount( depositRef )
-        console.log ( depositRef, depositedAmount )
+        //console.log ( depositRef, depositedAmount )
         break
       }
     }
