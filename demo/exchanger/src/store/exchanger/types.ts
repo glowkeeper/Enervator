@@ -57,6 +57,22 @@ export interface BuyReportProps extends PayloadProps
   data: BuyReport
 }
 
+export interface ExchangeRateProps
+{
+  currency: string
+  rate: number
+}
+
+export interface ExchangeRateReport
+{
+  data: Array<ExchangeRateProps>
+}
+
+export interface ExchangeRateReportProps extends PayloadProps
+{
+  data: ExchangeRateReport
+}
+
 /* Action Types */
 
 export const enum WriterActionTypes {
@@ -64,7 +80,9 @@ export const enum WriterActionTypes {
   DEPOSIT_SUCCESS = '@@WriterActionTypes/DEPOSIT_SUCCESS',
   DEPOSIT_FAILURE = '@@WriterActionTypes/DEPOSIT_FAILURE',
   BUY_SUCCESS = '@@WriterActionTypes/BUY_SUCCESS',
-  BUY_FAILURE = '@@WriterActionTypes/BUY_FAILURE'
+  BUY_FAILURE = '@@WriterActionTypes/BUY_FAILURE',
+  FOREX_SUCCESS = '@@WriterActionTypes/FOREX_SUCCESS',
+  FOREX_FAILURE = '@@WriterActionTypes/FOREX_FAILURE'
 }
 
 export const enum ReaderActionTypes {
@@ -72,5 +90,7 @@ export const enum ReaderActionTypes {
   DEPOSIT_SUCCESS = '@@ReaderActionTypes/DEPOSIT_SUCCESS',
   DEPOSIT_FAILURE = '@@ReaderActionTypes/DEPOSIT_FAILURE',
   BUY_SUCCESS = '@@ReaderActionTypes/BUY_SUCCESS',
-  BUY_FAILURE = '@@ReaderActionTypes/BUY_FAILURE'
+  BUY_FAILURE = '@@ReaderActionTypes/BUY_FAILURE',
+  FOREX_SUCCESS = '@@ReaderActionTypes/FOREX_SUCCESS',
+  FOREX_FAILURE = '@@ReaderActionTypes/FOREX_FAILURE'
 }

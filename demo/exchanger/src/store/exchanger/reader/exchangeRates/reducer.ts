@@ -1,5 +1,5 @@
-import { ReaderActionTypes } from '../types'
-import { ActionProps, PayloadProps } from '../../types'
+import { ReaderActionTypes } from '../../types'
+import { ActionProps, PayloadProps } from '../../../types'
 
 const initialState: PayloadProps = {
   data: {}
@@ -12,15 +12,13 @@ export const reducer = (state: PayloadProps = initialState, action: ActionProps)
       const data = action.payload.data as PayloadProps
       return data
     }
-    case ReaderActionTypes.DEPOSIT_SUCCESS:
-    case ReaderActionTypes.BUY_SUCCESS:
+    case ReaderActionTypes.FOREX_SUCCESS:
     {
       const data = (action.payload.data as PayloadProps)
-      //console.log( "this deposit data", data)
+      //console.log( "this rate data", data)
       return {...state, ...data}
     }
-    case ReaderActionTypes.DEPOSIT_FAILURE:
-    case ReaderActionTypes.BUY_FAILURE:
+    case ReaderActionTypes.FOREX_FAILURE:
     default:
       return state
   }

@@ -21,7 +21,8 @@ import { reducer as chainAccountReducer } from './blockchain/account/reducer'
 import { reducer as chainContractReducer } from './blockchain/contracts/reducer'
 import { reducer as infoReducer } from './info/reducer'
 import { reducer as writerReducer } from './exchanger/writer/reducer'
-import { reducer as readerReducer } from './exchanger/reader/reducer'
+import { reducer as depositReducer } from './exchanger/reader/deposit/reducer'
+import { reducer as exchangeRatesReducer } from './exchanger/reader/exchangeRates/reducer'
 
 const initialState = (window as any).initialReduxState
 
@@ -34,7 +35,8 @@ export interface ApplicationState {
   depositRefs: DepositRefProps
   forms: FormProps
   writer: PayloadProps
-  reader: PayloadProps
+  deposits: PayloadProps
+  rates: PayloadProps
 }
 
 export const rootReducer: Reducer = combineReducers({
@@ -46,7 +48,8 @@ export const rootReducer: Reducer = combineReducers({
   depositRefs: depositRefReducer,
   forms: formReducer,
   writer: writerReducer,
-  reader: readerReducer
+  deposits: depositReducer,
+  rates: exchangeRatesReducer,
 })
 
 export function configureStore()

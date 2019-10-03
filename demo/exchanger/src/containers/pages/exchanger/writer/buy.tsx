@@ -15,11 +15,19 @@ import { TextField, Select } from "material-ui-formik-components"
 import { DepositPicker } from '../../../../components/io/depositPicker'
 
 import { ApplicationState } from '../../../../store'
+
 import { ActionProps } from '../../../../store/types'
-import { BuyProps, DepositReportProps, DepositReport, DepositProps } from '../../../../store/exchanger/types'
+import { BuyProps,
+         DepositReportProps,
+         DepositReport,
+         DepositProps,
+         ExchangeRateReport,
+         ExchangeRateProps } from '../../../../store/exchanger/types'
+
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
+import { getExchangeRateRecord } from '../../../../store/exchanger/reader/exchangeRates/actions'
 import { makeBuy } from '../../../../store/exchanger/writer/buy/actions'
 
 import { TransactionHelper } from '../../../io/transactionHelper'
@@ -38,11 +46,13 @@ const buySchema = Yup.object().shape({
 
 interface BuyDepositProps {
   deposits: DepositReport
+  rates: ExchangeRateReport
 }
 
 export interface BuyDispatchProps {
   handleSubmit: (values: any) => void
   setFormFunctions: (formProps: FormData) => void
+  getExchangeRate: (currency: string) => void
 }
 
 type BuyFormProps = BuyDepositProps & BuyDispatchProps
@@ -81,14 +91,30 @@ export class BuyForm extends React.Component<BuyFormProps> {
       newAmounts.currency =  thisDeposit.currency as string,
       newAmounts.rate = 0,
       newAmounts.amount =  thisDeposit.amount as number
+
+      this.props.getExchangeRate(newAmounts.currency)
     }
 
     return newAmounts
   }
 
+  getRatesData = (rates: ExchangeRateReport): number  => {
+
+    let rate = 0
+    if ( typeof rates.data != 'undefined' )
+    {
+      const thisRate = rates.data[0] as ExchangeRateProps
+      //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
+      rate = thisRate.rate
+    }
+
+    return rate
+  }
+
   render() {
 
     const thisAmount: BuyProps  = this.getAmountsData(this.props.deposits)
+    const thisRate: number  = this.getRatesData(this.props.rates)
 
     return (
       <div>
@@ -99,7 +125,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
                               buyRef: thisAmount.buyRef,
                               depositRef: thisAmount.depositRef,
                               currency: thisAmount.currency,
-                              rate: 0,
+                              rate: thisRate,
                               amount: thisAmount.amount
                             }}
             enableReinitialize={true}
@@ -121,13 +147,16 @@ export class BuyForm extends React.Component<BuyFormProps> {
                     label={BuyStrings.currency}
                     component={TextField}
                   />
-                  <ErrorMessage name='currency' />
                   <Field
                     name='amount'
                     label={BuyStrings.amount}
                     component={TextField}
                   />
-                  <ErrorMessage name='amount' />
+                  <Field
+                    name='rate'
+                    label={BuyStrings.rate}
+                    component={TextField}
+                  />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />
@@ -147,14 +176,16 @@ export class BuyForm extends React.Component<BuyFormProps> {
 
 const mapStateToProps = (state: ApplicationState): BuyDepositProps => {
   return {
-    deposits:  state.reader.data as DepositReport
+    deposits:  state.deposits.data as DepositReport,
+    rates: state.rates.data as ExchangeRateReport
   }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, ActionProps>): BuyDispatchProps => {
   return {
     handleSubmit: (ownProps: any) => dispatch(makeBuy(ownProps)),
-    setFormFunctions: (formProps: FormData) => dispatch(setFormFunctions(formProps))
+    setFormFunctions: (formProps: FormData) => dispatch(setFormFunctions(formProps)),
+    getExchangeRate: (currency: string) => dispatch(getExchangeRateRecord({currency: currency}))
   }
 }
 
