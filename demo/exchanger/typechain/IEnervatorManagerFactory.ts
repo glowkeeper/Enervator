@@ -317,7 +317,7 @@ const _abi = [
     outputs: [
       {
         name: "",
-        type: "int256"
+        type: "int128"
       }
     ],
     payable: false,
