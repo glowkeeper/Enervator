@@ -8,7 +8,7 @@ contract IEnervatorManager {
     int128 currentTPES;
     int128 oldTPES;
     int128 perCapitaEnergy;
-    int256 unitValue;
+    int128 unitValue;
   }
 
   event TokensReceived
@@ -57,5 +57,5 @@ contract IEnervatorManager {
   function getCurrentTPES () external view returns ( int128 );
   function getOldTPES () external view returns ( int128 );
   function getPerCapitaEnergy () external view returns ( int128 );
-  function getUnitValue () external view returns ( int256 );
+  function getUnitValue () external view returns ( int128 );
 }

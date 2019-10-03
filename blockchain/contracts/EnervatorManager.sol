@@ -195,7 +195,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
         return values.perCapitaEnergy;
     }
 
-    function getUnitValue () external view returns ( int256 )
+    function getUnitValue () external view returns ( int128 )
     {
       return values.unitValue;
     }
