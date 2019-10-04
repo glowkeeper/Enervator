@@ -1,7 +1,7 @@
 class App {
 
   static readonly token='Enervator'
-  static readonly title='Enervator Admin'
+  static readonly title='Eneradmin'
   static readonly tagline='Using Blockchain Technology to Incentivise Energy Efficiency'
   static readonly copyright='© 2019'
   static readonly place ='[University of Sussex](https://www.sussex.ac.uk/)'
