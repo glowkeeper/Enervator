@@ -80,7 +80,7 @@ class ExchangeRates {
   static readonly headingExchangeRatesReader = 'Read Exchange Rates'
 
   static readonly currency = "Currency"
-  static readonly rate = "Exchange Rate"
+  static readonly rate = "Exchange Rate (Currency to US$)"
 
   static readonly exchangeRateDetails = 'Exchange Rate Details'
 }

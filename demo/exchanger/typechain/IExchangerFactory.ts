@@ -20,11 +20,19 @@ const _abi = [
     constant: false,
     inputs: [
       {
+        name: "_enervatorManager",
+        type: "address"
+      },
+      {
         name: "_depositDB",
         type: "address"
       },
       {
         name: "_forexDB",
+        type: "address"
+      },
+      {
+        name: "_buyDB",
         type: "address"
       }
     ],
@@ -51,7 +59,7 @@ const _abi = [
       },
       {
         name: "_amount",
-        type: "uint256"
+        type: "int128"
       }
     ],
     name: "deposit",
@@ -66,6 +74,10 @@ const _abi = [
       {
         name: "_depositRef",
         type: "bytes32"
+      },
+      {
+        name: "_canWithdraw",
+        type: "bool"
       }
     ],
     name: "setCanWithdraw",
@@ -96,20 +108,34 @@ const _abi = [
     constant: false,
     inputs: [
       {
-        name: "_buyer",
-        type: "address"
-      },
-      {
-        name: "_buyRef",
-        type: "bytes32"
-      },
-      {
-        name: "_depositRef",
-        type: "bytes32"
-      },
-      {
-        name: "_amountFIAT",
-        type: "int128"
+        components: [
+          {
+            name: "buyer",
+            type: "address"
+          },
+          {
+            name: "buyRef",
+            type: "bytes32"
+          },
+          {
+            name: "depositRef",
+            type: "bytes32"
+          },
+          {
+            name: "amountFIAT",
+            type: "int128"
+          },
+          {
+            name: "amountEOR",
+            type: "int128"
+          },
+          {
+            name: "exchangeRate",
+            type: "int128"
+          }
+        ],
+        name: "_buyData",
+        type: "tuple"
       }
     ],
     name: "buy",

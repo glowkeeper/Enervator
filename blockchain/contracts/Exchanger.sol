@@ -1,15 +1,17 @@
 pragma solidity ^0.5.7;
+pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 import "./ABDKMath64x64.sol";
 
+import "./IExchanger.sol";
 import "./IEnervatorManager.sol";
 import "./IDeposit.sol";
 import "./IForex.sol";
 import "./IBuy.sol";
 
-contract Exchanger is Ownable {
+contract Exchanger is IExchanger, Ownable {
 
   IEnervatorManager private enervatorManager;
   IDeposit private depositDB;
@@ -69,46 +71,27 @@ contract Exchanger is Ownable {
     require ( address(forexDB) != address(0), "no address for forexDB!" );
     require ( _code[0] != 0, "no currency code supplied!" );
 		require ( _rate > 0, "no rate supplied!" );
+
     forexDB.setRate( _code, _rate );
   }
 
-  function buy ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, int128 _amountFIAT ) external
+  function buy ( BuyData calldata _buyData ) external
   {
     require ( address(forexDB) != address(0), "no address for forexDB!" );
     require ( address(depositDB) != address(0), "no address for depositDB!" );
-    require ( _buyer != address(0), "no address for buyer!" );
-    require ( _buyRef[0] != 0, "no buy reference supplied!" );
-    require ( _depositRef[0] != 0, "no deposit reference supplied!" );
-    require ( depositDB.getDepositedAddress( _depositRef ) == _buyer, "buyer and deposit addresses are different!" );
-    require ( depositDB.getCanWithdraw( _depositRef ), "deposit cannot be withdrawn!" );
-    require ( _amountFIAT <= depositDB.getDepositedAmount( _depositRef ), "cannot buy that amount!" );
+    require ( _buyData.buyer != address(0), "no address for buyer!" );
+    require ( _buyData.buyRef[0] != 0, "no buy reference supplied!" );
+    require ( _buyData.depositRef[0] != 0, "no deposit reference supplied!" );
+    require ( depositDB.getDepositedAddress( _buyData.depositRef ) == _buyData.buyer, "buyer and deposit addresses are different!" );
+    require ( depositDB.getCanWithdraw( _buyData.depositRef ), "deposit cannot be withdrawn!" );
+    require ( _buyData.amountFIAT <= depositDB.getDepositedAmount( _buyData.depositRef ), "cannot buy that amount!" );
+    require ( _buyData.exchangeRate > 0, "no rate set for currency!" );
 
-    bytes32 code = depositDB.getDepositedCode(_depositRef);
-    int128 rate = forexDB.getRate(code);
-    require ( rate > 0, "no rate set for currency!" );
+    uint256 amountEOR = uint256(_buyData.amountFIAT * _buyData.exchangeRate);
+    require ( uint256(_buyData.amountEOR) == amountEOR, "FIAT != EOR!" );
 
-    int128 fixedAmountEOR = _amountFIAT / rate;
-    int128 toWei = fixedAmountEOR * 10**18;
-
-    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
-    enervatorManager.send ( _buyer, uint256(toWei), buyData );
-
-    /* int128 fixedAmountEOR = ABDKMath64x64.div(_amountFIAT, rate);
-
-    int128 integer;
-    int128 fraction;
-    assembly {
-	    integer := mload(add(fixedAmountEOR, 64))
-	    fraction := mload(add(fixedAmountEOR, 128))
-    }
-
-    int128 fractionToWei = ( fraction * 10**18 ) >> 64;
-    int128 integerToWei = ( integer * 10**18 ) >> 64;
-
-    uint256 amountWei = uint256(fractionToWei + integerToWei);
-
-    bytes memory buyData = abi.encodePacked( _buyRef, _depositRef, _amountFIAT );
-    enervatorManager.send ( _buyer, amountWei, buyData ); */
+    bytes memory buyData = abi.encodePacked( _buyData.buyRef, _buyData.depositRef, _buyData.amountFIAT );
+    enervatorManager.send ( _buyData.buyer, uint256(_buyData.amountEOR), buyData );
   }
 
   function bought ( address _buyer, uint256 _amountEOR, bytes calldata _buyData ) external

@@ -45,11 +45,15 @@ interface ExchangerInterface extends Interface {
     }>;
 
     buy: TypedFunctionDescription<{
-      encode([_buyer, _buyRef, _depositRef, _amountFIAT]: [
-        string,
-        Arrayish,
-        Arrayish,
-        BigNumberish
+      encode([_buyData]: [
+        {
+          buyer: string;
+          buyRef: Arrayish;
+          depositRef: Arrayish;
+          amountFIAT: BigNumberish;
+          amountEOR: BigNumberish;
+          exchangeRate: BigNumberish;
+        }
       ]): string;
     }>;
 
@@ -133,10 +137,14 @@ export class Exchanger extends Contract {
     ): Promise<ContractTransaction>;
 
     buy(
-      _buyer: string,
-      _buyRef: Arrayish,
-      _depositRef: Arrayish,
-      _amountFIAT: BigNumberish,
+      _buyData: {
+        buyer: string;
+        buyRef: Arrayish;
+        depositRef: Arrayish;
+        amountFIAT: BigNumberish;
+        amountEOR: BigNumberish;
+        exchangeRate: BigNumberish;
+      },
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -191,12 +199,14 @@ export class Exchanger extends Contract {
 
     setRate(_code: Arrayish, _rate: BigNumberish): Promise<BigNumber>;
 
-    buy(
-      _buyer: string,
-      _buyRef: Arrayish,
-      _depositRef: Arrayish,
-      _amountFIAT: BigNumberish
-    ): Promise<BigNumber>;
+    buy(_buyData: {
+      buyer: string;
+      buyRef: Arrayish;
+      depositRef: Arrayish;
+      amountFIAT: BigNumberish;
+      amountEOR: BigNumberish;
+      exchangeRate: BigNumberish;
+    }): Promise<BigNumber>;
 
     bought(
       _buyer: string,

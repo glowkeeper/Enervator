@@ -82,7 +82,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('Burns correctly', async function () {
+  /* it('Burns correctly', async function () {
 
     const burnAmount = new BN('1000000000', 10)
     const shiftedBurn = this.decimilisation.mul( burnAmount )
@@ -93,7 +93,7 @@ contract("Enervator Test", async function ( network )
     const supplyShouldEqual = 7727623693 - 1000000000
     assert.equal( thisRetrievedNewSupply, supplyShouldEqual )
 
-  });
+  });*/
 
   it('has the correct current TPES', async function () {
 
@@ -179,8 +179,29 @@ contract("Enervator Test", async function ( network )
 
     const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
     const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
-    const amount = await this.deposit.getDepositedAmount( depositRef )
-    await this.exchanger.buy( '0xe0d0671873163a87861b805C69693Da1F7998f87', buyRef, depositRef, amount )
+    const code = ethers.utils.formatBytes32String( "USD" )
+    const amount = BIG(await this.deposit.getDepositedAmount( depositRef ))
+    const savedRate = BIG(await this.forex.getRate( code ))
+    const amountEOR = savedRate.times(amount)
+    const thisAmount = "0x" + amount.toString(16)
+    const thisEOR = "0x" + amountEOR.toString(16)
+    const thisRate = "0x" + savedRate.toString(16)
+
+    const computed = amount.times(savedRate)
+    const thisComputed = "0x" + computed.toString(16)
+
+    // console.log ( buyRef, depositRef, thisAmount, thisComputed, thisEOR, thisRate  )
+
+    const buyData = {
+      buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',
+      buyRef: buyRef,
+      depositRef: depositRef,
+      amountFIAT: thisAmount,
+      amountEOR: thisEOR,
+      exchangeRate: thisRate
+    }
+
+    await this.exchanger.buy( buyData )
     const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
     const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
     assert.equal( newDepositedAmount, 0 )

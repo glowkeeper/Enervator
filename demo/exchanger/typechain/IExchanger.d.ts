@@ -13,7 +13,12 @@ import {
 interface IExchangerInterface extends Interface {
   functions: {
     setComponents: TypedFunctionDescription<{
-      encode([_depositDB, _forexDB]: [string, string]): string;
+      encode([_enervatorManager, _depositDB, _forexDB, _buyDB]: [
+        string,
+        string,
+        string,
+        string
+      ]): string;
     }>;
 
     deposit: TypedFunctionDescription<{
@@ -26,7 +31,7 @@ interface IExchangerInterface extends Interface {
     }>;
 
     setCanWithdraw: TypedFunctionDescription<{
-      encode([_depositRef]: [Arrayish]): string;
+      encode([_depositRef, _canWithdraw]: [Arrayish, boolean]): string;
     }>;
 
     setRate: TypedFunctionDescription<{
@@ -34,11 +39,15 @@ interface IExchangerInterface extends Interface {
     }>;
 
     buy: TypedFunctionDescription<{
-      encode([_buyer, _buyRef, _depositRef, _amountFIAT]: [
-        string,
-        Arrayish,
-        Arrayish,
-        BigNumberish
+      encode([_buyData]: [
+        {
+          buyer: string;
+          buyRef: Arrayish;
+          depositRef: Arrayish;
+          amountFIAT: BigNumberish;
+          amountEOR: BigNumberish;
+          exchangeRate: BigNumberish;
+        }
       ]): string;
     }>;
 
@@ -69,8 +78,10 @@ export class IExchanger extends Contract {
 
   functions: {
     setComponents(
+      _enervatorManager: string,
       _depositDB: string,
       _forexDB: string,
+      _buyDB: string,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -84,6 +95,7 @@ export class IExchanger extends Contract {
 
     setCanWithdraw(
       _depositRef: Arrayish,
+      _canWithdraw: boolean,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -94,10 +106,14 @@ export class IExchanger extends Contract {
     ): Promise<ContractTransaction>;
 
     buy(
-      _buyer: string,
-      _buyRef: Arrayish,
-      _depositRef: Arrayish,
-      _amountFIAT: BigNumberish,
+      _buyData: {
+        buyer: string;
+        buyRef: Arrayish;
+        depositRef: Arrayish;
+        amountFIAT: BigNumberish;
+        amountEOR: BigNumberish;
+        exchangeRate: BigNumberish;
+      },
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -112,7 +128,12 @@ export class IExchanger extends Contract {
   filters: {};
 
   estimate: {
-    setComponents(_depositDB: string, _forexDB: string): Promise<BigNumber>;
+    setComponents(
+      _enervatorManager: string,
+      _depositDB: string,
+      _forexDB: string,
+      _buyDB: string
+    ): Promise<BigNumber>;
 
     deposit(
       _depositor: string,
@@ -121,16 +142,21 @@ export class IExchanger extends Contract {
       _amount: BigNumberish
     ): Promise<BigNumber>;
 
-    setCanWithdraw(_depositRef: Arrayish): Promise<BigNumber>;
+    setCanWithdraw(
+      _depositRef: Arrayish,
+      _canWithdraw: boolean
+    ): Promise<BigNumber>;
 
     setRate(_code: Arrayish, _rate: BigNumberish): Promise<BigNumber>;
 
-    buy(
-      _buyer: string,
-      _buyRef: Arrayish,
-      _depositRef: Arrayish,
-      _amountFIAT: BigNumberish
-    ): Promise<BigNumber>;
+    buy(_buyData: {
+      buyer: string;
+      buyRef: Arrayish;
+      depositRef: Arrayish;
+      amountFIAT: BigNumberish;
+      amountEOR: BigNumberish;
+      exchangeRate: BigNumberish;
+    }): Promise<BigNumber>;
 
     bought(
       _buyer: string,
