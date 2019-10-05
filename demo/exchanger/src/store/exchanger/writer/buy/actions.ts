@@ -4,7 +4,7 @@ import shortid from 'shortid'
 import { ethers } from 'ethers'
 import { Decimal } from 'decimal.js'
 import { BigNumber } from 'bignumber.js'
-//const BN = require('bn.js')
+const BN = require('bn.js')
 
 import { ApplicationState } from '../../../store'
 
@@ -26,12 +26,11 @@ export const makeBuy = ( details: BuyProps ) => {
     const address = state.chainAccount.data.account
     const currency = ethers.utils.formatBytes32String(details.currency)
 
-    const thisTwo = new BigNumber(2)
-    const thisSixtyFour = new BigNumber(64)
+    const thisTwo = new BigNumber(10)
+    const thisSixtyFour = new BigNumber(18)
     const thisMultiplier = thisTwo.pow(thisSixtyFour)
-
     const amount = new BigNumber(details.amount)
-    const bigAmount = amount.shiftedBy( 64 )
+    const bigAmount = amount.times( thisMultiplier )
 
     let buyRef = details.buyRef
     //let buyRef = ""
@@ -49,24 +48,24 @@ export const makeBuy = ( details: BuyProps ) => {
 
       console.log(bigEORDollarValue)
 
-      const shiftedEORDollarValue = bigEORDollarValue.div( thisMultiplier ).toNumber()
+      const shiftedEORDollarValue = ( bigEORDollarValue.div( thisMultiplier ) ).toNumber()
 
       console.log(shiftedEORDollarValue)
 
       const thisRate = shiftedEORDollarValue * details.rate
-      const amountEOR = details.amount * thisRate
 
       console.log(thisRate)
 
       const bigRate = new BigNumber( thisRate )
-      const thisBigRate = bigRate.shiftedBy( 64 )
+      const thisBigRate = bigRate.times( thisMultiplier )
 
-      console.log(thisBigRate)
+      console.log(thisBigRate.toString(16) )
 
+      const amountEOR = details.amount * thisRate
       const bigAmountEOR = new BigNumber( amountEOR )
-      const thisBigAmountEOR = bigAmountEOR.shiftedBy( 64 )
+      const thisBigAmountEOR = bigAmountEOR.times( thisMultiplier )
 
-      console.log( thisBigAmountEOR )
+      console.log( thisBigAmountEOR.toString(16)  )
 
       const fiatString = "0x" + bigAmount.toString(16)
       const eORString = "0x" + thisBigAmountEOR.toString(16)

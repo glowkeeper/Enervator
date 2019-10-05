@@ -1,7 +1,5 @@
 pragma solidity ^0.5.7;
 
-import "./ABDKMath64x64.sol";
-
 import "./IForex.sol";
 import "./Strings.sol";
 
