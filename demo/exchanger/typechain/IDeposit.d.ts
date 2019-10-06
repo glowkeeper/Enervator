@@ -74,8 +74,8 @@ export class IDeposit extends Contract {
     getDeposit(
       _depositRef: Arrayish
     ): Promise<{
-      code: string;
       amount: BigNumber;
+      code: string;
       account: string;
       canWithdraw: boolean;
     }>;

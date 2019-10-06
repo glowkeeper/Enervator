@@ -48,7 +48,7 @@ const _abi = [
         type: "bytes32"
       },
       {
-        name: "_amountEOR",
+        name: "_amountWEI",
         type: "uint256"
       }
     ],
@@ -203,7 +203,7 @@ const _abi = [
       {
         components: [
           {
-            name: "amount",
+            name: "amountWEI",
             type: "uint256"
           },
           {

@@ -13,7 +13,7 @@ import {
 interface IBuyInterface extends Interface {
   functions: {
     bought: TypedFunctionDescription<{
-      encode([_buyer, _buyRef, _depositRef, _amountEOR]: [
+      encode([_buyer, _buyRef, _depositRef, _amountWEI]: [
         string,
         Arrayish,
         Arrayish,
@@ -55,13 +55,13 @@ export class IBuy extends Contract {
 
     getBuy(
       _buyerRef: Arrayish
-    ): Promise<{ amount: BigNumber; depositRef: string; account: string }>;
+    ): Promise<{ amountWEI: BigNumber; depositRef: string; account: string }>;
 
     bought(
       _buyer: string,
       _buyRef: Arrayish,
       _depositRef: Arrayish,
-      _amountEOR: BigNumberish,
+      _amountWEI: BigNumberish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -75,7 +75,7 @@ export class IBuy extends Contract {
       _buyer: string,
       _buyRef: Arrayish,
       _depositRef: Arrayish,
-      _amountEOR: BigNumberish
+      _amountWEI: BigNumberish
     ): Promise<BigNumber>;
   };
 }

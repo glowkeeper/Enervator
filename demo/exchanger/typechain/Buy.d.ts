@@ -13,7 +13,7 @@ import {
 interface BuyInterface extends Interface {
   functions: {
     bought: TypedFunctionDescription<{
-      encode([_buyer, _buyRef, _depositRef, _amountEOR]: [
+      encode([_buyer, _buyRef, _depositRef, _amountWEI]: [
         string,
         Arrayish,
         Arrayish,
@@ -24,7 +24,7 @@ interface BuyInterface extends Interface {
 
   events: {
     Bought: TypedEventDescription<{
-      encodeTopics([_epochTime, _buyer, _buyRef, _depositRef, _amountEOR]: [
+      encodeTopics([_epochTime, _buyer, _buyRef, _depositRef, _amountWEI]: [
         null,
         null,
         null,
@@ -65,13 +65,13 @@ export class Buy extends Contract {
 
     getBuy(
       _buyerRef: Arrayish
-    ): Promise<{ amount: BigNumber; depositRef: string; account: string }>;
+    ): Promise<{ amountWEI: BigNumber; depositRef: string; account: string }>;
 
     bought(
       _buyer: string,
       _buyRef: Arrayish,
       _depositRef: Arrayish,
-      _amountEOR: BigNumberish,
+      _amountWEI: BigNumberish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -84,7 +84,7 @@ export class Buy extends Contract {
       _buyer: null,
       _buyRef: null,
       _depositRef: null,
-      _amountEOR: null
+      _amountWEI: null
     ): EventFilter;
   };
 
@@ -93,7 +93,7 @@ export class Buy extends Contract {
       _buyer: string,
       _buyRef: Arrayish,
       _depositRef: Arrayish,
-      _amountEOR: BigNumberish
+      _amountWEI: BigNumberish
     ): Promise<BigNumber>;
   };
 }

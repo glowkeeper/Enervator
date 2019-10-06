@@ -27,6 +27,14 @@ interface ExchangerInterface extends Interface {
       ]): string;
     }>;
 
+    setCanWithdraw: TypedFunctionDescription<{
+      encode([_depositRef, _canWithdraw]: [Arrayish, boolean]): string;
+    }>;
+
+    setRate: TypedFunctionDescription<{
+      encode([_code, _rate]: [Arrayish, BigNumberish]): string;
+    }>;
+
     deposit: TypedFunctionDescription<{
       encode([_depositor, _depositRef, _code, _amount]: [
         string,
@@ -36,29 +44,19 @@ interface ExchangerInterface extends Interface {
       ]): string;
     }>;
 
-    setCanWithdraw: TypedFunctionDescription<{
-      encode([_depositRef, _canWithdraw]: [Arrayish, boolean]): string;
-    }>;
-
-    setRate: TypedFunctionDescription<{
-      encode([_code, _rate]: [Arrayish, BigNumberish]): string;
-    }>;
-
     buy: TypedFunctionDescription<{
       encode([_buyData]: [
         {
           buyer: string;
           buyRef: Arrayish;
           depositRef: Arrayish;
-          amountFIAT: BigNumberish;
-          amountEOR: BigNumberish;
-          exchangeRate: BigNumberish;
+          amountWEI: BigNumberish;
         }
       ]): string;
     }>;
 
     bought: TypedFunctionDescription<{
-      encode([_buyer, _amountEOR, _buyData]: [
+      encode([_buyer, _amountWEI, _buyData]: [
         string,
         BigNumberish,
         Arrayish
@@ -116,14 +114,6 @@ export class Exchanger extends Contract {
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
-    deposit(
-      _depositor: string,
-      _depositRef: Arrayish,
-      _code: Arrayish,
-      _amount: BigNumberish,
-      overrides?: TransactionOverrides
-    ): Promise<ContractTransaction>;
-
     setCanWithdraw(
       _depositRef: Arrayish,
       _canWithdraw: boolean,
@@ -136,21 +126,27 @@ export class Exchanger extends Contract {
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
+    deposit(
+      _depositor: string,
+      _depositRef: Arrayish,
+      _code: Arrayish,
+      _amount: BigNumberish,
+      overrides?: TransactionOverrides
+    ): Promise<ContractTransaction>;
+
     buy(
       _buyData: {
         buyer: string;
         buyRef: Arrayish;
         depositRef: Arrayish;
-        amountFIAT: BigNumberish;
-        amountEOR: BigNumberish;
-        exchangeRate: BigNumberish;
+        amountWEI: BigNumberish;
       },
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
     bought(
       _buyer: string,
-      _amountEOR: BigNumberish,
+      _amountWEI: BigNumberish,
       _buyData: Arrayish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
@@ -185,13 +181,6 @@ export class Exchanger extends Contract {
       _buyDB: string
     ): Promise<BigNumber>;
 
-    deposit(
-      _depositor: string,
-      _depositRef: Arrayish,
-      _code: Arrayish,
-      _amount: BigNumberish
-    ): Promise<BigNumber>;
-
     setCanWithdraw(
       _depositRef: Arrayish,
       _canWithdraw: boolean
@@ -199,18 +188,23 @@ export class Exchanger extends Contract {
 
     setRate(_code: Arrayish, _rate: BigNumberish): Promise<BigNumber>;
 
+    deposit(
+      _depositor: string,
+      _depositRef: Arrayish,
+      _code: Arrayish,
+      _amount: BigNumberish
+    ): Promise<BigNumber>;
+
     buy(_buyData: {
       buyer: string;
       buyRef: Arrayish;
       depositRef: Arrayish;
-      amountFIAT: BigNumberish;
-      amountEOR: BigNumberish;
-      exchangeRate: BigNumberish;
+      amountWEI: BigNumberish;
     }): Promise<BigNumber>;
 
     bought(
       _buyer: string,
-      _amountEOR: BigNumberish,
+      _amountWEI: BigNumberish,
       _buyData: Arrayish
     ): Promise<BigNumber>;
   };

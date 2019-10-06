@@ -22,7 +22,7 @@ const _abi = [
       },
       {
         name: "_rate",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "setRate",
@@ -76,7 +76,7 @@ const _abi = [
     outputs: [
       {
         name: "",
-        type: "int128"
+        type: "uint256"
       }
     ],
     payable: false,

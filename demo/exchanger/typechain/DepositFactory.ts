@@ -53,7 +53,7 @@ const _abi = [
       {
         indexed: false,
         name: "_amount",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "Deposited",
@@ -85,7 +85,7 @@ const _abi = [
       {
         indexed: false,
         name: "_amount",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "Withdrawn",
@@ -144,7 +144,7 @@ const _abi = [
       },
       {
         name: "_amount",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "deposit",
@@ -170,7 +170,7 @@ const _abi = [
       },
       {
         name: "_amount",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "withdraw",
@@ -303,7 +303,7 @@ const _abi = [
     outputs: [
       {
         name: "",
-        type: "int128"
+        type: "uint256"
       }
     ],
     payable: false,
@@ -361,12 +361,12 @@ const _abi = [
       {
         components: [
           {
-            name: "code",
-            type: "bytes32"
+            name: "amount",
+            type: "uint256"
           },
           {
-            name: "amount",
-            type: "int128"
+            name: "code",
+            type: "bytes32"
           },
           {
             name: "account",

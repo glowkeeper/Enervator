@@ -46,32 +46,6 @@ const _abi = [
     constant: false,
     inputs: [
       {
-        name: "_depositor",
-        type: "address"
-      },
-      {
-        name: "_depositRef",
-        type: "bytes32"
-      },
-      {
-        name: "_code",
-        type: "bytes32"
-      },
-      {
-        name: "_amount",
-        type: "int128"
-      }
-    ],
-    name: "deposit",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
         name: "_depositRef",
         type: "bytes32"
       },
@@ -95,10 +69,36 @@ const _abi = [
       },
       {
         name: "_rate",
-        type: "int128"
+        type: "uint256"
       }
     ],
     name: "setRate",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_depositor",
+        type: "address"
+      },
+      {
+        name: "_depositRef",
+        type: "bytes32"
+      },
+      {
+        name: "_code",
+        type: "bytes32"
+      },
+      {
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "deposit",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
@@ -122,16 +122,8 @@ const _abi = [
             type: "bytes32"
           },
           {
-            name: "amountFIAT",
-            type: "int128"
-          },
-          {
-            name: "amountEOR",
-            type: "int128"
-          },
-          {
-            name: "exchangeRate",
-            type: "int128"
+            name: "amountWEI",
+            type: "uint256"
           }
         ],
         name: "_buyData",
@@ -152,7 +144,7 @@ const _abi = [
         type: "address"
       },
       {
-        name: "_amountEOR",
+        name: "_amountWEI",
         type: "uint256"
       },
       {
