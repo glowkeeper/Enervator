@@ -13,8 +13,8 @@ contract Deposit is IDeposit {
   mapping(address => bytes32[]) private depositRefs;
   mapping(bytes32 =>  DepositDB) private deposits;
 
-  event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount );
-  event Withdrawn ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount );
+  event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount );
+  event Withdrawn ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount );
   event CanWithdraw ( bytes32 _depositRef, bool _canWithdraw );
 
   constructor( address _depositManager ) public
@@ -62,7 +62,7 @@ contract Deposit is IDeposit {
     return exists;
   }
 
-  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external
+  function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot deposit!");
     require ( _depositor != address(0), "zero address for depositor!" );
@@ -81,7 +81,7 @@ contract Deposit is IDeposit {
     }
 
     deposits[_depositRef].account = _depositor;
-		deposits[_depositRef].amount = ABDKMath64x64.add(deposits[_depositRef].amount, _amount);
+		deposits[_depositRef].amount += _amount;
     deposits[_depositRef].code = _code;
     deposits[_depositRef].canWithdraw = true; // set to true for now - further down the line, this can be used as a guard...
 
@@ -89,17 +89,17 @@ contract Deposit is IDeposit {
     emit Deposited( epochTime, _depositor, _depositRef, _code, _amount );
 	}
 
-  function withdraw ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount ) external
+  function withdraw ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount ) external
   {
     require ( _isAllowed(msg.sender), "that address cannot deposit!");
     require ( _depositor != address(0), "zero address for depositor!" );
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
     require ( _code[0] != 0, "no currency code supplied!" );
+    require ( _code == deposits[_depositRef].code, "currency codes do not match!" );
     require ( _amount > 0, "no withdraw to make!" );
     require ( _amount <= deposits[_depositRef].amount, "withdrawd too much!" );
 
-
-    deposits[_depositRef].amount = ABDKMath64x64.sub(deposits[_depositRef].amount, _amount);
+    deposits[_depositRef].amount -= _amount;
     if ( deposits[_depositRef].amount == 0 )
     {
       deposits[_depositRef].canWithdraw = false;
@@ -107,7 +107,6 @@ contract Deposit is IDeposit {
 
     uint epochTime = now;
     emit Withdrawn( epochTime, _depositor, _depositRef, _code, _amount );
-
   }
 
 	function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw ) external
@@ -153,7 +152,7 @@ contract Deposit is IDeposit {
     return deposits[_depositRef].account;
   }
 
-  function getDepositedAmount ( bytes32 _depositRef ) external view returns (int128)
+  function getDepositedAmount ( bytes32 _depositRef ) external view returns (uint256)
   {
     require ( _depositRef[0] != 0, "no deposit reference supplied!" );
 

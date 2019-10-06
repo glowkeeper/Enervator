@@ -48,7 +48,7 @@ contract("Enervator Test", async function ( network )
 
     const two = new BN('2', 10)
     const sixtyFour = new BN('64', 10)
-    this.multiplier = two.pow(sixtyFour)
+    this.twos = two.pow(sixtyFour)
 
     const ten = new BN('10', 10)
     const eighteen = new BN('18', 10)
@@ -72,7 +72,7 @@ contract("Enervator Test", async function ( network )
 
   it('Sets supply correctly', async function () {
 
-    const newSupply = new BN('7727623693', 10)
+    const newSupply = new BN('7727623693')
     const shiftedSupply = this.decimilisation.mul( newSupply )
     await this.manager.addTokens(shiftedSupply)
     const supply = await this.manager.getTotalSupply()
@@ -98,7 +98,7 @@ contract("Enervator Test", async function ( network )
   it('has the correct current TPES', async function () {
 
     const TPES = await this.manager.getCurrentTPES()
-    const retrievedTPES = TPES.div(this.multiplier)
+    const retrievedTPES = TPES.div(this.twos)
     const currentTPES = retrievedTPES.toString()
     assert.equal( currentTPES, '162494360000' )
 
@@ -107,13 +107,13 @@ contract("Enervator Test", async function ( network )
   it('has the correct old TPES', async function () {
 
     const TPES = new BN('162494360000', 10)
-    const thisTPES = this.multiplier.mul(TPES)
+    const thisTPES = this.twos.mul(TPES)
     await this.manager.setTPES(thisTPES)
     const currentTPES = await this.manager.getCurrentTPES()
     const oldTPES = await this.manager.getOldTPES()
-    const retrievedCurrentTPES = currentTPES.div(this.multiplier)
+    const retrievedCurrentTPES = currentTPES.div(this.twos)
     const thisCurrentTPES = retrievedCurrentTPES.toString()
-    const retrievedOldTPES = oldTPES.div(this.multiplier)
+    const retrievedOldTPES = oldTPES.div(this.twos)
     const thisOldTPES = retrievedOldTPES.toString()
     assert.equal( thisOldTPES, '162494360000' )
     assert.equal( thisCurrentTPES, '162494360000' )
@@ -123,7 +123,7 @@ contract("Enervator Test", async function ( network )
   it('has the correct per capita energy', async function () {
 
     const perCapita = await this.manager.getPerCapitaEnergy()
-    const retrievedPerCapita = perCapita.div(this.multiplier)
+    const retrievedPerCapita = perCapita.div(this.twos)
     const thisPerCapita = retrievedPerCapita.toString()
     assert.equal( thisPerCapita, '22' )
 
@@ -137,76 +137,103 @@ contract("Enervator Test", async function ( network )
     const perCapita = await this.manager.getPerCapitaEnergy()
     const derivedUnitValue = parseFloat( pricePerMWh.toString() ) * ( parseFloat( oldTPES.toString() ) / parseFloat( currentTPES.toString() ) ) / parseFloat( perCapita.toString() )
     const thisDerivedUnitValue = ( derivedUnitValue ).toFixed( 2 )
-    const unitValue = await this.manager.getUnitValue()
-    const retrievedUnitValue = parseFloat(unitValue.toString())
-    const thisUnitValue = ( retrievedUnitValue / 2**64 ).toFixed( 2 )
+    const retrievedUnitValue = await this.manager.getUnitValue()
+    const unitValue = parseFloat(retrievedUnitValue.toString())
+    const thisUnitValue = ( unitValue / 2**64 ).toFixed( 2 )
     assert.equal( thisDerivedUnitValue, thisUnitValue )
 
   });
 
   it('has the correct rate', async function () {
 
-    const code = ethers.utils.formatBytes32String( "USD" )
-    const rate = new DECIMAL(0.07)
-    const thisTwo = new DECIMAL(2)
-    const thisSixtyFour = new DECIMAL(64)
-    const thisMultiplier = thisTwo.pow(thisSixtyFour)
-    const thisNewBigRate = Math.round(thisMultiplier.mul(rate).toString())
-    await this.exchanger.setRate( code, thisNewBigRate.toString() )
-    const savedRate = BIG(await this.forex.getRate( code ))
-    const retrievedRate = savedRate.div(thisMultiplier)
-    const thisRetrievedRate = retrievedRate.toFixed(2)
-    assert.equal( thisRetrievedRate, rate.toString() )
+    const code = ethers.utils.formatBytes32String( "GBP" )
+    const rate = 0.8
+    const retrievedUnitValue = await this.manager.getUnitValue()
+    const unitValue = parseFloat(retrievedUnitValue.toString())
+    const thisUnitValue = ( unitValue / 2**64 ).toFixed( 2 )
+    const exchangeRate = rate * thisUnitValue
 
+    const thisBigExchangeRate = new DECIMAL(exchangeRate)
+    const ten = new DECIMAL('10', 10)
+    const eighteen = new DECIMAL('18', 10)
+    const decimilisation = ten.pow(eighteen)
+
+    const thisNewBigExchangeRate = decimilisation.mul(thisBigExchangeRate)
+
+    //console.log ( rate, thisUnitValue, exchangeRate, thisNewBigExchangeRate.toHexadecimal() )
+
+    await this.exchanger.setRate( code, thisNewBigExchangeRate.toHexadecimal() )
+
+    const retreivedRate = await this.forex.getRate( code )
+    const thisRate = parseFloat(retreivedRate.toString())
+    const thisShiftedRate = thisRate / 10**18
+    assert.equal( thisShiftedRate, exchangeRate )
   });
 
   it('deposits correctly', async function () {
 
-    const code = ethers.utils.formatBytes32String( "USD" )
-    const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
+    const code = ethers.utils.formatBytes32String( "GBP" )
+    const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
     const amount = '1000'
-    const bigAmount = new BN( amount, 10 )
-    const thisAmount = this.multiplier.mul(bigAmount)
+    const bigAmount = new BN( amount )
+    const thisAmount = this.decimilisation.mul(bigAmount)
     await this.exchanger.deposit( '0xe0d0671873163a87861b805C69693Da1F7998f87', depositRef, code, thisAmount )
     const savedAmount = await this.deposit.getDepositedAmount( depositRef )
-    const retrievedAmount = savedAmount.div( this.multiplier )
+    const retrievedAmount = savedAmount.div( this.decimilisation )
     const thisRetrievedAmount = retrievedAmount.toString()
     assert.equal( thisRetrievedAmount, amount )
 
   });
 
-  it('Buys correctly', async function () {
+  /*
+  struct BuyData {
+    address buyer;
+    bytes32 buyRef;
+    bytes32 depositRef;
+    uint256 amountWEI;
+  }
+  */
 
-    const buyRef = ethers.utils.formatBytes32String( "USDBUY" )
-    const depositRef = ethers.utils.formatBytes32String( "USDDEP" )
-    const code = ethers.utils.formatBytes32String( "USD" )
-    const amount = BIG(await this.deposit.getDepositedAmount( depositRef ))
-    const savedRate = BIG(await this.forex.getRate( code ))
-    const amountEOR = savedRate.times(amount)
-    const thisAmount = "0x" + amount.toString(16)
-    const thisEOR = "0x" + amountEOR.toString(16)
-    const thisRate = "0x" + savedRate.toString(16)
+  ( 280898876404494330000 ) = (1000 * 10^18) / ( 3.5600000000000005 * 10^18)
 
-    const computed = amount.times(savedRate)
-    const thisComputed = "0x" + computed.toString(16)
+    it('Buys correctly', async function () {
 
-    // console.log ( buyRef, depositRef, thisAmount, thisComputed, thisEOR, thisRate  )
+      const buyRef = ethers.utils.formatBytes32String( "GBPBUY" )
+      const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
+      const code = await this.deposit.getDepositedCode( depositRef )
+      const retrievedAmount = await this.deposit.getDepositedAmount( depositRef )
+      const savedAmount = parseFloat(retrievedAmount.toString())
+      const thisShiftedAmount  = savedAmount / 10**18
+      const retreivedRate = await this.forex.getRate( code )
+      const thisRate = parseFloat(retreivedRate.toString())
+      const thisShiftedRate = thisRate / 10**18
+      const amountWEI = thisShiftedAmount / thisShiftedRate
 
-    const buyData = {
-      buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',
-      buyRef: buyRef,
-      depositRef: depositRef,
-      amountFIAT: thisAmount,
-      amountEOR: thisEOR,
-      exchangeRate: thisRate
-    }
+      const bigAmountWei = new DECIMAL(amountWEI)
+      const ten = new DECIMAL('10', 10)
+      const eighteen = new DECIMAL('18', 10)
+      const decimilisation = ten.pow(eighteen)
+      const thisAmountWei =  bigAmountWei.mul(decimilisation)
 
-    await this.exchanger.buy( buyData )
-    const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
-    const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
-    assert.equal( newDepositedAmount, 0 )
-    assert.equal( canWithdraw, false )
+      //const wEIToString = "0x" + thisAmountWei.toString()
 
-  });
+      const supply = await this.manager.getTotalSupply()
+
+      console.log( thisShiftedAmount, thisShiftedRate, amountWEI, thisAmountWei.toHexadecimal(), supply.toString() )
+
+      const buyData = {
+        buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',
+        buyRef: buyRef,
+        depositRef: depositRef,
+        amountWEI: thisAmountWei.toHexadecimal()
+      }
+
+      await this.exchanger.buy( buyData )
+      const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
+      const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
+      assert.equal( newDepositedAmount, 0 )
+      assert.equal( canWithdraw, false )
+
+    });
 
 });

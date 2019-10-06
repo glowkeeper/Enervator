@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 contract IBuy {
 
   struct BuyDB {
-    uint256 amount;
+    uint256 amountWEI;
     bytes32 depositRef;
     address account;
   }
@@ -14,7 +14,7 @@ contract IBuy {
 
   function getExists ( address _x ) public view returns (bool);
 
-  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR ) external;
+  function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountWEI ) external;
 
   function getNumBuyers () external view returns (uint256);
 	function getBuys ( uint256 _index ) external view returns (address);

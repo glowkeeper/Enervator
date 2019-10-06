@@ -9,7 +9,7 @@ contract Forex is IForex {
 	address private forexManager;
 
 	bytes32[] private codes;
-	mapping(bytes32 => int128) private rates;
+	mapping(bytes32 => uint256) private rates;
 
 	constructor( address _forexManager ) public
   {
@@ -33,7 +33,7 @@ contract Forex is IForex {
     }
   }
 
-	function setRate ( bytes32 _code, int128 _rate ) external
+	function setRate ( bytes32 _code, uint256 _rate ) external
 	{
 		require ( _isAllowed(msg.sender), "that address cannot set forex rates!");
 		require ( _code[0] != 0, "no currency code supplied!" );
@@ -59,7 +59,7 @@ contract Forex is IForex {
     return codes[_index];
 	}
 
-	function getRate ( bytes32 _code ) external view returns (int128)
+	function getRate ( bytes32 _code ) external view returns (uint256)
 	{
 		require ( _code[0] != 0, "no currency code supplied!" );
 

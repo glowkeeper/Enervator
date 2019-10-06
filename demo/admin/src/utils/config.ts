@@ -95,11 +95,11 @@ class Contract {
 
   static buyABI = [
 
-  	"event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR )",
+  	"event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amounWEI )",
 
     "function getExists ( address _x ) view returns (bool)",
 
-    "function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR )@500000",
+    "function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amounWEI )@500000",
 
     "function getNumBuyers () view returns (uint256)",
   	"function getBuys ( uint256 _index ) view returns (address)",

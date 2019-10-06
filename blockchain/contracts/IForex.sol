@@ -7,10 +7,10 @@ contract IForex {
 
 	function _isAllowed ( address _settor ) private returns (bool);
 
-	function setRate ( bytes32 _code, int128 _rate ) external;
+	function setRate ( bytes32 _code, uint256 _rate ) external;
 
 	function getNumCodes () external view returns (uint256);
 	function getCode ( uint256 _index ) external view returns (bytes32);
-	function getRate ( bytes32 _code) external view returns (int128);
+	function getRate ( bytes32 _code) external view returns (uint256);
 
 }
