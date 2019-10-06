@@ -185,55 +185,44 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  /*
-  struct BuyData {
-    address buyer;
-    bytes32 buyRef;
-    bytes32 depositRef;
-    uint256 amountWEI;
-  }
-  */
+  it('Buys correctly', async function () {
 
-  ( 280898876404494330000 ) = (1000 * 10^18) / ( 3.5600000000000005 * 10^18)
+    const buyRef = ethers.utils.formatBytes32String( "GBPBUY" )
+    const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
+    const code = await this.deposit.getDepositedCode( depositRef )
+    const retrievedAmount = await this.deposit.getDepositedAmount( depositRef )
+    const savedAmount = parseFloat(retrievedAmount.toString())
+    const thisShiftedAmount  = savedAmount / 10**18
+    const retreivedRate = await this.forex.getRate( code )
+    const thisRate = parseFloat(retreivedRate.toString())
+    const thisShiftedRate = thisRate / 10**18
+    const amountWEI = thisShiftedAmount / thisShiftedRate
 
-    it('Buys correctly', async function () {
+    const bigAmountWei = new DECIMAL(amountWEI)
+    const ten = new DECIMAL('10', 10)
+    const eighteen = new DECIMAL('18', 10)
+    const decimilisation = ten.pow(eighteen)
+    const thisAmountWei =  bigAmountWei.mul(decimilisation)
 
-      const buyRef = ethers.utils.formatBytes32String( "GBPBUY" )
-      const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
-      const code = await this.deposit.getDepositedCode( depositRef )
-      const retrievedAmount = await this.deposit.getDepositedAmount( depositRef )
-      const savedAmount = parseFloat(retrievedAmount.toString())
-      const thisShiftedAmount  = savedAmount / 10**18
-      const retreivedRate = await this.forex.getRate( code )
-      const thisRate = parseFloat(retreivedRate.toString())
-      const thisShiftedRate = thisRate / 10**18
-      const amountWEI = thisShiftedAmount / thisShiftedRate
+    //const wEIToString = "0x" + thisAmountWei.toString()
 
-      const bigAmountWei = new DECIMAL(amountWEI)
-      const ten = new DECIMAL('10', 10)
-      const eighteen = new DECIMAL('18', 10)
-      const decimilisation = ten.pow(eighteen)
-      const thisAmountWei =  bigAmountWei.mul(decimilisation)
+    const supply = await this.manager.getTotalSupply()
 
-      //const wEIToString = "0x" + thisAmountWei.toString()
+    console.log( thisShiftedAmount, thisShiftedRate, amountWEI, thisAmountWei.toHexadecimal(), supply.toString() )
 
-      const supply = await this.manager.getTotalSupply()
+    const buyData = {
+      buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',
+      buyRef: buyRef,
+      depositRef: depositRef,
+      amountWEI: thisAmountWei.toHexadecimal()
+    }
 
-      console.log( thisShiftedAmount, thisShiftedRate, amountWEI, thisAmountWei.toHexadecimal(), supply.toString() )
+    await this.exchanger.buy( buyData )
+    const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
+    const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
+    assert.equal( newDepositedAmount, 0 )
+    assert.equal( canWithdraw, false )
 
-      const buyData = {
-        buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',
-        buyRef: buyRef,
-        depositRef: depositRef,
-        amountWEI: thisAmountWei.toHexadecimal()
-      }
-
-      await this.exchanger.buy( buyData )
-      const newDepositedAmount = await this.deposit.getDepositedAmount( depositRef )
-      const canWithdraw = await this.deposit.getCanWithdraw( depositRef )
-      assert.equal( newDepositedAmount, 0 )
-      assert.equal( canWithdraw, false )
-
-    });
+  });
 
 });
