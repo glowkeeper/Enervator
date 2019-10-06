@@ -41,10 +41,10 @@ interface IExchangerInterface extends Interface {
     buy: TypedFunctionDescription<{
       encode([_buyData]: [
         {
+          amountWEI: BigNumberish;
           buyer: string;
           buyRef: Arrayish;
           depositRef: Arrayish;
-          amountWEI: BigNumberish;
         }
       ]): string;
     }>;
@@ -105,10 +105,10 @@ export class IExchanger extends Contract {
 
     buy(
       _buyData: {
+        amountWEI: BigNumberish;
         buyer: string;
         buyRef: Arrayish;
         depositRef: Arrayish;
-        amountWEI: BigNumberish;
       },
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
@@ -146,10 +146,10 @@ export class IExchanger extends Contract {
     ): Promise<BigNumber>;
 
     buy(_buyData: {
+      amountWEI: BigNumberish;
       buyer: string;
       buyRef: Arrayish;
       depositRef: Arrayish;
-      amountWEI: BigNumberish;
     }): Promise<BigNumber>;
 
     bought(

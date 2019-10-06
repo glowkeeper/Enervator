@@ -17,7 +17,11 @@ interface ForexInterface extends Interface {
     }>;
   };
 
-  events: {};
+  events: {
+    SetRate: TypedEventDescription<{
+      encodeTopics([_code, _rate]: [null, null]): string[];
+    }>;
+  };
 }
 
 export class Forex extends Contract {
@@ -47,7 +51,9 @@ export class Forex extends Contract {
     getNumCodes(): Promise<BigNumber>;
   };
 
-  filters: {};
+  filters: {
+    SetRate(_code: null, _rate: null): EventFilter;
+  };
 
   estimate: {
     setRate(_code: Arrayish, _rate: BigNumberish): Promise<BigNumber>;

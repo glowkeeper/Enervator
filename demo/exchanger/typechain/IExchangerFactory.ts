@@ -110,6 +110,10 @@ const _abi = [
       {
         components: [
           {
+            name: "amountWEI",
+            type: "uint256"
+          },
+          {
             name: "buyer",
             type: "address"
           },
@@ -120,10 +124,6 @@ const _abi = [
           {
             name: "depositRef",
             type: "bytes32"
-          },
-          {
-            name: "amountWEI",
-            type: "uint256"
           }
         ],
         name: "_buyData",

@@ -25,6 +25,23 @@ const _abi = [
     type: "constructor"
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        name: "_code",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        name: "_rate",
+        type: "uint256"
+      }
+    ],
+    name: "SetRate",
+    type: "event"
+  },
+  {
     constant: false,
     inputs: [
       {

@@ -47,10 +47,10 @@ interface ExchangerInterface extends Interface {
     buy: TypedFunctionDescription<{
       encode([_buyData]: [
         {
+          amountWEI: BigNumberish;
           buyer: string;
           buyRef: Arrayish;
           depositRef: Arrayish;
-          amountWEI: BigNumberish;
         }
       ]): string;
     }>;
@@ -136,10 +136,10 @@ export class Exchanger extends Contract {
 
     buy(
       _buyData: {
+        amountWEI: BigNumberish;
         buyer: string;
         buyRef: Arrayish;
         depositRef: Arrayish;
-        amountWEI: BigNumberish;
       },
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
@@ -196,10 +196,10 @@ export class Exchanger extends Contract {
     ): Promise<BigNumber>;
 
     buy(_buyData: {
+      amountWEI: BigNumberish;
       buyer: string;
       buyRef: Arrayish;
       depositRef: Arrayish;
-      amountWEI: BigNumberish;
     }): Promise<BigNumber>;
 
     bought(
