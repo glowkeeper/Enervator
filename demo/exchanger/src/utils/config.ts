@@ -55,14 +55,14 @@ class Contract {
 
   static depositABI = [
 
-  	"event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )",
-  	"event Withdrawn ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )",
+    "event Deposited ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )",
+  	"event Withdrawn ( uint _epochTime, address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )",
   	"event CanWithdraw ( bytes32 _depositRef, bool _canWithdraw )",
 
     "function getExists ( address _x ) view returns (bool)",
 
-    "function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )@500000",
-    "function withdraw ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )@500000",
+    "function deposit( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )@500000",
+    "function withdraw ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )@500000",
 
   	"function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw )@500000",
 
@@ -74,26 +74,28 @@ class Contract {
     "function getDepositedAmount ( bytes32 _depositRef ) view returns (int128)",
     "function getDepositedCode ( bytes32 _depositRef ) view returns (bytes32)",
     "function getCanWithdraw ( bytes32 _depositRef ) view returns (bool)",
-    "function getDeposit( bytes32 _depositRef ) view returns ( tuple( bytes32 code, int128 amount, address account, bool canWithdraw ) depositDB )"
+    "function getDeposit( bytes32 _depositRef ) view returns ( tuple( uint256 amount, bytes32 code, address account, bool canWithdraw ) depositDB )"
 
   ]
 
   static forexABI = [
 
-  	"function setRate ( bytes32 _code, int128 _rate )@500000",
+    "event SetRate ( bytes32 _code, uint256 _rate )",
+
+  	"function setRate ( bytes32 _code, uint256 _rate )@500000",
     "function getNumCodes () view returns (uint256)",
     "function getCode ( uint256 _index ) view returns (bytes32)",
-    "function getRate ( bytes32 _code) view returns (int128)"
+    "function getRate ( bytes32 _code ) view returns (uint256)"
 
   ]
 
   static buyABI = [
 
-  	"event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR )",
+    "event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountWEI )",
 
     "function getExists ( address _x ) view returns (bool)",
 
-    "function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountEOR )@500000",
+    "function bought ( address _buyer, bytes32 _buyRef, bytes32 _depositRef, uint256 _amountWEI )@500000",
 
     "function getNumBuyers () view returns (uint256)",
   	"function getBuys ( uint256 _index ) view returns (address)",
@@ -103,7 +105,7 @@ class Contract {
     "function getBuyAddress ( bytes32 _buyerRef ) view returns (address)",
   	"function getDepositReference ( bytes32 _buyerRef ) view returns (bytes32)",
 
-    "function getBuy( bytes32 _buyerRef ) view returns ( tuple( uint256 _amount, bytes32 _depositRef, address _account ) buyDB )"
+    "function getBuy( bytes32 _buyerRef ) view returns ( tuple( uint256 amountWEI, bytes32 _depositRef, address _account ) buyDB )"
 
   ]
 
@@ -112,12 +114,12 @@ class Contract {
   	"event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef )",
 
     "function setComponents ( address _enervatorManager, address _depositDB, address _forexDB, address _buyDB)@500000",
-    "function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )@500000",
     "function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw )@500000",
-    "function setRate ( bytes32 _code, int128 _rate )@500000",
+    "function setRate ( bytes32 _code, uint256 _rate )@500000",
+
+    "function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )@500000",
     "function buy ( tuple( address buyer, bytes32 buyRef, bytes32 depositRef, int128 amountFIAT, int128 amountEOR, int128 exchangeRate ) buyData ) external@500000",
     "function bought ( address _buyer, uint256 _amountEOR, bytes _buyData )@500000",
-
   ]
 }
 

@@ -11,6 +11,8 @@ contract Forex is IForex {
 	bytes32[] private codes;
 	mapping(bytes32 => uint256) private rates;
 
+	event SetRate ( bytes32 _code, uint256 _rate );
+
 	constructor( address _forexManager ) public
   {
     require ( _forexManager != address(0), "zero address for deposit manager!" );
@@ -45,6 +47,8 @@ contract Forex is IForex {
     }
 
 		rates[_code] = _rate;
+
+		emit SetRate ( _code, _rate );
 	}
 
 	function getNumCodes () external view returns (uint256)

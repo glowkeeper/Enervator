@@ -56,14 +56,14 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('has the correct name', async function () {
+  it('Has the correct name', async function () {
 
     const name = await this.manager.getTokenName()
     assert.equal( name, 'Enervator' )
 
   });
 
-  it('has the correct symbol', async function () {
+  it('Has the correct symbol', async function () {
 
     const symbol = await this.manager.getTokenSymbol()
     assert.equal( symbol, 'EOR' )
@@ -82,7 +82,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  /* it('Burns correctly', async function () {
+  it('Burns correctly', async function () {
 
     const burnAmount = new BN('1000000000', 10)
     const shiftedBurn = this.decimilisation.mul( burnAmount )
@@ -93,9 +93,9 @@ contract("Enervator Test", async function ( network )
     const supplyShouldEqual = 7727623693 - 1000000000
     assert.equal( thisRetrievedNewSupply, supplyShouldEqual )
 
-  });*/
+  });
 
-  it('has the correct current TPES', async function () {
+  it('Has the correct current TPES', async function () {
 
     const TPES = await this.manager.getCurrentTPES()
     const retrievedTPES = TPES.div(this.twos)
@@ -104,7 +104,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('has the correct old TPES', async function () {
+  it('Has the correct old TPES', async function () {
 
     const TPES = new BN('162494360000', 10)
     const thisTPES = this.twos.mul(TPES)
@@ -120,7 +120,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('has the correct per capita energy', async function () {
+  it('Has the correct per capita energy', async function () {
 
     const perCapita = await this.manager.getPerCapitaEnergy()
     const retrievedPerCapita = perCapita.div(this.twos)
@@ -129,7 +129,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('has the correct unit value', async function () {
+  it('Has the correct unit value', async function () {
 
     const pricePerMWh = await this.manager.getPricePerMWh()
     const currentTPES = await this.manager.getCurrentTPES()
@@ -144,7 +144,7 @@ contract("Enervator Test", async function ( network )
 
   });
 
-  it('has the correct rate', async function () {
+  it('Has the correct rate', async function () {
 
     const code = ethers.utils.formatBytes32String( "GBP" )
     const rate = 0.8
@@ -170,7 +170,7 @@ contract("Enervator Test", async function ( network )
     assert.equal( thisShiftedRate, exchangeRate )
   });
 
-  it('deposits correctly', async function () {
+  it('Deposits correctly', async function () {
 
     const code = ethers.utils.formatBytes32String( "GBP" )
     const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
@@ -203,12 +203,6 @@ contract("Enervator Test", async function ( network )
     const eighteen = new DECIMAL('18', 10)
     const decimilisation = ten.pow(eighteen)
     const thisAmountWei =  bigAmountWei.mul(decimilisation)
-
-    //const wEIToString = "0x" + thisAmountWei.toString()
-
-    const supply = await this.manager.getTotalSupply()
-
-    console.log( thisShiftedAmount, thisShiftedRate, amountWEI, thisAmountWei.toHexadecimal(), supply.toString() )
 
     const buyData = {
       buyer: '0xe0d0671873163a87861b805C69693Da1F7998f87',

@@ -4,14 +4,11 @@ pragma experimental ABIEncoderV2;
 contract IExchanger {
 
   struct BuyData {
+    uint256 amountWEI;
     address buyer;
     bytes32 buyRef;
     bytes32 depositRef;
-    uint256 amountWEI;
   }
-
-
-
 
   function setComponents ( address _enervatorManager, address _depositDB, address _forexDB, address _buyDB ) external;
 

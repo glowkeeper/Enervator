@@ -3,6 +3,12 @@ pragma experimental ABIEncoderV2;
 
 contract IEnervatorManager {
 
+  enum TokenSend {
+    ADD,
+    BURN,
+    SEND
+  }
+
   struct TokenValues {
     int128 pricePerMWh;
     int128 currentTPES;

@@ -94,7 +94,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require( _amount > 0, "need to burn more than zero tokens!" );
       require( address(token) != address(0), "zero address for token!" );
 
-      token.operatorBurn( address(this), _amount, "", "");
+      bytes memory data =  abi.encodePacked( uint ( TokenSend.BURN ) );
+      bytes memory operatorData =  abi.encodePacked( uint ( TokenSend.BURN ) );
+      token.operatorBurn( address(this), _amount, data, operatorData );
     }
 
     function setTPES ( int128  _amount ) external onlyOwner
@@ -122,7 +124,8 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require ( address(token) != address(0), "zero address for token!" );
       require ( address(_recipient) != address(0), "zero address for recipient!"  );
 
-      token.operatorSend( address(this), _recipient, _amount, "", _buyData );
+      bytes memory data =  abi.encodePacked( uint ( TokenSend.SEND ) );
+      token.operatorSend( address(this), _recipient, _amount, data, _buyData );
     }
 
     function tokensReceived ( address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData ) external
@@ -147,13 +150,13 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      if ( operatorData[0] != 0 )
+      uint thisUserdata = abi.decode( userData, ( uint ) );
+
+      if ( thisUserdata == uint( TokenSend.SEND ) )
       {
-
         tokenSender.bought(to, amount, operatorData);
-
       }
-
+      
       emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }
 
