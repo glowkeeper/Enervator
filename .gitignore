@@ -15,4 +15,6 @@ demo/exchanger/build
 demo/exchanger/build/*
 demo/admin/typechain
 demo/admin/typechain/*
+demo/exchanger/typechain
+demo/exchanger/typechain/*
 *.awcache*
