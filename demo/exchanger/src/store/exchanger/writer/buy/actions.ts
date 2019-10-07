@@ -40,14 +40,9 @@ export const makeBuy = ( details: BuyProps ) => {
     let txData: TxReport = {}
     try {
 
-      const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
-      const unitValue = parseFloat( retrievedUnitValue.toString() )
-      const thisUnitValue = unitValue / 2**64
-      const exchangeRate = details.rate * thisUnitValue
-      const amountEOR = details.amount / exchangeRate
-      const amountWEI = getDecimalToWei( amountEOR )
+      const amountWEI = getDecimalToWei( details.amountEOR )
 
-      console.log ( thisUnitValue, exchangeRate, amountEOR, amountWEI.toHexadecimal() )
+      //console.log ( thisUnitValue, exchangeRate, amountEOR, amountWEI.toHexadecimal() )
 
       const buyData = {
         amountWEI: amountWEI.toHexadecimal(),

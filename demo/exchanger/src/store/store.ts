@@ -23,6 +23,7 @@ import { reducer as infoReducer } from './info/reducer'
 import { reducer as writerReducer } from './exchanger/writer/reducer'
 import { reducer as depositReducer } from './exchanger/reader/deposit/reducer'
 import { reducer as exchangeRatesReducer } from './exchanger/reader/exchangeRates/reducer'
+import { reducer as unitValueReducer } from './exchanger/reader/unitValue/reducer'
 
 const initialState = (window as any).initialReduxState
 
@@ -37,6 +38,7 @@ export interface ApplicationState {
   writer: PayloadProps
   deposits: PayloadProps
   rates: PayloadProps
+  unitValue: PayloadProps
 }
 
 export const rootReducer: Reducer = combineReducers({
@@ -50,6 +52,7 @@ export const rootReducer: Reducer = combineReducers({
   writer: writerReducer,
   deposits: depositReducer,
   rates: exchangeRatesReducer,
+  unitValue: unitValueReducer
 })
 
 export function configureStore()

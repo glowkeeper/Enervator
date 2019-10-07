@@ -87,6 +87,7 @@ class Buy {
   static readonly code = "Currency"
   static readonly amount = "Amount"
   static readonly rate = "Exchange Rate"  
+  static readonly amountEOR = "Amount EOR"
 
 }
 

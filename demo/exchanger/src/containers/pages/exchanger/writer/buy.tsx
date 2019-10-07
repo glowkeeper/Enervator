@@ -22,12 +22,14 @@ import { BuyProps,
          DepositReport,
          DepositProps,
          ExchangeRateReport,
-         ExchangeRateProps } from '../../../../store/exchanger/types'
+         ExchangeRateProps,
+         UnitValueProps } from '../../../../store/exchanger/types'
 
 import { FormData } from '../../../../store/helpers/forms/types'
 
 import { setFormFunctions } from '../../../../store/helpers/forms/actions'
 import { getExchangeRateRecord } from '../../../../store/exchanger/reader/exchangeRates/actions'
+import { getUnitValue } from '../../../../store/exchanger/reader/unitValue/actions'
 import { makeBuy } from '../../../../store/exchanger/writer/buy/actions'
 
 import { TransactionHelper } from '../../../io/transactionHelper'
@@ -44,28 +46,92 @@ const buySchema = Yup.object().shape({
     .required('Required'),
 })
 
-interface BuyDepositProps {
+interface BuyDepositProps
+{
   deposits: DepositReport
   rates: ExchangeRateReport
+  unitValue: UnitValueProps
 }
 
-export interface BuyDispatchProps {
+interface BuyDispatchProps
+{
   handleSubmit: (values: any) => void
   setFormFunctions: (formProps: FormData) => void
   getExchangeRate: (currency: string) => void
+  getUnitValue: () => void
 }
 
 type BuyFormProps = BuyDepositProps & BuyDispatchProps
 
-export class BuyForm extends React.Component<BuyFormProps> {
+class BuyForm extends React.Component<BuyFormProps> {
+
+
+   static buyData: BuyProps = {
+    account: "",
+    buyRef: "",
+    depositRef: "",
+    currency: "",
+    rate: 0,
+    amountEOR: 0,
+    amount: 0
+  }
 
   public static defaultProps = {
     handleSubmit: (values: any) => {},
-    setFormFunctions: (formProps: FormData) => {}
+    setFormFunctions: (formProps: FormData) => {},
+    getExchangeRate: (currency: string) => {},
+    getUnitValue: () => {}
   }
 
-  constructor (props: BuyFormProps) {
-   super(props)
+  constructor (props: BuyFormProps)
+  {
+    super(props)
+  }
+
+  componentDidUpdate (previousProps: BuyFormProps )
+  {
+    //console.log('Activity Dates: ', this.props.activityRef, this.props.activitiesRef)
+    if ( previousProps.deposits != this.props.deposits )
+    {
+      if ( typeof this.props.deposits.data != 'undefined' )
+      {
+        const thisDeposit =  this.props.deposits.data[0] as DepositProps
+
+        //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
+        BuyForm.buyData.depositRef = thisDeposit.depositRef
+        BuyForm.buyData.currency =thisDeposit.currency
+        BuyForm.buyData.amount = thisDeposit.amount
+
+        this.props.getExchangeRate( thisDeposit.currency )
+      }
+    }
+
+    if ( previousProps.rates != this.props.rates )
+    {
+      if ( typeof this.props.rates.data != 'undefined' )
+      {
+        const thisRate = this.props.rates.data[0] as ExchangeRateProps
+        //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
+        BuyForm.buyData.rate = Math.round( ( thisRate.rate ) * 100 + Number.EPSILON ) / 100
+
+        this.props.getUnitValue()
+      }
+    }
+
+    if ( previousProps.unitValue != this.props.unitValue )
+    {
+      const unitValue = this.props.unitValue.unitValue
+      const rate = BuyForm.buyData.rate
+      const amount = BuyForm.buyData.amount
+
+      //console.log ( unitValue, rate, amount )
+      if ( ( unitValue > 0 ) && ( rate > 0 )  && ( amount > 0 )  )
+      {
+        const exchangeRate = unitValue * rate
+        BuyForm.buyData.amountEOR = Math.round( ( amount / exchangeRate ) * 100 + Number.EPSILON ) / 100
+        this.forceUpdate()
+      }
+    }
   }
 
   handleSubmit = (values: BuyProps, setSubmitting: Function, reset: Function) => {
@@ -73,48 +139,7 @@ export class BuyForm extends React.Component<BuyFormProps> {
     this.props.handleSubmit(values)
   }
 
-  getAmountsData = (deposits: DepositReport): BuyProps  => {
-
-    let newAmounts: BuyProps = {
-      account: "",
-      buyRef: "",
-      depositRef: "",
-      currency: "",
-      rate: 0,
-      amount: 0
-    }
-    if ( typeof deposits.data != 'undefined' )
-    {
-      const thisDeposit = deposits.data[0] as DepositProps
-      //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
-      newAmounts.depositRef = thisDeposit.depositRef as string,
-      newAmounts.currency =  thisDeposit.currency as string,
-      newAmounts.rate = 0,
-      newAmounts.amount =  thisDeposit.amount as number
-
-      this.props.getExchangeRate(newAmounts.currency)
-    }
-
-    return newAmounts
-  }
-
-  getRatesData = (rates: ExchangeRateReport): number  => {
-
-    let rate = 0
-    if ( typeof rates.data != 'undefined' )
-    {
-      const thisRate = rates.data[0] as ExchangeRateProps
-      //console.log(thisDate.getDay(), thisDate.getMonth(), thisDate.getFullYear())
-      rate = thisRate.rate
-    }
-
-    return rate
-  }
-
   render() {
-
-    const thisAmount: BuyProps  = this.getAmountsData(this.props.deposits)
-    const thisRate: number  = this.getRatesData(this.props.rates)
 
     return (
       <div>
@@ -122,11 +147,12 @@ export class BuyForm extends React.Component<BuyFormProps> {
         <div>
           <Formik
             initialValues={ { account: "",
-                              buyRef: thisAmount.buyRef,
-                              depositRef: thisAmount.depositRef,
-                              currency: thisAmount.currency,
-                              rate: thisRate,
-                              amount: thisAmount.amount
+                              buyRef: BuyForm.buyData.buyRef,
+                              depositRef: BuyForm.buyData.depositRef,
+                              currency: BuyForm.buyData.currency,
+                              rate: BuyForm.buyData.rate,
+                              amountEOR: BuyForm.buyData.amountEOR,
+                              amount: BuyForm.buyData.amount
                             }}
             enableReinitialize={true}
             validationSchema={buySchema}
@@ -157,6 +183,11 @@ export class BuyForm extends React.Component<BuyFormProps> {
                     label={BuyStrings.rate}
                     component={TextField}
                   />
+                  <Field
+                    name='amountEOR'
+                    label={BuyStrings.amountEOR}
+                    component={TextField}
+                  />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />
@@ -175,9 +206,11 @@ export class BuyForm extends React.Component<BuyFormProps> {
 }
 
 const mapStateToProps = (state: ApplicationState): BuyDepositProps => {
+
   return {
     deposits:  state.deposits.data as DepositReport,
-    rates: state.rates.data as ExchangeRateReport
+    rates: state.rates.data as ExchangeRateReport,
+    unitValue: state.unitValue.data as UnitValueProps
   }
 }
 
@@ -185,7 +218,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ApplicationState, any, Actio
   return {
     handleSubmit: (ownProps: any) => dispatch(makeBuy(ownProps)),
     setFormFunctions: (formProps: FormData) => dispatch(setFormFunctions(formProps)),
-    getExchangeRate: (currency: string) => dispatch(getExchangeRateRecord({currency: currency}))
+    getExchangeRate: (currency: string) => dispatch(getExchangeRateRecord({currency: currency})),
+    getUnitValue: () => dispatch(getUnitValue()),
   }
 }
 
