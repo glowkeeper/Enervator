@@ -33,7 +33,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     event Minted ( uint256 _amount );
     event Burnt ( uint256 _amount );
     event Sent ( address _recipient, uint256 _amount, uint256 fromBalance, uint256 toBalance  );
-    event TokensReceived ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance );
+    event Received ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance );
 
     constructor ( TokenValues memory _values, address _exchanger ) public
     {
@@ -152,7 +152,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      emit TokensReceived ( operator, from, to, amount, fromBalance, toBalance );
+      emit Received ( operator, from, to, amount, fromBalance, toBalance );
     }
 
     function tokensToSend ( address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData ) external

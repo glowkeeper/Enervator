@@ -28,12 +28,12 @@ class Blockchain {
 
 class Contract {
 
-  static enervatorManagerAddress = "0xe3E6993dB0354D36D226341E525704545F0756Bd"
-  //static enervatorAddress = "0x95e6Ea25CA16Ed3a1c34f93A6EA15De330cbc20b"
-  static depositAddress = "0xc2b74FC6E36e42fd0620970Ea3De908c8c27E3C8"
-  static forexAddress = "0x60a129c10aA626CAf17615140b42F7DC73Ce3201"
-  static buyAddress = "0x18035409B2B7ed5f6a6D4170462401e70e298114"
-  static exchangerAddress = "0x7f07073df8f14a441130A6b92DB8f53142C26CE5"
+  static enervatorManagerAddress = "0x26b08C76F8e06D8737a646eB319E9e23a79abb89"
+  //static enervatorAddress = "0x3fbfD583CaB9F455b2fb2b50C9daE8402742Fb48"
+  static depositAddress = "0x607Ba2cdc63D3B4553df09fa976B412DcB17c4B8"
+  static forexAddress = "0xf5C5203608B78eBaf264f4D0D5eE704181a1515D"
+  static buyAddress = "0xa68b265e6a58471a8431bF7bD211D7Ba0a1c9cA1"
+  static exchangerAddress = "0x09BEBC46cdCeF6E4590716eB74B21dF89D437b9E"
 
   static enervatorManagerABI = [
 
@@ -42,7 +42,7 @@ class Contract {
   	"event Minted ( uint256 _amount )",
   	"event Burnt ( uint256 _amount )",
   	"event Sent ( address _recipient, uint256 _amount, uint256 fromBalance, uint256 toBalance  )",
-  	"event TokensReceived ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance )",
+  	"event Received ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance )",
 
     "function setToken( address _token )@500000",
     "function addTokens ( uint256 _amount )@500000",
