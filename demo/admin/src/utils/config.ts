@@ -131,7 +131,7 @@ class Contract {
     "function setRate ( bytes32 _code, uint256 _rate )@500000",
 
     "function deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, uint256 _amount )@500000",
-    "function buy ( tuple( address buyer, bytes32 buyRef, bytes32 depositRef, int128 amountFIAT, int128 amountEOR, int128 exchangeRate ) buyData ) external@500000",
+    "function buy ( tuple( uint256 amountWEI, address buyer, bytes32 buyRef, bytes32 depositRef ) buyData ) external@500000",
     "function bought ( address _buyer, uint256 _amountEOR, bytes _buyData )@500000",
   ]
 }

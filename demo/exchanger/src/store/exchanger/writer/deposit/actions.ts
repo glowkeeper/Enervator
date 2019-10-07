@@ -2,7 +2,8 @@ import { ThunkDispatch } from 'redux-thunk'
 
 import shortid from 'shortid'
 import { ethers } from 'ethers'
-import { Decimal } from 'decimal.js'
+
+import { getDecimalToWei } from '../../actions'
 
 import { ApplicationState } from '../../../store'
 
@@ -72,19 +73,14 @@ export const makeDeposit = ( details: DepositProps ) => {
       }
 
       //console.log ( "this ref", depositRef)
-
-      const amount = new Decimal(details.amount)
-      const thisTwo = new Decimal(2)
-      const thisSixtyFour = new Decimal(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisNewBigAmount = thisMultiplier.mul(amount)
+      const decimilisedAmount = getDecimalToWei( details.amount )
 
       // deposit ( address _depositor, bytes32 _depositRef, bytes32 _code, int128 _amount )@
-        const tx = await exchangerContract.deposit(
+      const tx = await exchangerContract.deposit(
         address,
         depositRef,
         currency,
-        thisNewBigAmount.toHexadecimal()
+        decimilisedAmount.toHexadecimal()
       )
       txData = {
         [tx.hash]: {

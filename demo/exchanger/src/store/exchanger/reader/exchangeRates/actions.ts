@@ -3,6 +3,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ethers } from 'ethers'
 import { BigNumber } from 'bignumber.js'
 
+import { getBigNumberFromWei } from '../../actions'
+
 import { ApplicationState } from '../../../store'
 
 import { ActionProps } from '../../../types'
@@ -40,12 +42,10 @@ const getExchangeRate = (props: RateReportProps) => {
     let actionType = props.failureActionType
 
     try {
+
       const exchangeRate = await forexContract.getRate(currency)
       const bigExchangeRate = new BigNumber(exchangeRate)
-      const thisTwo = new BigNumber(2)
-      const thisSixtyFour = new BigNumber(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisExchangeRate = bigExchangeRate.div(thisMultiplier).toNumber()
+      const thisExchangeRate = getBigNumberFromWei( bigExchangeRate )
 
       //console.log( thisExchangeRate )
 

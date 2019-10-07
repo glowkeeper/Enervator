@@ -2,6 +2,9 @@ import { ThunkDispatch } from 'redux-thunk'
 
 import shortid from 'shortid'
 import { ethers } from 'ethers'
+
+import { getDecimalToWei } from '../../actions'
+
 import { Decimal } from 'decimal.js'
 import { BigNumber } from 'bignumber.js'
 const BN = require('bn.js')
@@ -26,12 +29,6 @@ export const makeBuy = ( details: BuyProps ) => {
     const address = state.chainAccount.data.account
     const currency = ethers.utils.formatBytes32String(details.currency)
 
-    const thisTwo = new BigNumber(10)
-    const thisSixtyFour = new BigNumber(18)
-    const thisMultiplier = thisTwo.pow(thisSixtyFour)
-    const amount = new BigNumber(details.amount)
-    const bigAmount = amount.times( thisMultiplier )
-
     let buyRef = details.buyRef
     //let buyRef = ""
     if ( buyRef == "" ) {
@@ -43,44 +40,21 @@ export const makeBuy = ( details: BuyProps ) => {
     let txData: TxReport = {}
     try {
 
-      const eORDollarValue = await enervatorManagerContract.getUnitValue()
-      const bigEORDollarValue = new BigNumber( eORDollarValue )
+      const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
+      const unitValue = parseFloat( retrievedUnitValue.toString() )
+      const thisUnitValue = unitValue / 2**64
+      const exchangeRate = details.rate * thisUnitValue
+      const amountEOR = details.amount / exchangeRate
+      const amountWEI = getDecimalToWei( amountEOR )
 
-      console.log(bigEORDollarValue)
-
-      const shiftedEORDollarValue = ( bigEORDollarValue.div( thisMultiplier ) ).toNumber()
-
-      console.log(shiftedEORDollarValue)
-
-      const thisRate = shiftedEORDollarValue * details.rate
-
-      console.log(thisRate)
-
-      const bigRate = new BigNumber( thisRate )
-      const thisBigRate = bigRate.times( thisMultiplier )
-
-      console.log(thisBigRate.toString(16) )
-
-      const amountEOR = details.amount * thisRate
-      const bigAmountEOR = new BigNumber( amountEOR )
-      const thisBigAmountEOR = bigAmountEOR.times( thisMultiplier )
-
-      console.log( thisBigAmountEOR.toString(16)  )
-
-      const fiatString = "0x" + bigAmount.toString(16)
-      const eORString = "0x" + thisBigAmountEOR.toString(16)
-      const rateString = "0x" + thisBigRate.toString(16)
+      console.log ( thisUnitValue, exchangeRate, amountEOR, amountWEI.toHexadecimal() )
 
       const buyData = {
+        amountWEI: amountWEI.toHexadecimal(),
         buyer: address,
         buyRef: buyRef,
-        depositRef: details.depositRef,
-        amountFIAT: fiatString,
-        amountEOR: eORString,
-        exchangeRate: rateString
+        depositRef: details.depositRef
       }
-
-      console.log( "Buy this", buyData )
 
       const tx = await exchangerContract.buy( buyData )
       txData = {
