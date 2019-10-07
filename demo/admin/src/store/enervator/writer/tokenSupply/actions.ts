@@ -5,9 +5,9 @@ import { ethers } from 'ethers'
 import { ApplicationState } from '../../../store'
 
 import { write } from '../../../actions'
-import BN from 'bn.js'
+import { BigNumber } from 'bignumber.js'
 
-import { getDecimalToWei } from '../../actions'
+import { getBigNumberFromWei, getDecimalToWei } from '../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
 import { SupplyProps, WriterActionTypes} from '../../types'
@@ -23,10 +23,11 @@ export const setSupply = (details: SupplyProps) => {
     let actionType = WriterActionTypes.SUPPLY_FAILURE
     let txData: TxReport = {}
     try {
+
       // set(bytes32 _reference, bytes32 _orgRef, bytes32 _reportingOrgRef, bytes32 _version, bytes32 _generatedTime)
       const totalSupply = await enervatorManagerContract.getTotalSupply()
-      const bigSupply = ethers.utils.bigNumberify( totalSupply )
-      const currentSupply = bigSupply.div(ethers.constants.WeiPerEther).toNumber()
+      const bigSupply = new BigNumber( totalSupply )
+      const currentSupply = getBigNumberFromWei ( bigSupply )
 
       let key = -1
 
@@ -36,9 +37,7 @@ export const setSupply = (details: SupplyProps) => {
         {
           const amount = currentSupply - details.supply
           const decimilisedBurnAmount = getDecimalToWei( amount )
-          console.log( decimilisedBurnAmount.toHexadecimal() )
-
-          //console.log(currentSupply, details.supply, amount, decimilisedBurnAmount )
+          //console.log( decimilisedBurnAmount.toHexadecimal() )
 
           const tx = await enervatorManagerContract.burnTokens ( decimilisedBurnAmount.toHexadecimal() )
           txData = {
@@ -51,10 +50,7 @@ export const setSupply = (details: SupplyProps) => {
         {
           const amount = details.supply - currentSupply
           const decimilisedAddAmount = getDecimalToWei( amount )
-          console.log( decimilisedAddAmount.toHexadecimal() )
-
-          //7727623693
-          //8000000000
+          //console.log( decimilisedAddAmount.toHexadecimal() )
 
           const tx = await enervatorManagerContract.addTokens ( decimilisedAddAmount.toHexadecimal() )
           txData = {

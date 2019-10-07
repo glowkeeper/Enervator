@@ -3,6 +3,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ethers } from 'ethers'
 import { BigNumber } from 'bignumber.js'
 
+import { getBigNumberFromWei, getBigNumberFromTwotoSixyFour, getDecimalToWei } from '../../actions'
+
 import { ApplicationState } from '../../../../store'
 
 import { ActionProps } from '../../../types'
@@ -35,38 +37,32 @@ export const getEnervatorReport = () => {
         perCapitaEnergy: 0,
         unitValue: 0
       }
-
-      const thisTwo = new BigNumber(2)
-      const thisSixtyFour = new BigNumber(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-
       enervatorParamsData.tokenName = await enervatorManagerContract.getTokenName()
       enervatorParamsData.tokenSymbol = await enervatorManagerContract.getTokenSymbol()
 
       const totalSupply = await enervatorManagerContract.getTotalSupply()
-      const bigSupply = ethers.utils.bigNumberify(totalSupply)
-      enervatorParamsData.totalSupply = bigSupply.div(ethers.constants.WeiPerEther).toNumber()
+      const bigSupply = new BigNumber( totalSupply )
+      enervatorParamsData.totalSupply = getBigNumberFromWei( bigSupply )
 
       const pricePerMWh = await enervatorManagerContract.getPricePerMWh()
       const bigPricePerMWh = new BigNumber(pricePerMWh)
-      enervatorParamsData.pricePerMWh = bigPricePerMWh.div(thisMultiplier).toNumber()
+      enervatorParamsData.pricePerMWh = getBigNumberFromTwotoSixyFour( bigPricePerMWh )
 
       const currentTPES = await enervatorManagerContract.getCurrentTPES()
       const bigCurrentTPES =new BigNumber(currentTPES)
-      enervatorParamsData.currentTPES = bigCurrentTPES.div(thisMultiplier).toNumber()
+      enervatorParamsData.currentTPES = getBigNumberFromTwotoSixyFour( bigCurrentTPES )
 
       const oldTPES = await enervatorManagerContract.getOldTPES()
       const bigOldTPES = new BigNumber(oldTPES)
-      enervatorParamsData.oldTPES = bigOldTPES.div(thisMultiplier).toNumber()
+      enervatorParamsData.oldTPES = getBigNumberFromTwotoSixyFour( bigOldTPES )
 
       const perCapitaEnergy = await enervatorManagerContract.getPerCapitaEnergy()
-      const bigPerCapitaEnergy = new BigNumber(perCapitaEnergy)
-      enervatorParamsData.perCapitaEnergy = bigPerCapitaEnergy.div(thisMultiplier).toNumber()
+      const bigPerCapitaEnergy = new BigNumber( perCapitaEnergy )
+      enervatorParamsData.perCapitaEnergy = getBigNumberFromTwotoSixyFour( bigPerCapitaEnergy )
 
-      const unitValue = await enervatorManagerContract.getUnitValue()
-      const bigUnitValue = new BigNumber(unitValue)
-      enervatorParamsData.unitValue = bigUnitValue.div(thisMultiplier).toNumber()
-
+      const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
+      const unitValue = parseFloat( retrievedUnitValue.toString() )
+      enervatorParamsData.unitValue = Math.round( ( unitValue / 2**64 ) * 100 + Number.EPSILON ) / 100
       enervatorData.data.data[0] = enervatorParamsData
 
       //console.log( enervatorParamsData.tokenName, enervatorParamsData.tokenSymbol,enervatorData.data.data[0] )

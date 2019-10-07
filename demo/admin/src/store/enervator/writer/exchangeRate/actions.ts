@@ -26,11 +26,13 @@ export const setExchangeRate = (details: ExchangeRateProps) => {
     let txData: TxReport = {}
     try {
 
-      const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
+      /* const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
       const unitValue = parseFloat( retrievedUnitValue.toString() )
       const thisUnitValue = unitValue / 2**64
       const exchangeRate = details.rate * thisUnitValue
-      const thisDecimalExchangeRate = getDecimalToWei( exchangeRate )
+      const thisDecimalExchangeRate = getDecimalToWei( exchangeRate ) */
+
+      const thisDecimalExchangeRate = getDecimalToWei( details.rate )
 
       const tx = await exchangeRateContract.setRate (currency, thisDecimalExchangeRate.toHexadecimal())
       txData = {

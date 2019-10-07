@@ -65,3 +65,23 @@ export const getBNToTwotoSixyFour = ( value: number ): BN => {
   return mulitplier.mul( thisValue ) as BN
 
 }
+
+export const getBigNumberFromWei = ( value: BigNumber ): number => {
+
+  const ten = new BigNumber( '10' )
+  const eighteen = new BigNumber( '18' )
+  const mulitplier = ten.pow( eighteen )
+
+  return value.div(mulitplier).toNumber()
+
+}
+
+export const getBigNumberFromTwotoSixyFour = ( value: BigNumber ): number => {
+
+  const two = new BigNumber( '2' )
+  const sixtyFour = new BigNumber( '64' )
+  const mulitplier = two.pow( sixtyFour )
+
+  return value.div(mulitplier).toNumber()
+
+}
