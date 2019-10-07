@@ -31,6 +31,13 @@ class Contract {
 
   static enervatorManagerABI = [
 
+    "event TPES ( int128  _amount )",
+  	"event PerCapitaEnergy ( int128 _amount )",
+  	"event Minted ( uint256 _amount )",
+  	"event Burnt ( uint256 _amount )",
+  	"event Sent ( address _recipient, uint256 _amount, uint256 fromBalance, uint256 toBalance  )",
+  	"event TokensReceived ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance )",
+
     "function setToken( address _token )@500000",
     "function addTokens ( uint256 _amount )@500000",
     "function burnTokens ( uint256 _amount )@500000",
@@ -111,7 +118,7 @@ class Contract {
 
   static exchangerABI = [
 
-  	"event Buy ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef,  uint256 _amountWEI )",
+    "event Buy ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef,  uint256 _amountWEI )",
 
     "function setComponents ( address _enervatorManager, address _depositDB, address _forexDB, address _buyDB)@500000",
     "function setCanWithdraw ( bytes32 _depositRef, bool _canWithdraw )@500000",
