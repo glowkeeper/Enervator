@@ -89,7 +89,7 @@ interface EnervatorManagerInterface extends Interface {
       ]): string[];
     }>;
 
-    TokensReceived: TypedEventDescription<{
+    Received: TypedEventDescription<{
       encodeTopics([operator, from, to, amount, fromBalance, toBalance]: [
         null,
         null,
@@ -243,7 +243,7 @@ export class EnervatorManager extends Contract {
       toBalance: null
     ): EventFilter;
 
-    TokensReceived(
+    Received(
       operator: null,
       from: null,
       to: null,
