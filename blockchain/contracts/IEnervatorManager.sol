@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 contract IEnervatorManager {
 
   enum TokenSend {
-    ADD,
+    MINT,
     BURN,
     SEND
   }

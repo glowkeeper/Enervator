@@ -18,11 +18,11 @@ contract Enervator is IEnervator, ERC777 {
     manager = _defaultOperators[0];
   }
 
-  function addSupply ( uint256 _amount ) external
+  function addSupply ( uint256 _amount, bytes calldata userData, bytes calldata operatorData ) external
   {
     require( isOperatorFor( msg.sender, manager ), "not token operator!" );
     require( _amount > 0, "no tokens to add!" );
 
-    _mint( manager, manager, _amount, "", "" );
+    _mint( manager, manager, _amount, userData, operatorData );
   }
 }

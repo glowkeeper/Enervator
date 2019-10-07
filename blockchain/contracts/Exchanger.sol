@@ -16,7 +16,7 @@ contract Exchanger is IExchanger, Ownable {
   IForex private forexDB;
   IBuy private buyDB;
 
-  event Bought ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef );
+  event Buy ( uint _epochTime, address _buyer, bytes32 _buyRef, bytes32 _depositRef,  uint256 _amountWEI );
 
   function setComponents ( address _enervatorManager, address _depositDB, address _forexDB, address _buyDB) external onlyOwner
   {
@@ -96,6 +96,9 @@ contract Exchanger is IExchanger, Ownable {
 
     bytes memory sendData = abi.encodePacked( _buyData.buyRef, _buyData.depositRef, amountFIAT );
     enervatorManager.send ( _buyData.buyer, _buyData.amountWEI, sendData );
+
+    uint epochTime = now;
+    emit Buy ( epochTime, _buyData.buyer, _buyData.buyRef, _buyData.depositRef, _buyData.amountWEI );
   }
 
   function bought ( address _buyer, uint256 _amountWEI, bytes calldata _buyData ) external

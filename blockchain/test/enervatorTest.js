@@ -174,7 +174,7 @@ contract("Enervator Test", async function ( network )
 
     const code = ethers.utils.formatBytes32String( "GBP" )
     const depositRef = ethers.utils.formatBytes32String( "GBPDEP" )
-    const amount = '1000'
+    const amount = '1500'
     const bigAmount = new BN( amount )
     const thisAmount = this.decimilisation.mul(bigAmount)
     await this.exchanger.deposit( '0xe0d0671873163a87861b805C69693Da1F7998f87', depositRef, code, thisAmount )

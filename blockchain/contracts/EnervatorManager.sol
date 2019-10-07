@@ -27,6 +27,14 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
     IEnervator private token;
     IExchanger private tokenSender;
 
+    event TPES ( int128  _amount );
+    event PerCapitaEnergy ( int128 _amount );
+
+    event Minted ( uint256 _amount );
+    event Burnt ( uint256 _amount );
+    event Sent ( address _recipient, uint256 _amount, uint256 fromBalance, uint256 toBalance  );
+    event TokensReceived ( address operator, address from, address to, uint256 amount, uint256 fromBalance, uint256 toBalance );
+
     constructor ( TokenValues memory _values, address _exchanger ) public
     {
       require ( _values.pricePerMWh > 0, "pricePerMWh invalid" );
@@ -86,7 +94,9 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       require( _amount > 0, "need to add more than zero tokens!" );
       require( address(token) != address(0), "zero address for token!" );
 
-      token.addSupply( _amount );
+      bytes memory data =  abi.encodePacked( uint ( TokenSend.MINT ) );
+      bytes memory operatorData =  abi.encodePacked( uint ( TokenSend.MINT ) );
+      token.addSupply( _amount, data, operatorData );
     }
 
     function burnTokens ( uint256 _amount ) external onlyOwner
@@ -106,6 +116,8 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       values.oldTPES = values.currentTPES;
       values.currentTPES = _amount;
       _setUnitValue();
+
+      emit TPES ( _amount );
     }
 
     function setPerCapitaEnergy ( int128 _amount ) external onlyOwner
@@ -114,6 +126,8 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
       values.perCapitaEnergy = _amount;
       _setUnitValue();
+
+      emit PerCapitaEnergy ( _amount );
     }
 
     function send ( address _recipient, uint256 _amount, bytes calldata _buyData ) external
@@ -138,7 +152,7 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
       uint256 fromBalance = token.balanceOf(from);
       uint256 toBalance = token.balanceOf(to);
 
-      emit TokensReceived(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
+      emit TokensReceived ( operator, from, to, amount, fromBalance, toBalance );
     }
 
     function tokensToSend ( address operator, address from, address to, uint256 amount, bytes calldata userData, bytes calldata operatorData ) external
@@ -154,10 +168,21 @@ contract EnervatorManager is IEnervatorManager, IERC777Recipient, IERC777Sender,
 
       if ( thisUserdata == uint( TokenSend.SEND ) )
       {
+
         tokenSender.bought(to, amount, operatorData);
+        emit Sent ( to, amount, fromBalance, toBalance );
+
+      } else if ( thisUserdata == uint( TokenSend.MINT ) )
+      {
+
+        emit Minted ( amount );
+
+      } else if ( thisUserdata == uint( TokenSend.BURN ) )
+      {
+
+        emit Burnt (  amount );
+
       }
-      
-      emit TokensSent(operator, from, to, amount, userData, operatorData, address(token), fromBalance, toBalance);
     }
 
     function getTokenName () external view returns ( string memory )
