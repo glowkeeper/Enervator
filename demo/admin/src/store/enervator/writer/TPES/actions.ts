@@ -1,11 +1,12 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { BigNumber } from 'bignumber.js'
 
 import { ApplicationState } from '../../../store'
 
 import { write } from '../../../actions'
+
+import { getDecimalToTwotoSixyFour } from '../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
 import { TPESProps, WriterActionTypes} from '../../types'
@@ -18,20 +19,14 @@ export const setTPES = (details: TPESProps) => {
     const state = getState()
     const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
+    const thisTPES = getDecimalToTwotoSixyFour( details.tPES )
+
     let actionType = WriterActionTypes.TPES_FAILURE
     let txData: TxReport = {}
     try {
 
-      const thisTwo = new BigNumber(2)
-      const thisSixtyFour = new BigNumber(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-
-      const tpes = new BigNumber(details.tPES)
-      const thisNewBigTPES = thisMultiplier.times(tpes)
-      const tPESString = "0x" + thisNewBigTPES.toString(16)
-
       //console.log(details.tPES, tpes, thisNewBigTPES.toHexadecimal())
-      const tx = await enervatorManagerContract.setTPES (tPESString)
+      const tx = await enervatorManagerContract.setTPES ( thisTPES.toHexadecimal() )
       txData = {
         [tx.hash]: {
           summary: `${Transaction.success}`,

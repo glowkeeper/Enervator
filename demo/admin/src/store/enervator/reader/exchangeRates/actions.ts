@@ -1,7 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { BigNumber } from 'bignumber.js'
 
 import { ApplicationState } from '../../../../store'
 
@@ -40,18 +39,14 @@ const getExchangeRate = (props: RateReportProps) => {
     let actionType = props.failureActionType
 
     try {
-      const exchangeRate = await forexContract.getRate(currency)
-      const bigExchangeRate = new BigNumber(exchangeRate)
-      const thisTwo = new BigNumber(2)
-      const thisSixtyFour = new BigNumber(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisExchangeRate = bigExchangeRate.div(thisMultiplier).toNumber()
 
-      //console.log( thisExchangeRate )
+      const retrievedRate = await forexContract.getRate(currency)
+      const thisRate = parseFloat(retrievedRate.toString())
+      const thisShiftedRate = Math.round( ( thisRate / 10**18 ) * 100 + Number.EPSILON ) / 100
 
       exchangeRatesData.data.data[data.length] = {
         currency: ethers.utils.parseBytes32String(currency),
-        rate: thisExchangeRate
+        rate: thisShiftedRate
       }
 
       actionType = props.successActionType

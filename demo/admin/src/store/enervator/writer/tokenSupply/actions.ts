@@ -1,11 +1,13 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { BigNumber } from 'bignumber.js'
 
 import { ApplicationState } from '../../../store'
 
 import { write } from '../../../actions'
+import BN from 'bn.js'
+
+import { getDecimalToWei } from '../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
 import { SupplyProps, WriterActionTypes} from '../../types'
@@ -23,8 +25,9 @@ export const setSupply = (details: SupplyProps) => {
     try {
       // set(bytes32 _reference, bytes32 _orgRef, bytes32 _reportingOrgRef, bytes32 _version, bytes32 _generatedTime)
       const totalSupply = await enervatorManagerContract.getTotalSupply()
-      const bigSupply = ethers.utils.bigNumberify(totalSupply)
+      const bigSupply = ethers.utils.bigNumberify( totalSupply )
       const currentSupply = bigSupply.div(ethers.constants.WeiPerEther).toNumber()
+
       let key = -1
 
       if ( currentSupply != details.supply )
@@ -32,12 +35,12 @@ export const setSupply = (details: SupplyProps) => {
         if ( currentSupply > details.supply )
         {
           const amount = currentSupply - details.supply
-          const burnAmount =  ethers.utils.bigNumberify(amount)
-          const decimilisedBurnAmount = ethers.constants.WeiPerEther.mul( burnAmount )
+          const decimilisedBurnAmount = getDecimalToWei( amount )
+          console.log( decimilisedBurnAmount.toHexadecimal() )
 
           //console.log(currentSupply, details.supply, amount, decimilisedBurnAmount )
 
-          const tx = await enervatorManagerContract.burnTokens (decimilisedBurnAmount)
+          const tx = await enervatorManagerContract.burnTokens ( decimilisedBurnAmount.toHexadecimal() )
           txData = {
             [tx.hash]: {
               summary: `${Transaction.success}`,
@@ -47,12 +50,13 @@ export const setSupply = (details: SupplyProps) => {
         } else
         {
           const amount = details.supply - currentSupply
-          const addAmount =  ethers.utils.bigNumberify(amount)
-          const decimilisedAddAmount = ethers.constants.WeiPerEther.mul( addAmount )
+          const decimilisedAddAmount = getDecimalToWei( amount )
+          console.log( decimilisedAddAmount.toHexadecimal() )
 
-          //console.log(currentSupply, details.supply, amount, decimilisedAddAmount )
+          //7727623693
+          //8000000000
 
-          const tx = await enervatorManagerContract.addTokens (decimilisedAddAmount)
+          const tx = await enervatorManagerContract.addTokens ( decimilisedAddAmount.toHexadecimal() )
           txData = {
             [tx.hash]: {
               summary: `${Transaction.success}`,

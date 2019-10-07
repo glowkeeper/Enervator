@@ -1,11 +1,12 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { Decimal } from 'decimal.js'
 
 import { ApplicationState } from '../../../store'
 
 import { write } from '../../../actions'
+
+import { getDecimalToWei } from '../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
 import { ExchangeRateProps, WriterActionTypes} from '../../types'
@@ -17,21 +18,21 @@ export const setExchangeRate = (details: ExchangeRateProps) => {
 
     const state = getState()
     const exchangeRateContract = state.chainContracts.data.contracts.exchange
+    const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
     const currency = ethers.utils.formatBytes32String(details.currency)
-    const rate = new Decimal(details.rate)
-    const thisTwo = new Decimal(2)
-    const thisSixtyFour = new Decimal(64)
-    const thisMultiplier = thisTwo.pow(thisSixtyFour)
-    const thisNewBigRate = thisMultiplier.mul(rate)
-
-    //console.log (currency, thisNewBigRate.toString())
 
     let actionType = WriterActionTypes.RATE_FAILURE
     let txData: TxReport = {}
     try {
-      // set(bytes32 _reference, bytes32 _orgRef, bytes32 _reportingOrgRef, bytes32 _version, bytes32 _generatedTime)
-      const tx = await exchangeRateContract.setRate (currency, thisNewBigRate.toHexadecimal())
+
+      const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
+      const unitValue = parseFloat( retrievedUnitValue.toString() )
+      const thisUnitValue = unitValue / 2**64
+      const exchangeRate = details.rate * thisUnitValue
+      const thisDecimalExchangeRate = getDecimalToWei( exchangeRate )
+
+      const tx = await exchangeRateContract.setRate (currency, thisDecimalExchangeRate.toHexadecimal())
       txData = {
         [tx.hash]: {
           summary: `${Transaction.success}`,

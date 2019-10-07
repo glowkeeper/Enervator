@@ -1,11 +1,12 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
-import { Decimal } from 'decimal.js'
 
 import { ApplicationState } from '../../../store'
 
 import { write } from '../../../actions'
+
+import { getDecimalToTwotoSixyFour } from '../../actions'
 
 import { ActionProps, TxReport } from '../../../types'
 import { PerCapitaEnergyProps, WriterActionTypes} from '../../types'
@@ -18,18 +19,14 @@ export const setPerCapitaEnergy = (details: PerCapitaEnergyProps) => {
     const state = getState()
     const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
+    const thisPerCapitaEnergy = getDecimalToTwotoSixyFour( details.perCapitaEnergy )
+
     let actionType = WriterActionTypes.CAPITA_FAILURE
     let txData: TxReport = {}
     try {
 
-      const perCapitaEnergy = new Decimal(details.perCapitaEnergy)
-      const thisTwo = new Decimal(2)
-      const thisSixtyFour = new Decimal(64)
-      const thisMultiplier = thisTwo.pow(thisSixtyFour)
-      const thisNewBigPerCapitaEnergy = thisMultiplier.mul(perCapitaEnergy)
-
       //console.log(details.perCapitaEnergy, perCapitaEnergy, thisNewBigPerCapitaEnergy.toHexadecimal())
-      const tx = await enervatorManagerContract.setPerCapitaEnergy (thisNewBigPerCapitaEnergy.toHexadecimal())
+      const tx = await enervatorManagerContract.setPerCapitaEnergy ( thisPerCapitaEnergy.toHexadecimal() )
       txData = {
         [tx.hash]: {
           summary: `${Transaction.success}`,
