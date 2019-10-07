@@ -68,7 +68,11 @@ interface EnervatorInterface extends Interface {
     }>;
 
     addSupply: TypedFunctionDescription<{
-      encode([_amount]: [BigNumberish]): string;
+      encode([_amount, userData, operatorData]: [
+        BigNumberish,
+        Arrayish,
+        Arrayish
+      ]): string;
     }>;
   };
 
@@ -217,6 +221,8 @@ export class Enervator extends Contract {
 
     addSupply(
       _amount: BigNumberish,
+      userData: Arrayish,
+      operatorData: Arrayish,
       overrides?: TransactionOverrides
     ): Promise<ContractTransaction>;
 
@@ -311,6 +317,10 @@ export class Enervator extends Contract {
 
     burn(amount: BigNumberish, data: Arrayish): Promise<BigNumber>;
 
-    addSupply(_amount: BigNumberish): Promise<BigNumber>;
+    addSupply(
+      _amount: BigNumberish,
+      userData: Arrayish,
+      operatorData: Arrayish
+    ): Promise<BigNumber>;
   };
 }

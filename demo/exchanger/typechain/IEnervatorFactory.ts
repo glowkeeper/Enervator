@@ -393,6 +393,14 @@ const _abi = [
       {
         name: "_amount",
         type: "uint256"
+      },
+      {
+        name: "userData",
+        type: "bytes"
+      },
+      {
+        name: "operatorData",
+        type: "bytes"
       }
     ],
     name: "addSupply",

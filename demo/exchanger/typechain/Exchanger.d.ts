@@ -65,8 +65,9 @@ interface ExchangerInterface extends Interface {
   };
 
   events: {
-    Bought: TypedEventDescription<{
-      encodeTopics([_epochTime, _buyer, _buyRef, _depositRef]: [
+    Buy: TypedEventDescription<{
+      encodeTopics([_epochTime, _buyer, _buyRef, _depositRef, _amountWEI]: [
+        null,
         null,
         null,
         null,
@@ -156,11 +157,12 @@ export class Exchanger extends Contract {
   };
 
   filters: {
-    Bought(
+    Buy(
       _epochTime: null,
       _buyer: null,
       _buyRef: null,
-      _depositRef: null
+      _depositRef: null,
+      _amountWEI: null
     ): EventFilter;
 
     OwnershipTransferred(
