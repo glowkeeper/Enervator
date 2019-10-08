@@ -7,8 +7,7 @@ const Forex = artifacts.require('./Forex.sol');
 const Buy = artifacts.require('./Buy.sol');
 const Exchanger = artifacts.require('./Exchanger.sol');
 
-/*const ethers = require('ethers');
-const BN = require('bn.js');*/
+const ethers = require('ethers');
 const DECIMAL = require('decimal.js')
 
 try {
@@ -29,9 +28,14 @@ module.exports = async function (deployer, network, accounts) {
   // 2016 total primary energy supply (TPES) was 162494360000 MWh.
   // 2014 global per capita energy consumption was 22.35853544 MegaWatt hours
   // Can't get deciomals to work, so rounding down.
+
+  const ten = new DECIMAL('10', 10)
+  const eighteen = new DECIMAL('18', 10)
+  const decimilisation = ten.pow(eighteen)
   const two = new DECIMAL('2', 10);
   const sixtyFour = new DECIMAL('64', 10);
   const multiplier = two.pow(sixtyFour);
+
   const TPES = new DECIMAL('162494360000', 10);
   const currentTPES = multiplier.mul(TPES);
   const oldTPES = currentTPES;
@@ -76,21 +80,22 @@ module.exports = async function (deployer, network, accounts) {
   await deployer.deploy( EnervatorManager, tokenValues, exchanger.address );
   const tokenManager = await EnervatorManager.deployed();
 
-  exchanger.setComponents ( tokenManager.address, deposit.address, forex.address, buy.address );
-
-  // The world population at 2.34pm GMT on September 2nd, 2019, 7,727,623,693.
   await deployer.deploy( Enervator, [ tokenManager.address ] );
   const token = await Enervator.deployed();
 
+  await exchanger.setComponents ( tokenManager.address, deposit.address, forex.address, buy.address );
   await tokenManager.setToken(token.address);
 
-  const amountEOR = new DECIMAL('7727623693', 10)
-  const ten = new DECIMAL('10', 10)
-  const eighteen = new DECIMAL('18', 10)
-  const decimilisation = ten.pow(eighteen)
-  const amountWei =  amountEOR.mul(decimilisation)
-  await tokenManager.addTokens(amountWei.toHexadecimal())
+  // Set some important defaults
 
+  const amountEOR = new DECIMAL('7727623693', 10)
+  const amountWei =  amountEOR.mul(decimilisation)
+  await tokenManager.addTokens( amountWei.toHexadecimal() )
+
+  const code = ethers.utils.formatBytes32String( "USD" )
+  const uSExchangeRate =  new DECIMAL(1)
+  const exchangeRateToWei = decimilisation.mul(uSExchangeRate)
+  await exchanger.setRate( code, exchangeRateToWei.toHexadecimal() )
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
