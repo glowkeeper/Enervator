@@ -1,5 +1,7 @@
 # About Enervator
 
+![](/images/Enervator75x75.png)
+
 Enervator is an implementation of Ethereum's [ERC777 Token Standard](https://eips.ethereum.org/EIPS/eip-777). It inherits from [OpenZeppelin's implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol) of that standard.
 
 Below describes the processes by which Enervator incentivises energy efficiency.

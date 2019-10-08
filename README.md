@@ -1,5 +1,7 @@
 # Enervator
 
+![](/images/Enervator75x75.png)
+
 A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
 
 You can read some of the details as to how Enervator works by reading [About Enervator](/ABOUT.md).
@@ -13,6 +15,8 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 Enervator is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) on Ethereum's Rinkeby Test Network.
 
 ## Demo Applications
+
+![](/images/enerchanger.png)
 
 There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530):
 
