@@ -1,6 +1,6 @@
 # Enervator
 
-A cryptocurrency stablecoin, with the currency code EOR, whose aim is to incentivise energy efficiency.
+A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
 
 You can read some of the details as to how Enervator works by reading [About Enervator](/ABOUT.md).
 
