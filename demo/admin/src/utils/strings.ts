@@ -1,6 +1,7 @@
 class App {
 
   static readonly token='Enervator'
+  static readonly symbol='EOR'
   static readonly title='Eneradmin'
   static readonly tagline='Using Blockchain Technology to Incentivise Energy Efficiency'
   static readonly copyright='© 2019'
@@ -40,14 +41,14 @@ class Home {
 
   static readonly heading = `${App.title} Home`
 
-  static readonly info = `Use **${App.title}** to read and set parameters for **${App.token}**.<br /><br />The _${Paths.blockchain}_ link, above, gives details of the blockchain in use.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
+  static readonly info = `**${App.title}** is a proof of concept that showcases **${App.token}** by showing how it is possible to set and display the token's parameters.<br /><br />The _${Paths.blockchain}_ link, above, gives details of the blockchain in use.<br /><br />The _${Paths.overview}_ link describes the origins of **${App.token}**.<br /><br />The _${Paths.help}_ link gives brief instructions as to how to use **${App.title}**.<br /><br />The _${Paths.about}_ link gives version, author and copyright information.`
 }
 
 class About {
 
   static readonly heading = `About ${App.title}`
 
-  static readonly info = `**${App.title}** version ${App.version}<br /><br />Created by ${App.author} at the ${App.place}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
+  static readonly info = `**${App.title}** version ${App.version}.<br /><br />A proof of concept showcasing **${App.token}**.<br /><br />Created by ${App.author} at the ${App.place}.<br /><br />For more information about **${App.token}**, please contact s dot huckle at sussex dot ac dot uk.`
 }
 
 class Overview {
@@ -61,7 +62,7 @@ class Help {
 
   static readonly heading = `${App.title} Help`
 
-  static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read **${App.token}\'s** parameters. <br /><br />To set **${App.token}** parameters, click on the _${App.headingWriter}_ link in the sidebar, and select the parameter you wish to update. To read **${App.token}** parameters, click on the _${App.headingReader}_ link in the sidebar.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/).`
+  static readonly info = `**${App.title}** allows the owner of the **${App.token} Manager** smart contract to set **${App.token}** parameters. Anyone can read those parameters. <br /><br />To set **${App.token}** values, click on the _${App.headingWriter} drop down menu_ in the sidebar, and select the value you wish to update. To read **${App.token}\'s** settings, click on the _${App.headingReader} drop down menu_ in the sidebar.<br /><br />**${App.title}** depends on [MetaMask](https://metamask.io/), which should be pointing at the Rinkeby Test Network.`
 }
 
 class Transaction {
