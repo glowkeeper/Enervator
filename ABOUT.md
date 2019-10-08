@@ -8,7 +8,7 @@ Below describes the processes by which Enervator incentivises energy efficiency.
 
 Total Supply = World Population, so it will grow or decrease according to annual population fluctuations.
 
-Value = 2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
+EOR = 2017 global average residential electricity price * ( old TPES / current TPES ) / annual global per capita energy use
 
 ## Variables
 
