@@ -1,6 +1,9 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import { ethers } from 'ethers'
+import { BigNumber } from 'bignumber.js'
+
+import { getBigNumberFromWei } from '../../actions'
 
 import { ApplicationState } from '../../../../store'
 
@@ -41,12 +44,13 @@ const getExchangeRate = (props: RateReportProps) => {
     try {
 
       const retrievedRate = await forexContract.getRate(currency)
-      const thisRate = parseFloat(retrievedRate.toString())
-      const thisShiftedRate = Math.round( ( thisRate / 10**18 ) * 100 + Number.EPSILON ) / 100
+      const bigRetrievedRate = new BigNumber( retrievedRate )
+      const rate = getBigNumberFromWei( bigRetrievedRate )
+      const thisRate = Math.round( ( rate ) * 100 + Number.EPSILON ) / 100
 
       exchangeRatesData.data.data[data.length] = {
         currency: ethers.utils.parseBytes32String(currency),
-        rate: thisShiftedRate
+        rate: thisRate
       }
 
       actionType = props.successActionType

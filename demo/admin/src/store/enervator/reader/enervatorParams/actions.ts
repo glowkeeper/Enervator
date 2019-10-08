@@ -24,19 +24,20 @@ export const getEnervatorReport = () => {
       data: { data: [] }
     }
 
+    let enervatorParamsData: EnervatorProps = {
+      tokenName: "",
+      tokenSymbol: "",
+      totalSupply: 0,
+      pricePerMWh: 0,
+      currentTPES: 0,
+      oldTPES: 0,
+      perCapitaEnergy: 0,
+      unitValue: 0
+    }
+
     let actionType = ReaderActionTypes.REPORT_FAILURE
     try {
 
-      let enervatorParamsData: EnervatorProps = {
-        tokenName: "",
-        tokenSymbol: "",
-        totalSupply: 0,
-        pricePerMWh: 0,
-        currentTPES: 0,
-        oldTPES: 0,
-        perCapitaEnergy: 0,
-        unitValue: 0
-      }
       enervatorParamsData.tokenName = await enervatorManagerContract.getTokenName()
       enervatorParamsData.tokenSymbol = await enervatorManagerContract.getTokenSymbol()
 
@@ -44,9 +45,10 @@ export const getEnervatorReport = () => {
       const bigSupply = new BigNumber( totalSupply )
       enervatorParamsData.totalSupply = getBigNumberFromWei( bigSupply )
 
-      const pricePerMWh = await enervatorManagerContract.getPricePerMWh()
-      const bigPricePerMWh = new BigNumber(pricePerMWh)
-      enervatorParamsData.pricePerMWh = getBigNumberFromTwotoSixyFour( bigPricePerMWh )
+      const retrievedPricePerMWh = await enervatorManagerContract.getPricePerMWh()
+      const bigPricePerMWh = new BigNumber(retrievedPricePerMWh)
+      const pricePerMWh = getBigNumberFromTwotoSixyFour( bigPricePerMWh )
+      enervatorParamsData.pricePerMWh = Math.round( ( pricePerMWh ) * 100 + Number.EPSILON ) / 100
 
       const currentTPES = await enervatorManagerContract.getCurrentTPES()
       const bigCurrentTPES =new BigNumber(currentTPES)
@@ -56,13 +58,16 @@ export const getEnervatorReport = () => {
       const bigOldTPES = new BigNumber(oldTPES)
       enervatorParamsData.oldTPES = getBigNumberFromTwotoSixyFour( bigOldTPES )
 
-      const perCapitaEnergy = await enervatorManagerContract.getPerCapitaEnergy()
-      const bigPerCapitaEnergy = new BigNumber( perCapitaEnergy )
-      enervatorParamsData.perCapitaEnergy = getBigNumberFromTwotoSixyFour( bigPerCapitaEnergy )
+      const retrievedPerCapitaEnergy = await enervatorManagerContract.getPerCapitaEnergy()
+      const bigPerCapitaEnergy = new BigNumber( retrievedPerCapitaEnergy )
+      const perCapitaEnergy = getBigNumberFromTwotoSixyFour( bigPerCapitaEnergy )
+      enervatorParamsData.perCapitaEnergy = Math.round( ( perCapitaEnergy ) * 100 + Number.EPSILON ) / 100
 
       const retrievedUnitValue = await enervatorManagerContract.getUnitValue()
-      const unitValue = parseFloat( retrievedUnitValue.toString() )
-      enervatorParamsData.unitValue = Math.round( ( unitValue / 2**64 ) * 100 + Number.EPSILON ) / 100
+      const bigRetrievedUnitValue = new BigNumber( retrievedUnitValue )
+      const unitValue = getBigNumberFromTwotoSixyFour( bigRetrievedUnitValue )
+      enervatorParamsData.unitValue = Math.round( ( unitValue ) * 100 + Number.EPSILON ) / 100
+
       enervatorData.data.data[0] = enervatorParamsData
 
       //console.log( enervatorParamsData.tokenName, enervatorParamsData.tokenSymbol,enervatorData.data.data[0] )
