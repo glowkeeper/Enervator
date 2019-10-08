@@ -1,8 +1,7 @@
 # Enervator
 
-![](/images/Enervator75x75.png)
-
-A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
+![](/images/Enervator75x75.png) | A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
+---|---
 
 You can read some of the details as to how Enervator works by reading [About Enervator](/ABOUT.md).
 
