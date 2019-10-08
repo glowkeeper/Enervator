@@ -72,17 +72,17 @@ let theme = createMuiTheme({
   palette: {
     type: 'dark',
     background: {
-      default: '#439889',
+      default: '#ffcdd2',
     },
     primary: {
-      light: '#66BB6A',
-      main: '#4CAF50',
-      dark: '#43A047'
+      light: '#ef5350',
+      main: '#f44336',
+      dark: '#e53935'
     },
     secondary: {
-      light: '#439889',
-      main: '#00695c',
-      dark: '#003d33'
+      light: '#4CAF50',
+      main: '#43A047',
+      dark: '#388E3C'
     },
     error: {
       light: '#f05545',
@@ -107,7 +107,7 @@ const useStyles = makeStyles({
   header: {
     padding: theme.spacing(2),
     align: 'center',
-    background: 'linear-gradient(45deg, #66BB6A 30%, #A5D6A7 90%)'
+    background: 'linear-gradient(45deg, #e53935 30%, #ef5350 90%)'
   },
   logo: {
     paddingLeft: theme.spacing(1),
@@ -120,13 +120,13 @@ const useStyles = makeStyles({
     paddingRight: theme.spacing(1),
     marginRight: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #00695c 30%, #439889 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
   },
   subTitle: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #00695c 30%, #439889 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
   },
   content: {
     padding: theme.spacing(2),
@@ -158,26 +158,26 @@ const useStyles = makeStyles({
   footer: {
     padding: theme.spacing(2),
     align: 'center',
-    background: 'linear-gradient(45deg, #66BB6A 30%, #A5D6A7 90%)'
+    background: 'linear-gradient(45deg, #e53935 30%, #ef5350 90%)'
   },
   copyright: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #4CAF50 30%, #439889 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
   },
   author: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     marginRight: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #4CAF50 30%, #439889 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
   },
   button: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    background: 'linear-gradient(45deg, #003d33 30%, #439889 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
   }
 })
 
