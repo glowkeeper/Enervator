@@ -7,8 +7,9 @@ const Forex = artifacts.require('./Forex.sol');
 const Buy = artifacts.require('./Buy.sol');
 const Exchanger = artifacts.require('./Exchanger.sol');
 
-const ethers = require('ethers');
-const BN = require('bn.js');
+/*const ethers = require('ethers');
+const BN = require('bn.js');*/
+const DECIMAL = require('decimal.js')
 
 try {
 
@@ -28,22 +29,23 @@ module.exports = async function (deployer, network, accounts) {
   // 2016 total primary energy supply (TPES) was 162494360000 MWh.
   // 2014 global per capita energy consumption was 22.35853544 MegaWatt hours
   // Can't get deciomals to work, so rounding down.
-  const two = new BN('2', 10);
-  const sixtyFour = new BN('64', 10);
+  const two = new DECIMAL('2', 10);
+  const sixtyFour = new DECIMAL('64', 10);
   const multiplier = two.pow(sixtyFour);
-  const TPES = new BN('162494360000', 10);
+  const TPES = new DECIMAL('162494360000', 10);
   const currentTPES = multiplier.mul(TPES);
   const oldTPES = currentTPES;
-  const price = new BN('98', 10);
+
+  const price = new DECIMAL('98.16', 10);
   const pricePerMWh = multiplier.mul(price);
-  let perCapita = new BN('22', 10);
+  let perCapita = new DECIMAL('22.35853544', 10);
   let perCapitaEnergy = multiplier.mul(perCapita);
 
   const tokenValues = {
-    pricePerMWh: web3.utils.toHex(pricePerMWh),
-    currentTPES: web3.utils.toHex(currentTPES),
-    oldTPES: web3.utils.toHex(oldTPES),
-    perCapitaEnergy: web3.utils.toHex(perCapitaEnergy),
+    pricePerMWh: pricePerMWh.toHexadecimal(),
+    currentTPES: currentTPES.toHexadecimal(),
+    oldTPES: oldTPES.toHexadecimal(),
+    perCapitaEnergy: perCapitaEnergy.toHexadecimal(),
     unitValue: 0
   }
 
@@ -81,6 +83,14 @@ module.exports = async function (deployer, network, accounts) {
   const token = await Enervator.deployed();
 
   await tokenManager.setToken(token.address);
+
+  const amountEOR = new DECIMAL('7727623693', 10)
+  const ten = new DECIMAL('10', 10)
+  const eighteen = new DECIMAL('18', 10)
+  const decimilisation = ten.pow(eighteen)
+  const amountWei =  amountEOR.mul(decimilisation)
+  await tokenManager.addTokens(amountWei.toHexadecimal())
+
 
   console.log( "static enervatorManagerAddress = \"" + tokenManager.address + "\"" );
   console.log( "static enervatorAddress = \"" + token.address + "\"" );
