@@ -96,7 +96,7 @@ class BuyForm extends React.Component<BuyFormProps> {
 
   constructor (props: BuyFormProps)
   {
-    super(props)    
+    super(props)
     this.initialise()
   }
 
@@ -194,24 +194,28 @@ class BuyForm extends React.Component<BuyFormProps> {
                   />
                   <ErrorMessage name='depositRef' />
                   <Field
+                    disabled={true}
                     name="currency"
                     label={BuyStrings.currency}
                     component={TextField}
                   />
                   <ErrorMessage name='currency' />
                   <Field
+                    disabled={true}
                     name='amount'
                     label={BuyStrings.amount}
                     component={TextField}
                   />
                   <ErrorMessage name='amount' />
                   <Field
+                    disabled={true}
                     name='rate'
                     label={BuyStrings.rate}
                     component={TextField}
                   />
                   <ErrorMessage name='rate' />
                   <Field
+                    disabled={true}
                     name='amountEOR'
                     label={BuyStrings.amountEOR}
                     component={TextField}
