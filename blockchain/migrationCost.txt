@@ -1,0 +1,153 @@
+Starting migrations...
+======================
+> Network name:    'rinkeby'
+> Network id:      4
+> Block gas limit: 7006834
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0xb5f9cbf80fa1315c4d47c3a14cbdf57aab481eff1bd17581406cb526956fda0a
+   > Blocks: 0            Seconds: 4
+   > contract address:    0x62C6fCCFd60eC33534Fd541547Ba161F4543C27A
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.607416474
+   > gas used:            273162
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00546324 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00546324 ETH
+
+
+2_deploy_contracts.js
+=====================
+Deploying to Rinkeby
+
+   Deploying 'Strings'
+   -------------------
+   > transaction hash:    0xffac4f4b3122c0cf41a8aaac0acdb355264eef1597d49c1f8282bca0c566bd5b
+   > Blocks: 0            Seconds: 12
+   > contract address:    0xaCC92de46ef1Db4040438Eef78369CEb5e6604eb
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.590256574
+   > gas used:            815967
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01631934 ETH
+
+
+   Linking
+   -------
+   * Contract: Deposit <--> Library: Strings (at address: 0xaCC92de46ef1Db4040438Eef78369CEb5e6604eb)
+
+   Linking
+   -------
+   * Contract: Buy <--> Library: Strings (at address: 0xaCC92de46ef1Db4040438Eef78369CEb5e6604eb)
+
+   Linking
+   -------
+   * Contract: Forex <--> Library: Strings (at address: 0xaCC92de46ef1Db4040438Eef78369CEb5e6604eb)
+
+   Deploying 'Exchanger'
+   ---------------------
+   > transaction hash:    0xef1f3f85a1f9e3c24c4d170b86e7300b3d0692e9e061de93b404e6cc6c93859d
+   > Blocks: 0            Seconds: 12
+   > contract address:    0x2484336c3a7812a3011ead2064ee0a7190B6F1a3
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.526155154
+   > gas used:            3205071
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.06410142 ETH
+
+
+   Deploying 'Deposit'
+   -------------------
+   > transaction hash:    0x263c936421491ae198024eed7a4c9089effb7e1f054d791a58db4d8b7887754c
+   > Blocks: 1            Seconds: 16
+   > contract address:    0x64c2D88F8298Dc4d8Ed95B6c8e12DEbf7d81f431
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.478304354
+   > gas used:            2392540
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0478508 ETH
+
+
+   Deploying 'Forex'
+   -----------------
+   > transaction hash:    0x149845e75b49cddb20348db7812410531b998dc6307dd0587641a980d8bc77ce
+   > Blocks: 0            Seconds: 12
+   > contract address:    0x2d6718857e21065Fec46bd29c729c1609Db4e2ac
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.466646174
+   > gas used:            582909
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01165818 ETH
+
+
+   Deploying 'Buy'
+   ---------------
+   > transaction hash:    0xc59f6a4cef759ce8f73f576bd249d508add031eacdc8a54474f389617c1b7394
+   > Blocks: 1            Seconds: 16
+   > contract address:    0x5e589FBB8BB4B0Df26a2A98b8F6ED873b74F5Fe7
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.432822954
+   > gas used:            1691161
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.03382322 ETH
+
+
+   Deploying 'EnervatorManager'
+   ----------------------------
+   > transaction hash:    0x661862937b0944da82f14627dd9eea8dd5a54f96c3ecf77cb0682c7353d0cf2c
+   > Blocks: 0            Seconds: 12
+   > contract address:    0x639AaB41667FFB0Dffb9FA90201470361D6133E7
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.358480754
+   > gas used:            3717110
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0743422 ETH
+
+
+   Deploying 'Enervator'
+   ---------------------
+   > transaction hash:    0x60ed54a82d1f8cfe167a4dca3172cef7965cd97aa4959398935e44a4370e6ec6
+   > Blocks: 1            Seconds: 16
+   > contract address:    0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530
+   > account:             0x8F03Ca885434522D695735A28d6A8A93b4390dA9
+   > balance:             7.284716994
+   > gas used:            3688188
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.07376376 ETH
+
+static enervatorManagerAddress = "0x639AaB41667FFB0Dffb9FA90201470361D6133E7"
+static enervatorAddress = "0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530"
+static depositAddress = "0x64c2D88F8298Dc4d8Ed95B6c8e12DEbf7d81f431"
+static forexAddress = "0x2d6718857e21065Fec46bd29c729c1609Db4e2ac"
+static buyAddress = "0x5e589FBB8BB4B0Df26a2A98b8F6ED873b74F5Fe7"
+static exchangerAddress = "0x2484336c3a7812a3011ead2064ee0a7190B6F1a3"
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.32185892 ETH
+
+
+Summary
+=======
+> Total deployments:   8
+> Final cost:          0.32732216 ETH

@@ -59,7 +59,8 @@ module.exports = async function (deployer, network, accounts) {
   }
 
   if ( network === 'rinkeby' ) {
-    return
+    //return
+    console.log("Deploying to Rinkeby")    
   }
 
   await deployer.deploy(StringsLib);
