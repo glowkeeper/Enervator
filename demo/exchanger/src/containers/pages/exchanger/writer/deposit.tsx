@@ -29,6 +29,7 @@ const depositSchema = Yup.object().shape({
     .required('Required'),
   amount: Yup
     .number()
+    .positive('Amount FIAT needs to be greater than 0')
     .required('Required'),
 })
 

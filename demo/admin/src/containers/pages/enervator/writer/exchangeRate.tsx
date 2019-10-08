@@ -29,6 +29,7 @@ const exchangeRateSchema = Yup.object().shape({
     .required('Required'),
   rate: Yup
     .number()
+    .positive('Rate needs to be greater than 0')
     .required('Required'),
 })
 
@@ -85,7 +86,7 @@ export class ExchangeRateForm extends React.Component<ExchangeRateFormProps> {
                     label={ExchangeRateStrings.rate}
                     component={TextField}
                   />
-                  <ErrorMessage name='value' />
+                  <ErrorMessage name='rate' />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />

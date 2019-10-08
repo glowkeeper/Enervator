@@ -26,6 +26,7 @@ import { Helpers } from '../../../../utils/config'
 const supplySchema = Yup.object().shape({
   supply: Yup
     .number()
+    .positive('Supply needs to be greater than 0')
     .required('Required'),
 })
 
@@ -74,7 +75,7 @@ export class SupplyForm extends React.Component<SupplyFormProps> {
                     label={TokenSupplyStrings.supply}
                     component={TextField}
                   />
-                  <ErrorMessage name='value' />
+                  <ErrorMessage name='supply' />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />

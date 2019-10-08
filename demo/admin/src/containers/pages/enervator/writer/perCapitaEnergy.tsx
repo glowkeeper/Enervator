@@ -26,6 +26,7 @@ import { Helpers } from '../../../../utils/config'
 const PerCapitaEnergySchema = Yup.object().shape({
   perCapitaEnergy: Yup
     .number()
+    .positive('per Capita Energy needs to be greater than 0')
     .required('Required'),
 })
 
@@ -74,7 +75,7 @@ export class PerCapitaEnergyForm extends React.Component<PerCapitaEnergyFormProp
                     label={PerCapitaEnergyStrings.perCapitaEnergy}
                     component={TextField}
                   />
-                  <ErrorMessage name='value' />
+                  <ErrorMessage name='perCapitaEnergy' />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />

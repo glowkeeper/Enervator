@@ -26,6 +26,7 @@ import { Helpers } from '../../../../utils/config'
 const TPESSchema = Yup.object().shape({
   tPES: Yup
     .number()
+    .positive('TPES needs to be greater than 0')
     .required('Required'),
 })
 
@@ -74,7 +75,7 @@ export class TPESForm extends React.Component<TPESFormProps> {
                     label={TPESStrings.tPES}
                     component={TextField}
                   />
-                  <ErrorMessage name='value' />
+                  <ErrorMessage name='tPES' />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />

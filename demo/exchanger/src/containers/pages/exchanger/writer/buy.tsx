@@ -41,8 +41,20 @@ const buySchema = Yup.object().shape({
   depositRef: Yup
     .string()
     .required('Required'),
+  currency: Yup
+    .string()
+    .required('Required'),
+  rate: Yup
+    .number()
+    .positive('Rate needs to be greater than 0')
+    .required('Required'),
+  amountEOR: Yup
+    .number()
+    .positive('Amount EOR to buy needs to be greater than 0')
+    .required('Required'),
   amount: Yup
     .number()
+    .positive('Amount FIAT needs to be greater than 0')
     .required('Required'),
 })
 
@@ -64,7 +76,6 @@ interface BuyDispatchProps
 type BuyFormProps = BuyDepositProps & BuyDispatchProps
 
 class BuyForm extends React.Component<BuyFormProps> {
-
 
    static buyData: BuyProps = {
     account: "",
@@ -147,7 +158,7 @@ class BuyForm extends React.Component<BuyFormProps> {
         <div>
           <Formik
             initialValues={ { account: "",
-                              buyRef: BuyForm.buyData.buyRef,
+                              buyRef: "",
                               depositRef: BuyForm.buyData.depositRef,
                               currency: BuyForm.buyData.currency,
                               rate: BuyForm.buyData.rate,
@@ -173,21 +184,25 @@ class BuyForm extends React.Component<BuyFormProps> {
                     label={BuyStrings.currency}
                     component={TextField}
                   />
+                  <ErrorMessage name='currency' />
                   <Field
                     name='amount'
                     label={BuyStrings.amount}
                     component={TextField}
                   />
+                  <ErrorMessage name='amount' />
                   <Field
                     name='rate'
                     label={BuyStrings.rate}
                     component={TextField}
                   />
+                  <ErrorMessage name='rate' />
                   <Field
                     name='amountEOR'
                     label={BuyStrings.amountEOR}
                     component={TextField}
                   />
+                  <ErrorMessage name='amountEOR' />
                   <br />
                   {formProps.isSubmitting && <LinearProgress />}
                   <br />
