@@ -96,7 +96,8 @@ class BuyForm extends React.Component<BuyFormProps> {
 
   constructor (props: BuyFormProps)
   {
-    super(props)
+    super(props)    
+    this.initialise()
   }
 
   componentDidUpdate (previousProps: BuyFormProps )
@@ -148,6 +149,19 @@ class BuyForm extends React.Component<BuyFormProps> {
   handleSubmit = (values: BuyProps, setSubmitting: Function, reset: Function) => {
     this.props.setFormFunctions({submitFunc: setSubmitting, resetFunc: reset})
     this.props.handleSubmit(values)
+    this.initialise()
+  }
+
+  initialise = () => {
+    BuyForm.buyData = {
+     account: "",
+     buyRef: "",
+     depositRef: "",
+     currency: "",
+     rate: 0,
+     amountEOR: 0,
+     amount: 0
+   }
   }
 
   render() {
