@@ -16,16 +16,16 @@ Enervator is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](ht
 
 There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530):
 
-1. [Eneradmin](dat://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
-2. [Enerchanger](dat://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd)
+1. [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
+2. [Enerchanger](http://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd)
 
-[Eneradmin](dat://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) is a tool for administering [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530). You do not have permissions to set any parameters with [Eneradmin](dat://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb), but you will be able to read both the token's parameters and any exchange rates that have been specified.
+[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) is a tool for administering [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530). You do not have permissions to set any parameters with [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb), but you will be able to read both the token's parameters and any exchange rates that have been specified.
 
-[Enerchanger](dat://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd) is a proof of concept that simulates depositing cash and buying _EOR_, the [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) token. To use the tool, first deposit some cash (imagine that's a PayPal link or some such like), then use that deposit to buy some EOR.
+[Enerchanger](http://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd) is a proof of concept that simulates depositing cash and buying _EOR_, the [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) token. To use the tool, first deposit some cash (imagine that's a PayPal link or some such like), then use that deposit to buy some EOR.
 
 ### Demo Dependencies
 
-To use [Eneradmin](dat://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](dat://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd), you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
+To use [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://798f9d3be8842ddc87a29dd1d04619e48d2d6eeaf7e27f728022e308c2c770fd), you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
 ## Licensing
 
