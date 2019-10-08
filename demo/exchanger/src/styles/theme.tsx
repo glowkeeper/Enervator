@@ -76,13 +76,13 @@ let theme = createMuiTheme({
     },
     primary: {
       light: '#ef5350',
-      main: '#f44336',
-      dark: '#e53935'
+      main: '#c62828',
+      dark: '#b71c1c'
     },
     secondary: {
-      light: '#4CAF50',
-      main: '#43A047',
-      dark: '#388E3C'
+      light: '#388E3C',
+      main: '#2E7D32',
+      dark: '#1B5E20'
     },
     error: {
       light: '#f05545',
@@ -107,7 +107,7 @@ const useStyles = makeStyles({
   header: {
     padding: theme.spacing(2),
     align: 'center',
-    background: 'linear-gradient(45deg, #e53935 30%, #ef5350 90%)'
+    background: 'linear-gradient(45deg, #e53935 30%, #2E7D32 90%)'
   },
   logo: {
     paddingLeft: theme.spacing(1),
@@ -120,13 +120,13 @@ const useStyles = makeStyles({
     paddingRight: theme.spacing(1),
     marginRight: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #2E7D32 90%)'
   },
   subTitle: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     align: 'center',
-    background: 'linear-gradient(45deg, #b71c1c 30%, #c62828 90%)'
+    background: 'linear-gradient(45deg, #b71c1c 30%, #2E7D32 90%)'
   },
   content: {
     padding: theme.spacing(2),
@@ -158,7 +158,7 @@ const useStyles = makeStyles({
   footer: {
     padding: theme.spacing(2),
     align: 'center',
-    background: 'linear-gradient(45deg, #e53935 30%, #ef5350 90%)'
+    background: 'linear-gradient(45deg, #e53935 30%, #2E7D32 90%)'
   },
   copyright: {
     paddingLeft: theme.spacing(1),
