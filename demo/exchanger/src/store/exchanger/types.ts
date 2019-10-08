@@ -44,6 +44,8 @@ export interface BuyProps
   depositRef: string,
   currency: string,
   rate: number,
+  unitValue: number,
+  eORRate: number,
   amountEOR: number
   amount: number
 }

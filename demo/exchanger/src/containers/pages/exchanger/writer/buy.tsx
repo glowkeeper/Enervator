@@ -46,7 +46,15 @@ const buySchema = Yup.object().shape({
     .required('Required'),
   rate: Yup
     .number()
-    .positive('Rate needs to be greater than 0')
+    .positive('Currency to US$ exchange rate needs to be greater than 0')
+    .required('Required'),
+  unitValue: Yup
+    .number()
+    .positive('EOR value must be greater than 0')
+    .required('Required'),
+  eORRate: Yup
+    .number()
+    .positive('Currency to EOR exchange rate needs to be greater than 0')
     .required('Required'),
   amountEOR: Yup
     .number()
@@ -83,6 +91,8 @@ class BuyForm extends React.Component<BuyFormProps> {
     depositRef: "",
     currency: "",
     rate: 0,
+    unitValue: 0,
+    eORRate: 0,
     amountEOR: 0,
     amount: 0
   }
@@ -140,6 +150,8 @@ class BuyForm extends React.Component<BuyFormProps> {
       if ( ( unitValue > 0 ) && ( rate > 0 )  && ( amount > 0 )  )
       {
         const exchangeRate = unitValue * rate
+        BuyForm.buyData.unitValue = Math.round( ( unitValue ) * 100 + Number.EPSILON ) / 100
+        BuyForm.buyData.eORRate = Math.round( ( exchangeRate ) * 100 + Number.EPSILON ) / 100 
         BuyForm.buyData.amountEOR = Math.round( ( amount / exchangeRate ) * 100 + Number.EPSILON ) / 100
         this.forceUpdate()
       }
@@ -159,6 +171,8 @@ class BuyForm extends React.Component<BuyFormProps> {
      depositRef: "",
      currency: "",
      rate: 0,
+     unitValue: 0,
+     eORRate: 0,
      amountEOR: 0,
      amount: 0
    }
@@ -176,6 +190,8 @@ class BuyForm extends React.Component<BuyFormProps> {
                               depositRef: BuyForm.buyData.depositRef,
                               currency: BuyForm.buyData.currency,
                               rate: BuyForm.buyData.rate,
+                              unitValue: BuyForm.buyData.unitValue,
+                              eORRate: BuyForm.buyData.eORRate,
                               amountEOR: BuyForm.buyData.amountEOR,
                               amount: BuyForm.buyData.amount
                             }}
@@ -214,6 +230,20 @@ class BuyForm extends React.Component<BuyFormProps> {
                     component={TextField}
                   />
                   <ErrorMessage name='rate' />
+                  <Field
+                    disabled={true}
+                    name='unitValue'
+                    label={BuyStrings.unitValue}
+                    component={TextField}
+                  />
+                  <ErrorMessage name='unitValue' />
+                  <Field
+                    disabled={true}
+                    name='eORRate'
+                    label={BuyStrings.eORRate}
+                    component={TextField}
+                  />
+                  <ErrorMessage name='eORRate' />
                   <Field
                     disabled={true}
                     name='amountEOR'
