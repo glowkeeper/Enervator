@@ -17,7 +17,7 @@ Enervator is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](ht
 
 ![](/images/enerchanger.png)
 
-There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530):
+There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530). However, to run them, you must install the dependencies (see instructions below):
 
 1. [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
 2. [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b)
