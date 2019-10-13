@@ -18,7 +18,7 @@ export const setExchangeRate = (details: ExchangeRateProps) => {
 
     const state = getState()
     const exchangeRateContract = state.chainContracts.data.contracts.exchange
-    const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
+    //const enervatorManagerContract = state.chainContracts.data.contracts.enervatorManager
 
     const currency = ethers.utils.formatBytes32String(details.currency)
 
