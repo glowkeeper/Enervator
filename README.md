@@ -57,7 +57,7 @@ Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for prov
 
 ## Contributing
 
-Contributions presently _unwelcome_, since this forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing to [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530), please email [Steve Huckle](https://glowkeeper.github.io/).
+Contributions presently _unwelcome_, since this repository currently forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing in the future, please email [Steve Huckle](https://glowkeeper.github.io/).
 
 ## License
 
