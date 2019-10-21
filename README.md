@@ -12,7 +12,6 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 ## Table of Contents
 
 - [Usage](#usage)
-  - [Deployed Address](#deployed-address)
   - [Demo Applications](#demo-applications)
   - [Demo Dependencies](#demo-dependencies)  
 - [Install](#install)
@@ -23,17 +22,13 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 
 ## Usage
 
-Below shows you how to use the demo' applications that showcase [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530).
-
-### Deployed Address
-
-Enervator is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) on Ethereum's Rinkeby Test Network.
+Below shows you how to use the demo' applications that showcase EOR, which is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) on Ethereum's Rinkeby Test Network.
 
 ### Demo Applications
 
 ![](/images/enerchanger.png)
 
-There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530). However, to run them, you must install the dependencies (see instructions below):
+There are two demo' applications for showcasing [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530). However, to run them, you must install the [dependencies](#demo-dependencies):
 
 1. [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
 2. [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b)
@@ -62,8 +57,8 @@ Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for prov
 
 ## Contributing
 
-Contributions presently unwelcome, since this forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530), please email [Steve Huckle](https://glowkeeper.github.io/).
+Contributions presently _unwelcome_, since this forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing to [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530), please email [Steve Huckle](https://glowkeeper.github.io/).
 
 ## License
 
-Presently, there are no circumstances where you may copy or reuse anything in this repository, since it forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530), please email [Steve Huckle](https://glowkeeper.github.io/).
+Presently, there are no circumstances where you may copy or reuse anything in this repository, since it forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished.
