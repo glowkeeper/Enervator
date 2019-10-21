@@ -4,13 +4,13 @@ Below is a technical overview of [Enervator](https://github.com/glowkeeper/Enerv
 
 _*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). Some of the information here borrows excerpts from that work._
 
-[Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, is an ERC777 token contract that inherits from OpenZeppelin's implementation of [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol). Its aim is to incentivise energy efficiency. Figure 1, below, shows that the token is supported by a number of other contracts. They chiefly manage the supply of EOR and allow the token to be exchanged for sovereign currencies.
+[Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, is an ERC777 token contract that inherits from OpenZeppelin's implementation of [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol). Its aim is to incentivise energy efficiency. Figure 1, below, shows that the token is supported by a number of other contracts. They chiefly manage the supply and value of EOR and allow the token to be exchanged for sovereign currencies.
 
 ![](./images/enervatorWholeClassDiagram.png)
 
 _Figure 1: Enervator class diagram_
 
-`EnervatorManager` is the default operator of [Enervator](https://github.com/glowkeeper/Enervator). It holds the supply of EOR and sets the parameters that derive EOR's [value](./value.md). `EnervatorManager` inherits from OpenZeppelin interfaces, [IERC777Sender](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Sender.sol) and [IERC777Recipient](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Recipient.sol), which provide definitions of hook functions that `EnervatorManager` implements. Those functions are called when EOR are sent or received. In particular, `EnervatorManager` implements the `tokensToSend` hook so that it calls a function from the `Exchanger` contract that updates the `BuyDB` contract with details of the tokens sent. As well as the `BuyDB` contract, the `Exchanger` contract maintains links to the `ForexDB` contract, which has functions that set and get the US Dollar exchange rates for sovereign currencies, and the `DepositDB` contract, which contains sovereign currency deposits. Those deposits govern the amount of EOR that can be bought.
+`EnervatorManager` is the default operator of [Enervator](https://github.com/glowkeeper/Enervator). It holds the supply of EOR and sets the parameters that derive EOR's [value](./value.md). `EnervatorManager` inherits from OpenZeppelin interfaces, [IERC777Sender](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Sender.sol) and [IERC777Recipient](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Recipient.sol), which provide definitions of hook functions that `EnervatorManager` implements. Those functions are called when EOR are sent or received. In particular, `EnervatorManager` implements the `tokensToSend` hook so that it calls a function from the `Exchanger` contract that updates the `BuyDB` contract with details of the tokens sent. As well as the `BuyDB` contract, the `Exchanger` contract maintains links to the `Forex` contract, which has functions that set and get the US Dollar exchange rates for sovereign currencies, and the `DepositDB` contract, which contains sovereign currency deposits. Those deposits govern the amount of EOR that can be bought.
 
 ## Frontend Interfaces
 
@@ -25,7 +25,7 @@ _Figure 1: Enervator class diagram_
 
 _Figure 2: Eneradmin use case diagram_
 
-`Enerchanger` converts those exchange rates into their equivalent EOR value. Figure 3, below, shows that it is a proof of concept that simulates depositing cash and buying EOR. To use `Enerchanger`, first deposit some cash (imagine that's a PayPal link or some such like), then use that deposit to buy some EOR.
+`Enerchanger` converts those exchange rates into their equivalent EOR value. It mainly interacts with the `Exchanger` contract, described above. Figure 3, below, shows that it is a proof of concept that simulates depositing cash and buying EOR. To use `Enerchanger`, first deposit some cash (imagine that's a PayPal link or some such like), then use that deposit to buy some EOR.
 
 ![](./images/enerchangerUseCaseDiagram.png)
 
