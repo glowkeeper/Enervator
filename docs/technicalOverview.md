@@ -4,7 +4,7 @@ Below is a technical overview of [Enervator](https://github.com/glowkeeper/Enerv
 
 _*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). Some of the information here borrows excerpts from that work._
 
-[Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, is an ERC777 token that inherits from OpenZeppelin's implementation of [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol). Figure 1, below, shows that the token is supported by a number of other contracts. They chiefly manage the supply of EOR and allow the token to be exchanged for sovereign currencies.
+[Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, is an ERC777 token contract that inherits from OpenZeppelin's implementation of [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol). Its aim is to [incentivise energy efficiency](./value.md). Figure 1, below, shows that the token is supported by a number of other contracts. They chiefly manage the supply of EOR and allow the token to be exchanged for sovereign currencies.
 
 ![](./images/enervatorWholeClassDiagram.png)
 
