@@ -53,7 +53,7 @@ To install locally, clone this repository, switch to its root directory, then ty
 
 ## Thanks
 
-Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for providing [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol) and helping when [the maintainer](https://glowkeeper.github.io/) was struggling to get his implementation of ERC777 working.
+Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for providing [ERC777](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/ERC777.sol) and helping when [the maintainer](#maintainer) was struggling to get his implementation of ERC777 working.
 
 ## Contributing
 
