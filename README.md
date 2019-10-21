@@ -15,7 +15,7 @@ _**The name Enervator is a reference to the token's relation to energy. The word
   - [Demo Applications](#demo-applications)
   - [Demo Dependencies](#demo-dependencies)  
 - [Install](#install)
-- [Maintainers](#maintainers)
+- [Maintainer](#maintainer)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
 - [License](#license)
