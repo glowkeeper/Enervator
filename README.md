@@ -5,7 +5,7 @@
 
 You can read some of the details as to how Enervator works by reading [About Enervator](/ABOUT.md).
 
-_*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). Some of the text here borrows excerpts from that work._
+_*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). Some of the information here borrows excerpts from that work._
 
 _**The name Enervator is a reference to the token's relation to energy. The word 'enervator' is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken. So in this context, the token aims to decrease energy consumption._
 
