@@ -14,7 +14,7 @@ _Figure 1: Enervator class diagram_
 
 ## Frontend Interfaces
 
-[Enervator](https://github.com/glowkeeper/Enervator) is interfaced by two demos' (please read the [loading section](#loading), below, before trying to load the apps' in your browser):
+[Enervator](https://github.com/glowkeeper/Enervator) is interfaced by two demos' (please read the [loading section](#loading-eneradmin-and-enerchanger), below, before trying to load the apps' in your browser):
 
 1. [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
 2. [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b)
@@ -45,7 +45,7 @@ _*Disclaimer: [this author](https://glowkeeper.github.io/) hasn't looked at [ipf
 
 ## Loading Eneradmin and Enerchanger
 
-<a name='loading'>To load </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
+To load [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
 ![](/images/enerchanger.png)
 
