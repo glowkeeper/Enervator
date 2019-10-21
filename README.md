@@ -49,7 +49,7 @@ To install locally, clone this repository, switch to its root directory, then ty
 
 ## Maintainer
 
-Steve Huckle [Steve Huckle](https://glowkeeper.github.io/).
+[Steve Huckle](https://glowkeeper.github.io/).
 
 ## Thanks
 
