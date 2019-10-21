@@ -31,7 +31,7 @@ _Figure 2: Eneradmin use case diagram_
 
 _Figure 3: Enerchanger use case diagram_
 
-Both `Eneradmin`and `Enerchanger` are web-based applications written in [React](https://reactjs.org/). they employ a [Redux](https://redux.js.org/) state container that govern interaction with Ethereum via [ethers.js](https://github.com/ethers-io/ethers.js/), which uses [web3.js](https://github.com/ethereum/web3.js/) as a provider, via the browser extension [MetaMask](https://reactjs.org/). They also implement type-safety through [Typescript](https://www.typescriptlang.org/). `Eneradmin`and `Enerchanger` are built and bundled using [webpack](https://webpack.js.org/).
+Both `Eneradmin`and `Enerchanger` are web-based applications written in [React](https://reactjs.org/). They employ a [Redux](https://redux.js.org/) state container that govern interaction with Ethereum via [ethers.js](https://github.com/ethers-io/ethers.js/), which uses [web3.js](https://github.com/ethereum/web3.js/) as a provider, via the browser extension [MetaMask](https://reactjs.org/). They also implement type-safety through [Typescript](https://www.typescriptlang.org/). `Eneradmin`and `Enerchanger` are built and bundled using [webpack](https://webpack.js.org/).
 
 ## Deployment
 
@@ -39,16 +39,14 @@ Enervator is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](ht
 
 The `webpack` bundled apps </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) are deployed to [dat](https://dat.foundation/), which is a peer-to-peer distributed data protocol. They are kept online via [homebase](https://github.com/beakerbrowser/homebase), which is daemonised, via [pm2](https://www.npmjs.com/package/pm2), on a server with the [dat](https://github.com/datproject/dat) tools installed.
 
-An alternative to [dat](https://dat.foundation/) is [ipfs](https://ipfs.io/). However, [in this author's opinion](https://glowkeeper.github.io/), [dat](https://dat.foundation/) is significantly easier to deploy and maintain, not least because, with [dat](https://dat.foundation/), you can copy new files to the same directory, and keep the same hash address. The last time I looked into [ipfs](https://ipfs.io/), new files meant new hashes (although, _I think_ there are ways to use DNS to circumvent that). Additionally, [this author](https://glowkeeper.github.io/) struggled to keep [ipfs](https://ipfs.io/) resources online. Whereas [homebase](https://github.com/beakerbrowser/homebase) manages that seamlessly. Finally, [dat](https://dat.foundation/) appears much less _corporate_ than [ipfs](https://ipfs.io/).
+An alternative to [dat](https://dat.foundation/) is [ipfs](https://ipfs.io/). However, [in this author's opinion](https://glowkeeper.github.io/), [dat](https://dat.foundation/) is significantly easier to deploy and maintain than [ipfs](https://ipfs.io/), not least because, with [dat](https://dat.foundation/), you can copy new files to the same directory, and keep the same hash address. With [ipfs](https://ipfs.io/), new files means new hashes (although, _I think_ there are ways to use DNS to circumvent that). Additionally, [this author](https://glowkeeper.github.io/) struggled to keep [ipfs](https://ipfs.io/) resources pinned and online, whereas [homebase](https://github.com/beakerbrowser/homebase) manages that seamlessly. Finally, [dat](https://dat.foundation/) appears much less _corporate_ than [ipfs](https://ipfs.io/).
 
-_*Author disclaimer: [this author](https://glowkeeper.github.io/) haven't looked at [ipfs](https://ipfs.io/) for a wehile, so some of what I've written above may no longer be true._
+_*Disclaimer: [this author](https://glowkeeper.github.io/) hasn't looked at [ipfs](https://ipfs.io/) for a while, so some of that described above may no longer be true._
 
 ## Loading Eneradmin and Enerchanger
+
+<a name='loading'>To load </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
 ![](/images/enerchanger.png)
 
 _Figure 4: The Enerchanger frontend interface_
-
-<a name='loading'>To load </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
-
-[dat](https://dat.foundation/) is a peer-to-peer distributed data protocol. By using Ethereum, and deploying to [dat](https://dat.foundation/), [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) can truthfully claim to be utilising the decentralised web. The only thing that's not decentralised about them is this GitHub resource!
