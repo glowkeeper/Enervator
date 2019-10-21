@@ -10,7 +10,7 @@ _*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://g
 
 _Figure 1: Enervator class diagram_
 
-`EnervatorManager` is the default operator of [Enervator](https://github.com/glowkeeper/Enervator). It holds the supply of EOR and sets the parameters that derive EOR's [value](./value.md). `EnervatorManager` inherits from OpenZeppelin interfaces, [IERC777Sender](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Sender.sol) and [IERC777Recipient](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Recipient.sol), which provide definitions of hook functions that `EnervatorManager` implements. Those functions are called when EOR are sent or received. In particular, `EnervatorManager` implements the `tokensToSend` hook so that it calls a function from the `Exchanger` contract that updates the `BuyDB` contract with details of the tokens sent. The `Exchanger` contract is the only contract allowed to send tokens via `EnervatorManager`. As well as the `BuyDB` contract, it maintains links to the `ForexDB` contract, which has functions that set and get the US Dollar exchange rates for sovereign currencies, and the `DepositDB` contract, which contains sovereign currency deposits. Those deposits govern the amount of EOR that can be bought.
+`EnervatorManager` is the default operator of [Enervator](https://github.com/glowkeeper/Enervator). It holds the supply of EOR and sets the parameters that derive EOR's [value](./value.md). `EnervatorManager` inherits from OpenZeppelin interfaces, [IERC777Sender](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Sender.sol) and [IERC777Recipient](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Recipient.sol), which provide definitions of hook functions that `EnervatorManager` implements. Those functions are called when EOR are sent or received. In particular, `EnervatorManager` implements the `tokensToSend` hook so that it calls a function from the `Exchanger` contract that updates the `BuyDB` contract with details of the tokens sent. As well as the `BuyDB` contract, the `Exchanger` contract maintains links to the `ForexDB` contract, which has functions that set and get the US Dollar exchange rates for sovereign currencies, and the `DepositDB` contract, which contains sovereign currency deposits. Those deposits govern the amount of EOR that can be bought.
 
 ## Frontend Interfaces
 
@@ -43,14 +43,12 @@ An alternative to [dat](https://dat.foundation/) is [ipfs](https://ipfs.io/). Ho
 
 _*Author disclaimer: [this author](https://glowkeeper.github.io/) haven't looked at [ipfs](https://ipfs.io/) for a wehile, so some of what I've written above may no longer be true._
 
-is a little less corporate,
-
 ## Loading Eneradmin and Enerchanger
 
 ![](/images/enerchanger.png)
 
 _Figure 4: The Enerchanger frontend interface_
 
-<a name='#loading'>To load </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
+<a name='loading'>To load </a>[Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) in a web browser, you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
 [dat](https://dat.foundation/) is a peer-to-peer distributed data protocol. By using Ethereum, and deploying to [dat](https://dat.foundation/), [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) can truthfully claim to be utilising the decentralised web. The only thing that's not decentralised about them is this GitHub resource!
