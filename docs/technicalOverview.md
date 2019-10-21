@@ -14,7 +14,7 @@ _Figure 1: Enervator class diagram_
 
 ## Frontend Interfaces
 
-[Enervator](https://github.com/glowkeeper/Enervator) is interfaced by two demo' projects (please [read the _loading_ section, below](#loading), before trying to load the apps' in your browser):
+[Enervator](https://github.com/glowkeeper/Enervator) is interfaced by two demo' projects (please read the [loading section](#loading), below, before trying to load the apps' in your browser):
 
 1. [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb)
 2. [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b)
