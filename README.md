@@ -16,7 +16,7 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 ## Table of Contents
 
 - [Usage](#usage)
-  - [Demo Applications](#demo-applications)
+- [Demo Applications](#demo-applications)
   - [Demo Dependencies](#demo-dependencies)  
 - [Install](#install)
 - [Maintainer](#maintainer)
@@ -28,7 +28,7 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 
 Below shows you how to use the demo' applications that showcase EOR, which is deployed at address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) on Ethereum's Rinkeby Test Network.
 
-### Demo Applications
+## Demo Applications
 
 ![](/images/enerchanger.png)
 
