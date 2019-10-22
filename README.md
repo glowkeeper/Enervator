@@ -1,9 +1,13 @@
 # Enervator
 
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+
 ![](/images/Enervator75x75.png) | A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
 ---|---
 
 You can read some of the details as to how Enervator incentivises energy efficiency by reading [The Value of Enervator](/docs/value.md).
+
+You can also read a [Technical Overview](/docs/technicalOverview.md).
 
 _*Enervator is described in more detail in [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/). Some of the information here borrows excerpts from that work._
 
@@ -37,7 +41,7 @@ There are two demo' applications for showcasing [Enervator](https://rinkeby.ethe
 
 [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b) is a proof of concept that simulates depositing cash and buying EOR, the [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) token. To use the tool, first deposit some cash (imagine that's a PayPal link or some such like), then use that deposit to buy some EOR.
 
-#### Demo Dependencies
+### Demo Dependencies
 
 To use [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b), you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
@@ -57,7 +61,7 @@ Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for prov
 
 ## Contributing
 
-Contributions presently _unwelcome_, since this repository currently forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing in the future, please email [Steve Huckle](https://glowkeeper.github.io/).
+Contributions presently _unwelcome_, since this repository forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing in the future, please email [Steve Huckle](https://glowkeeper.github.io/).
 
 ## License
 
