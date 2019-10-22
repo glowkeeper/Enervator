@@ -17,7 +17,8 @@ _**The name Enervator is a reference to the token's relation to energy. The word
 
 - [Usage](#usage)
 - [Demo Applications](#demo-applications)
-  - [Demo Dependencies](#demo-dependencies)  
+  - [Demo Dependencies](#demo-dependencies)
+- [Built Using](#built-using)    
 - [Install](#install)
 - [Maintainer](#maintainer)
 - [Thanks](#thanks)
@@ -46,6 +47,15 @@ There are two demo' applications for showcasing [Enervator](https://rinkeby.ethe
 To use [Eneradmin](http://bcd1e0c422401c3591fb3a347aaa0d73b7faff797a21b15edabf0ca214157ccb) and [Enerchanger](http://795f83fa1356cd7d00e5cfe8f1a93f32c55127684c6fc4cb8ff89a32e000016b), you will need to be running [Firefox](https://www.mozilla.org/) with the [Dat P2P Protocol](https://addons.mozilla.org/en-GB/firefox/addon/dat-p2p-protocol/) and [MetaMask](https://metamask.io/) extensions installed. [MetaMask](https://metamask.io/) should be pointing at the Rinkeby Test Network, and you will need a few test Ether in your [MetaMask](https://metamask.io/) wallet - you can get those from the [Rinkeby Faucet](https://faucet.rinkeby.io/).
 
 For [MetaMask](https://metamask.io/) to see any [Enervator](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) tokens you buy, you will need to add the [token contract address](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530) to your [MetaMask](https://metamask.io/) account. To do so,  within [MetaMask](https://metamask.io/), go to your account's menu, click on _Add Token_, then specify the custom address _0x5483b2996bba07330e188fe10bb101d4c1ac8530_ - if you've done that correctly, [MetaMask](https://metamask.io/) will automagically find the token's symbol and precision.
+
+## Built Using
+
+- [node](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [Ganache](https://github.com/trufflesuite/ganache)
+- [Truffle](https://github.com/trufflesuite/truffle)
+- [React](https://reactjs.org/) + [Redux](https://redux.js.org/) + [TypeScript](https://www.typescriptlang.org/)
+- [MetaMask](https://metamask.io/)
 
 ## Install
 
