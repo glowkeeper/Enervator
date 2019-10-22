@@ -49,7 +49,7 @@ For [MetaMask](https://metamask.io/) to see any [Enervator](https://rinkeby.ethe
 
 ## Install
 
-This project uses [node](http://nodejs.org/) and [npm](https://npmjs.com/). Please install those first. Then clone this repository, switch to its root directory, then type `npm install`.
+This project uses [node](http://nodejs.org/) and [npm](https://npmjs.com/). Please install those first. Then clone this repository, switch to its root directory, and type `npm install`.
 
 ## Maintainer
 
