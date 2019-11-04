@@ -14,7 +14,7 @@ This article describes a cryptocurrency, called Enervator, whose aim is to incen
 
 ## Introduction
 
-[Enervator](https://github.com/glowkeeper/Enervator) (EOR) is a cryptocurrency whose primary goal is to incentivise energy efficiency. The name Enervator is a reference to the token's relation to energy. The word is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; thus, the author considered 'Enervator' as a perfect name for a cryptocurrency whose aim is to reduce energy consumption.
+[Enervator](https://github.com/glowkeeper/Enervator) (EOR) [^1] is a cryptocurrency whose primary goal is to incentivise energy efficiency. The name Enervator is a reference to the token's relation to energy. The word is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken; thus, the author considered 'Enervator' as a perfect name for a cryptocurrency whose aim is to reduce energy consumption.
 
 First, this article provides some background to EOR. Then, it describes the design of EOR and discusses the mechanisms by which it derives its value. Afterwards, the design of a proof of concept application that administers EOR, Eneradmin, is discussed. this paper includes examples of the application in use, which show how it is used to set the parameters that change the value of EOR. The paper ends with an analysis of those examples.
 
@@ -32,11 +32,13 @@ Furthermore, Socialism and the Blockchain discusses the problem of the annual en
 
 The Ethereum community has developed a variety of platform standards, called Ethereum Improvement Proposals (EIPs), which include core protocol specifications, client application programming interfaces and smart contract specifications. If an EIP is approved, it becomes an Ethereum Request for Comment (ERC), which give technical guidance to standard interfaces. An example is ERC20 [^601], a contract interface for creating fungible assets. Fungibility is a term from economics that relates to an items' ability to be exchanged for something else; fungible goods, such as Ether or The U.S. Dollar, are equivalent and interchangeable, whereas non-fungible goods, such as deeds of ownership or collectables, are distinct [@OpenZeppelin_TokensOpenZeppelinDocs_2019]. Therefore, ERC20 derived contracts define tokens that represent a form of digital asset that can act as a medium of exchange on the Ethereum network; [EOS](https://eos.io/) [^602], [Augur](https://www.augur.net/) [^603] and [0x](https://0x.org/) [^604] are three examples of Ethereum tokens.
 
-The ERC777 standard maintains backwards compatibility with ERC20 but includes significant improvements. For example, it has more sophisticated mechanisms for sending and receiving tokens [^605]. Figure 2, below, shows that [Enervator](https://github.com/glowkeeper/Enervator) inherits from OpenZeppelin's implementation of ERC777 (OpenZeppelin is a company that provides a set of production-ready contracts for Ethereum distributed application development) [^606]. [Enervator](https://github.com/glowkeeper/Enervator) also includes a management contract, EnervatorManager, that holds the supply of EOR and sets the parameters that derive EOR's value. EnervatorManager also inherits from OpenZeppelin contracts, which are interfaces that enable it to send and receive tokens.
+The ERC777 standard maintains backwards compatibility with ERC20 but includes significant improvements. For example, it has more sophisticated mechanisms for sending and receiving tokens [^605]. Figure 1, below, shows that [Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, inherits from OpenZeppelin's implementation of ERC777 (OpenZeppelin is a company that provides a set of production-ready contracts for Ethereum distributed application development) [^606].
 
-![Figure 2: The smart contract architecture of EOR](images/enervatorClassDiagram.png)
+![Figure 2: Enervator class diagram](./images/enervatorWholeClassDiagram.png)
 
-#### Defining Value
+Figure 2 also shows that several other contracts support the token. [Enervator](https://github.com/glowkeeper/Enervator) also includes a management contract, _EnervatorManager_, which is the default operator of [Enervator](https://github.com/glowkeeper/Enervator) and holds the supply of the token. It also sets the parameters that derive EOR's value. EnervatorManager inherits from the OpenZeppelin contracts [IERC777Sender](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Sender.sol) and [IERC777Recipient](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC777/IERC777Recipient.sol), which provide definitions of hook functions that _EnervatorManager_ implements. Those functions are called when EOR are sent or received. In particular, `EnervatorManager` implements the `tokensToSend` hook so that it calls a function from the `Exchanger` contract that updates the `BuyDB` contract with details of the tokens sent. As well as the `BuyDB` contract, the `Exchanger` contract maintains links to the `Forex` contract, which has functions that set and get the US Dollar exchange rates for sovereign currencies, and the `DepositDB` contract, which contains sovereign currency deposits. Those deposits govern the amount of EOR that can be bought.
+
+### Defining Value
 
 The value of EOR is to reflect two annual consumption metrics. The first is global per capita energy consumption, which, according to figures from the World Bank, in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh) [^607].
 
@@ -46,11 +48,7 @@ Since the basis of the value of EOR is global energy use per capita, it seems pr
 
 Finally, so that it is possible to exchange sovereign currencies for EOR, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, figures from the IEA show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh [^609].
 
-#### Supply Algorithm
-
-As described above, the total supply of EOR is to reflect the world population, and it will fluctuate with changes in that annual population.
-
-#### Value Algorithms
+### Value Algorithms
 
 The value of EOR will reflect energy consumption, not energy price variations, so [Enervator](https://github.com/glowkeeper/Enervator) shall use the 2017 global average residential electricity price, at US$98.16 per MWh, as a constant.
 
@@ -68,9 +66,7 @@ To further incentivise lower energy consumption, the price of a single EOR also 
 
 Hence, with an increase in TPES, the value of EOR decreases, and visa-versa.
 
-### Expository Instantiation
-
-Next, this article demonstrates expository instantiation from DSR when explaining the design of Enervator through examples [@Gregor_AnatomyDesignTheory_2007].
+### Demonstrations of Enervator
 
 At the time of writing, [Enervator](https://github.com/glowkeeper/Enervator) is available on Ethereum's Rinkeby test network [^610]. Figure 3, below, shows Enervator on Rinkeby, shortly after its deployment; amongst the details shown are the physical address of the Enervator contract, the token supply, the number of addresses holding EOR and some initial transfers.
 
@@ -140,6 +136,7 @@ This article asks the second of four subordinate questions that help answer the 
 
 The chapter gave some background to EOR and described its design. Then it described the design of the DSR artefact that administers EOR, Eneradmin. It showed examples of that artefact in use and how it can be used to set the parameters that change the value of EOR in such a manner as to increase or decrease the token's value, depending on the decrease or increase of global per capita energy consumption and TPES. The chapter ended with an analysis of those examples, whereby it found that blockchains, through EOR, can indeed help address concerns about energy consumption. However, that depends on network externalities, because only wide-scale adoption of EOR will see that potential realised.
 
+[^1]: The source code for [Enervator](https://github.com/glowkeeper/Enervator) is available on GitHub at https://github.com/glowkeeper/Enervator
 [^601]: The ERC20 token standard is described at https://github.com/ethereum/eips/issues/20
 
 [^602]: EOS has the currency code EOS. You can read more about EOS a <https://eos.io/>
@@ -152,7 +149,7 @@ The chapter gave some background to EOR and described its design. Then it descri
 [^607]: World Bank statistics for energy use per capita are available at https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE
 [^608]: World population available at https://www.worldometers.info/world-population/
 [^609]: IEA statistics for global average residential electricity price are available at https://www.iea.org/statistics/prices/
-[^610]: Ethereum's Rinkeby test network is described at https://www.rinkeby.io/#stats
+[^610]: The address of the demonstrator applications is available on the [Enervator](https://github.com/glowkeeper/Enervator) GitHub repository at https://github.com/glowkeeper/Enervator
 
 [^611]: React is available at https://reactjs.org/
 [^612]: MetaMask is available at https://metamask.io/
