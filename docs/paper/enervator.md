@@ -66,57 +66,45 @@ To further incentivise lower energy consumption, the price of a single EOR also 
 
 Hence, with an increase in TPES, the value of EOR decreases, and visa-versa.
 
-### Demonstrations of Enervator
+### Enervator Deployement
 
 At the time of writing, [Enervator](https://github.com/glowkeeper/Enervator) is available on Ethereum's Rinkeby test network [^610]. Figure 3, below, shows Enervator on Rinkeby, shortly after its deployment; amongst the details shown are the physical address of the Enervator contract, the token supply, the number of addresses holding EOR and some initial transfers.
 
 ![Figure 3: The initial deployment of EOR](images/enervatorInitialDeployment.png)
 
-The author has developed a DSR artefact to demonstrate the administration of Enervator. It is called Eneradmin, and it is described below.
+## Administering Enervator
 
-## The Design of Eneradmin
-
-Figure 4 shows that Eneradmin is responsible for managing [Enervator](https://github.com/glowkeeper/Enervator). It does so by managing the supply of EOR, as well as setting the token's value parameters and the sovereign currency US Dollar exchange rates. Enerchanger, the DSR artefact described in the next chapter, is responsible for converting those exchange rates into their equivalent EOR value.
+The author has developed an application called Eneradmin, which is a proof of concept to demonstrate administering Enervator. It is called  and its function is described, below. Figure 4 shows that it is responsible for managing the supply of EOR, as well as setting the token's value parameters and the sovereign currency US Dollar exchange rates. Enerchanger, the DSR artefact described later, is responsible for converting those exchange rates into their equivalent EOR value.
 
 ![Figure 4:  Use Case Diagram for Eneradmin](images/eneradminUseCaseDiagram.png)
 
-### Principles of Form and Function
+At the time of writing, Eneradmin is a web-based application written in the Javascript framework React [^611]. It depends on the web browser extension MetaMask [^612], which is cryptocurrency wallet software that manages Ethereum accounts and thereby, allows users to sign and pay for smart contract transactions created by Ethereum applications.
 
-In addition to the smart contracts described in Figure 1, above, Figure 5, below, shows that Eneradmin stores and retrieves exchange rates in a Forex contract. It interacts with that contract via an Exchanger contract, which is explained in greater detail in the next chapter.
+The scenario described below models the value mechanisms described above. Figure 5 shows that, at creation, EOR's total supply was 7,727,623,693 tokens, matching the global population for September 2019. It was initialised with a constant per MWh price of US$98.16, and TPES was set at 162,494,360,000 MWh. Per capita energy was set to 22.36 MWh. That results in the value of a single EOR at US$4.39 (the unitValue figure in Figure 3):
 
-![Figure 5: The smart contract architecture of Eneradmin](images/eneradminClassDiagram.png)
+![Figure 5: The initial value of EOR](images/eneradminSetup.png)
 
-Eneradmin is a web-based application written in the Javascript framework React [^611]. It depends on the web browser extension MetaMask [^612], which is cryptocurrency wallet software that manages Ethereum accounts and thereby, allows users to sign and pay for smart contract transactions created by Ethereum applications. [Appendix E](./appendixADE.md) gives more information regarding the application development environment used by the DSR artefacts described throughout this thesis.
+Next, Figure 6 shows the user of Eneradmin signing the transaction that changes EOR's setting for global per capita energy consumption to 30 MWh.
 
-### Expository Instantiation
+![Figure 6: Setting per capita energy consumption at 30 MWh](images/eneradminSetPCE.png)
 
-Next, this article demonstrates expository instantiation from DSR when explaining the design of Eneradmin through examples [@Gregor_AnatomyDesignTheory_2007]. The scenario described below models the value mechanisms described above and starts to examine whether blockchains can help address concerns about energy consumption.
+Consequently, Figure 7 shows that EOR's value has dropped to US$3.27.
 
-Figure 6 shows that, at creation, EOR's total supply was 7,727,623,693 tokens, matching the global population for September 2019. It was initialised with a constant per MWh price of US$98.16, and TPES was set at 162,494,360,000 MWh. Per capita energy was set to 22.36 MWh. That results in the value of a single EOR at US$4.39 (the unitValue figure in Figure 3):
+![Figure 7: The value of EOR after setting per capita energy consumption at 30 MWh](images/eneradmin30PCE.png)
 
-![Figure 6: The initial value of EOR](images/eneradminSetup.png)
+However, Figure 8 shows that, if global per capita energy consumption falls to 10 MWh, the value of EOR rises to US$9.82.
 
-Next, Figure 7 shows the user of Eneradmin signing the transaction that changes EOR's setting for global per capita energy consumption to 30 MWh.
-
-![Figure 7: Setting per capita energy consumption at 30 MWh](images/eneradminSetPCE.png)
-
-Consequently, Figure 8 shows that EOR's value has dropped to US$3.27.
-
-![Figure 8: The value of EOR after setting per capita energy consumption at 30 MWh](images/eneradmin30PCE.png)
-
-However, Figure 9 shows that, if global per capita energy consumption falls to 10 MWh, the value of EOR rises to US$9.82.
-
-![Figure 9: The value of EOR after setting per capita energy consumption at 10 MWh](images/eneradmin10PCE.png)
+![Figure 8: The value of EOR after setting per capita energy consumption at 10 MWh](images/eneradmin10PCE.png)
 
 The result is that holders of EOR have a stake in seeing global per capita energy consumption fall, and therefore, it offers incentives for lowering their personal energy use, too.
 
-Figures 4.10 and 4.11 show a similar mechanism for TPES. Figure 10 shows that with per capita energy consumption set back to its initial amount of 22.36 MWh, but annual TPES rising to 200,000,000,000 MWh, the value of EOR falls to US$3.57.
+Figures 9 and 10 show a similar mechanism for TPES. Figure 9 shows that with per capita energy consumption set back to its initial amount of 22.36 MWh, but annual TPES rising to 200,000,000,000 MWh, the value of EOR falls to US$3.57.
 
-![Figure 10: The value of EOR after setting TPES to 200,000,000,000 MWh](images/eneradminTPES200000000000.png)
+![Figure 9: The value of EOR after setting TPES to 200,000,000,000 MWh](images/eneradminTPES200000000000.png)
 
-However, Figure 11 shows that, if TPES falls to 100,000,000,000 MWh instead, EOR's value rises to US$7.13.
+However, Figure 10 shows that, if TPES falls to 100,000,000,000 MWh instead, EOR's value rises to US$7.13.
 
-![Figure 11: The value of EOR after setting TPES to 100,000,000,000 MWh](images/eneradminTPES100000000000.png)
+![Figure 10: The value of EOR after setting TPES to 100,000,000,000 MWh](images/eneradminTPES100000000000.png)
 
 Hence, energy producers are similarly incentivised to decrease the amount of energy they produce.
 
@@ -149,7 +137,8 @@ The chapter gave some background to EOR and described its design. Then it descri
 [^607]: World Bank statistics for energy use per capita are available at https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE
 [^608]: World population available at https://www.worldometers.info/world-population/
 [^609]: IEA statistics for global average residential electricity price are available at https://www.iea.org/statistics/prices/
-[^610]: The address of the demonstrator applications is available on the [Enervator](https://github.com/glowkeeper/Enervator) GitHub repository at https://github.com/glowkeeper/Enervator
+[^610]: The address of the of the [Enervator](https://github.com/glowkeeper/Enervator) token is on the GitHub repository at https://github.com/glowkeeper/Enervator
+[^611]: The address of the of the Eneradmin proof of concept is on the GitHub repository at https://github.com/glowkeeper/Enervator
 
 [^611]: React is available at https://reactjs.org/
 [^612]: MetaMask is available at https://metamask.io/
