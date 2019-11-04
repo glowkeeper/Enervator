@@ -1,0 +1,15 @@
+---
+title: Blockchains and Energy: A Cryptocurrency That Incentivises Energy Efficiency
+author: Steve Huckle
+header-includes:
+    - \usepackage{fancyhdr}
+    - \pagestyle{fancy}
+    - \lhead{\thepage}
+    - \chead{}
+    - \rhead{}
+    - \lfoot{© 2020 ShareLab — University of Sussex, Department of Informatics}
+    - \cfoot{}
+    - \rfoot{}
+    - \renewcommand{\headrulewidth}{0.4pt}
+    - \renewcommand{\footrulewidth}{0.4pt}
+---
