@@ -14,7 +14,7 @@ This article describes a cryptocurrency, called Enervator, whose aim is to incen
 
 ## Introduction
 
-[Enervator](https://github.com/glowkeeper/Enervator) (EOR) [^1] is a cryptocurrency whose primary goal is to incentivise energy efficiency. The name Enervator is a reference to the token's relation to energy. The word is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken. Thus _Enervator_ is a perfect name for a cryptocurrency whose aim is to reduce energy consumption.
+[Enervator](https://github.com/glowkeeper/Enervator) (EOR)[^1] is a cryptocurrency whose primary goal is to incentivise energy efficiency. The name Enervator is a reference to the token's relation to energy. The word is a noun meaning 'something that enervates', where 'enervates' is a verb, meaning to weaken. Thus _Enervator_ is a perfect name for a cryptocurrency whose aim is to reduce energy consumption.
 
 First, this article provides some background to EOR. Then, it describes the design of EOR and discusses the mechanisms by which it derives its value. Afterwards, the design of a proof of concept application that administers EOR, Eneradmin, is discussed. This paper includes examples of the application in use, which show how it is used to set the parameters that change the value of EOR. The paper ends with an analysis of those examples.
 
@@ -22,7 +22,7 @@ First, this article provides some background to EOR. Then, it describes the desi
 
 The author's paper, Socialism and the Blockchain [@Huckle_SocialismBlockchain_2016], published in 2016, examines the idea of using a digital asset to measure the value of an electric car by equating the amount of energy consumed by mining on the Bitcoin blockchain with the energy consumed over the lifetime of the vehicle. The paper contends that energy is a useful measure of value because industrial economies are increasingly mechanised. This thesis builds on that idea by using energy consumption as a direct measure of the price of EOR.
 
-Socialism and the Blockchain also discusses the problem of the annual energy used by mining on the Bitcoin network, which the paper estimated as equating to the total consumption of the 2.72 million people of Jamaica [@Huckle_SocialismBlockchain_2016]. During 2018, international media outlets also began noting Bitcoin's high energy demand; articles appeared in The Guardian [@Hern_BitcoinEnergyUsage_2018], Forbes [@Lee_BitcoinEnergyConsumption_2018] and The Economist [@G.F_WhyBitcoinUses_2018], to name but a few. By early November 2018, when Nature published a piece about that excessive demand [@Krause_QuantificationEnergyCarbon_2018], the author was moved to reply. He did so for The Conversation [^15], in an article titled: Bitcoin’s high energy consumption is a concern – but it may be a price worth paying [@Huckle_BitcoinHighEnergy_2018]. That concluded that Bitcoin's commons-based peer production (CBPP) model and decentralised, trustless operations were a rebuttal to the consumption-led ideology and hierarchical topologies of Neoliberal Capitalism. The piece argued that, by providing an alternative, the network might indirectly drive down the energy use of society. While that could be true, the author was left wondering if he could produce a more immediate response to those criticisms. [Enervator](https://github.com/glowkeeper/Enervator) is that response.
+Socialism and the Blockchain also discusses the problem of the annual energy used by mining on the Bitcoin network, which the paper estimated as equating to the total consumption of the 2.72 million people of Jamaica [@Huckle_SocialismBlockchain_2016]. During 2018, international media outlets also began noting Bitcoin's high energy demand; articles appeared in The Guardian [@Hern_BitcoinEnergyUsage_2018], Forbes [@Lee_BitcoinEnergyConsumption_2018] and The Economist [@G.F_WhyBitcoinUses_2018], to name but a few. By early November 2018, when Nature published a piece about that excessive demand [@Krause_QuantificationEnergyCarbon_2018], the author was moved to reply. He did so for The Conversation[^2], in an article titled: Bitcoin’s high energy consumption is a concern – but it may be a price worth paying [@Huckle_BitcoinHighEnergy_2018]. That concluded that Bitcoin's commons-based peer production (CBPP) model and decentralised, trustless operations were a rebuttal to the consumption-led ideology and hierarchical topologies of Neoliberal Capitalism. The piece argued that, by providing an alternative, the network might indirectly drive down the energy use of society. While that could be true, the author was left wondering if he could produce a more immediate response to those criticisms. [Enervator](https://github.com/glowkeeper/Enervator) is that response.
 
 ## The Design of Enervator
 
@@ -30,9 +30,9 @@ Socialism and the Blockchain also discusses the problem of the annual energy use
 
 ![Figure 1: A Use Case for Enervator](images/enervatorUseCaseDiagram.png)
 
-The Ethereum community has developed a variety of platform standards, called Ethereum Improvement Proposals (EIPs), which include core protocol specifications, client application programming interfaces and smart contract specifications. If an EIP is approved, it becomes an Ethereum Request for Comment (ERC), which give technical guidance to standard interfaces. An example is ERC20 [^2], a contract interface for creating fungible assets. Fungibility is a term from economics that relates to an items' ability to be exchanged for something else; fungible goods, such as Ether or The U.S. Dollar, are equivalent and interchangeable, whereas non-fungible goods, such as deeds of ownership or collectables, are distinct [@OpenZeppelin_TokensOpenZeppelinDocs_2019]. Therefore, ERC20 derived contracts define tokens that represent a form of digital asset that can act as a medium of exchange on the Ethereum network; [EOS](https://eos.io/) [^3], [Augur](https://www.augur.net/) [^4] and [0x](https://0x.org/) [^5] are three examples of Ethereum tokens.
+The Ethereum community has developed a variety of platform standards, called Ethereum Improvement Proposals (EIPs), which include core protocol specifications, client application programming interfaces and smart contract specifications. If an EIP is approved, it becomes an Ethereum Request for Comment (ERC), which give technical guidance to standard interfaces. An example is ERC20[^2], a contract interface for creating fungible assets. Fungibility is a term from economics that relates to an items' ability to be exchanged for something else; fungible goods, such as Ether or The U.S. Dollar, are equivalent and interchangeable, whereas non-fungible goods, such as deeds of ownership or collectables, are distinct [@OpenZeppelin_TokensOpenZeppelinDocs_2019]. Therefore, ERC20 derived contracts define tokens that represent a form of digital asset that can act as a medium of exchange on the Ethereum network; [EOS](https://eos.io/)[^3], [Augur](https://www.augur.net/)[^4] and [0x](https://0x.org/)[^5] are three examples of Ethereum tokens.
 
-The ERC777 standard maintains backwards compatibility with ERC20 but includes significant improvements. For example, it has more sophisticated mechanisms for sending and receiving tokens [^6]. Figure 1, below, shows that [Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, inherits from OpenZeppelin's implementation of ERC777 (OpenZeppelin is a company that provides a set of production-ready contracts for Ethereum distributed application development) [^7].
+The ERC777 standard maintains backwards compatibility with ERC20 but includes significant improvements. For example, it has more sophisticated mechanisms for sending and receiving tokens[^6]. Figure 1, below, shows that [Enervator](https://github.com/glowkeeper/Enervator), which has a token symbol EOR, inherits from OpenZeppelin's implementation of ERC777 (OpenZeppelin is a company that provides a set of production-ready contracts for Ethereum distributed application development)[^7].
 
 ![Figure 2: Enervator class diagram](./images/enervatorWholeClassDiagram.png)
 
@@ -40,13 +40,13 @@ Figure 2 also shows that several other contracts support the token. [Enervator](
 
 ### Consumption Metrics
 
-The value of EOR is to reflect two annual consumption metrics. The first is global per capita energy consumption, which, according to figures from the World Bank, in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh) [^8].
+The value of EOR is to reflect two annual consumption metrics. The first is global per capita energy consumption, which, according to figures from the World Bank, in 2014, was 1922.488 kilograms of oil equivalent, or 22.35853544 MegaWatt hours (MWh)[^8].
 
 The second consumption metric is total primary energy supply (TPES), which according to the International Energy Agency (IEA), in 2016, was 13972 Megatons of oil equivalent (Mtoe), or 162,494,360,000 MWh [@InternationalEnergyAgency_WorldEnergyBalances_2019].
 
-Since the basis of the value of EOR is global energy use per capita, it seems prudent to base total supply on world population. At the time of writing, that was 7,727,623,693 [^9].
+Since the basis of the value of EOR is global energy use per capita, it seems prudent to base total supply on world population. At the time of writing, that was 7,727,623,693[^9].
 
-Finally, so that it is possible to exchange sovereign currencies for EOR, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, figures from the IEA show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh [^10].
+Finally, so that it is possible to exchange sovereign currencies for EOR, a sovereign currency price per MWh is needed. Energy prices vary significantly around the world; however, figures from the IEA show that, for 2017, the _global average residential electricity price_ was US$98.16 per MWh[^10].
 
 ### Value Algorithms
 
@@ -54,27 +54,29 @@ The value of EOR will reflect energy consumption, not energy price variations, s
 
 A simple value algorithm would be to derive the value of a single EOR by taking the product of US$98.16 and annual global average per capita energy consumption. For example:
 
-1 EOR = 98.16 * 22.35853544 = US$2194.71
+_1 EOR = 98.16 * 22.35853544 = US$2194.71_
 
 Unfortunately, that simple algorithm rewards inefficiency, since the value of EOR would increase as consumption increases. In a world threatened by climate change, that is problematic. Instead, a simple fix that offers incentives for efficiency is to take the reciprocal of the annual global average per capita energy consumption:
 
-1 EOR = 98.16 * ( 1 / 22.35853544 ) = US$4.39
+_1 EOR = 98.16 * ( 1 / 22.35853544 ) = US$4.39_
 
 To further incentivise lower energy consumption, the price of a single EOR also reflects the difference between the old and the current TPES figures. To see the effect, imagine the annual TPES figures show that, unfortunately, TPES has increased from 162,494,360,000 MWh to 200,000,000,000 MWh:
 
-1 EOR = 98.16 * ( 1 / 22.35853544 ) * ( 162494360000 / 200000000000 ) = 98.16 * ( 162494360000 / 200000000000 ) / 22.35853544  = US$3.57
+_1 EOR = 98.16 * ( 1 / 22.35853544 ) * ( 162494360000 / 200000000000 )_
+_= 98.16 * ( 162494360000 / 200000000000 ) / 22.35853544 _
+_= US$3.57_
 
 Hence, with an increase in TPES, the value of EOR decreases, and visa-versa.
 
 ## Enervator Deployment
 
-At the time of writing, [Enervator](https://github.com/glowkeeper/Enervator) is available on Ethereum's Rinkeby test network [^11]. Figure 3, below, shows Enervator on Rinkeby, shortly after its deployment; amongst the details shown are the physical address of the Enervator contract, the token supply, the number of addresses holding EOR and some initial transfers.
+At the time of writing, [Enervator](https://github.com/glowkeeper/Enervator) is available on Ethereum's Rinkeby test network[^11]. Figure 3, below, shows Enervator on Rinkeby, shortly after its deployment; amongst the details shown are the physical address of the Enervator contract, the token supply, the number of addresses holding EOR and some initial transfers.
 
 ![Figure 3: The initial deployment of EOR](images/enervatorInitialDeployment.png)
 
 ## An Application to Administer Enervator
 
-The author has developed an application called Eneradmin [^12], which is a proof of concept to demonstrate administering Enervator. Eneradmin is a web-based application written in the Javascript framework React [^13]. It depends on the web browser extension MetaMask [^14], which is cryptocurrency wallet software that manages Ethereum accounts and thereby, allows users to sign and pay for smart contract transactions created by Ethereum applications.
+The author has developed an application called Eneradmin[^12], which is a proof of concept to demonstrate administering Enervator. Eneradmin is a web-based application written in the Javascript framework React[^13]. It depends on the web browser extension MetaMask[^14], which is cryptocurrency wallet software that manages Ethereum accounts and thereby, allows users to sign and pay for smart contract transactions created by Ethereum applications.
 
 Figure 4 shows that Eneradmin is responsible for managing the supply of EOR, as well as setting the token's value parameters and the sovereign currency US Dollar exchange rates. Enerchanger, the DSR artefact described later, is responsible for converting those exchange rates into their equivalent EOR value.
 
@@ -110,7 +112,7 @@ Hence, energy producers are similarly incentivised to decrease the amount of ene
 
 ## Exchanging Sovereign Currencies for EOR
 
-The author has developed an application called Enerchanger [^16], which is a proof of concept to demonstrate exchanging sovereign currencies for EOR. Similar to Eneradmin, Enerchanger is a web-based application that depends on the web browser extension MetaMask. Figure 11 shows that Enerchanger is responsible for taking sovereign currency deposits and exchanging those for EOR.
+The author has developed an application called Enerchanger[^15], which is a proof of concept to demonstrate exchanging sovereign currencies for EOR. Similar to Eneradmin, Enerchanger is a web-based application that depends on the web browser extension MetaMask. Figure 11 shows that Enerchanger is responsible for taking sovereign currency deposits and exchanging those for EOR.
 
 ![Figure 11: Use Case for Enerchanger](images/enerchangerUseCaseDiagram.png)
 
@@ -134,7 +136,7 @@ Figure 16 shows the Indian Citizen's MetaMask wallet container her newly bought 
 
 ![Figure 16: MetaMask showing the 32.01 EOR](images/enerchangerEORAccount.png)
 
-Finally, Figure 17 shows that transfer on the Rinkeby blockchain explorer service, Etherscan (it is the first transfer displayed) [^701].
+Finally, Figure 17 shows that transfer on the Rinkeby blockchain explorer service, Etherscan (it is the first transfer displayed)[^16].
 
 ![Figure 17: Etherscan showing the 32.01 EOR transfer](images/enerchangerEtherscan.png)
 
@@ -167,11 +169,11 @@ Nevertheless, despite reluctance, there is nascent international government supp
 
 Could there be unintended consequences of [Enervator](https://github.com/glowkeeper/Enervator)? By internalising problematic network externalities, could there be negative psychological impacts? Might the token generate some unwanted behaviour, such as the token holder not turning on the heating, even when the outside temperatures determine that the heating should go on. Such matters are only addressable through extensive testing of future iterations of the token.
 
-Is the algorithm currently implemented by [Enervator](https://github.com/glowkeeper/Enervator) too simplistic? Could it offer better incentives? The author's article for The Conversation [^1005] concluded that "if humankind is to avoid climate catastrophe, we need to take urgent action and find solutions that produce clean, sustainable energy" [@Huckle_BitcoinHighEnergy_2018]. [Enervator](https://github.com/glowkeeper/Enervator) could incentivise clean energy, too. For example, if annual wind power grows, the token's value increases. Again, improvements to the value algorithm of [Enervator](https://github.com/glowkeeper/Enervator) can only occur through extensive testing.
+Is the algorithm currently implemented by [Enervator](https://github.com/glowkeeper/Enervator) too simplistic? Could it offer better incentives? The author's article for The Conversation[^2] concluded that "if humankind is to avoid climate catastrophe, we need to take urgent action and find solutions that produce clean, sustainable energy" [@Huckle_BitcoinHighEnergy_2018]. [Enervator](https://github.com/glowkeeper/Enervator) could incentivise clean energy, too. For example, if annual wind power grows, the token's value increases. Again, improvements to the value algorithm of [Enervator](https://github.com/glowkeeper/Enervator) can only occur through extensive testing.
 
 This article proposes that EOR increases the visibility and availability of financial information. However, the cryptographic capabilities inherent in blockchain technology make it challenging to match transactions to real people [@karlstrom_libertarians_2014]. That challenge is not insurmountable, especially if the Indian Government were to adopt EOR, whereby it was in charge of issuing the necessary addresses for trading the token.
 
-Finally, during a presentation for an Innovation forum discussing Energy Services Business Models, held by the [UK Centre for Research into Energy Demand Solutions](http://www.sussex.ac.uk/spru/research/projects/creds) at [The Fusebox, Brighton](https://thefuseboxbrighton.com/) on October 4th 2019 [^1001], this author discussed the barriers to uptake in front of [Enervator](https://github.com/glowkeeper/Enervator). A slide showed the network externalities discussed in this thesis, whereby the hoped-for energy-efficient behaviour might only become apparent if the token managed wide-scale adoption. However, the person in charge of energy services at a UK county council had presented before the author, during which they explained they were seeking innovative solutions to lowering their consumption. The author offered [Enervator](https://github.com/glowkeeper/Enervator) as one such innovation. Could the solution to those network externalities come in the form of scaling back the goals of [Enervator](https://github.com/glowkeeper/Enervator)? Instead of incentivising global efficiencies, might it incentivise the energy consumption of that county council? The person in charge of the county council's energy services seemed to think so, and initial conversations about the idea appear promising.
+Finally, during a presentation for an Innovation forum discussing Energy Services Business Models, held by the [UK Centre for Research into Energy Demand Solutions](http://www.sussex.ac.uk/spru/research/projects/creds) at [The Fusebox, Brighton](https://thefuseboxbrighton.com/) on October 4th 2019[^17], this author discussed the barriers to uptake in front of [Enervator](https://github.com/glowkeeper/Enervator). A slide showed the network externalities discussed in this thesis, whereby the hoped-for energy-efficient behaviour might only become apparent if the token managed wide-scale adoption. However, the person in charge of energy services at a UK county council had presented before the author, during which they explained they were seeking innovative solutions to lowering their consumption. The author offered [Enervator](https://github.com/glowkeeper/Enervator) as one such innovation. Could the solution to those network externalities come in the form of scaling back the goals of [Enervator](https://github.com/glowkeeper/Enervator)? Instead of incentivising global efficiencies, might it incentivise the energy consumption of that county council? The person in charge of the county council's energy services seemed to think so, and initial conversations about the idea appear promising.
 
 ## Conclusion
 
@@ -180,6 +182,7 @@ This article describes the cryptocurrency token [Enervator](https://github.com/g
 The article gave some background to [Enervator](https://github.com/glowkeeper/Enervator) and described the token's design. Then it explained the design of the proof of concept that administers EOR - Eneradmin. It explained examples of that application in use. Those examples showed Eneradmin setting the parameters that change the value of EOR in such a manner as to increase or decrease the token's value, depending on the decrease or increase of global per capita energy consumption and TPES. Then this article gave some background to the proof of concept Enerchanger and described its design. It showed examples of that application in use and how it might be used to deposit Indian Rupees and exchange those for EOR. The chapter ended with an analysis of those examples, whereby it found that blockchains, through EOR, can indeed help address concerns about energy consumption.  That depends on network externalities because only wide-scale adoption of EOR will see that potential realised. There could be other benefits of adopting cryptocurrencies, such as increasing the transparency of financial information and widening access to financial services.  However,  there are concerns over monetary sovereignty because cryptos introduce the possibility of disempowering a country's ability to constrain inflation. One way to overcome such concerns might be for governments to issue cryptocurrencies of their own, but as of the time of writing, there are very few examples of such bold moves.
 
 [^1]: The source code for [Enervator](https://github.com/glowkeeper/Enervator) is available on GitHub at https://github.com/glowkeeper/Enervator
+[^2]: The Conversation - https://theconversation.com - is a not-for-profit organisation. They source topical content, written by academics, that is written in plain English and aimed at the general public
 [^2]: The ERC20 token standard is described at https://github.com/ethereum/eips/issues/20
 [^3]: EOS has the currency code EOS. More information about EOS is available at <https://eos.io/>
 [^4]: Augur has the currency code REP. More information about Augur is available at https://www.augur.net/
@@ -193,5 +196,6 @@ The article gave some background to [Enervator](https://github.com/glowkeeper/En
 [^12]: The address of the live demonstration of the Eneradmin proof of concept is available on the [Enervator](https://github.com/glowkeeper/Enervator) GitHub repository at https://github.com/glowkeeper/Enervator
 [^13]: React is available at https://reactjs.org/
 [^14]: MetaMask is available at https://metamask.io/
-[^15]: The Conversation - https://theconversation.com - is a not-for-profit organisation. They source topical content, written by academics, that is written in plain English and aimed at the general public
-[^16]: The address of the live demonstration of the Enerchanger proof of concept is available on the [Enervator](https://github.com/glowkeeper/Enervator) GitHub repository at https://github.com/glowkeeper/Enervator
+[^15]: The address of the live demonstration of the Enerchanger proof of concept is available on the [Enervator](https://github.com/glowkeeper/Enervator) GitHub repository at https://github.com/glowkeeper/Enervator
+[^16]: Etherscan is a blockchain explorer service for Ethereum.
+[^17]: The presentation is available at https://github.com/glowkeeper/innovationForum

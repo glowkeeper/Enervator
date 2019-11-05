@@ -1,5 +1,5 @@
 ---
-title: Addressing Concerns Over Blockchain Energy Consumption: A Cryptocurrency That Incentivises Energy Efficiency
+title: "Addressing Concerns Over Blockchain Energy Consumption: A Cryptocurrency That Incentivises Energy Efficiency"
 author: Steve Huckle
 header-includes:
     - \usepackage{fancyhdr}
