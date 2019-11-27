@@ -1,10 +1,11 @@
 const path = require('path')
-const fs  = require('fs');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const fs = require('fs')
+const webpack = require('webpack')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+const htmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { CheckerPlugin } = require('awesome-typescript-loader')
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
 
 var config = {
   node: {
@@ -15,13 +16,12 @@ var config = {
   },
   entry: {
     app: [
-      'babel-polyfill',
+      '@babel/polyfill',
       './src/index.tsx'
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'build')
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
@@ -29,11 +29,12 @@ var config = {
   plugins: [
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      favicon: './src/images/favicon.png',
+    new htmlWebpackPlugin({
       template: './src/index.html',
       inject: 'body',
+      inlineSource: '.(js|css)$'
     }),
+    new htmlWebpackInlineSourcePlugin(),
     new CheckerPlugin(),
     new TsConfigPathsPlugin(/* { configFileName, compiler } */)
   ],
@@ -58,11 +59,12 @@ var config = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 32768
+              limit: 81920
             }
           }
         ]

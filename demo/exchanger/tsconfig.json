@@ -7,18 +7,15 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "noImplicitAny": true,
-    "noImplicitThis": true,
+    "noImplicitThis": false,
     "keyofStringsOnly": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
-    "strictNullChecks": true,
     "outDir": "build",
     "lib": [
-      "es5",
       "es2015",
-      "es6",
-      "esnext",
+      "es2017.object",
       "dom"
     ]
   },
