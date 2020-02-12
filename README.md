@@ -1,6 +1,6 @@
 # Enervator
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) [![built-with openzeppelin](https://img.shields.io/badge/built%20with-OpenZeppelin-3677FF)](https://docs.openzeppelin.com/)
 
 ![](/images/Enervator75x75.png) | A cryptocurrency stablecoin, with the token symbol EOR, whose aim is to incentivise energy efficiency.
 ---|---
