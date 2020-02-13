@@ -34,7 +34,7 @@ _Image Source: [Clipart Library](http://clipart-library.com/clipart/1071253.htm)
 
 - - -
 
-## 
+##
 
 [Enervator](https://github.com/glowkeeper/Enervator) (EOR) is a proof of concept for a cryptocurrency that incentivises energy efficiency
 
@@ -73,6 +73,10 @@ In 2017: _US$98.16 per MWh_
 _Image Source: [Clipart Library](http://clipart-library.com/clipart/1804638.htm)_
 
 - - -
+
+## Deployed
+
+![](images/enervatorInitialDeployment.png)
 
 ## Video
 
