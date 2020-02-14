@@ -1,10 +1,18 @@
+# Enervator
+
+(Dr) Steven Huckle
+
+![](images/Enervator.png)
+
+- - -
+
 ## All Views Expressed Are My Own
 
 ![](images/notUofS.jpg)
 
-#  A Cryptocurrency that Incentivises Energy Efficiency
+#
 
-![](images/Enervator.png)
+[Enervator](https://github.com/glowkeeper/Enervator) (EOR) is a proof of concept for a cryptocurrency that incentivises energy efficiency
 
 - - -
 
@@ -33,10 +41,6 @@ _Image Source: [STARSINSIDER](https://www.starsinsider.com/food/200230/a-greenho
 _Image Source: [Clipart Library](http://clipart-library.com/clipart/1071253.htm)_
 
 - - -
-
-##
-
-[Enervator](https://github.com/glowkeeper/Enervator) (EOR) is a proof of concept for a cryptocurrency that incentivises energy efficiency
 
 ## World Population
 
@@ -111,9 +115,13 @@ _Image Source: [Clipart Library](http://clipart-library.com/clipart/1804638.htm)
 
 - - -
 
-## Video
+## GAPCEC Falls to 10 MWh
 
-<video controls=true src="http://localhost:8000/videos/test.m4v"></video>
+<video controls=true src="http://localhost:8000/videos/tenMWh.m4v"></video>
+
+## £1000 to EOR
+
+<video controls=true src="http://localhost:8000/videos/thousandPounds.m4v"></video>
 
 ## Deployed
 
