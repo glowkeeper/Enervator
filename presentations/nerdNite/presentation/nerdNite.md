@@ -120,11 +120,11 @@ A West Sussex Cryptocurrency?
 
 # Links
 
-1. [Introduction to this talk](https://github.com/glowkeeper/innovationForum): https://github.com/glowkeeper/innovationForum
-2. [This presentation](https://tinyurl.com/y5f59m85): https://tinyurl.com/y5f59m85
+1. [Enervator](https://github.com/glowkeeper/Enervator): https://github.com/glowkeeper/Enervator
+1. [Intro' to this talk](https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite): https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite
+2. [This presentation](https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md): https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md
 3. [Socialism and the Blockchain](http://dx.doi.org/10.3390/fi8040049): http://dx.doi.org/10.3390/fi8040049
 4. [Bitcoin’s high energy consumption is a concern – but it may be a price worth paying](https://tinyurl.com/y4ep8ygy): https://tinyurl.com/y4ep8ygy
-5. [Enervator](https://github.com/glowkeeper/Enervator): https://github.com/glowkeeper/Enervator
 
 - - -
 
@@ -132,4 +132,4 @@ A West Sussex Cryptocurrency?
 
 w: [glowkeeper.github.io](https://glowkeeper.github.io/)
 
-e: s.huckle@sussex.ac.uk
+e: steve.huckle@gmail.com or s.huckle@sussex.ac.uk
