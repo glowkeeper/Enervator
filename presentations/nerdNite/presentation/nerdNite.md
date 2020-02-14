@@ -1,22 +1,18 @@
-#  Enervator - A Cryptocurrency that Incentivises Energy Efficiency
+## All Views Expressed Are My Own
 
-by (Dr) Steven Huckle
+![](images/notUofS.jpg)
+
+#  A Cryptocurrency that Incentivises Energy Efficiency
 
 ![](images/Enervator.png)
 
 - - -
 
-## All Views Expressed Are My Own
-
-![](images/notUofS.jpg)
-
-# The Energy Use of CryptoCurrencies
+## The Energy Use of CryptoCurrencies
 
 ![](images/bitcoinMining.png)
 
 _Image Source: [CBC](https://www.cbc.ca/news/canada/montreal/magog-halts-bitcoin-mining-projects-over-energy-supply-concerns-1.4605041)_
-
-- - -
 
 ## Counter Culture?
 
@@ -64,13 +60,34 @@ In 2017: _US$98.16 per MWh_
 
 ## EOR Value - GAPCEC Rising
 
-![](images/eorValueLower.png)
+![](images/eorValueGAPCECRising.png)
 
-## EOR Value - TPES
+## EOR Value - GAPCEC Falling
 
-![](images/eorValueTPES.png)
+![](images/eorValueGAPCECFalling.png)
 
-## The Code
+## EOR Value - TPES Rising
+
+![](images/eorValueTPESRising.png)
+
+## EOR Value - TPES Falling
+
+![](images/eorValueTPESFalling.png)
+
+# The Code
+
+![](images/programmer.jpg)
+
+_Image Source: [Clipart Library](http://clipart-library.com/clipart/1742722.htm)_
+
+- - -
+
+## The Enervator Token
+
++ [OpenZeppelin ERC777]()
++ Rinkeby address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530)
+
+## Smart Contracts
 
 ```
 function _setUnitValue () private
@@ -94,13 +111,13 @@ _Image Source: [Clipart Library](http://clipart-library.com/clipart/1804638.htm)
 
 - - -
 
-## Deployed
-
-![](images/enervatorInitialDeployment.png)
-
 ## Video
 
 <video controls=true src="http://localhost:8000/videos/test.m4v"></video>
+
+## Deployed
+
+Rinkeby address [0x5483b2996BBa07330E188Fe10BB101d4c1Ac8530](https://rinkeby.etherscan.io/token/0x5483b2996bba07330e188fe10bb101d4c1ac8530)
 
 # The Future
 
@@ -120,11 +137,11 @@ A West Sussex Cryptocurrency?
 
 # Links
 
-1. [Enervator](https://github.com/glowkeeper/Enervator): https://github.com/glowkeeper/Enervator
-2. [Intro' to this talk](https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite): https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite
-3. [This presentation](https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md): https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md
-4. [Socialism and the Blockchain](http://dx.doi.org/10.3390/fi8040049): http://dx.doi.org/10.3390/fi8040049
-5. [Bitcoin’s high energy consumption is a concern – but it may be a price worth paying](https://tinyurl.com/y4ep8ygy): https://tinyurl.com/y4ep8ygy
++ [Enervator](https://github.com/glowkeeper/Enervator): https://github.com/glowkeeper/Enervator
++ [Intro'](https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite): https://tinyurl.com/tkj2mg2
++ [Presentation](https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md): https://tinyurl.com/shtpv57
++ [Socialism and the Blockchain](http://dx.doi.org/10.3390/fi8040049): http://dx.doi.org/10.3390/fi8040049
++ [The Conversation Article](https://tinyurl.com/y4ep8ygy): https://tinyurl.com/y4ep8ygy
 
 - - -
 

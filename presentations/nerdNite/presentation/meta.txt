@@ -1,6 +1,0 @@
----
-title: "Enervator - Incentivising Energy Efficiency"
-author: "Dr Steven Huckle"
-date: February 20th 2020
-output: revealjs
----
