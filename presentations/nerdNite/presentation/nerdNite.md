@@ -1,4 +1,4 @@
-#  Enervator - A Cryptocurrency That Incentivises Energy Efficiency
+#  Enervator - A Cryptocurrency that Incentivises Energy Efficiency
 
 by (Dr) Steven Huckle
 
