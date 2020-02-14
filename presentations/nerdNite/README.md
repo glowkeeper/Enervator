@@ -1,10 +1,10 @@
-# Presentation for the Innovation Forum - Energy Services Business Models
+# Presentation for Nerd Nite
 
 Introducing [Enervator](https://github.com/glowkeeper/Enervator), a cryptocurrency that incentivises energy efficiency.
 
-By [Steve Huckle](https://glowkeeper.github.io/), PhD Researcher at the [University of Sussex](https://www.sussex.ac.uk/).
+By [(Dr) Steven Huckle](https://glowkeeper.github.io/).
 
-4th October 2019, at [The Fusebox](https://thefuseboxbrighton.com/), Brighton, UK.
+20th February 2020.
 
 ## Bitcoin's High Energy Demand
 
@@ -18,4 +18,4 @@ Also buried deep within [Socialism and the Blockchain](http://dx.doi.org/10.3390
 
 Honestly? Although at the time, my article for [The Conversation](https://theconversation.com/bitcoins-high-energy-consumption-is-a-concern-but-it-may-be-a-price-worth-paying-106282) was by far the most read piece by a Sussex academic on that platform, I couldn't help worrying that my argument was tenuous, at best. I wanted something more concrete to address the criticisms of the energy consumption of cryptocurrencies. [Enervator](https://github.com/glowkeeper/Enervator) is that.
 
-This presentation introduces [Enervator](https://github.com/glowkeeper/Enervator), demonstrates its value mechanisms, shows how it might be exchanged for a sovereign currency, then discusses some barriers to its uptake.
+This presentation introduces [Enervator](https://github.com/glowkeeper/Enervator) and demonstrates the value mechanisms that enable the token to incentivise energy efficiency.

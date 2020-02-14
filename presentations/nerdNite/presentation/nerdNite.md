@@ -6,7 +6,7 @@ by (Dr) Steven Huckle
 
 - - -
 
-## All Views My Own
+## All Views Expressed Are My Own
 
 ![](images/notUofS.jpg)
 
@@ -70,6 +70,22 @@ In 2017: _US$98.16 per MWh_
 
 ![](images/eorValueTPES.png)
 
+## The Code
+
+```
+function _setUnitValue () private
+{
+  require (values.pricePerMWh > 0, "pricePerMWh invalid");
+  require (values.currentTPES > 0, "currentTPES invalid");
+  require (values.oldTPES > 0, "oldTPES invalid");
+  require (values.perCapitaEnergy > 0, "perCapitaEnergy invalid");
+
+  int128 TPESFactor = ABDKMath64x64.div(values.oldTPES, values.currentTPES);
+  int128 prePrice =  ABDKMath64x64.div(TPESFactor, values.perCapitaEnergy);
+  values.unitValue = ABDKMath64x64.mul(prePrice, values.pricePerMWh);
+}
+```
+
 # Demo
 
 ![](images/demo.jpg)
@@ -101,16 +117,6 @@ _Image Source: [Clipart Library](http://clipart-library.com/clipart/2083841.htm)
 ## Network Effects
 
 A West Sussex Cryptocurrency?
-
-# Summary
-
-> 1. Criticisms of the excessive energy use of [Bitcoin](https://bitcoin.org/en/)
-> 2. I argued it was a price worth paying because blockchains challenge the hierarchies of Capitalism
-> 3. [Enervator](https://github.com/glowkeeper/Enervator) incentivises energy efficiency
-> 4. There are (significant) barriers to uptake
-> 5. ...but are they insurmountable?
-
-- - -
 
 # Links
 
