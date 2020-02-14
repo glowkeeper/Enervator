@@ -121,10 +121,10 @@ A West Sussex Cryptocurrency?
 # Links
 
 1. [Enervator](https://github.com/glowkeeper/Enervator): https://github.com/glowkeeper/Enervator
-1. [Intro' to this talk](https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite): https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite
-2. [This presentation](https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md): https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md
-3. [Socialism and the Blockchain](http://dx.doi.org/10.3390/fi8040049): http://dx.doi.org/10.3390/fi8040049
-4. [Bitcoin’s high energy consumption is a concern – but it may be a price worth paying](https://tinyurl.com/y4ep8ygy): https://tinyurl.com/y4ep8ygy
+2. [Intro' to this talk](https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite): https://github.com/glowkeeper/Enervator/tree/master/presentations/nerdNite
+3. [This presentation](https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md): https://github.com/glowkeeper/Enervator/blob/master/presentations/nerdNite/presentation/nerdNite.md
+4. [Socialism and the Blockchain](http://dx.doi.org/10.3390/fi8040049): http://dx.doi.org/10.3390/fi8040049
+5. [Bitcoin’s high energy consumption is a concern – but it may be a price worth paying](https://tinyurl.com/y4ep8ygy): https://tinyurl.com/y4ep8ygy
 
 - - -
 
