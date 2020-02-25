@@ -71,8 +71,10 @@ Thanks to the people at [OpenZeppelin](https://openzeppelin.com/), both for prov
 
 ## Contributing
 
-Contributions presently _unwelcome_, since this repository forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished. However, that will change with publication of that work, so if you are interested in contributing in the future, please email [Steve Huckle](https://glowkeeper.github.io/).
+Contributions welcome - please email the maintainer.
 
 ## License
 
-Presently, there are no circumstances where you may copy or reuse anything in this repository, since it forms part of [Steve Huckle's PhD Thesis](https://glowkeeper.github.io/PhDWorks/), which is unpublished.
+GNU General Public License v3.0
+
+See [COPYING](/COPYING.txt) to see the full text.
