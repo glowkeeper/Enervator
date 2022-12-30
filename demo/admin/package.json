@@ -28,7 +28,7 @@
     "date-fns": "^2.0.0-beta.5",
     "decimal.js": "^10.2.0",
     "ethers": "^4.0.37",
-    "flat": "^4.1.0",
+    "flat": "^5.0.1",
     "formik": "^1.5.8",
     "history": "^4.10.1",
     "material-ui-chip-input": "^2.0.0-beta.1",
